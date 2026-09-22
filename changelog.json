@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.17.0",
+    "date": "2026-09-22",
+    "title": "The bonsai gives way to a ginkgo leaf",
+    "changes": [
+      "Katsumii has a new logo — a gold and teal ginkgo leaf where the low-poly bonsai used to stand — in the navigation bar, the closing call to action and the preview notice",
+      "The browser tab carries the new mark too, so pinned tabs and bookmarks match the site"
+    ]
+  },
+  {
     "version": "0.16.1",
     "date": "2026-09-07",
     "title": "The security.txt file is reachable again",

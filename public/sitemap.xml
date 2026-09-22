@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.katsumii.com/en/app</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/app" />
@@ -13,7 +13,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/app</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/app" />
@@ -23,7 +23,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/app</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/app" />
@@ -33,7 +33,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/features</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/features" />
@@ -43,7 +43,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/features</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/features" />
@@ -53,7 +53,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/features</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/features" />
@@ -63,7 +63,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/prop-firm-challenges</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/prop-firm-challenges" />
@@ -73,7 +73,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/prop-firm-challenges</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/prop-firm-challenges" />
@@ -83,7 +83,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/prop-firm-challenges</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/prop-firm-challenges" />
@@ -93,7 +93,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/funded-accounts</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/funded-accounts" />
@@ -103,7 +103,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/funded-accounts</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/funded-accounts" />
@@ -113,7 +113,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/funded-accounts</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/funded-accounts" />
@@ -123,7 +123,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/personal-trading</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/personal-trading" />
@@ -133,7 +133,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/personal-trading</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/personal-trading" />
@@ -143,7 +143,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/personal-trading</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/personal-trading" />
@@ -153,7 +153,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/backtesting</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/backtesting" />
@@ -163,7 +163,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/backtesting</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/backtesting" />
@@ -173,7 +173,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/backtesting</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/backtesting" />
@@ -183,7 +183,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/analytics-reviews</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/analytics-reviews" />
@@ -193,7 +193,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/analytics-reviews</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/analytics-reviews" />
@@ -203,7 +203,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/analytics-reviews</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/analytics-reviews" />
@@ -213,7 +213,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/customization</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/customization" />
@@ -223,7 +223,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/customization</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/customization" />
@@ -233,7 +233,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/customization</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/customization" />
@@ -243,7 +243,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/workflow</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/workflow" />
@@ -253,7 +253,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/workflow</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/workflow" />
@@ -263,7 +263,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/workflow</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/workflow" />
@@ -273,7 +273,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/local-offline</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/local-offline" />
@@ -283,7 +283,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/local-offline</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/local-offline" />
@@ -293,7 +293,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/local-offline</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/local-offline" />
@@ -303,7 +303,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/pricing</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/pricing" />
@@ -313,7 +313,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/pricing</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/pricing" />
@@ -323,7 +323,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/pricing</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/pricing" />
@@ -333,7 +333,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/manual</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/manual" />
@@ -343,7 +343,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/manual</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/manual" />
@@ -353,7 +353,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/manual</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/manual" />
@@ -363,7 +363,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/faq</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/faq" />
@@ -373,7 +373,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/faq</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/faq" />
@@ -383,7 +383,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/faq</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/faq" />
@@ -393,7 +393,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/contact</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/contact" />
@@ -403,7 +403,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/contact</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/contact" />
@@ -413,7 +413,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/contact</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/contact" />
@@ -423,7 +423,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/privacy</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/privacy" />
@@ -433,7 +433,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/privacy</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/privacy" />
@@ -443,7 +443,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/privacy</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/privacy" />
@@ -453,7 +453,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/terms</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/terms" />
@@ -463,7 +463,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/terms</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/terms" />
@@ -473,7 +473,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/terms</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/terms" />
@@ -483,7 +483,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/impressum</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/impressum" />
@@ -493,7 +493,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/impressum</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/impressum" />
@@ -503,7 +503,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/impressum</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/impressum" />
@@ -513,7 +513,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/en/security</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/security" />
@@ -523,7 +523,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/de/security</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/security" />
@@ -533,7 +533,7 @@
   </url>
   <url>
     <loc>https://www.katsumii.com/zht/security</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/security" />
