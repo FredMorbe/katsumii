@@ -19,10 +19,11 @@ import ConsentBanner from "./components/ConsentBanner.vue"
 import { useTheme } from "./composables/useTheme.js"
 import { useConsent } from "./composables/useConsent.js"
 import { setI18nLocale } from "./i18n.js"
+import { buildStructuredGraph } from "./utils/structuredData.js"
 import { localizedAlternatesForPath, localizedPathForRoute, normalizeLocale, unlocalizedPathFromRoute } from "./utils/routes.js"
 
 const route = useRoute()
-const { locale, t } = useI18n()
+const { locale, t, tm } = useI18n()
 const { theme, isDark, toggleTheme, isThemeGlitching, nextTheme } = useTheme()
 const { consent } = useConsent()
 
@@ -117,73 +118,20 @@ const routeDescription = () => {
 }
 
 const buildStructuredData = (title, description, canonicalUrl) => {
-  const softwareUrl = absoluteUrl(localizedPathForRoute("/app", "en"))
   const currentPath = route.meta.canonicalPath || unlocalizedPathFromRoute(route.path)
-  const graph = [
-    {
-      "@type": "Organization",
-      "@id": `${SITE_URL}/#organization`,
-      "name": "Katsumii",
-      "url": SITE_URL,
-      "logo": `${SITE_URL}/logo.png`,
-      "email": "info@katsumii.com",
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${SITE_URL}/#website`,
-      "name": "Katsumii",
-      "url": SITE_URL,
-      "publisher": { "@id": `${SITE_URL}/#organization` },
-      "inLanguage": htmlLangForLocale(normalizeLocale(routeLocale() || locale.value)),
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": `${softwareUrl}#software`,
-      "name": "Katsumii",
-      "url": softwareUrl,
-      "description": t("common.pageDescriptions.app"),
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Windows 10, Windows 11, macOS 12 or newer",
-      "image": DEFAULT_SOCIAL_IMAGE,
-      "publisher": { "@id": `${SITE_URL}/#organization` },
-    },
-    {
-      "@type": "WebPage",
-      "@id": `${canonicalUrl}#webpage`,
-      "url": canonicalUrl,
-      "name": title,
-      "description": description,
-      "isPartOf": { "@id": `${SITE_URL}/#website` },
-      "about": { "@id": `${softwareUrl}#software` },
-      "inLanguage": htmlLangForLocale(normalizeLocale(routeLocale() || locale.value)),
-    },
-  ]
-
-  if (currentPath && currentPath !== "/app") {
-    graph.push({
-      "@type": "BreadcrumbList",
-      "@id": `${canonicalUrl}#breadcrumb`,
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Katsumii",
-          "item": softwareUrl,
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": title.replace(/\s-\sKatsumii$/, ""),
-          "item": canonicalUrl,
-        },
-      ],
-    })
-  }
-
-  return {
-    "@context": "https://schema.org",
-    "@graph": graph,
-  }
+  return buildStructuredGraph({
+    siteUrl: SITE_URL,
+    socialImage: DEFAULT_SOCIAL_IMAGE,
+    softwareUrl: absoluteUrl(localizedPathForRoute("/app", "en")),
+    canonicalUrl,
+    lang: htmlLangForLocale(normalizeLocale(routeLocale() || locale.value)),
+    title,
+    description,
+    appDescription: t("common.pageDescriptions.app"),
+    isHome: !currentPath || currentPath === "/app",
+    tiers: tm("pricingPage.tiers"),
+    faqItems: currentPath === "/faq" ? tm("faq.items") : null,
+  })
 }
 
 watch(

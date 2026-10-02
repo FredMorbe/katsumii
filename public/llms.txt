@@ -1,0 +1,25 @@
+# Katsumii
+
+> Katsumii is an offline trading journal for prop firm and funded traders. It runs on your own computer, keeps funded, challenge, personal and backtest trading in four separate modes, tracks prop firm rules per account and turns logged trades into statistics. Data stays in one local file; there is no cloud account. Licenses are a one-time payment (no subscription); a free Demo is available. Supports Windows 10 or newer and macOS 12 or newer.
+
+Pages are available in English (/en/), German (/de/) and Traditional Chinese (/zht/).
+
+## Product
+
+- [Overview](https://www.katsumii.com/en/app/): What Katsumii is and who it is for
+- [Features](https://www.katsumii.com/en/features/): All modules at a glance
+- [Prop firm challenges](https://www.katsumii.com/en/prop-firm-challenges/): Profit targets, trading days, loss limits, consistency context, inactivity alerts
+- [Funded accounts](https://www.katsumii.com/en/funded-accounts/): MLL/DLL distance, account health, payout context, winning days
+- [Personal trading](https://www.katsumii.com/en/personal-trading/): Personal accounts, daily goals, risk limits, calendar reviews
+- [Backtesting](https://www.katsumii.com/en/backtesting/): Sessions, FXReplay and CSV imports, hypotheses, strategy validation
+- [Analytics & reviews](https://www.katsumii.com/en/analytics-reviews/): Dashboards, reports, calendar views, tags, mistakes, emotions
+- [Workflow](https://www.katsumii.com/en/workflow/): CSV and FXReplay imports, MT5 and broker API sync, daily journal, offline HTML reports
+- [Local & offline](https://www.katsumii.com/en/local-offline/): Local data, no cloud account, controlled backups
+
+## Buying and support
+
+- [Pricing](https://www.katsumii.com/en/pricing/): Demo, Lite and Professional licenses
+- [FAQ](https://www.katsumii.com/en/faq/): Licenses, data storage, demo, platforms, imports
+- [Manual](https://www.katsumii.com/en/manual/): Setup, logging trades, accounts, analytics
+- [Contact](https://www.katsumii.com/en/contact/): info@katsumii.com
+- [Security](https://www.katsumii.com/en/security/): How to report a vulnerability

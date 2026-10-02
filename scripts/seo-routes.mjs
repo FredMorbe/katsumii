@@ -29,13 +29,18 @@ const localeMessages = Object.fromEntries(
   ]),
 )
 
-export const localeText = (locale, key) => {
+// Raw message value (string, array or object) of a key, falling back to English.
+export const localeValue = (locale, key) => {
   const lookup = (messages) => key.split(".").reduce((current, segment) => current?.[segment], messages)
-  const value = lookup(localeMessages[locale])
-  if (typeof value === "string") return value
-  const fallback = lookup(localeMessages[DEFAULT_LOCALE])
-  if (typeof fallback === "string") return fallback
-  throw new Error(`seo-routes: locale key "${key}" is missing in "${locale}" and in the "${DEFAULT_LOCALE}" fallback`)
+  const value = lookup(localeMessages[locale]) ?? lookup(localeMessages[DEFAULT_LOCALE])
+  if (value === undefined) throw new Error(`seo-routes: locale key "${key}" is missing in "${locale}" and in the "${DEFAULT_LOCALE}" fallback`)
+  return value
+}
+
+export const localeText = (locale, key) => {
+  const value = localeValue(locale, key)
+  if (typeof value !== "string") throw new Error(`seo-routes: locale key "${key}" is not a string`)
+  return value
 }
 
 // `source` is the Vue component that owns the page — its last git change (plus

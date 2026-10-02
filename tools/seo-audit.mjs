@@ -2,7 +2,7 @@
 // `npm run build` via postbuild). Reads dist/ and exits non-zero on any error;
 // warnings are printed but do not fail the build.
 
-import { existsSync, readFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import {
   HREFLANG_BY_LOCALE,
@@ -20,8 +20,8 @@ import {
 const DIST = join(ROOT, "dist")
 const MIN_BODY_TEXT = 400
 const TITLE_MAX = 65
-const DESCRIPTION_MIN = 70
-const DESCRIPTION_MAX = 165
+// zh-TW glyphs are about twice as wide as Latin ones, so its snippet budget is in half the characters
+const DESCRIPTION_RANGE = { en: [70, 165], de: [70, 165], zht: [25, 90] }
 
 const errors = []
 const warnings = []
@@ -77,8 +77,9 @@ for (const route of indexableRoutes) {
     const title = decode(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? "")
     const description = tagAttr(html.match(/<meta\s+name="description"[^>]*>/)?.[0] ?? "", "content")
     if (title.length > TITLE_MAX) warn(where, `title is ${title.length} chars (>${TITLE_MAX})`)
-    if (description.length < DESCRIPTION_MIN || description.length > DESCRIPTION_MAX) {
-      warn(where, `description is ${description.length} chars (want ${DESCRIPTION_MIN}–${DESCRIPTION_MAX})`)
+    const [descriptionMin, descriptionMax] = DESCRIPTION_RANGE[locale]
+    if (description.length < descriptionMin || description.length > descriptionMax) {
+      warn(where, `description is ${description.length} chars (want ${descriptionMin}–${descriptionMax})`)
     }
     if (title !== localeText(locale, route.titleKey)) fail(where, "title differs from the locale file")
 
@@ -98,6 +99,13 @@ for (const route of indexableRoutes) {
       try {
         const graph = JSON.parse(ld[1])["@graph"]
         if (!Array.isArray(graph) || !graph.length) fail(where, "JSON-LD @graph is empty")
+        else {
+          const software = graph.find((node) => node["@type"] === "SoftwareApplication")
+          if (!software?.offers?.length) fail(where, "SoftwareApplication has no offers")
+          const faq = graph.find((node) => node["@type"] === "FAQPage")
+          if (route.path === "/faq" && !faq?.mainEntity?.length) fail(where, "FAQPage JSON-LD missing or empty")
+          if (route.path !== "/faq" && faq) fail(where, "FAQPage JSON-LD on a page without the FAQ")
+        }
       } catch (err) {
         fail(where, `JSON-LD does not parse: ${err.message}`)
       }
@@ -139,6 +147,12 @@ const notFound = read("404.html")
 if (!/name="robots"[^>]*noindex/i.test(notFound)) fail("404.html", "missing noindex")
 if (/rel="canonical"/i.test(notFound)) fail("404.html", "must not carry a canonical")
 if (/location\.replace|http-equiv="refresh"/i.test(notFound)) fail("404.html", "must not redirect — it has to stay a real 404")
+
+// robots.txt must announce the sitemap; llms.txt and the IndexNow key must ship
+if (!read("robots.txt").includes(`Sitemap: ${SITE_URL}/sitemap.xml`)) fail("robots.txt", "Sitemap line missing")
+if (!existsSync(join(DIST, "llms.txt"))) fail("llms.txt", "missing")
+const keyFiles = readdirSync(DIST).filter((name) => /^[0-9a-f]{32}\.txt$/.test(name))
+if (keyFiles.length !== 1) fail("indexnow", `expected one key file in dist, found ${keyFiles.length}`)
 
 // domain root: readable content, canonical → landing
 const root = read("index.html")

@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.17.2",
+    "date": "2026-10-03",
+    "title": "Pages are readable for search engines and AI assistants",
+    "changes": [
+      "Every page now ships with its full text, so search engines and AI assistants can read it without running any scripts",
+      "Page titles and descriptions are rewritten in English, German and Traditional Chinese to say plainly what each page covers",
+      "Search results can now show the license options and the FAQ answers",
+      "Addresses consistently end in a slash, the sitemap carries real update dates, and unknown addresses show a proper 404 page"
+    ]
+  },
+  {
     "version": "0.17.1",
     "date": "2026-09-23",
     "title": "The ginkgo leaf gets a sharper edge",

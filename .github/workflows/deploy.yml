@@ -63,3 +63,20 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  # Pings Bing & co. (IndexNow) about pages whose sitemap lastmod is recent.
+  # Runs only after the new version is live; a failure here does not undo the deploy.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Submit changed URLs to IndexNow
+        run: node scripts/indexnow.mjs

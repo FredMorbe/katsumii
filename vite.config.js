@@ -11,11 +11,13 @@ import {
   SOCIAL_IMAGE,
   SUPPORTED_LOCALES,
   localeText,
+  localeValue,
   localizedRoutePath,
   routeUrl,
   sitemapXml,
   staticRouteMeta,
 } from './scripts/seo-routes.mjs'
+import { buildStructuredGraph } from './src/utils/structuredData.js'
 
 const appRoutes = new Set([
   '/app',
@@ -77,71 +79,21 @@ const stripAlternateTags = (html) =>
 
 const structuredDataJson = (route, locale, title, description, canonical) => {
   const appRoute = staticRouteMeta.find((item) => item.path === '/app')
-  const softwareUrl = routeUrl(appRoute, 'en')
-  const lang = HREFLANG_BY_LOCALE[locale]
-  const graph = [
-    {
-      '@type': 'Organization',
-      '@id': `${SITE_URL}/#organization`,
-      name: 'Katsumii',
-      url: SITE_URL,
-      logo: `${SITE_URL}/logo.png`,
-      email: 'info@katsumii.com',
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${SITE_URL}/#website`,
-      name: 'Katsumii',
-      url: SITE_URL,
-      publisher: { '@id': `${SITE_URL}/#organization` },
-      inLanguage: lang,
-    },
-    {
-      '@type': 'SoftwareApplication',
-      '@id': `${softwareUrl}#software`,
-      name: 'Katsumii',
-      url: softwareUrl,
-      description: localeText(locale, 'common.pageDescriptions.app'),
-      applicationCategory: 'FinanceApplication',
-      operatingSystem: 'Windows 10, Windows 11, macOS 12 or newer',
-      image: SOCIAL_IMAGE,
-      publisher: { '@id': `${SITE_URL}/#organization` },
-    },
-    {
-      '@type': 'WebPage',
-      '@id': `${canonical}#webpage`,
-      url: canonical,
-      name: title,
-      description,
-      isPartOf: { '@id': `${SITE_URL}/#website` },
-      about: { '@id': `${softwareUrl}#software` },
-      inLanguage: lang,
-    },
-  ]
+  const graph = buildStructuredGraph({
+    siteUrl: SITE_URL,
+    socialImage: SOCIAL_IMAGE,
+    softwareUrl: routeUrl(appRoute, 'en'),
+    canonicalUrl: canonical,
+    lang: HREFLANG_BY_LOCALE[locale],
+    title,
+    description,
+    appDescription: localeText(locale, 'common.pageDescriptions.app'),
+    isHome: route.path === '/app',
+    tiers: localeValue(locale, 'pricingPage.tiers'),
+    faqItems: route.path === '/faq' ? localeValue(locale, 'faq.items') : null,
+  })
 
-  if (route.path !== '/app') {
-    graph.push({
-      '@type': 'BreadcrumbList',
-      '@id': `${canonical}#breadcrumb`,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Katsumii',
-          item: softwareUrl,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: title.replace(/\s-\sKatsumii$/, ''),
-          item: canonical,
-        },
-      ],
-    })
-  }
-
-  return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2)
-    .replace(/</g, '\\u003c')
+  return JSON.stringify(graph, null, 2).replace(/</g, '\\u003c')
 }
 
 const upsertStructuredData = (html, payload) => {
