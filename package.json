@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "sitemap": "node scripts/build-sitemap.mjs",
     "screenshots": "node scripts/optimize-screenshots.mjs",
-    "prebuild": "node scripts/build-sitemap.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postbuild": "node scripts/prerender.mjs && node tools/seo-audit.mjs",
+    "seo-audit": "node tools/seo-audit.mjs"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
@@ -25,6 +25,7 @@
     "@vitejs/plugin-vue": "^6.0.2",
     "autoprefixer": "^10.4.27",
     "postcss": "^8.5.8",
+    "puppeteer-core": "^25.4.0",
     "sharp": "^0.35.3",
     "tailwindcss": "^4.2.1",
     "vite": "^7.3.1"

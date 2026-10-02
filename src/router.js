@@ -136,6 +136,12 @@ router.beforeEach((to) => {
   if (legacyPath) {
     return { path: legacyPath, query: to.query, hash: to.hash, replace: true }
   }
+
+  /* canonical URLs end in a slash (see routePath) — SPA links written without
+     one are normalised so the address bar matches the canonical/hreflang URLs */
+  if (to.params.locale && !to.path.endsWith("/")) {
+    return { path: `${to.path}/`, query: to.query, hash: to.hash, replace: true }
+  }
 })
 
 export default router

@@ -56,7 +56,8 @@ export const routePath = (path = "", locale = preferredLocale()) => {
   const cleanBase = baseUrl.replace(/\/+$/, "")
   const prefix = cleanBase ? `${cleanBase}/` : "/"
   const localizedPath = [normalizeLocale(locale), cleanPath].filter(Boolean).join("/")
-  return `${prefix}${localizedPath}`.replace(/\/{2,}/g, "/")
+  // trailing slash = the canonical URL form (GitHub Pages serves <route>/index.html)
+  return `${prefix}${localizedPath}/`.replace(/\/{2,}/g, "/")
 }
 
 export const pagePath = (page, locale) => {
@@ -65,7 +66,7 @@ export const pagePath = (page, locale) => {
 }
 
 export const unlocalizedPathFromRoute = (path = "") => {
-  const cleanPath = path.replace(/^\/+/, "")
+  const cleanPath = path.replace(/^\/+|\/+$/g, "")
   const segments = cleanPath.split("/")
   if (SUPPORTED_LOCALES.includes(segments[0])) segments.shift()
   const rest = segments.join("/")

@@ -7,16 +7,16 @@
   <title>Katsumii - Offline Trading Journal</title>
   <meta name="description" content="Katsumii is an offline trading journal for disciplined traders with trade logging, prop firm tracking, analytics, reports, and local data control." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.katsumii.com/en/app" />
-  <link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/app" data-katsumii-hreflang="true" />
-  <link rel="alternate" hreflang="de" href="https://www.katsumii.com/de/app" data-katsumii-hreflang="true" />
-  <link rel="alternate" hreflang="zh-TW" href="https://www.katsumii.com/zht/app" data-katsumii-hreflang="true" />
-  <link rel="alternate" hreflang="x-default" href="https://www.katsumii.com/en/app" data-katsumii-hreflang="true" />
+  <link rel="canonical" href="https://www.katsumii.com/en/app/" />
+  <link rel="alternate" hreflang="en" href="https://www.katsumii.com/en/app/" data-katsumii-hreflang="true" />
+  <link rel="alternate" hreflang="de" href="https://www.katsumii.com/de/app/" data-katsumii-hreflang="true" />
+  <link rel="alternate" hreflang="zh-TW" href="https://www.katsumii.com/zht/app/" data-katsumii-hreflang="true" />
+  <link rel="alternate" hreflang="x-default" href="https://www.katsumii.com/en/app/" data-katsumii-hreflang="true" />
   <meta property="og:site_name" content="Katsumii" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Katsumii - Offline Trading Journal" />
   <meta property="og:description" content="Katsumii is an offline trading journal for disciplined traders with trade logging, prop firm tracking, analytics, reports, and local data control." />
-  <meta property="og:url" content="https://www.katsumii.com/en/app" />
+  <meta property="og:url" content="https://www.katsumii.com/en/app/" />
   <meta property="og:locale" content="en" />
   <meta property="og:image" content="https://www.katsumii.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -47,9 +47,9 @@
         },
         {
           "@type": "SoftwareApplication",
-          "@id": "https://www.katsumii.com/en/app#software",
+          "@id": "https://www.katsumii.com/en/app/#software",
           "name": "Katsumii",
-          "url": "https://www.katsumii.com/en/app",
+          "url": "https://www.katsumii.com/en/app/",
           "description": "Katsumii is an offline trading journal for disciplined traders with trade logging, prop firm tracking, analytics, reports, and local data control.",
           "applicationCategory": "FinanceApplication",
           "operatingSystem": "Windows 10, Windows 11, macOS 12 or newer",
@@ -63,7 +63,11 @@
   <style>
     html { background: #f8fafc; }
     html.dark-init { background: #020617; }
+    /* Prerendered markup (scripts/prerender.mjs) is for crawlers and no-JS readers;
+       browsers wait for Vue to mount so a light snapshot never flashes on a dark theme. */
+    #app[data-prerendered] { visibility: hidden; }
   </style>
+  <noscript><style>#app[data-prerendered] { visibility: visible; }</style></noscript>
   <script>
     (function () {
       var t = localStorage.getItem('katsumii-theme');

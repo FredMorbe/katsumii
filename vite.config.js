@@ -1,8 +1,21 @@
-import { readFileSync } from 'node:fs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import {
+  DEFAULT_LOCALE,
+  HREFLANG_BY_LOCALE,
+  LEGACY_LOCALE_PREFIXES,
+  LEGACY_PROTOTYPE_PATHS,
+  SITE_URL,
+  SOCIAL_IMAGE,
+  SUPPORTED_LOCALES,
+  localeText,
+  localizedRoutePath,
+  routeUrl,
+  sitemapXml,
+  staticRouteMeta,
+} from './scripts/seo-routes.mjs'
 
 const appRoutes = new Set([
   '/app',
@@ -27,153 +40,7 @@ const appRoutes = new Set([
   '/welcome',
 ])
 
-const SITE_URL = 'https://www.katsumii.com'
-const SOCIAL_IMAGE = `${SITE_URL}/og-image.png`
-const LASTMOD = '2026-07-05'
-
-const SUPPORTED_LOCALES = ['en', 'de', 'zht']
-const HREFLANG_BY_LOCALE = {
-  en: 'en',
-  de: 'de',
-  zht: 'zh-TW',
-}
-
-const localeMessages = Object.fromEntries(
-  SUPPORTED_LOCALES.map((locale) => [
-    locale,
-    JSON.parse(readFileSync(resolve(__dirname, `src/locales/${locale}.json`), 'utf8')),
-  ]),
-)
-
-const localeText = (locale, key) => {
-  const value = key.split('.').reduce((current, segment) => current?.[segment], localeMessages[locale])
-  if (typeof value === 'string') return value
-  const fallback = key.split('.').reduce((current, segment) => current?.[segment], localeMessages.en)
-  return typeof fallback === 'string' ? fallback : key
-}
-
-const staticRouteMeta = [
-  {
-    path: '/app',
-    titleKey: 'common.pageTitles.app',
-    descriptionKey: 'common.pageDescriptions.app',
-    priority: '1.0',
-  },
-  {
-    path: '/features',
-    titleKey: 'common.pageTitles.features',
-    descriptionKey: 'common.pageDescriptions.features',
-    priority: '0.9',
-  },
-  {
-    path: '/prop-firm-challenges',
-    titleKey: 'common.pageTitles.propFirmChallenges',
-    descriptionKey: 'common.pageDescriptions.propFirmChallenges',
-    priority: '0.8',
-  },
-  {
-    path: '/funded-accounts',
-    titleKey: 'common.pageTitles.fundedAccounts',
-    descriptionKey: 'common.pageDescriptions.fundedAccounts',
-    priority: '0.8',
-  },
-  {
-    path: '/personal-trading',
-    titleKey: 'common.pageTitles.personalTrading',
-    descriptionKey: 'common.pageDescriptions.personalTrading',
-    priority: '0.8',
-  },
-  {
-    path: '/backtesting',
-    titleKey: 'common.pageTitles.backtesting',
-    descriptionKey: 'common.pageDescriptions.backtesting',
-    priority: '0.8',
-  },
-  {
-    path: '/analytics-reviews',
-    titleKey: 'common.pageTitles.analyticsReviews',
-    descriptionKey: 'common.pageDescriptions.analyticsReviews',
-    priority: '0.8',
-  },
-  {
-    path: '/customization',
-    titleKey: 'common.pageTitles.customization',
-    descriptionKey: 'common.pageDescriptions.customization',
-    priority: '0.8',
-  },
-  {
-    path: '/workflow',
-    titleKey: 'common.pageTitles.workflow',
-    descriptionKey: 'common.pageDescriptions.workflow',
-    priority: '0.8',
-  },
-  {
-    path: '/local-offline',
-    titleKey: 'common.pageTitles.localOffline',
-    descriptionKey: 'common.pageDescriptions.localOffline',
-    priority: '0.8',
-  },
-  {
-    path: '/pricing',
-    titleKey: 'common.pageTitles.pricing',
-    descriptionKey: 'common.pageDescriptions.pricing',
-    priority: '0.9',
-  },
-  {
-    path: '/manual',
-    titleKey: 'common.pageTitles.manual',
-    descriptionKey: 'common.pageDescriptions.manual',
-    priority: '0.7',
-  },
-  {
-    path: '/faq',
-    titleKey: 'common.pageTitles.faq',
-    descriptionKey: 'common.pageDescriptions.faq',
-    priority: '0.7',
-  },
-  {
-    path: '/contact',
-    titleKey: 'common.pageTitles.contact',
-    descriptionKey: 'common.pageDescriptions.contact',
-    priority: '0.5',
-  },
-  {
-    path: '/impressum',
-    titleKey: 'common.pageTitles.impressum',
-    descriptionKey: 'common.pageDescriptions.impressum',
-    priority: '0.3',
-  },
-  {
-    path: '/privacy',
-    titleKey: 'common.pageTitles.privacy',
-    descriptionKey: 'common.pageDescriptions.privacy',
-    priority: '0.3',
-  },
-  {
-    path: '/terms',
-    titleKey: 'common.pageTitles.terms',
-    descriptionKey: 'common.pageDescriptions.terms',
-    priority: '0.3',
-  },
-  {
-    path: '/security',
-    titleKey: 'common.pageTitles.security',
-    descriptionKey: 'common.pageDescriptions.security',
-    priority: '0.3',
-  },
-  {
-    path: '/welcome',
-    titleKey: 'common.pageTitles.welcome',
-    descriptionKey: 'common.pageDescriptions.welcome',
-    robots: 'noindex, follow',
-  },
-  {
-    path: '/bugreport',
-    titleKey: 'common.pageTitles.bugreport',
-    descriptionKey: 'common.pageDescriptions.bugreport',
-    robots: 'noindex, follow',
-  },
-]
+const localizedPreviewPath = (route, locale) => localizedRoutePath(route, locale).replace(/\/+$/, '')
 
 const escapeHtml = (value) => String(value)
   .replaceAll('&', '&amp;')
@@ -186,16 +53,12 @@ const upsertMetaTag = (html, matcher, tag) => {
   return html.replace('</head>', `  ${tag}\n</head>`)
 }
 
-const localizedRoutePath = (route, locale) => `/${locale}${route.path}`
-
-const routeUrl = (route, locale) => `${SITE_URL}${localizedRoutePath(route, locale)}`
-
 const normalizePreviewPath = (pathname = '/') => pathname.replace(/\/+$/, '') || '/'
 
 const staticPreviewPaths = new Set([
   ...staticRouteMeta.flatMap((route) => [
     route.path,
-    ...SUPPORTED_LOCALES.map((locale) => localizedRoutePath(route, locale)),
+    ...SUPPORTED_LOCALES.map((locale) => localizedPreviewPath(route, locale)),
   ]),
   ...SUPPORTED_LOCALES.map((locale) => `/${locale}`),
 ])
@@ -319,38 +182,6 @@ const routeHtml = (html, route, locale, options = {}) => {
   ].reduce((value, transform) => transform(value), html)
 }
 
-const sitemapXml = () => {
-  const indexableRoutes = staticRouteMeta.filter((route) => !route.robots?.includes('noindex'))
-  const urls = indexableRoutes.flatMap((route) =>
-    SUPPORTED_LOCALES.map((locale) => {
-      const alternates = [
-        ...SUPPORTED_LOCALES.map((alternateLocale) =>
-          `    <xhtml:link rel="alternate" hreflang="${HREFLANG_BY_LOCALE[alternateLocale]}" href="${routeUrl(route, alternateLocale)}" />`
-        ),
-        `    <xhtml:link rel="alternate" hreflang="x-default" href="${routeUrl(route, 'en')}" />`,
-      ].join('\n')
-
-      return [
-        '  <url>',
-        `    <loc>${routeUrl(route, locale)}</loc>`,
-        `    <lastmod>${LASTMOD}</lastmod>`,
-        `    <changefreq>${route.path === '/impressum' || route.path === '/privacy' || route.path === '/terms' || route.path === '/security' ? 'yearly' : 'monthly'}</changefreq>`,
-        `    <priority>${route.priority}</priority>`,
-        alternates,
-        '  </url>',
-      ].join('\n')
-    })
-  ).join('\n')
-
-  return [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
-    urls,
-    '</urlset>',
-    '',
-  ].join('\n')
-}
-
 const routeFallbackPlugin = () => ({
   name: 'katsumii-route-fallback',
   configureServer(server) {
@@ -374,6 +205,43 @@ const routeFallbackPlugin = () => ({
     })
   },
 })
+
+// GitHub Pages cannot send 301s, and its 404.html is a real 404 (status + noindex
+// content). Retired URLs (/tw/…, /es/…, /v2–/v6 prototypes) therefore get a small
+// static stub: meta refresh + canonical to the live page, which Google treats as
+// a redirect. Anything not listed here correctly answers 404.
+const redirectStubHtml = (target) => `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="${SITE_URL}${target}" />
+  <meta http-equiv="refresh" content="0; url=${target}" />
+  <script>window.location.replace(${JSON.stringify(target)} + window.location.search + window.location.hash)</script>
+</head>
+<body>
+  <p><a href="${target}">Continue to Katsumii</a></p>
+</body>
+</html>
+`
+
+const writeLegacyRedirectStubs = async (outDir) => {
+  const stubs = new Map()
+  for (const [legacy, replacement] of Object.entries(LEGACY_LOCALE_PREFIXES)) {
+    stubs.set(`/${legacy}/`, `/${replacement}/app/`)
+    for (const route of staticRouteMeta) {
+      stubs.set(`/${legacy}${route.path}/`, `/${replacement}${route.path}/`)
+    }
+  }
+  for (const path of LEGACY_PROTOTYPE_PATHS) stubs.set(`${path}/`, `/${DEFAULT_LOCALE}/app/`)
+
+  await Promise.all([...stubs].map(async ([stubPath, target]) => {
+    const dir = resolve(outDir, stubPath.replace(/^\/+/, ''))
+    await mkdir(dir, { recursive: true })
+    await writeFile(resolve(dir, 'index.html'), redirectStubHtml(target))
+  }))
+}
 
 const staticRoutePagesPlugin = () => {
   let outDir
@@ -414,6 +282,7 @@ const staticRoutePagesPlugin = () => {
         }))
       }
 
+      await writeLegacyRedirectStubs(outDir)
       await writeFile(resolve(outDir, 'sitemap.xml'), sitemapXml())
     },
   }

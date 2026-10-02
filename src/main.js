@@ -7,5 +7,7 @@ import i18n, { initialLocale, loadLocaleMessages } from "./i18n.js"
 import { vZoom } from "./v6/zoom.js"
 
 loadLocaleMessages(initialLocale).then(() => {
+  // the prerendered snapshot is hidden until here; mount() replaces it
+  document.getElementById("app").removeAttribute("data-prerendered")
   createApp(AppShell).use(router).use(i18n).directive("zoom", vZoom).mount("#app")
 })

@@ -3,16 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Katsumii</title>
-  <script>
-    (function () {
-      var path = window.location.pathname + window.location.search + window.location.hash;
-      var target = "/app.html?path=" + encodeURIComponent(path);
-      window.location.replace(target);
-    })();
-  </script>
+  <title>404 - Katsumii</title>
+  <meta name="description" content="This page does not exist. Continue to the Katsumii offline trading journal." />
+  <!-- GitHub Pages answers unknown URLs with this file AND an HTTP 404 status. No canonical on purpose. -->
+  <meta name="robots" content="noindex, follow" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <style>
+    :root { --bg: #f8fafc; --fg: #0f172a; --muted: #475569; --line: #cbd5e1; --accent: #0369a1; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #020617; --fg: #f1f5f9; --muted: #94a3b8; --line: #1e293b; --accent: #67e8f9; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: var(--bg); color: var(--fg); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.55; }
+    main { width: min(560px, 100%); }
+    .code { margin: 0 0 8px; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+    h1 { margin: 0 0 12px; font-size: clamp(2rem, 6vw, 2.75rem); line-height: 1.1; }
+    p { margin: 0 0 24px; color: var(--muted); }
+    nav { display: grid; gap: 8px; }
+    a { display: block; padding: 12px 16px; border: 1px solid var(--line); border-radius: 10px; color: var(--fg); text-decoration: none; }
+    a:hover, a:focus-visible { border-color: var(--accent); color: var(--accent); }
+  </style>
 </head>
 <body>
-  <p>Redirecting to Katsumii...</p>
+  <main>
+    <p class="code">404</p>
+    <h1 id="title">This page does not exist.</h1>
+    <p id="sub">The link may be outdated or mistyped. These pages will get you back on track.</p>
+    <nav aria-label="Katsumii">
+      <a id="l-app" href="/en/app/">Katsumii - Offline Trading Journal</a>
+      <a id="l-features" href="/en/features/">Features</a>
+      <a id="l-pricing" href="/en/pricing/">Pricing</a>
+      <a id="l-manual" href="/en/manual/">Manual</a>
+    </nav>
+  </main>
+  <script>
+    (function () {
+      var copy = {
+        en: { title: "This page does not exist.", sub: "The link may be outdated or mistyped. These pages will get you back on track.", app: "Katsumii - Offline Trading Journal", features: "Features", pricing: "Pricing", manual: "Manual" },
+        de: { title: "Diese Seite gibt es nicht.", sub: "Der Link ist möglicherweise veraltet oder falsch geschrieben. Von hier aus findest du zurück.", app: "Katsumii - Offline-Trading-Journal", features: "Funktionen", pricing: "Preise", manual: "Handbuch" },
+        zht: { title: "找不到這個頁面。", sub: "連結可能已過期或輸入有誤，你可以從下面的頁面繼續瀏覽。", app: "Katsumii - 離線交易日誌", features: "功能", pricing: "價格", manual: "使用手冊" }
+      };
+      var first = location.pathname.split("/")[1];
+      var lang = copy[first] ? first : null;
+      if (!lang) {
+        var nav = (navigator.language || "en").toLowerCase();
+        lang = nav.indexOf("zh") === 0 ? "zht" : nav.indexOf("de") === 0 ? "de" : "en";
+      }
+      var c = copy[lang];
+      document.documentElement.lang = lang === "zht" ? "zh-TW" : lang;
+      document.getElementById("title").textContent = c.title;
+      document.getElementById("sub").textContent = c.sub;
+      ["app", "features", "pricing", "manual"].forEach(function (k) {
+        var a = document.getElementById("l-" + k);
+        a.textContent = c[k];
+        a.href = "/" + lang + "/" + k + "/";
+      });
+    })();
+  </script>
 </body>
 </html>

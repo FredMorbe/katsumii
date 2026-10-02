@@ -32,3 +32,6 @@ public/Screenshots/**/*.png
 *.sln
 *.sw?
 *.lnk
+
+# Generated at build time by vite.config.js (scripts/seo-routes.mjs)
+public/sitemap.xml

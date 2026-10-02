@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+        with:
+          # sitemap <lastmod> comes from per-file git history (scripts/seo-routes.mjs)
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -31,8 +34,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # postbuild = headless-Chrome prerender (scripts/prerender.mjs) + SEO audit
+      # (tools/seo-audit.mjs). Uses the runner's preinstalled google-chrome and
+      # fails the deploy on any SEO regression.
       - name: Build site
         run: npm run build
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
 
       - name: Set up Pages
         uses: actions/configure-pages@v6
