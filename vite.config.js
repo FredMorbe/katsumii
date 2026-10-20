@@ -6,26 +6,51 @@ import vue from '@vitejs/plugin-vue'
 
 const appRoutes = new Set([
   '/app',
-  '/features',
-  '/prop-firm-challenges',
-  '/funded-accounts',
-  '/personal-trading',
-  '/backtesting',
-  '/analytics-reviews',
-  '/customization',
-  '/workflow',
-  '/local-offline',
-  '/pricing',
-  '/manual',
-  '/faq',
+  '/journal',
+  '/journal/features',
+  '/journal/prop-firm-challenges',
+  '/journal/funded-accounts',
+  '/journal/personal-trading',
+  '/journal/backtesting',
+  '/journal/analytics-reviews',
+  '/journal/customization',
+  '/journal/workflow',
+  '/journal/local-offline',
+  '/journal/pricing',
+  '/journal/manual',
+  '/journal/faq',
+  '/journal/bugreport',
+  '/journal/welcome',
+  '/andromeda',
+  '/tidii-cleaner',
+  '/cubamii',
   '/contact',
-  '/bugreport',
   '/impressum',
   '/privacy',
   '/terms',
   '/security',
-  '/welcome',
 ])
+
+/* Journal pages that used to sit at the site root. They now live under /journal;
+   the old URLs get a small redirect stub (see staticRoutePagesPlugin). */
+const LEGACY_JOURNAL_PAGES = [
+  'app',
+  'features',
+  'prop-firm-challenges',
+  'funded-accounts',
+  'personal-trading',
+  'backtesting',
+  'analytics-reviews',
+  'customization',
+  'workflow',
+  'local-offline',
+  'pricing',
+  'manual',
+  'faq',
+  'bugreport',
+  'welcome',
+]
+const journalPathFor = (page) => (page === 'app' ? '/journal' : `/journal/${page}`)
 
 const SITE_URL = 'https://www.katsumii.com'
 const SOCIAL_IMAGE = `${SITE_URL}/og-image.png`
@@ -54,79 +79,103 @@ const localeText = (locale, key) => {
 
 const staticRouteMeta = [
   {
-    path: '/app',
+    path: '/',
+    titleKey: 'common.pageTitles.home',
+    descriptionKey: 'common.pageDescriptions.home',
+    priority: '1.0',
+  },
+  {
+    path: '/journal',
     titleKey: 'common.pageTitles.app',
     descriptionKey: 'common.pageDescriptions.app',
     priority: '1.0',
   },
   {
-    path: '/features',
+    path: '/andromeda',
+    titleKey: 'common.pageTitles.andromeda',
+    descriptionKey: 'common.pageDescriptions.andromeda',
+    priority: '0.8',
+  },
+  {
+    path: '/tidii-cleaner',
+    titleKey: 'common.pageTitles.tidii',
+    descriptionKey: 'common.pageDescriptions.tidii',
+    priority: '0.8',
+  },
+  {
+    path: '/cubamii',
+    titleKey: 'common.pageTitles.cubamii',
+    descriptionKey: 'common.pageDescriptions.cubamii',
+    priority: '0.8',
+  },
+  {
+    path: '/journal/features',
     titleKey: 'common.pageTitles.features',
     descriptionKey: 'common.pageDescriptions.features',
     priority: '0.9',
   },
   {
-    path: '/prop-firm-challenges',
+    path: '/journal/prop-firm-challenges',
     titleKey: 'common.pageTitles.propFirmChallenges',
     descriptionKey: 'common.pageDescriptions.propFirmChallenges',
     priority: '0.8',
   },
   {
-    path: '/funded-accounts',
+    path: '/journal/funded-accounts',
     titleKey: 'common.pageTitles.fundedAccounts',
     descriptionKey: 'common.pageDescriptions.fundedAccounts',
     priority: '0.8',
   },
   {
-    path: '/personal-trading',
+    path: '/journal/personal-trading',
     titleKey: 'common.pageTitles.personalTrading',
     descriptionKey: 'common.pageDescriptions.personalTrading',
     priority: '0.8',
   },
   {
-    path: '/backtesting',
+    path: '/journal/backtesting',
     titleKey: 'common.pageTitles.backtesting',
     descriptionKey: 'common.pageDescriptions.backtesting',
     priority: '0.8',
   },
   {
-    path: '/analytics-reviews',
+    path: '/journal/analytics-reviews',
     titleKey: 'common.pageTitles.analyticsReviews',
     descriptionKey: 'common.pageDescriptions.analyticsReviews',
     priority: '0.8',
   },
   {
-    path: '/customization',
+    path: '/journal/customization',
     titleKey: 'common.pageTitles.customization',
     descriptionKey: 'common.pageDescriptions.customization',
     priority: '0.8',
   },
   {
-    path: '/workflow',
+    path: '/journal/workflow',
     titleKey: 'common.pageTitles.workflow',
     descriptionKey: 'common.pageDescriptions.workflow',
     priority: '0.8',
   },
   {
-    path: '/local-offline',
+    path: '/journal/local-offline',
     titleKey: 'common.pageTitles.localOffline',
     descriptionKey: 'common.pageDescriptions.localOffline',
     priority: '0.8',
   },
   {
-    path: '/pricing',
+    path: '/journal/pricing',
     titleKey: 'common.pageTitles.pricing',
     descriptionKey: 'common.pageDescriptions.pricing',
     priority: '0.9',
   },
   {
-    path: '/manual',
+    path: '/journal/manual',
     titleKey: 'common.pageTitles.manual',
     descriptionKey: 'common.pageDescriptions.manual',
     priority: '0.7',
   },
   {
-    path: '/faq',
+    path: '/journal/faq',
     titleKey: 'common.pageTitles.faq',
     descriptionKey: 'common.pageDescriptions.faq',
     priority: '0.7',
@@ -162,13 +211,13 @@ const staticRouteMeta = [
     priority: '0.3',
   },
   {
-    path: '/welcome',
+    path: '/journal/welcome',
     titleKey: 'common.pageTitles.welcome',
     descriptionKey: 'common.pageDescriptions.welcome',
     robots: 'noindex, follow',
   },
   {
-    path: '/bugreport',
+    path: '/journal/bugreport',
     titleKey: 'common.pageTitles.bugreport',
     descriptionKey: 'common.pageDescriptions.bugreport',
     robots: 'noindex, follow',
@@ -186,7 +235,7 @@ const upsertMetaTag = (html, matcher, tag) => {
   return html.replace('</head>', `  ${tag}\n</head>`)
 }
 
-const localizedRoutePath = (route, locale) => `/${locale}${route.path}`
+const localizedRoutePath = (route, locale) => (route.path === '/' ? `/${locale}` : `/${locale}${route.path}`)
 
 const routeUrl = (route, locale) => `${SITE_URL}${localizedRoutePath(route, locale)}`
 
@@ -198,6 +247,7 @@ const staticPreviewPaths = new Set([
     ...SUPPORTED_LOCALES.map((locale) => localizedRoutePath(route, locale)),
   ]),
   ...SUPPORTED_LOCALES.map((locale) => `/${locale}`),
+  ...LEGACY_JOURNAL_PAGES.flatMap((page) => [`/${page}`, ...SUPPORTED_LOCALES.map((locale) => `/${locale}/${page}`)]),
 ])
 
 const hasStaticPreviewPage = (pathname) => staticPreviewPaths.has(normalizePreviewPath(pathname))
@@ -213,8 +263,10 @@ const stripAlternateTags = (html) =>
   html.replace(/\n\s*<link\s+rel="alternate"[^>]*data-katsumii-hreflang="true"[^>]*>/gi, '')
 
 const structuredDataJson = (route, locale, title, description, canonical) => {
-  const appRoute = staticRouteMeta.find((item) => item.path === '/app')
+  const appRoute = staticRouteMeta.find((item) => item.path === '/journal')
   const softwareUrl = routeUrl(appRoute, 'en')
+  const isJournal = route.path.startsWith('/journal')
+  const studioUrl = SITE_URL + '/en'
   const lang = HREFLANG_BY_LOCALE[locale]
   const graph = [
     {
@@ -236,7 +288,7 @@ const structuredDataJson = (route, locale, title, description, canonical) => {
     {
       '@type': 'SoftwareApplication',
       '@id': `${softwareUrl}#software`,
-      name: 'Katsumii',
+      name: 'Katsumii Journal',
       url: softwareUrl,
       description: localeText(locale, 'common.pageDescriptions.app'),
       applicationCategory: 'FinanceApplication',
@@ -251,12 +303,12 @@ const structuredDataJson = (route, locale, title, description, canonical) => {
       name: title,
       description,
       isPartOf: { '@id': `${SITE_URL}/#website` },
-      about: { '@id': `${softwareUrl}#software` },
+      about: { '@id': isJournal ? `${softwareUrl}#software` : `${SITE_URL}/#organization` },
       inLanguage: lang,
     },
   ]
 
-  if (route.path !== '/app') {
+  if (route.path !== '/' && route.path !== '/journal') {
     graph.push({
       '@type': 'BreadcrumbList',
       '@id': `${canonical}#breadcrumb`,
@@ -264,8 +316,8 @@ const structuredDataJson = (route, locale, title, description, canonical) => {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Katsumii',
-          item: softwareUrl,
+          name: isJournal ? 'Katsumii Journal' : 'Katsumii',
+          item: isJournal ? softwareUrl : studioUrl,
         },
         {
           '@type': 'ListItem',
@@ -375,6 +427,20 @@ const routeFallbackPlugin = () => ({
   },
 })
 
+const redirectStubHtml = (target) => `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Katsumii</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="${target}" />
+  <meta http-equiv="refresh" content="0; url=${target}" />
+  <script>location.replace(${JSON.stringify(target)} + location.search + location.hash)</script>
+</head>
+<body><a href="${target}">${target}</a></body>
+</html>
+`
+
 const staticRoutePagesPlugin = () => {
   let outDir
 
@@ -392,27 +458,32 @@ const staticRoutePagesPlugin = () => {
           await mkdir(routeDir, { recursive: true })
           await writeFile(resolve(routeDir, 'index.html'), routeHtml(appHtml, route, locale))
         }),
-        (async () => {
-          const legacyDir = resolve(outDir, route.path.replace(/^\/+/, ''))
-          await mkdir(legacyDir, { recursive: true })
-          await writeFile(resolve(legacyDir, 'index.html'), routeHtml(appHtml, route, 'en', {
+        /* unlocalized copy (katsumii.com/journal/pricing) — never for the root,
+           that file is the SPA entry itself */
+        ...(route.path === '/' ? [] : [(async () => {
+          const bareDir = resolve(outDir, route.path.replace(/^\/+/, ''))
+          await mkdir(bareDir, { recursive: true })
+          await writeFile(resolve(bareDir, 'index.html'), routeHtml(appHtml, route, 'en', {
             canonical: routeUrl(route, 'en'),
             robots: 'noindex, follow',
           }))
-        })(),
+        })()]),
       ]))
 
-      const appRoute = staticRouteMeta.find((route) => route.path === '/app')
-      if (appRoute) {
-        await Promise.all(SUPPORTED_LOCALES.map(async (locale) => {
-          const localeRootDir = resolve(outDir, locale)
-          await mkdir(localeRootDir, { recursive: true })
-          await writeFile(resolve(localeRootDir, 'index.html'), routeHtml(appHtml, appRoute, locale, {
-            canonical: routeUrl(appRoute, locale),
-            robots: 'noindex, follow',
-          }))
-        }))
-      }
+      /* old Journal URLs (/en/features, /pricing, …) → small redirect stubs with a
+         canonical to the new address, so bookmarks and indexed links keep working */
+      await Promise.all(LEGACY_JOURNAL_PAGES.flatMap((page) => [
+        ...SUPPORTED_LOCALES.map(async (locale) => {
+          const dir = resolve(outDir, locale, page)
+          await mkdir(dir, { recursive: true })
+          await writeFile(resolve(dir, 'index.html'), redirectStubHtml(`${SITE_URL}/${locale}${journalPathFor(page)}`))
+        }),
+        (async () => {
+          const dir = resolve(outDir, page)
+          await mkdir(dir, { recursive: true })
+          await writeFile(resolve(dir, 'index.html'), redirectStubHtml(`${SITE_URL}/en${journalPathFor(page)}`))
+        })(),
+      ]))
 
       await writeFile(resolve(outDir, 'sitemap.xml'), sitemapXml())
     },

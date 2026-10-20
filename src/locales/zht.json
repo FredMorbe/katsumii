@@ -16,7 +16,8 @@
       "ariaMain": "主導覽",
       "ariaFeaturePages": "功能頁面",
       "groupDisciplines": "四種交易模式",
-      "groupDeeper": "深入了解"
+      "groupDeeper": "深入了解",
+      "allApps": "所有應用"
     },
     "pages": {
       "featuresOverview": {
@@ -81,6 +82,12 @@
       "security": "資安",
       "tagline": "交易日誌",
       "ariaInstagram": "Katsumii 的 Instagram"
+    },
+    "studio": {
+      "apps": "應用",
+      "company": "公司",
+      "tagline": "軟體工作室",
+      "note": "用心打造的軟體。"
     }
   },
   "landing": {
@@ -2242,7 +2249,11 @@
       "security": "資安 - Katsumii",
       "welcome": "歡迎 - Katsumii",
       "bugreport": "回報問題 - Katsumii",
-      "notFound": "404 - Katsumii"
+      "notFound": "404 - Katsumii",
+      "home": "Katsumii - 軟體工作室",
+      "andromeda": "Andromeda - Katsumii",
+      "tidii": "Tidii Cleaner - Katsumii",
+      "cubamii": "Cubamii - Katsumii"
     },
     "pageDescriptions": {
       "default": "Katsumii 是為重視紀律的交易者打造的離線交易日誌，包含交易記錄、Prop Firm 追蹤、分析報告與本地資料控制。",
@@ -2266,7 +2277,11 @@
       "security": "如何回報 Katsumii 的資安漏洞，以及回報後可以期待什麼。",
       "welcome": "Katsumii 的導覽介紹，協助你開始使用交易日誌並建立清楚流程。",
       "bugreport": "回報 Katsumii 問題並提供重現步驟，協助我們調查。",
-      "notFound": "這個 Katsumii 頁面不存在，或已被移動。"
+      "notFound": "這個 Katsumii 頁面不存在，或已被移動。",
+      "home": "Katsumii 是一間軟體工作室。探索 Katsumii Journal、Andromeda、Tidii Cleaner 與 Cubamii——專注的桌面與行動應用，部分免費、部分付費。",
+      "andromeda": "Andromeda 是 Katsumii 推出的專注型桌面應用，詳情即將公布。",
+      "tidii": "Tidii Cleaner 是 Katsumii 的桌面應用，讓你的電腦保持整潔，可免費下載。",
+      "cubamii": "Cubamii 是 Katsumii 的行動應用，詳情即將公布。"
     },
     "cta": {
       "getKatsumii": "取得 Katsumii",
@@ -2812,6 +2827,86 @@
         ]
       }
     ]
+  },
+  "studio": {
+    "hero": {
+      "eyebrow": "軟體工作室",
+      "titlePre": "小而精的應用。",
+      "titleEm": "一個星座",
+      "sub": "Katsumii 打造專注的桌面與行動軟體。每個應用都是一顆獨立的星——有的免費，有的付費，全都用心製作。"
+    },
+    "chart": {
+      "aria": "Katsumii 應用星圖",
+      "caption": "Katsumii 星座",
+      "legend": "實心星是我們的應用，虛線的則是接下來的作品。"
+    },
+    "apps": {
+      "eyebrow": "應用",
+      "titlePre": "找到你的",
+      "titleEm": "那顆星",
+      "open": "了解更多"
+    },
+    "platform": {
+      "desktop": "桌面",
+      "mobile": "行動"
+    },
+    "price": {
+      "free": "免費",
+      "paid": "付費"
+    },
+    "about": {
+      "eyebrow": "工作室",
+      "titlePre": "小而銳利的",
+      "titleEm": "軟體",
+      "copy": "Katsumii 是一間獨立工作室，開發桌面與行動應用。每個應用各有個性，底層則是同樣的工藝標準。",
+      "cta": "聯絡我們"
+    }
+  },
+  "products": {
+    "journal": {
+      "name": "Katsumii Journal",
+      "tagline": "掌握你的優勢。",
+      "desc": "離線交易日誌，適用於資助帳戶、挑戰帳戶、個人帳戶與回測。你的資料留在你的電腦上。"
+    },
+    "andromeda": {
+      "name": "Andromeda",
+      "tagline": "為遠行而生。",
+      "desc": "Katsumii 推出的專注型桌面應用，詳情即將公布。"
+    },
+    "tidii": {
+      "name": "Tidii Cleaner",
+      "tagline": "安靜地整理你的電腦。",
+      "desc": "讓你的電腦保持整潔，可免費下載，詳情即將公布。"
+    },
+    "cubamii": {
+      "name": "Cubamii",
+      "tagline": "小巧，隨身攜帶。",
+      "desc": "Katsumii 的行動應用，詳情即將公布。"
+    }
+  },
+  "productPage": {
+    "back": "所有應用",
+    "previewLabel": "預覽即將推出",
+    "pointsEyebrow": "敬請期待",
+    "points": [
+      {
+        "title": "專注的設計",
+        "copy": "把一件事做好，不留多餘的負擔。"
+      },
+      {
+        "title": "用心打造",
+        "copy": "與每個 Katsumii 應用相同的工藝與細節。"
+      },
+      {
+        "title": "詳情即將公布",
+        "copy": "截圖、功能與下載連結很快會出現在這裡。"
+      }
+    ],
+    "cta": {
+      "titlePre": "想知道何時",
+      "titleEm": "推出",
+      "button": "聯絡我們"
+    }
   }
 }
 

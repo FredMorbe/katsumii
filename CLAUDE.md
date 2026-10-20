@@ -17,7 +17,13 @@ No linting or test scripts are configured.
 **Stack:** Vue 3 (Composition API, `<script setup>`) + Vite + Tailwind CSS v4 + vue-i18n v11 + vue-router v4 + Headless UI + Heroicons.
 
 ### Routing
-`src/router.js` uses `createRouter` + `createWebHistory`. `src/AppShell.vue` mounts the router via `<RouterView />`. Routes: `/app` (home/landing → `App.vue`), `/features`, `/pricing`, `/manual`, `/faq`, `/contact`, `/impressum`, `/privacy`, `/terms`, `/welcome`. The `/` path redirects to `/app`. Legacy `app.html?page=X` URLs are redirected via a `beforeEach` guard. Page titles are set via `route.meta.title` in `router.afterEach`.
+`src/router.js` uses `createRouter` + `createWebHistory`. `src/AppShell.vue` mounts the router via `<RouterView />`. Katsumii is a **software studio**; every route is locale-prefixed (`/en`, `/de`, `/zht`):
+
+- **Studio level:** `/:locale` (constellation landing → `StudioHome.vue`), `/contact`, `/impressum`, `/privacy`, `/terms`, `/security`.
+- **Katsumii Journal** (the trading journal, formerly the whole site): `/journal` (landing → `LandingV6.vue`) and its sub pages `/journal/features`, `/journal/pricing`, `/journal/manual`, `/journal/faq`, `/journal/funded-accounts`, … Journal routes carry `meta.journal: true`, which makes `V6Shell` render the product nav/footer (brand + "Journal" tag) instead of the studio nav.
+- **Other products:** `/andromeda`, `/tidii-cleaner`, `/cubamii` → generic `ProductPage.vue` (route `meta.product` selects the entry in `src/utils/products.js`). Copy lives in `products.<key>` / `productPage` locale keys.
+- **Adding a product:** add an entry to `src/utils/products.js` (route, accent, platform, price, star position), add `products.<key>` + `common.pageTitles/pageDescriptions.<key>` to all locales, add the route in `router.js` and the static meta in `vite.config.js` + `scripts/build-sitemap.mjs`.
+- **Legacy URLs:** the Journal used to live at the root (`/en/features`, `/en/app`, `/pricing`, …). `LEGACY_JOURNAL_PAGES` (`utils/routes.js`) drives client-side redirects in `router.js` and static redirect stubs generated in `vite.config.js`. Unlocalized URLs (`/journal`, `/pricing`) redirect to the visitor's locale. Legacy `app.html?page=X` URLs are still redirected via a `beforeEach` guard. Page titles come from `route.meta.titleKey` (see `AppShell.vue`).
 
 ### Theme & Background system
 Theme (`"light"` / `"dark"`) and background (`"honeycomb"` / `"lines"`) state is managed by two composables:

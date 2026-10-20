@@ -10,8 +10,8 @@
           <li v-for="c in heroChips" :key="c">{{ c }}</li>
         </ul>
         <div class="v6wf-actions v6-reveal">
-          <RouterLink :to="`/${lang}/pricing`" class="v6-btn v6-magnetic">{{ t('common.cta.getKatsumii') }} <span aria-hidden="true">→</span></RouterLink>
-          <RouterLink :to="`/${lang}/features`" class="v6-quiet v6-magnetic">{{ t('common.cta.allFeatures') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/pricing`" class="v6-btn v6-magnetic">{{ t('common.cta.getKatsumii') }} <span aria-hidden="true">→</span></RouterLink>
+          <RouterLink :to="`/${lang}/journal/features`" class="v6-quiet v6-magnetic">{{ t('common.cta.allFeatures') }}</RouterLink>
         </div>
       </div>
       <figure class="v6wf-shot v6-reveal">
@@ -157,8 +157,8 @@
       <h2 class="v6wf-cta-title v6-reveal">{{ t('workflowPage.cta.title') }}<b class="v6-dot">.</b></h2>
       <p class="v6wf-cta-sub v6-reveal">{{ t('workflowPage.cta.sub') }}</p>
       <div class="v6wf-cta-actions v6-reveal">
-        <RouterLink :to="`/${lang}/pricing`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('common.cta.seePricing') }} <span aria-hidden="true">→</span></RouterLink>
-        <RouterLink :to="`/${lang}/features`" class="v6-quiet">{{ t('common.cta.exploreAllFeatures') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="`/${lang}/journal/pricing`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('common.cta.seePricing') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="`/${lang}/journal/features`" class="v6-quiet">{{ t('common.cta.exploreAllFeatures') }} <span aria-hidden="true">→</span></RouterLink>
       </div>
     </section>
   </main>

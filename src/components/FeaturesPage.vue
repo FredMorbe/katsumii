@@ -10,8 +10,8 @@
           <li v-for="tag in heroTags" :key="tag">{{ tag }}</li>
         </ul>
         <div class="v6ft-actions v6-reveal">
-          <RouterLink :to="`/${lang}/pricing`" class="v6-btn v6-magnetic">{{ t('featuresPage.footerCta.primary') }} <span aria-hidden="true">→</span></RouterLink>
-          <RouterLink :to="`/${lang}/manual`" class="v6-quiet v6-magnetic">{{ t('featuresPage.footerCta.secondary') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/pricing`" class="v6-btn v6-magnetic">{{ t('featuresPage.footerCta.primary') }} <span aria-hidden="true">→</span></RouterLink>
+          <RouterLink :to="`/${lang}/journal/manual`" class="v6-quiet v6-magnetic">{{ t('featuresPage.footerCta.secondary') }}</RouterLink>
         </div>
       </div>
       <figure class="v6ft-shot v6-reveal">
@@ -38,7 +38,7 @@
         <ul>
           <li v-for="point in m.points" :key="point">{{ point }}</li>
         </ul>
-        <RouterLink v-if="m.path" :to="`/${lang}/${m.path}`" class="v6ft-module-link">
+        <RouterLink v-if="m.path" :to="`/${lang}/journal/${m.path}`" class="v6ft-module-link">
           {{ t('featuresPage.cardLink') }} <span aria-hidden="true">→</span>
         </RouterLink>
       </article>
@@ -64,8 +64,8 @@
       <h2 class="v6ft-cta-title v6-reveal">{{ t('featuresPage.footerCta.headline') }}</h2>
       <p class="v6ft-cta-sub v6-reveal">{{ t('featuresPage.footerCta.description') }}</p>
       <div class="v6ft-cta-actions v6-reveal">
-        <RouterLink :to="`/${lang}/pricing`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('featuresPage.footerCta.primary') }} <span aria-hidden="true">→</span></RouterLink>
-        <RouterLink :to="`/${lang}/manual`" class="v6-quiet">{{ t('featuresPage.footerCta.secondary') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="`/${lang}/journal/pricing`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('featuresPage.footerCta.primary') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="`/${lang}/journal/manual`" class="v6-quiet">{{ t('featuresPage.footerCta.secondary') }} <span aria-hidden="true">→</span></RouterLink>
       </div>
     </section>
   </main>

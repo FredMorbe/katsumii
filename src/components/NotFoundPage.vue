@@ -6,7 +6,7 @@
       <p class="v6nf-sub v6-reveal">{{ t('notFoundPage.sub') }}</p>
 
       <div class="v6nf-actions v6-reveal">
-        <RouterLink :to="`/${lang}/app`" class="v6-btn v6-magnetic">{{ t('notFoundPage.back') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="`/${lang}`" class="v6-btn v6-magnetic">{{ t('notFoundPage.back') }} <span aria-hidden="true">→</span></RouterLink>
       </div>
 
       <nav class="v6nf-links v6-reveal" :aria-label="t('notFoundPage.ariaLinks')">
@@ -34,7 +34,7 @@ const lang = computed(() => {
   return normalizeLocale(raw)
 })
 
-const LINK_PATHS = ["/features", "/pricing", "/manual", "/faq"]
+const LINK_PATHS = ["/journal/features", "/journal/pricing", "/journal/manual", "/journal/faq"]
 const links = computed(() =>
   (tm("notFoundPage.links") || []).map((l, i) => ({
     path: LINK_PATHS[i], name: rt(l.name), copy: rt(l.copy),

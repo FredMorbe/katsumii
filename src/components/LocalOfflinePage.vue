@@ -10,8 +10,8 @@
           <li v-for="c in heroChips" :key="c">{{ c }}</li>
         </ul>
         <div class="v6lo-actions v6-reveal">
-          <RouterLink :to="`/${lang}/pricing`" class="v6-btn v6-magnetic">{{ t('common.cta.getKatsumii') }} <span aria-hidden="true">→</span></RouterLink>
-          <RouterLink :to="`/${lang}/features`" class="v6-quiet v6-magnetic">{{ t('common.cta.allFeatures') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/pricing`" class="v6-btn v6-magnetic">{{ t('common.cta.getKatsumii') }} <span aria-hidden="true">→</span></RouterLink>
+          <RouterLink :to="`/${lang}/journal/features`" class="v6-quiet v6-magnetic">{{ t('common.cta.allFeatures') }}</RouterLink>
         </div>
       </div>
 
@@ -88,8 +88,8 @@
       <h2 class="v6lo-cta-title v6-reveal">{{ t('localOfflinePage.cta.title') }}<b class="v6-dot">.</b></h2>
       <p class="v6lo-cta-sub v6-reveal">{{ t('localOfflinePage.cta.sub') }}</p>
       <div class="v6lo-cta-actions v6-reveal">
-        <RouterLink :to="`/${lang}/pricing`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('common.cta.seePricing') }} <span aria-hidden="true">→</span></RouterLink>
-        <RouterLink :to="`/${lang}/faq`" class="v6-quiet v6-magnetic">{{ t('localOfflinePage.cta.readFaq') }}</RouterLink>
+        <RouterLink :to="`/${lang}/journal/pricing`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('common.cta.seePricing') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="`/${lang}/journal/faq`" class="v6-quiet v6-magnetic">{{ t('localOfflinePage.cta.readFaq') }}</RouterLink>
       </div>
     </section>
   </main>

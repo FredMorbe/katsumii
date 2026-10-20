@@ -155,6 +155,20 @@
   letter-spacing: 0.01em;
 }
 .v6-brand img { border-radius: 8px; }
+/* product tag beside the studio brand, e.g. "Katsumii. | JOURNAL" */
+.v6-brand-scope {
+  margin-left: -1.1rem;
+  padding-left: 0.95rem;
+  border-left: 1px solid var(--v6-line-strong);
+  color: var(--v6-gold);
+  text-decoration: none;
+  font-family: var(--v6-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+.v6-brand-scope:hover { color: var(--v6-gold-hi); }
 .v6-nav-links {
   display: flex;
   align-items: center;

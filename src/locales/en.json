@@ -16,7 +16,8 @@
       "ariaMain": "Main navigation",
       "ariaFeaturePages": "Feature pages",
       "groupDisciplines": "Four disciplines",
-      "groupDeeper": "Go deeper"
+      "groupDeeper": "Go deeper",
+      "allApps": "All apps"
     },
     "pages": {
       "featuresOverview": {
@@ -81,6 +82,12 @@
       "security": "Security",
       "tagline": "trading journal",
       "ariaInstagram": "Katsumii on Instagram"
+    },
+    "studio": {
+      "apps": "Apps",
+      "company": "Company",
+      "tagline": "software studio",
+      "note": "Software, made with care."
     }
   },
   "landing": {
@@ -2242,7 +2249,11 @@
       "security": "Security - Katsumii",
       "welcome": "Welcome - Katsumii",
       "bugreport": "Report a Bug - Katsumii",
-      "notFound": "404 - Katsumii"
+      "notFound": "404 - Katsumii",
+      "home": "Katsumii - Software Studio",
+      "andromeda": "Andromeda - Katsumii",
+      "tidii": "Tidii Cleaner - Katsumii",
+      "cubamii": "Cubamii - Katsumii"
     },
     "pageDescriptions": {
       "default": "Katsumii is an offline trading journal for disciplined traders with trade logging, prop firm tracking, analytics, reports, and local data control.",
@@ -2266,7 +2277,11 @@
       "security": "How to report a security vulnerability in Katsumii and what to expect after you do.",
       "welcome": "A guided introduction to Katsumii and the first steps for getting value from your trading journal.",
       "bugreport": "Report a Katsumii bug and share reproduction steps so the issue can be investigated.",
-      "notFound": "This Katsumii page does not exist or has moved."
+      "notFound": "This Katsumii page does not exist or has moved.",
+      "home": "Katsumii is a software studio. Explore Katsumii Journal, Andromeda, Tidii Cleaner and Cubamii — focused apps for desktop and mobile, some free, some paid.",
+      "andromeda": "Andromeda is a focused desktop app from Katsumii. Details follow soon.",
+      "tidii": "Tidii Cleaner is a desktop app from Katsumii that keeps your PC tidy. Free to download.",
+      "cubamii": "Cubamii is the Katsumii mobile app. Details follow soon."
     },
     "cta": {
       "getKatsumii": "Get Katsumii",
@@ -2805,6 +2820,86 @@
         ]
       }
     ]
+  },
+  "studio": {
+    "hero": {
+      "eyebrow": "Software studio",
+      "titlePre": "Small apps.",
+      "titleEm": "One constellation",
+      "sub": "Katsumii builds focused software for desktop and mobile. Every app is a star of its own — some free, some paid, all made with care."
+    },
+    "chart": {
+      "aria": "Star chart of the Katsumii apps",
+      "caption": "Constellation Katsumii",
+      "legend": "Solid stars are our apps. Dashed ones come next."
+    },
+    "apps": {
+      "eyebrow": "The apps",
+      "titlePre": "Find your",
+      "titleEm": "star",
+      "open": "Learn more"
+    },
+    "platform": {
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    },
+    "price": {
+      "free": "Free",
+      "paid": "Paid"
+    },
+    "about": {
+      "eyebrow": "The studio",
+      "titlePre": "Small, sharp",
+      "titleEm": "software",
+      "copy": "Katsumii is an independent studio building desktop and mobile apps. Each one has its own identity — and the same standard of craft underneath.",
+      "cta": "Get in touch"
+    }
+  },
+  "products": {
+    "journal": {
+      "name": "Katsumii Journal",
+      "tagline": "Own your edge.",
+      "desc": "The offline trading journal for funded, challenge, personal and backtest accounts. Your data stays on your machine."
+    },
+    "andromeda": {
+      "name": "Andromeda",
+      "tagline": "Built to go far.",
+      "desc": "A focused desktop app from Katsumii. Details follow soon."
+    },
+    "tidii": {
+      "name": "Tidii Cleaner",
+      "tagline": "A tidy machine, quietly.",
+      "desc": "Keeps your PC tidy. Free to download. Details follow soon."
+    },
+    "cubamii": {
+      "name": "Cubamii",
+      "tagline": "Small. In your pocket.",
+      "desc": "The Katsumii mobile app. Details follow soon."
+    }
+  },
+  "productPage": {
+    "back": "All apps",
+    "previewLabel": "Preview coming soon",
+    "pointsEyebrow": "What to expect",
+    "points": [
+      {
+        "title": "Focused by design",
+        "copy": "One job, done well — without the bloat."
+      },
+      {
+        "title": "Built with care",
+        "copy": "The same craft and attention to detail as every Katsumii app."
+      },
+      {
+        "title": "Details coming soon",
+        "copy": "Screenshots, features and downloads will land here shortly."
+      }
+    ],
+    "cta": {
+      "titlePre": "Want to know when it's",
+      "titleEm": "ready",
+      "button": "Get in touch"
+    }
   }
 }
 

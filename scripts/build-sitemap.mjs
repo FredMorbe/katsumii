@@ -19,26 +19,31 @@ const LOCALES = [
 ]
 const DEFAULT_LOCALE = "en"
 
-// Only pages that should be indexed. Excludes /welcome, /bugreport, /v2..v5, 404.
+// Only pages that should be indexed. Excludes /journal/welcome, /journal/bugreport, 404.
+// path "" is the studio landing (katsumii.com/en).
 const PAGES = [
-  { path: "/app",                  priority: "1.0", changefreq: "weekly" },
-  { path: "/features",             priority: "0.9", changefreq: "monthly" },
-  { path: "/prop-firm-challenges", priority: "0.8", changefreq: "monthly" },
-  { path: "/funded-accounts",      priority: "0.8", changefreq: "monthly" },
-  { path: "/personal-trading",     priority: "0.8", changefreq: "monthly" },
-  { path: "/backtesting",          priority: "0.8", changefreq: "monthly" },
-  { path: "/analytics-reviews",    priority: "0.8", changefreq: "monthly" },
-  { path: "/customization",        priority: "0.8", changefreq: "monthly" },
-  { path: "/workflow",             priority: "0.8", changefreq: "monthly" },
-  { path: "/local-offline",        priority: "0.7", changefreq: "monthly" },
-  { path: "/pricing",              priority: "0.9", changefreq: "monthly" },
-  { path: "/manual",               priority: "0.7", changefreq: "monthly" },
-  { path: "/faq",                  priority: "0.7", changefreq: "monthly" },
-  { path: "/contact",              priority: "0.5", changefreq: "yearly" },
-  { path: "/privacy",              priority: "0.3", changefreq: "yearly" },
-  { path: "/terms",                priority: "0.3", changefreq: "yearly" },
-  { path: "/impressum",            priority: "0.3", changefreq: "yearly" },
-  { path: "/security",             priority: "0.3", changefreq: "yearly" },
+  { path: "",                              priority: "1.0", changefreq: "weekly" },
+  { path: "/journal",                      priority: "1.0", changefreq: "weekly" },
+  { path: "/journal/features",             priority: "0.9", changefreq: "monthly" },
+  { path: "/journal/prop-firm-challenges", priority: "0.8", changefreq: "monthly" },
+  { path: "/journal/funded-accounts",      priority: "0.8", changefreq: "monthly" },
+  { path: "/journal/personal-trading",     priority: "0.8", changefreq: "monthly" },
+  { path: "/journal/backtesting",          priority: "0.8", changefreq: "monthly" },
+  { path: "/journal/analytics-reviews",    priority: "0.8", changefreq: "monthly" },
+  { path: "/journal/customization",        priority: "0.8", changefreq: "monthly" },
+  { path: "/journal/workflow",             priority: "0.8", changefreq: "monthly" },
+  { path: "/journal/local-offline",        priority: "0.7", changefreq: "monthly" },
+  { path: "/journal/pricing",              priority: "0.9", changefreq: "monthly" },
+  { path: "/journal/manual",               priority: "0.7", changefreq: "monthly" },
+  { path: "/journal/faq",                  priority: "0.7", changefreq: "monthly" },
+  { path: "/andromeda",                    priority: "0.8", changefreq: "monthly" },
+  { path: "/tidii-cleaner",                priority: "0.8", changefreq: "monthly" },
+  { path: "/cubamii",                      priority: "0.8", changefreq: "monthly" },
+  { path: "/contact",                      priority: "0.5", changefreq: "yearly" },
+  { path: "/privacy",                      priority: "0.3", changefreq: "yearly" },
+  { path: "/terms",                        priority: "0.3", changefreq: "yearly" },
+  { path: "/impressum",                    priority: "0.3", changefreq: "yearly" },
+  { path: "/security",                     priority: "0.3", changefreq: "yearly" },
 ]
 
 // lastmod has to describe the last real change, not the moment of the build.

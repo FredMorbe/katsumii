@@ -142,7 +142,7 @@
                 <ul>
                   <li v-for="p in m.points" :key="p">{{ p }}</li>
                 </ul>
-                <RouterLink :to="`/${lang}${m.path}`" class="v6-quiet v6-mode-link">
+                <RouterLink :to="`/${lang}/journal${m.path}`" class="v6-quiet v6-mode-link">
                   {{ t('landing.modes.explore', { name: m.name }) }} <span aria-hidden="true">→</span>
                 </RouterLink>
               </div>
@@ -173,7 +173,7 @@
                 <ul>
                   <li v-for="p in modes[activeMode].points" :key="p">{{ p }}</li>
                 </ul>
-                <RouterLink :to="`/${lang}${modes[activeMode].path}`" class="v6-quiet v6-mode-link">
+                <RouterLink :to="`/${lang}/journal${modes[activeMode].path}`" class="v6-quiet v6-mode-link">
                   {{ t('landing.modes.explore', { name: modes[activeMode].name }) }} <span aria-hidden="true">→</span>
                 </RouterLink>
               </article>
@@ -194,7 +194,7 @@
             <ul>
               <li v-for="p in m.points" :key="p">{{ p }}</li>
             </ul>
-            <RouterLink :to="`/${lang}${m.path}`" class="v6-quiet v6-mode-link">
+            <RouterLink :to="`/${lang}/journal${m.path}`" class="v6-quiet v6-mode-link">
               {{ t('landing.modes.explore', { name: m.name }) }} <span aria-hidden="true">→</span>
             </RouterLink>
           </article>
@@ -260,7 +260,7 @@
       <p class="v6-cta-sub v6-reveal">{{ t('landing.cta.sub') }}</p>
       <div class="v6-cta-actions v6-reveal">
         <span class="v6-btn v6-btn-lg v6-btn-static" aria-disabled="true">{{ t('landing.cta.primary') }}</span>
-        <RouterLink :to="`/${lang}/features`" class="v6-quiet">{{ t('landing.cta.secondary') }}</RouterLink>
+        <RouterLink :to="`/${lang}/journal/features`" class="v6-quiet">{{ t('landing.cta.secondary') }}</RouterLink>
       </div>
     </section>
 

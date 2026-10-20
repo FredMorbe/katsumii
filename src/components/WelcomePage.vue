@@ -35,8 +35,8 @@
     <!-- CTA -->
     <section class="v6w-cta">
       <div class="v6w-cta-actions v6-reveal">
-        <RouterLink :to="`/${lang}/manual`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('welcomePage.openManual') }} <span aria-hidden="true">→</span></RouterLink>
-        <RouterLink :to="`/${lang}/faq`" class="v6-quiet v6-magnetic">{{ t('welcomePage.browseFaq') }}</RouterLink>
+        <RouterLink :to="`/${lang}/journal/manual`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('welcomePage.openManual') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="`/${lang}/journal/faq`" class="v6-quiet v6-magnetic">{{ t('welcomePage.browseFaq') }}</RouterLink>
       </div>
       <p class="v6w-cta-note v6-reveal">
         {{ t('welcomePage.notePre') }}

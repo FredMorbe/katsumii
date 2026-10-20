@@ -9,15 +9,16 @@
 
     <!-- NAV -->
     <header ref="navEl" class="v6-nav" :class="{ scrolled }">
-      <RouterLink class="v6-brand" :to="`/${lang}/app`">
+      <RouterLink class="v6-brand" :to="`/${lang}`">
         <img :src="asset('logo.png')" :alt="t('common.alts.logo')" width="32" height="32" />
         <span>Katsumii<b class="v6-dot" aria-hidden="true">.</b></span>
       </RouterLink>
+      <RouterLink v-if="isJournal" class="v6-brand-scope" :to="`/${lang}/journal`">Journal</RouterLink>
 
-      <nav class="v6-nav-links" :aria-label="t('shell.nav.ariaMain')">
+      <nav v-if="isJournal" class="v6-nav-links" :aria-label="t('shell.nav.ariaMain')">
         <span class="v6-nav-home-slot" :class="{ 'is-visible': !isLandingRoute }">
           <RouterLink
-            :to="`/${lang}/app`"
+            :to="`/${lang}/journal`"
             :aria-hidden="isLandingRoute"
           :tabindex="isLandingRoute ? -1 : undefined"
           >
@@ -25,9 +26,9 @@
           </RouterLink>
         </span>
         <div class="v6-nav-drop">
-          <RouterLink :to="`/${lang}/features`" aria-haspopup="true">{{ t('shell.nav.features') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/features`" aria-haspopup="true">{{ t('shell.nav.features') }}</RouterLink>
           <div class="v6-nav-menu" role="menu" :aria-label="t('shell.nav.ariaFeaturePages')">
-            <RouterLink role="menuitem" :to="`/${lang}/features`">
+            <RouterLink role="menuitem" :to="`/${lang}/journal/features`">
               <span class="v6-nav-menu-idx" aria-hidden="true">00</span>
               <span class="v6-nav-menu-text">
                 {{ t('shell.pages.featuresOverview.label') }}
@@ -42,7 +43,7 @@
               v-for="(item, index) in FEATURE_PAGES"
               :key="item.path"
               role="menuitem"
-              :to="`/${lang}/${item.path}`"
+              :to="`/${lang}/journal/${item.path}`"
             >
               <span
                 class="v6-nav-menu-idx"
@@ -64,7 +65,7 @@
               v-for="(item, index) in DEEPER_PAGES"
               :key="item.path"
               role="menuitem"
-              :to="`/${lang}/${item.path}`"
+              :to="`/${lang}/journal/${item.path}`"
             >
               <span class="v6-nav-menu-idx" aria-hidden="true">0{{ index + 5 }}</span>
               <span class="v6-nav-menu-text">
@@ -77,8 +78,13 @@
             </RouterLink>
           </div>
         </div>
-        <RouterLink :to="`/${lang}/pricing`">{{ t('shell.nav.pricing') }}</RouterLink>
-        <RouterLink :to="`/${lang}/faq`">{{ t('shell.nav.faq') }}</RouterLink>
+        <RouterLink :to="`/${lang}/journal/pricing`">{{ t('shell.nav.pricing') }}</RouterLink>
+        <RouterLink :to="`/${lang}/journal/faq`">{{ t('shell.nav.faq') }}</RouterLink>
+      </nav>
+
+      <nav v-else class="v6-nav-links" :aria-label="t('shell.nav.ariaMain')">
+        <RouterLink v-for="p in PRODUCTS" :key="p.key" :to="`/${lang}${p.path}`">{{ t(`products.${p.key}.name`) }}</RouterLink>
+        <RouterLink :to="`/${lang}/contact`">{{ t('shell.footer.contact') }}</RouterLink>
       </nav>
 
       <div class="v6-nav-right">
@@ -98,7 +104,8 @@
             <path d="M20.4 14.2A8.4 8.4 0 0 1 9.8 3.6a8.4 8.4 0 1 0 10.6 10.6z" />
           </svg>
         </button>
-        <span class="v6-btn v6-btn-sm v6-btn-static" aria-disabled="true">{{ t('shell.comingSoon') }}</span>
+        <span v-if="isJournal" class="v6-btn v6-btn-sm v6-btn-static" aria-disabled="true">{{ t('shell.comingSoon') }}</span>
+        <RouterLink v-else class="v6-btn v6-btn-sm v6-magnetic" :to="`/${lang}/contact`">{{ t('shell.footer.contact') }}</RouterLink>
         <button
           type="button"
           class="v6-menu-toggle"
@@ -118,8 +125,14 @@
         <button class="v6-mobile-backdrop" type="button" :aria-label="t('common.aria.closeMenu')" @click="mobileOpen = false"></button>
         <nav ref="mobilePanelEl" class="v6-mobile-panel" :aria-label="t('shell.mobile.ariaNav')">
           <p class="v6-mobile-kicker">{{ t('shell.mobile.kicker') }}</p>
-          <div class="v6-mobile-nav">
-            <RouterLink :to="`/${lang}/features`">
+          <div v-if="!isJournal" class="v6-mobile-nav">
+            <RouterLink v-for="p in PRODUCTS" :key="p.key" :to="`/${lang}${p.path}`">
+              {{ t(`products.${p.key}.name`) }}<small>{{ t(`products.${p.key}.tagline`) }}</small>
+            </RouterLink>
+            <RouterLink :to="`/${lang}/contact`">{{ t('shell.footer.contact') }}</RouterLink>
+          </div>
+          <div v-else class="v6-mobile-nav">
+            <RouterLink :to="`/${lang}/journal/features`">
               {{ t('shell.nav.features') }}<small>{{ t('shell.mobile.featuresSub') }}</small>
             </RouterLink>
 
@@ -146,7 +159,7 @@
                   <RouterLink
                     v-for="item in group.items"
                     :key="item.path"
-                    :to="`/${lang}/${item.path}`"
+                    :to="`/${lang}/journal/${item.path}`"
                     :tabindex="openGroup === group.key ? undefined : -1"
                   >
                     {{ t(`shell.pages.${item.key}.label`) }}<small>{{ t(`shell.pages.${item.key}.sub`) }}</small>
@@ -155,11 +168,11 @@
               </div>
             </div>
 
-            <RouterLink :to="`/${lang}/pricing`">{{ t('shell.nav.pricing') }}</RouterLink>
-            <RouterLink :to="`/${lang}/faq`">{{ t('shell.nav.faq') }}</RouterLink>
+            <RouterLink :to="`/${lang}/journal/pricing`">{{ t('shell.nav.pricing') }}</RouterLink>
+            <RouterLink :to="`/${lang}/journal/faq`">{{ t('shell.nav.faq') }}</RouterLink>
           </div>
-          <span class="v6-btn v6-btn-static" aria-disabled="true">{{ t('shell.comingSoon') }}</span>
-          <p class="v6-mobile-note">{{ t('shell.mobile.note') }}</p>
+          <span v-if="isJournal" class="v6-btn v6-btn-static" aria-disabled="true">{{ t('shell.comingSoon') }}</span>
+          <p class="v6-mobile-note">{{ isJournal ? t('shell.mobile.note') : t('shell.studio.note') }}</p>
         </nav>
       </div>
     </Transition>
@@ -169,7 +182,7 @@
     <footer class="v6-footer">
       <div class="v6-footer-cols">
         <div class="v6-footer-brand">
-          <RouterLink class="v6-brand v6-footer-brand-link" :to="`/${lang}/app`">
+          <RouterLink class="v6-brand v6-footer-brand-link" :to="`/${lang}`">
             <img :src="asset('logo.png')" :alt="t('common.alts.logo')" width="28" height="28" />
             <span>Katsumii<b class="v6-dot" aria-hidden="true">.</b></span>
           </RouterLink>
@@ -199,37 +212,54 @@
           </a>
         </div>
 
+        <template v-if="isJournal">
         <nav class="v6-footer-col" :aria-label="t('shell.footer.product')">
           <p class="v6-footer-head">{{ t('shell.footer.product') }}</p>
-          <RouterLink :to="`/${lang}/app`">{{ t('shell.nav.home') }}</RouterLink>
-          <RouterLink :to="`/${lang}/pricing`">{{ t('shell.nav.pricing') }}</RouterLink>
-          <RouterLink :to="`/${lang}/app#system-requirements`">{{ t('shell.footer.systemRequirements') }}</RouterLink>
-          <RouterLink :to="`/${lang}/local-offline`">{{ t('shell.pages.localOffline.label') }}</RouterLink>
+          <RouterLink :to="`/${lang}`">{{ t('shell.nav.allApps') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal`">{{ t('shell.nav.home') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/pricing`">{{ t('shell.nav.pricing') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal#system-requirements`">{{ t('shell.footer.systemRequirements') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/local-offline`">{{ t('shell.pages.localOffline.label') }}</RouterLink>
         </nav>
 
         <nav class="v6-footer-col" :aria-label="t('shell.footer.features')">
           <p class="v6-footer-head">{{ t('shell.footer.features') }}</p>
-          <RouterLink :to="`/${lang}/features`">{{ t('shell.footer.overview') }}</RouterLink>
-          <RouterLink :to="`/${lang}/analytics-reviews`">{{ t('shell.pages.analytics.label') }}</RouterLink>
-          <RouterLink :to="`/${lang}/customization`">{{ t('shell.pages.customization.label') }}</RouterLink>
-          <RouterLink :to="`/${lang}/workflow`">{{ t('shell.pages.workflow.label') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/features`">{{ t('shell.footer.overview') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/analytics-reviews`">{{ t('shell.pages.analytics.label') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/customization`">{{ t('shell.pages.customization.label') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/workflow`">{{ t('shell.pages.workflow.label') }}</RouterLink>
         </nav>
 
         <nav class="v6-footer-col" :aria-label="t('shell.footer.disciplines')">
           <p class="v6-footer-head">{{ t('shell.footer.disciplines') }}</p>
-          <RouterLink :to="`/${lang}/funded-accounts`">{{ t('shell.pages.funded.label') }}</RouterLink>
-          <RouterLink :to="`/${lang}/prop-firm-challenges`">{{ t('shell.pages.challenge.label') }}</RouterLink>
-          <RouterLink :to="`/${lang}/personal-trading`">{{ t('shell.pages.personal.label') }}</RouterLink>
-          <RouterLink :to="`/${lang}/backtesting`">{{ t('shell.pages.backtest.label') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/funded-accounts`">{{ t('shell.pages.funded.label') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/prop-firm-challenges`">{{ t('shell.pages.challenge.label') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/personal-trading`">{{ t('shell.pages.personal.label') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/backtesting`">{{ t('shell.pages.backtest.label') }}</RouterLink>
         </nav>
 
         <nav class="v6-footer-col" :aria-label="t('shell.footer.support')">
           <p class="v6-footer-head">{{ t('shell.footer.support') }}</p>
-          <RouterLink :to="`/${lang}/manual`">{{ t('shell.footer.manual') }}</RouterLink>
-          <RouterLink :to="`/${lang}/faq`">{{ t('shell.nav.faq') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/manual`">{{ t('shell.footer.manual') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/faq`">{{ t('shell.nav.faq') }}</RouterLink>
           <RouterLink :to="`/${lang}/contact`">{{ t('shell.footer.contact') }}</RouterLink>
           <a :href="INSTAGRAM_URL" target="_blank" rel="noopener">{{ t('shell.footer.instagram') }}</a>
         </nav>
+
+        </template>
+        <template v-else>
+        <nav class="v6-footer-col" :aria-label="t('shell.studio.apps')">
+          <p class="v6-footer-head">{{ t('shell.studio.apps') }}</p>
+          <RouterLink v-for="p in PRODUCTS" :key="p.key" :to="`/${lang}${p.path}`">{{ t(`products.${p.key}.name`) }}</RouterLink>
+        </nav>
+
+        <nav class="v6-footer-col" :aria-label="t('shell.studio.company')">
+          <p class="v6-footer-head">{{ t('shell.studio.company') }}</p>
+          <RouterLink :to="`/${lang}/contact`">{{ t('shell.footer.contact') }}</RouterLink>
+          <a :href="INSTAGRAM_URL" target="_blank" rel="noopener">{{ t('shell.footer.instagram') }}</a>
+        </nav>
+
+        </template>
 
         <nav class="v6-footer-col" :aria-label="t('shell.footer.legal')">
           <p class="v6-footer-head">{{ t('shell.footer.legal') }}</p>
@@ -242,7 +272,7 @@
       </div>
 
       <div class="v6-footer-bottom">
-        <p>© {{ year }} Katsumii — {{ t('shell.footer.tagline') }}</p>
+        <p>© {{ year }} Katsumii — {{ isJournal ? t('shell.footer.tagline') : t('shell.studio.tagline') }}</p>
         <p class="v6-footer-version">v{{ siteVersion }}</p>
       </div>
     </footer>
@@ -256,6 +286,7 @@ import { useRoute } from "vue-router"
 import { createV6Background } from "../../v6/gl.js"
 import { initMagnetic, prefersReducedMotion } from "../../v6/motion.js"
 import { normalizeLocale } from "../../utils/routes.js"
+import { PRODUCTS } from "../../utils/products.js"
 import { useConsent } from "../../composables/useConsent.js"
 import PreviewNoticeModal from "./PreviewNoticeModal.vue"
 import V6LangSwitch from "./V6LangSwitch.vue"
@@ -301,7 +332,10 @@ const MOBILE_GROUPS = [
 const route = useRoute()
 const isDark = inject("isDark")
 const toggleTheme = inject("toggleTheme")
-const isLandingRoute = computed(() => route.meta.canonicalPath === "/app")
+const isLandingRoute = computed(() => route.meta.canonicalPath === "/journal")
+/* Journal pages carry the product nav and footer; the studio level (home,
+   other products, contact, legal) carries the studio nav. */
+const isJournal = computed(() => !!route.meta.journal)
 
 const rootEl = ref(null)
 const glEl = ref(null)

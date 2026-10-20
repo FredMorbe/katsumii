@@ -16,7 +16,8 @@
       "ariaMain": "Hauptnavigation",
       "ariaFeaturePages": "Funktionsseiten",
       "groupDisciplines": "Vier Disziplinen",
-      "groupDeeper": "Mehr im Detail"
+      "groupDeeper": "Mehr im Detail",
+      "allApps": "Alle Apps"
     },
     "pages": {
       "featuresOverview": {
@@ -81,6 +82,12 @@
       "security": "Sicherheit",
       "tagline": "Trading-Journal",
       "ariaInstagram": "Katsumii auf Instagram"
+    },
+    "studio": {
+      "apps": "Apps",
+      "company": "Unternehmen",
+      "tagline": "Software-Studio",
+      "note": "Software, mit Sorgfalt gemacht."
     }
   },
   "landing": {
@@ -2242,7 +2249,11 @@
       "security": "Sicherheit - Katsumii",
       "welcome": "Willkommen - Katsumii",
       "bugreport": "Fehler melden - Katsumii",
-      "notFound": "404 - Katsumii"
+      "notFound": "404 - Katsumii",
+      "home": "Katsumii - Software-Studio",
+      "andromeda": "Andromeda - Katsumii",
+      "tidii": "Tidii Cleaner - Katsumii",
+      "cubamii": "Cubamii - Katsumii"
     },
     "pageDescriptions": {
       "default": "Katsumii ist ein Offline-Trading-Journal für disziplinierte Trader mit Trade-Logging, Prop-Firm-Tracking, Analytics, Reports und lokaler Datenkontrolle.",
@@ -2266,7 +2277,11 @@
       "security": "Wie du eine Sicherheitslücke in Katsumii meldest und was danach passiert.",
       "welcome": "Eine geführte Einführung in Katsumii und die ersten Schritte, um dein Trading-Journal sinnvoll zu nutzen.",
       "bugreport": "Melde einen Katsumii-Fehler und teile Reproduktionsschritte, damit wir das Problem untersuchen können.",
-      "notFound": "Diese Katsumii-Seite existiert nicht oder wurde verschoben."
+      "notFound": "Diese Katsumii-Seite existiert nicht oder wurde verschoben.",
+      "home": "Katsumii ist ein Software-Studio. Entdecke Katsumii Journal, Andromeda, Tidii Cleaner und Cubamii — fokussierte Apps für Desktop und Mobile, teils kostenlos, teils kostenpflichtig.",
+      "andromeda": "Andromeda ist eine fokussierte Desktop-App von Katsumii. Details folgen in Kürze.",
+      "tidii": "Tidii Cleaner ist eine Desktop-App von Katsumii, die deinen PC aufgeräumt hält. Kostenlos herunterladen.",
+      "cubamii": "Cubamii ist die mobile App von Katsumii. Details folgen in Kürze."
     },
     "cta": {
       "getKatsumii": "Katsumii holen",
@@ -2805,6 +2820,86 @@
         ]
       }
     ]
+  },
+  "studio": {
+    "hero": {
+      "eyebrow": "Software-Studio",
+      "titlePre": "Kleine Apps.",
+      "titleEm": "Ein Sternbild",
+      "sub": "Katsumii entwickelt fokussierte Software für Desktop und Mobile. Jede App ist ein eigener Stern — manche kostenlos, manche kostenpflichtig, alle mit Sorgfalt gemacht."
+    },
+    "chart": {
+      "aria": "Sternkarte der Katsumii-Apps",
+      "caption": "Sternbild Katsumii",
+      "legend": "Durchgezogene Sterne sind unsere Apps. Gestrichelte folgen."
+    },
+    "apps": {
+      "eyebrow": "Die Apps",
+      "titlePre": "Finde deinen",
+      "titleEm": "Stern",
+      "open": "Mehr erfahren"
+    },
+    "platform": {
+      "desktop": "Desktop",
+      "mobile": "Mobil"
+    },
+    "price": {
+      "free": "Kostenlos",
+      "paid": "Kostenpflichtig"
+    },
+    "about": {
+      "eyebrow": "Das Studio",
+      "titlePre": "Kleine, scharfe",
+      "titleEm": "Software",
+      "copy": "Katsumii ist ein unabhängiges Studio für Desktop- und Mobile-Apps. Jede hat ihre eigene Identität — und darunter denselben Anspruch an Handwerk.",
+      "cta": "Kontakt aufnehmen"
+    }
+  },
+  "products": {
+    "journal": {
+      "name": "Katsumii Journal",
+      "tagline": "Dein Vorteil, im Griff.",
+      "desc": "Das Offline-Trading-Journal für Funded-, Challenge-, Personal- und Backtest-Konten. Deine Daten bleiben auf deinem Rechner."
+    },
+    "andromeda": {
+      "name": "Andromeda",
+      "tagline": "Gebaut für die Weite.",
+      "desc": "Eine fokussierte Desktop-App von Katsumii. Details folgen in Kürze."
+    },
+    "tidii": {
+      "name": "Tidii Cleaner",
+      "tagline": "Ein aufgeräumter Rechner, ganz leise.",
+      "desc": "Hält deinen PC aufgeräumt. Kostenlos herunterladen. Details folgen in Kürze."
+    },
+    "cubamii": {
+      "name": "Cubamii",
+      "tagline": "Klein. In deiner Tasche.",
+      "desc": "Die mobile App von Katsumii. Details folgen in Kürze."
+    }
+  },
+  "productPage": {
+    "back": "Alle Apps",
+    "previewLabel": "Vorschau folgt",
+    "pointsEyebrow": "Was dich erwartet",
+    "points": [
+      {
+        "title": "Fokussiert",
+        "copy": "Eine Aufgabe, gut gelöst — ohne Ballast."
+      },
+      {
+        "title": "Mit Sorgfalt gebaut",
+        "copy": "Dasselbe Handwerk und derselbe Blick fürs Detail wie bei jeder Katsumii-App."
+      },
+      {
+        "title": "Details folgen",
+        "copy": "Screenshots, Funktionen und Downloads erscheinen hier in Kürze."
+      }
+    ],
+    "cta": {
+      "titlePre": "Du willst wissen, wann es",
+      "titleEm": "fertig",
+      "button": "Kontakt aufnehmen"
+    }
   }
 }
 

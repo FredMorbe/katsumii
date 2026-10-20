@@ -188,8 +188,8 @@
       <div class="v6p-cta-actions v6-reveal">
         <!-- buying is not live yet, so the primary action moves the reader deeper
              into the product rather than back to the start of the funnel -->
-        <RouterLink :to="pagePath('features')" class="v6-btn v6-btn-lg v6-magnetic">{{ t('pricingPage.cta.seeFeatures') }} <span aria-hidden="true">→</span></RouterLink>
-        <RouterLink :to="pagePath('app')" class="v6-quiet">{{ t('pricingPage.cta.backHome') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="pagePath('journal/features')" class="v6-btn v6-btn-lg v6-magnetic">{{ t('pricingPage.cta.seeFeatures') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink :to="pagePath('journal')" class="v6-quiet">{{ t('pricingPage.cta.backHome') }} <span aria-hidden="true">→</span></RouterLink>
       </div>
     </section>
   </main>

@@ -117,7 +117,9 @@ const routeDescription = () => {
 }
 
 const buildStructuredData = (title, description, canonicalUrl) => {
-  const softwareUrl = absoluteUrl(localizedPathForRoute("/app", "en"))
+  const isJournal = !!route.meta.journal
+  const softwareUrl = absoluteUrl(localizedPathForRoute("/journal", "en"))
+  const studioUrl = absoluteUrl(localizedPathForRoute("/", "en"))
   const currentPath = route.meta.canonicalPath || unlocalizedPathFromRoute(route.path)
   const graph = [
     {
@@ -139,7 +141,7 @@ const buildStructuredData = (title, description, canonicalUrl) => {
     {
       "@type": "SoftwareApplication",
       "@id": `${softwareUrl}#software`,
-      "name": "Katsumii",
+      "name": "Katsumii Journal",
       "url": softwareUrl,
       "description": t("common.pageDescriptions.app"),
       "applicationCategory": "FinanceApplication",
@@ -154,12 +156,12 @@ const buildStructuredData = (title, description, canonicalUrl) => {
       "name": title,
       "description": description,
       "isPartOf": { "@id": `${SITE_URL}/#website` },
-      "about": { "@id": `${softwareUrl}#software` },
+      "about": { "@id": isJournal ? `${softwareUrl}#software` : `${SITE_URL}/#organization` },
       "inLanguage": htmlLangForLocale(normalizeLocale(routeLocale() || locale.value)),
     },
   ]
 
-  if (currentPath && currentPath !== "/app") {
+  if (currentPath && currentPath !== "/" && currentPath !== "/journal") {
     graph.push({
       "@type": "BreadcrumbList",
       "@id": `${canonicalUrl}#breadcrumb`,
@@ -167,8 +169,8 @@ const buildStructuredData = (title, description, canonicalUrl) => {
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Katsumii",
-          "item": softwareUrl,
+          "name": isJournal ? "Katsumii Journal" : "Katsumii",
+          "item": isJournal ? softwareUrl : studioUrl,
         },
         {
           "@type": "ListItem",
@@ -206,7 +208,7 @@ watch(
     const title = routeTitle()
     const description = routeDescription()
     const currentLocale = normalizeLocale(routeLocale() || locale.value)
-    const canonicalPath = route.meta.canonicalPath || unlocalizedPathFromRoute(route.path) || "/app"
+    const canonicalPath = route.meta.canonicalPath || unlocalizedPathFromRoute(route.path) || "/"
     const canonicalUrl = absoluteUrl(localizedPathForRoute(canonicalPath, currentLocale))
     const robots = route.meta.robots || "index, follow"
     const lang = htmlLangForLocale(currentLocale)

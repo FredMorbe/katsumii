@@ -59,8 +59,36 @@ export const routePath = (path = "", locale = preferredLocale()) => {
   return `${prefix}${localizedPath}`.replace(/\/{2,}/g, "/")
 }
 
+/* Katsumii is a studio: the locale root is the studio landing, every product
+   lives under its own prefix — /journal, /andromeda, /tidii-cleaner, /cubamii. */
+export const JOURNAL_BASE = "/journal"
+
+/* Journal pages that used to sit at the site root (/features, /pricing, …).
+   "app" was the Journal landing itself. Old links and bookmarks still resolve. */
+export const LEGACY_JOURNAL_PAGES = [
+  "app",
+  "features",
+  "prop-firm-challenges",
+  "funded-accounts",
+  "personal-trading",
+  "backtesting",
+  "analytics-reviews",
+  "customization",
+  "workflow",
+  "local-offline",
+  "pricing",
+  "manual",
+  "faq",
+  "bugreport",
+  "welcome",
+]
+
+export const journalPathFor = (legacyPage) =>
+  legacyPage === "app" ? JOURNAL_BASE : `${JOURNAL_BASE}/${legacyPage}`
+
 export const pagePath = (page, locale) => {
-  if (!page || page === "home" || page === "app") return routePath("app", locale)
+  if (!page || page === "home") return routePath("", locale)
+  if (page === "app") return routePath("journal", locale)
   return routePath(page, locale)
 }
 
@@ -69,13 +97,13 @@ export const unlocalizedPathFromRoute = (path = "") => {
   const segments = cleanPath.split("/")
   if (SUPPORTED_LOCALES.includes(segments[0])) segments.shift()
   const rest = segments.join("/")
-  return `/${rest || "app"}`
+  return `/${rest}`
 }
 
-export const localizedPathForRoute = (path = "/app", locale = preferredLocale()) =>
+export const localizedPathForRoute = (path = "/", locale = preferredLocale()) =>
   routePath(unlocalizedPathFromRoute(path), locale)
 
-export const localizedAlternatesForPath = (path = "/app") =>
+export const localizedAlternatesForPath = (path = "/") =>
   SUPPORTED_LOCALES.map((locale) => ({
     locale,
     hreflang: HREFLANG_BY_LOCALE[locale],

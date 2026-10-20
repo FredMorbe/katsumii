@@ -12,8 +12,8 @@
           <li v-for="c in chips" :key="c">{{ c }}</li>
         </ul>
         <div class="v6m-hero-actions v6-reveal">
-          <RouterLink :to="`/${lang}/pricing`" class="v6-btn v6-magnetic">{{ t('common.cta.getKatsumii') }} <span aria-hidden="true">→</span></RouterLink>
-          <RouterLink :to="`/${lang}/features`" class="v6-quiet v6-magnetic">{{ t('common.cta.allFeatures') }}</RouterLink>
+          <RouterLink :to="`/${lang}/journal/pricing`" class="v6-btn v6-magnetic">{{ t('common.cta.getKatsumii') }} <span aria-hidden="true">→</span></RouterLink>
+          <RouterLink :to="`/${lang}/journal/features`" class="v6-quiet v6-magnetic">{{ t('common.cta.allFeatures') }}</RouterLink>
         </div>
       </div>
     </section>
@@ -73,8 +73,8 @@
       <h2 class="v6m-cta-title v6-reveal">{{ t(`${ns}.cta.title`) }} <em>{{ t(`${ns}.cta.em`) }}</em><b class="v6-dot">.</b></h2>
       <p class="v6m-cta-sub v6-reveal">{{ t(`${ns}.cta.sub`) }}</p>
       <div class="v6m-cta-actions v6-reveal">
-        <RouterLink :to="`/${lang}/pricing`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('common.cta.getKatsumii') }} <span aria-hidden="true">→</span></RouterLink>
-        <RouterLink v-if="next" :to="`/${lang}${next.path}`" class="v6-quiet">
+        <RouterLink :to="`/${lang}/journal/pricing`" class="v6-btn v6-btn-lg v6-magnetic">{{ t('common.cta.getKatsumii') }} <span aria-hidden="true">→</span></RouterLink>
+        <RouterLink v-if="next" :to="`/${lang}/journal${next.path}`" class="v6-quiet">
           {{ t('modePages.ui.nextDiscipline', { name: t(`shell.pages.${next.key}.label`) }) }} <span aria-hidden="true">→</span>
         </RouterLink>
       </div>
