@@ -72,14 +72,16 @@ const COL = [
   [215, 248, 255], /* 4 bright knots     */
   [110, 118, 255], /* 5 outer haze       */
 ]
-const AL = [0.34, 0.6, 0.92, 0.08] /* last alpha bucket = soft puffs */
+const AL = [0.26, 0.46, 0.76, 0.05] /* last alpha bucket = soft puffs */
 const NB = COL.length * AL.length
 const omega = (r) => 0.018 + 0.006 * (1 - r) /* rad/s — one turn in about five minutes */
 const armAngle = (arm, r) => arm * Math.PI + Math.log(1 + r * 6) * 3.0
 
 let seed = 11
 const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
-const gauss = () => (rnd() + rnd() + rnd() - 1.5) / 1.5
+const gauss = () => (rnd() + rnd() + rnd() - 1.5) / 1.5 /* roughly ±1 */
+const norm = () => (rnd() + rnd() + rnd() + rnd() - 2) / 0.577 /* ~N(0,1) */
+const armWidth = (r) => 0.16 + 0.17 * r /* angular sd of an arm, rad — thick, diffuse bands */
 
 const buildGalaxy = (count) => {
   const buckets = Array.from({ length: NB }, () => ({ r: [], t: [], h: [], s: [] }))
@@ -99,42 +101,42 @@ const buildGalaxy = (count) => {
     const r = Math.pow(rnd(), 0.6) * 0.8
     add(1, rnd() < 0.4 ? 1 : 0, r, rnd() * 6.283, gauss() * 0.04, 1)
   }
-  /* two main arms: warm near the core, blue-white outward, violet at the rim */
-  for (let i = 0; i < count * 0.55; i++) {
+  /* two thick main arms: cyan near the core, indigo toward the rim */
+  for (let i = 0; i < count * 0.62; i++) {
     const arm = rnd() < 0.5 ? 0 : 1
-    const r0 = Math.pow(rnd(), 0.85) * 0.98 + 0.02
-    const r = Math.max(0.02, r0 + gauss() * 0.03)
-    const th = armAngle(arm, r0) + gauss() * (0.2 + 0.28 * r0)
+    const r0 = Math.pow(rnd(), 0.85) * 0.88 + 0.12
+    const r = Math.max(0.02, r0 + norm() * 0.02)
+    const th = armAngle(arm, r0) + norm() * armWidth(r0)
     const c = r0 > 0.8 && rnd() < 0.45 ? 3 : rnd() < 0.1 + 0.85 * r0 ? 2 : 1
-    add(c, r0 > 0.7 && rnd() < 0.7 ? 0 : rnd() < 0.22 ? 2 : rnd() < 0.55 ? 1 : 0, r, th, flat(r), rnd() < 0.03 ? 2 : 1)
+    add(c, r0 > 0.7 && rnd() < 0.6 ? 0 : rnd() < 0.22 ? 2 : rnd() < 0.55 ? 1 : 0, r, th, flat(r), rnd() < 0.03 ? 2 : 1)
   }
   /* fainter feathers between the arms */
-  for (let i = 0; i < count * 0.1; i++) {
+  for (let i = 0; i < count * 0.08; i++) {
     const arm = rnd() < 0.5 ? 0.5 : 1.5
     const r = Math.pow(rnd(), 0.9) * 0.9 + 0.1
-    add(rnd() < 0.6 ? 2 : 3, 0, r, armAngle(arm, r) + gauss() * (0.2 + 0.14 * r), flat(r), 1)
+    add(rnd() < 0.6 ? 2 : 3, 0, r, armAngle(arm, r) + norm() * armWidth(r) * 1.1, flat(r), 1)
   }
-  /* soft blue puffs along the arms */
-  for (let i = 0; i < count * 0.07; i++) {
+  /* large soft puffs: the diffuse body of the arms */
+  for (let i = 0; i < count * 0.1; i++) {
     const arm = rnd() < 0.5 ? 0 : 1
     const r = Math.pow(rnd(), 0.85) * 0.95 + 0.05
-    add(rnd() < 0.62 ? 2 : 3, 3, r, armAngle(arm, r) + gauss() * (0.15 + 0.2 * r), flat(r), 14 + rnd() * 14)
+    add(rnd() < 0.62 ? 2 : 3, 3, r, armAngle(arm, r) + norm() * armWidth(r) * 0.85, flat(r), 24 + rnd() * 30)
   }
-  /* pink star-forming knots: tight clusters with a glow puff each */
-  for (let i = 0; i < count * 0.007; i++) {
+  /* bright star-forming knots: tight clusters with a glow puff each */
+  for (let i = 0; i < count * 0.008; i++) {
     const arm = rnd() < 0.5 ? 0 : 1
-    const r = 0.24 + rnd() * 0.74
-    const th0 = armAngle(arm, r) + gauss() * (0.1 + 0.12 * r)
+    const r = 0.22 + rnd() * 0.76
+    const th0 = armAngle(arm, r) + norm() * armWidth(r) * 0.9
     for (let k = 0; k < 4; k++) {
-      add(4, rnd() < 0.6 ? 1 : 0, r + gauss() * 0.012, th0 + gauss() * 0.02, flat(r), 1.5 + rnd() * 1.5)
+      add(4, rnd() < 0.6 ? 1 : 0, r + norm() * 0.012, th0 + norm() * 0.02, flat(r), 1.5 + rnd() * 1.5)
     }
-    add(4, 3, r, th0, flat(r), 12 + rnd() * 6)
+    add(4, 3, r, th0, flat(r), 14 + rnd() * 8)
   }
-  /* violet halo reaching past the last arm */
+  /* indigo halo reaching past the last arm */
   for (let i = 0; i < count * 0.04; i++) {
     const arm = rnd() < 0.5 ? 0 : 1
     const r = 0.6 + rnd() * 0.55
-    add(5, 3, r, armAngle(arm, Math.min(r, 1)) + gauss() * 0.34, flat(r), 10 + rnd() * 10)
+    add(5, 3, r, armAngle(arm, Math.min(r, 1)) + norm() * 0.3, flat(r), 16 + rnd() * 16)
   }
   const toTyped = (b) => ({ r: Float32Array.from(b.r), t: Float32Array.from(b.t), h: Float32Array.from(b.h), s: Float32Array.from(b.s) })
 
@@ -143,7 +145,7 @@ const buildGalaxy = (count) => {
   for (let i = 0; i < count * 0.14; i++) {
     const arm = rnd() < 0.5 ? 0 : 1
     const r = 0.16 + Math.pow(rnd(), 0.9) * 0.72
-    dust.r.push(r); dust.t.push(armAngle(arm, r) - 0.17 - 0.07 * r + gauss() * 0.05); dust.h.push(0); dust.s.push(2 + rnd() * 2)
+    dust.r.push(r); dust.t.push(armAngle(arm, r) - armWidth(r) * 1.0 + norm() * 0.05); dust.h.push(0); dust.s.push(2 + rnd() * 2)
   }
   return { buckets: buckets.map(toTyped), dust: toTyped(dust) }
 }
@@ -163,7 +165,7 @@ onMounted(() => {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
   const small = window.innerWidth < 700
-  const { buckets, dust } = buildGalaxy(reduced || small ? 9000 : 20000)
+  const { buckets, dust } = buildGalaxy(reduced || small ? 10000 : 22000)
 
   /* fixed background stars (they do not turn with the galaxy) */
   const bg = Array.from({ length: 90 }, () => ({ x: rnd(), y: rnd(), s: rnd() < 0.08 ? 2 : 1, c: rnd() < 0.5 ? "170,205,255" : "255,255,255", a: 0.25 + rnd() * 0.5 }))
@@ -254,7 +256,7 @@ onMounted(() => {
       if (!b.r.length) continue
       const isPuff = bi % AL.length === AL.length - 1
       if (isPuff) {
-        ctx.globalAlpha = al * 1.5
+        ctx.globalAlpha = al * 1.0
         const sprite = sprites[(bi / AL.length) | 0]
         for (let j = 0; j < b.r.length; j += stride) {
           const r = b.r[j], a = b.t[j] + omega(r) * t
