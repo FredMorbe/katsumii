@@ -298,7 +298,7 @@ onMounted(() => {
       const labelW = Math.max(el.offsetWidth, 140)
       const flip = pos[0] + labelW > W - 12 && pos[0] - labelW > 12
       el.classList.toggle("left", flip)
-      el.style.transform = `translate3d(${pos[0].toFixed(1)}px,${pos[1].toFixed(1)}px,0)${flip ? " translateX(-100%)" : ""}`
+      el.style.transform = `translate3d(${pos[0].toFixed(1)}px,${pos[1].toFixed(1)}px,0) translateY(-50%)${flip ? " translateX(-100%)" : ""}`
       if (p.key === active.value) {
         const ra = ((((th % 6.283) + 6.283) % 6.283) / 6.283) * 24
         const dec = (1 - p.galaxy.r) * 62 - 18

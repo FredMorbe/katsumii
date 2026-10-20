@@ -1,5 +1,9 @@
 <template>
   <main ref="rootEl" class="v6-studio">
+    <!-- STAGE: hero copy + sky. In the night-sky view the sky is the page background up here and fades out downward -->
+    <div class="v6st-stage" :class="{ sky: view === 'sky' }">
+    <StudioNightSky v-if="view === 'sky'" />
+
     <!-- HERO -->
     <section class="v6st-hero">
       <div>
@@ -26,11 +30,10 @@
     </section>
 
     <!-- SKY: galaxy or constellation, switchable -->
-    <section class="v6st-sky-wrap">
+    <section v-if="view !== 'sky'" class="v6st-sky-wrap">
       <!-- the reveal sits on the static wrapper: elements swapped in later never get initV6Reveals -->
       <div class="v6-reveal">
       <StudioGalaxy v-if="view === 'galaxy'" />
-      <StudioNightSky v-else-if="view === 'sky'" />
 
       <div v-else class="v6st-chart" :aria-label="t('studio.chart.aria')">
         <!-- graticule + dust: purely decorative -->
@@ -80,6 +83,7 @@
       </div>
       </div>
     </section>
+    </div>
 
     <!-- APPS -->
     <section class="v6st-apps">
@@ -119,7 +123,7 @@
 </template>
 
 <script setup>
-import { computed, inject, onBeforeUnmount, onMounted, ref } from "vue"
+import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRoute } from "vue-router"
 import { initMagnetic, initV6Reveals } from "../v6/motion.js"
@@ -183,6 +187,10 @@ const setView = (v) => {
   try { localStorage.setItem(VIEW_KEY, v) } catch { /* private mode — the choice just isn't remembered */ }
 }
 
+/* tells the shell's transparent nav (global CSS in v6.css) that it sits on the black sky */
+watch(view, (v) => document.body.classList.toggle("v6-sky-hero", v === "sky"), { immediate: true })
+onBeforeUnmount(() => document.body.classList.remove("v6-sky-hero"))
+
 const rootEl = ref(null)
 let cleanups = []
 
@@ -199,6 +207,23 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .v6-studio { position: relative; z-index: 1; }
+
+/* ── stage ── */
+.v6st-stage { position: relative; }
+.v6st-stage.sky { min-height: clamp(720px, 100vh, 960px); }
+.v6st-stage.sky .v6st-hero { position: relative; z-index: 3; text-shadow: 0 0 18px #000, 0 0 6px rgba(0, 0, 0, 0.8); }
+/* the night sky is black: hero copy and the view switch keep their dark-theme colours in light mode too */
+.v6.light .v6st-stage.sky .v6st-hero {
+  --v6-ink: #eef2f7;
+  --v6-muted: #94a3b8;
+  --v6-faint: #64748b;
+  --v6-gold: #22d3ee;
+  --v6-gold-hi: #67e8f9;
+  --v6-line: rgba(226, 232, 240, 0.1);
+  --v6-line-strong: rgba(34, 211, 238, 0.3);
+  color: var(--v6-ink);
+}
+.v6.light .v6st-stage.sky .v6st-viewbtn.active { color: #031820; }
 
 /* ── hero ── */
 .v6st-hero {

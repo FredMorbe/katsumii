@@ -129,9 +129,10 @@ onMounted(() => {
     px = W * 0.5; py = H * 1.35
     ox = -0.4 * W; oy = -0.35 * H; SW = 1.8 * W; SH = 1.7 * H
 
+    /* the hero copy owns the top of the stage; the constellation lives below it */
     const skyPos = (s) => narrow
-      ? [(s.mx / 100) * W, (s.my / 100 * 0.86 + 0.05) * H]
-      : [(s.x / 100) * W, (s.y / 100 * 0.84 + 0.06) * H]
+      ? [(s.mx / 100) * W, (0.6 + (s.my / 100) * 0.27) * H]
+      : [(s.x / 100) * W, (0.4 + (s.y / 100) * 0.46) * H]
     pts = PRODUCTS.map((p) => skyPos(p.star))
     ghosts = GHOST_STARS.map((g) => ({ pos: skyPos({ x: g.x, y: g.y, mx: g.mx, my: g.my }), from: PRODUCTS.findIndex((p) => p.key === g.from) }))
   }
@@ -199,7 +200,7 @@ onMounted(() => {
        starlight too faint to resolve piles up inside the band as fine grain. */
     dyn = []
     g.globalCompositeOperation = "lighter"
-    const area = Math.min(1, (SW * SH) / 2.7e6) /* star density per px stays the same on small panels */
+    const area = Math.min(1.7, (SW * SH) / 2.7e6) /* star density per px stays the same on small panels */
     const candidates = Math.round(190000 * area)
     for (let n = 0; n < candidates; n++) {
       const X = ox + rnd() * SW, Y = oy + rnd() * SH
@@ -235,7 +236,7 @@ onMounted(() => {
     const gi = gg.createImageData(200, 200)
     for (let k = 0; k < gi.data.length; k += 4) {
       gi.data[k] = gi.data[k + 1] = gi.data[k + 2] = 200
-      gi.data[k + 3] = rnd() * 22
+      gi.data[k + 3] = rnd() * 12
     }
     gg.putImageData(gi, 0, 0)
     g.fillStyle = g.createPattern(gn, "repeat")
@@ -257,10 +258,8 @@ onMounted(() => {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     ctx.clearRect(0, 0, W, H)
 
-    /* deep space: the sky is never pure black in a long exposure, it is a very dark blue */
-    const bgG = ctx.createLinearGradient(0, 0, 0, H)
-    bgG.addColorStop(0, "#020711"); bgG.addColorStop(0.5, "#041122"); bgG.addColorStop(1, "#061a2c")
-    ctx.fillStyle = bgG
+    /* deep space: black */
+    ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, W, H)
 
     if (sky) {
@@ -275,14 +274,14 @@ onMounted(() => {
         const ia = PRODUCTS.findIndex((p) => p.key === ka), ib = PRODUCTS.findIndex((p) => p.key === kb)
         const [ax, ay] = pts[ia], [bx, by] = pts[ib]
         const len = Math.hypot(bx - ax, by - ay) || 1
-        const ux = (bx - ax) / len, uy = (by - ay) / len, gap = 16
-        ctx.strokeStyle = ia === hot || ib === hot ? "rgba(190,225,255,.8)" : "rgba(170,205,245,.46)"
-        ctx.lineWidth = 1
+        const ux = (bx - ax) / len, uy = (by - ay) / len, gap = 9 /* stops at the star's glow, pointing straight at its centre */
+        ctx.strokeStyle = ia === hot || ib === hot ? "rgba(200,230,255,.9)" : "rgba(180,210,245,.55)"
+        ctx.lineWidth = 0.6
         ctx.beginPath(); ctx.moveTo(ax + ux * gap, ay + uy * gap); ctx.lineTo(bx - ux * gap, by - uy * gap); ctx.stroke()
       })
       ghosts.forEach((gh) => {
         const [ax, ay] = pts[gh.from], [bx, by] = gh.pos
-        ctx.strokeStyle = "rgba(170,205,245,.2)"; ctx.setLineDash([3, 6])
+        ctx.strokeStyle = "rgba(170,205,245,.3)"; ctx.lineWidth = 0.6; ctx.setLineDash([2, 5])
         ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke(); ctx.setLineDash([])
         ctx.globalCompositeOperation = "lighter"
         ctx.globalAlpha = 0.7
@@ -314,7 +313,7 @@ onMounted(() => {
       const labelW = Math.max(el.offsetWidth, 140)
       const flip = x + labelW > W - 12 && x - labelW > 12
       el.classList.toggle("left", flip)
-      el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)${flip ? " translateX(-100%)" : ""}`
+      el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) translateY(-50%)${flip ? " translateX(-100%)" : ""}`
       if (p.key === active.value) {
         const ra = (((x / W) * 24) % 24 + 24) % 24
         const dec = 62 - (y / H) * 80
@@ -361,7 +360,7 @@ onMounted(() => {
   ro.observe(panel)
   const io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible) start() })
   io.observe(panel)
-  panel.addEventListener("pointermove", onPointer)
+  window.addEventListener("pointermove", onPointer, { passive: true })
   document.addEventListener("visibilitychange", onVisibility)
 
   cleanup = () => {
@@ -369,7 +368,7 @@ onMounted(() => {
     clearTimeout(resizeTimer)
     cancelAnimationFrame(raf)
     ro.disconnect(); io.disconnect()
-    panel.removeEventListener("pointermove", onPointer)
+    window.removeEventListener("pointermove", onPointer)
     document.removeEventListener("visibilitychange", onVisibility)
   }
 })
@@ -378,28 +377,38 @@ onBeforeUnmount(() => cleanup())
 </script>
 
 <style scoped>
-/* A window onto a real night sky — dark in both themes, so it carries its own tokens. */
+/* The sky is the page background of the stage: full-bleed, black, and it dissolves
+   into the page toward the bottom. It carries its own tokens so it stays dark in both themes. */
 .v6ns-sky {
   --v6-ink: #eef2f7;
   --v6-faint: #64748b;
-  position: relative;
-  width: 100%;
-  height: clamp(540px, 74vh, 760px);
-  border-radius: 22px;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   overflow: hidden;
   color: var(--v6-ink);
-  background: #020711;
-  border: 1px solid rgba(226, 232, 240, 0.1);
+  pointer-events: none;
 }
-.v6ns-sky canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.2s; }
+.v6ns-sky canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.4s;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 74%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 74%, transparent 100%);
+}
 .v6ns-sky.ready canvas { opacity: 1; }
-.v6ns-sky::after {
+/* quiet zone: dims the starfield behind the hero copy and the nav so they stay readable */
+.v6ns-sky::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 2;
   pointer-events: none;
-  background: radial-gradient(ellipse 80% 90% at 50% 48%, transparent 60%, rgba(0, 4, 12, 0.5) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.5) 24%, rgba(0, 0, 0, 0.18) 40%, transparent 52%);
 }
 
 .v6ns-name {
@@ -408,7 +417,7 @@ onBeforeUnmount(() => cleanup())
   top: 0;
   z-index: 3;
   margin: 0;
-  padding-top: 4.6rem;
+  padding-top: 4rem;
   color: rgba(190, 215, 250, 0.4);
   font-size: 0.7rem;
   letter-spacing: 0.5em;
@@ -417,17 +426,17 @@ onBeforeUnmount(() => cleanup())
 }
 .v6ns-read, .v6ns-hint {
   position: absolute;
-  bottom: 1.2rem;
+  bottom: 14%;
   margin: 0;
   z-index: 6;
   font-size: 0.68rem;
   letter-spacing: 0.16em;
   pointer-events: none;
-  text-shadow: 0 0 8px #01030a;
+  text-shadow: 0 0 8px #000;
 }
-.v6ns-read { left: 1.6rem; color: #7d8ca3; transition: color 0.3s; }
+.v6ns-read { left: var(--v6-gutter, 1.6rem); color: #7d8ca3; transition: color 0.3s; }
 .v6ns-read.on { color: var(--rc, #67e8f9); }
-.v6ns-hint { right: 1.6rem; color: #64748b; }
+.v6ns-hint { right: var(--v6-gutter, 1.6rem); color: #64748b; }
 
 /* the app stars */
 .v6ns-sys {
@@ -441,6 +450,7 @@ onBeforeUnmount(() => cleanup())
   color: #eef2f7;
   text-decoration: none;
   will-change: transform;
+  pointer-events: auto;
   opacity: 0;
   transition: opacity 1s 0.4s;
 }
@@ -472,7 +482,7 @@ onBeforeUnmount(() => cleanup())
   margin-left: -0.3rem;
   border-radius: 10px;
   border: 1px solid transparent;
-  text-shadow: 0 0 14px #01030a, 0 0 6px #01030a, 0 1px 2px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 14px #000, 0 0 6px #000, 0 1px 2px rgba(0, 0, 0, 0.9);
   transition: background 0.3s, border-color 0.3s;
 }
 .v6ns-lab .v6-mono { color: var(--ac); font-size: 0.64rem; letter-spacing: 0.16em; }
@@ -495,7 +505,7 @@ onBeforeUnmount(() => cleanup())
 }
 .v6ns-sys.on { z-index: 8; }
 .v6ns-sys.on .v6ns-lab {
-  background: rgba(3, 8, 18, 0.9);
+  background: rgba(2, 6, 14, 0.92);
   backdrop-filter: blur(8px);
   border-color: color-mix(in srgb, var(--ac) 45%, transparent);
   text-shadow: none;
@@ -509,9 +519,13 @@ onBeforeUnmount(() => cleanup())
 .v6ns-sys:focus-visible .v6ns-lab { border-color: var(--ac-hi); }
 
 @media (max-width: 900px) {
-  .v6ns-sky { height: 72vh; min-height: 520px; }
   .v6ns-more, .v6ns-lab em, .v6ns-lab .v6-mono, .v6ns-hint { display: none !important; }
   .v6ns-lab strong { font-size: 1.05rem; }
   .v6ns-name { font-size: 0.6rem; letter-spacing: 0.35em; }
+  .v6ns-read { display: none; }
+  .v6ns-sky canvas {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
+  }
 }
 </style>

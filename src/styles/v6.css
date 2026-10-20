@@ -175,6 +175,16 @@
   gap: 1.6rem;
   margin-inline: auto;
 }
+/* studio landing, night-sky view: the transparent nav sits on black even in light mode */
+body.v6-sky-hero .v6.light .v6-nav:not(.scrolled) {
+  --v6-ink: #eef2f7;
+  --v6-muted: #94a3b8;
+  --v6-faint: #64748b;
+  --v6-gold: #22d3ee;
+  --v6-gold-hi: #67e8f9;
+  --v6-line: rgba(226, 232, 240, 0.12);
+  --v6-line-strong: rgba(34, 211, 238, 0.3);
+}
 .v6-nav-links a {
   color: var(--v6-muted);
   text-decoration: none;
