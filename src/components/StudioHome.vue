@@ -4,14 +4,34 @@
     <section class="v6st-hero">
       <div>
         <p class="v6-eyebrow v6-reveal"><i></i>{{ t('studio.hero.eyebrow') }}</p>
-        <h1 class="v6-h1 v6-reveal">{{ t('studio.hero.titlePre') }} <em>{{ t('studio.hero.titleEm') }}</em><b class="v6-dot">.</b></h1>
+        <h1 class="v6-h1 v6-reveal">{{ t('studio.hero.titlePre') }} <em>{{ t(view === 'galaxy' ? 'studio.hero.titleEmGalaxy' : 'studio.hero.titleEm') }}</em><b class="v6-dot">.</b></h1>
       </div>
-      <p class="v6st-sub v6-reveal">{{ t('studio.hero.sub') }}</p>
+      <div class="v6st-hero-side">
+        <p class="v6st-sub v6-reveal">{{ t('studio.hero.sub') }}</p>
+        <div class="v6st-viewbar v6-reveal" role="group" :aria-label="t('studio.view.label')">
+          <span class="v6-mono v6st-viewlabel" aria-hidden="true">{{ t('studio.view.label') }}</span>
+          <button
+            v-for="v in VIEWS"
+            :key="v"
+            type="button"
+            class="v6st-viewbtn"
+            :class="{ active: view === v }"
+            :aria-pressed="view === v"
+            @click="setView(v)"
+          >
+            {{ t(`studio.view.${v}`) }}
+          </button>
+        </div>
+      </div>
     </section>
 
-    <!-- CONSTELLATION -->
-    <section class="v6st-sky-wrap" :aria-label="t('studio.chart.aria')">
-      <div class="v6st-chart v6-reveal">
+    <!-- SKY: galaxy or constellation, switchable -->
+    <section class="v6st-sky-wrap">
+      <!-- the reveal sits on the static wrapper: elements swapped in later never get initV6Reveals -->
+      <div class="v6-reveal">
+      <StudioGalaxy v-if="view === 'galaxy'" />
+
+      <div v-else class="v6st-chart" :aria-label="t('studio.chart.aria')">
         <!-- graticule + dust: purely decorative -->
         <svg class="v6st-graticule" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <ellipse cx="50" cy="50" rx="45" ry="44" />
@@ -57,6 +77,7 @@
         <p class="v6st-caption v6-mono" aria-hidden="true">{{ t('studio.chart.caption') }}</p>
         <p class="v6st-legend v6-mono">{{ t('studio.chart.legend') }}</p>
       </div>
+      </div>
     </section>
 
     <!-- APPS -->
@@ -101,6 +122,7 @@ import { computed, inject, onBeforeUnmount, onMounted, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRoute } from "vue-router"
 import { initMagnetic, initV6Reveals } from "../v6/motion.js"
+import StudioGalaxy from "./StudioGalaxy.vue"
 import { normalizeLocale } from "../utils/routes.js"
 import { CONSTELLATION_LINES, GHOST_STARS, PRODUCTS, productByKey } from "../utils/products.js"
 
@@ -142,6 +164,23 @@ const dust = (() => {
   }))
 })()
 
+/* galaxy is the default; the visitor's choice is remembered */
+const VIEWS = ["galaxy", "constellation"]
+const VIEW_KEY = "katsumii-sky-view"
+const readView = () => {
+  try {
+    const saved = localStorage.getItem(VIEW_KEY)
+    return VIEWS.includes(saved) ? saved : "galaxy"
+  } catch {
+    return "galaxy"
+  }
+}
+const view = ref(readView())
+const setView = (v) => {
+  view.value = v
+  try { localStorage.setItem(VIEW_KEY, v) } catch { /* private mode — the choice just isn't remembered */ }
+}
+
 const rootEl = ref(null)
 let cleanups = []
 
@@ -170,13 +209,39 @@ onBeforeUnmount(() => {
   align-items: end;
 }
 .v6st-hero .v6-h1 { margin-top: 1rem; font-size: clamp(2.6rem, 6vw, 5rem); max-width: 14ch; }
-.v6st-sub { margin: 0; padding-bottom: 0.4rem; color: var(--v6-muted); line-height: 1.75; }
+.v6st-hero-side { display: grid; gap: 1.2rem; }
+.v6st-sub { margin: 0; color: var(--v6-muted); line-height: 1.75; }
+
+/* ── view switch ── */
+.v6st-viewbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.v6st-viewlabel { margin-right: 0.4rem; color: var(--v6-faint); }
+.v6st-viewbtn {
+  font-family: var(--v6-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--v6-line);
+  background: transparent;
+  color: var(--v6-muted);
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
+}
+.v6st-viewbtn:hover { color: var(--v6-gold-hi); border-color: var(--v6-line-strong); }
+.v6st-viewbtn.active { background: var(--v6-gold); border-color: var(--v6-gold); color: #031820; }
+.v6.light .v6st-viewbtn.active { color: #ecfeff; }
 
 /* ── constellation chart ── */
 .v6st-sky-wrap {
   max-width: var(--v6-container);
   margin: 0 auto;
-  padding: clamp(1.5rem, 4vh, 3rem) var(--v6-gutter) 0;
+  padding: clamp(1.2rem, 3vh, 2.2rem) var(--v6-gutter) 0;
 }
 .v6st-chart {
   position: relative;

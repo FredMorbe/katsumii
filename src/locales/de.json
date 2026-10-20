@@ -2826,7 +2826,8 @@
       "eyebrow": "Software-Studio",
       "titlePre": "Kleine Apps.",
       "titleEm": "Ein Sternbild",
-      "sub": "Katsumii entwickelt fokussierte Software für Desktop und Mobile. Jede App ist ein eigener Stern — manche kostenlos, manche kostenpflichtig, alle mit Sorgfalt gemacht."
+      "sub": "Katsumii entwickelt fokussierte Software für Desktop und Mobile. Jede App ist ein eigener Stern — manche kostenlos, manche kostenpflichtig, alle mit Sorgfalt gemacht.",
+      "titleEmGalaxy": "Eine Galaxie"
     },
     "chart": {
       "aria": "Sternkarte der Katsumii-Apps",
@@ -2853,6 +2854,17 @@
       "titleEm": "Software",
       "copy": "Katsumii ist ein unabhängiges Studio für Desktop- und Mobile-Apps. Jede hat ihre eigene Identität — und darunter denselben Anspruch an Handwerk.",
       "cta": "Kontakt aufnehmen"
+    },
+    "view": {
+      "label": "Ansicht",
+      "galaxy": "Galaxie",
+      "constellation": "Sternbild"
+    },
+    "galaxy": {
+      "aria": "Interaktive Galaxiekarte der Katsumii-Apps",
+      "readout": "Katsumii-Galaxie · 4 Systeme kartiert · weitere unerforscht",
+      "hint": "Dreht sich langsam · Maus drauf zum Anvisieren",
+      "open": "System öffnen"
     }
   },
   "products": {

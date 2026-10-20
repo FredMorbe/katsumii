@@ -2826,7 +2826,8 @@
       "eyebrow": "Software studio",
       "titlePre": "Small apps.",
       "titleEm": "One constellation",
-      "sub": "Katsumii builds focused software for desktop and mobile. Every app is a star of its own — some free, some paid, all made with care."
+      "sub": "Katsumii builds focused software for desktop and mobile. Every app is a star of its own — some free, some paid, all made with care.",
+      "titleEmGalaxy": "One galaxy"
     },
     "chart": {
       "aria": "Star chart of the Katsumii apps",
@@ -2853,6 +2854,17 @@
       "titleEm": "software",
       "copy": "Katsumii is an independent studio building desktop and mobile apps. Each one has its own identity — and the same standard of craft underneath.",
       "cta": "Get in touch"
+    },
+    "view": {
+      "label": "View",
+      "galaxy": "Galaxy",
+      "constellation": "Constellation"
+    },
+    "galaxy": {
+      "aria": "Interactive galaxy chart of the Katsumii apps",
+      "readout": "Katsumii galaxy · 4 systems charted · more unexplored",
+      "hint": "Slowly turning · hover to lock on",
+      "open": "Open system"
     }
   },
   "products": {

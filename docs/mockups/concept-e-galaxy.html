@@ -298,8 +298,9 @@ a.v6-card:hover,.v6-card.hov:hover{border-color:var(--ac-line,var(--v6-line-stro
   function place(){
     sys.forEach(function(el){
       var r=+el.dataset.r,th=+el.dataset.th+w(r)*t,p=proj(r,th,0);
-      el.style.transform='translate3d('+p[0].toFixed(1)+'px,'+p[1].toFixed(1)+'px,0)';
-      el.classList.toggle('left',p[0]>W*.74);
+      var lw=Math.max(el.offsetWidth,140),flip=p[0]+lw>W-12&&p[0]-lw>12;
+      el.classList.toggle('left',flip);
+      el.style.transform='translate3d('+p[0].toFixed(1)+'px,'+p[1].toFixed(1)+'px,0)'+(flip?' translateX(-100%)':'');
       if(el.dataset.k===hover){var ra=((((th%6.283)+6.283)%6.283)/6.283*24),dec=(1-r)*62-18;
         read.textContent=el.dataset.cat+' · RA '+(ra|0)+'h '+(((ra%1)*60)|0)+'m · DEC '+(dec>=0?'+':'')+dec.toFixed(1)+'°'}
     });

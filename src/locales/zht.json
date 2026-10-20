@@ -2833,7 +2833,8 @@
       "eyebrow": "軟體工作室",
       "titlePre": "小而精的應用。",
       "titleEm": "一個星座",
-      "sub": "Katsumii 打造專注的桌面與行動軟體。每個應用都是一顆獨立的星——有的免費，有的付費，全都用心製作。"
+      "sub": "Katsumii 打造專注的桌面與行動軟體。每個應用都是一顆獨立的星——有的免費，有的付費，全都用心製作。",
+      "titleEmGalaxy": "一個銀河"
     },
     "chart": {
       "aria": "Katsumii 應用星圖",
@@ -2860,6 +2861,17 @@
       "titleEm": "軟體",
       "copy": "Katsumii 是一間獨立工作室，開發桌面與行動應用。每個應用各有個性，底層則是同樣的工藝標準。",
       "cta": "聯絡我們"
+    },
+    "view": {
+      "label": "檢視",
+      "galaxy": "銀河",
+      "constellation": "星座"
+    },
+    "galaxy": {
+      "aria": "Katsumii 應用互動銀河星圖",
+      "readout": "Katsumii 銀河 · 已標註 4 個星系 · 更多尚待探索",
+      "hint": "緩緩旋轉 · 滑鼠移上去即可鎖定",
+      "open": "開啟星系"
     }
   },
   "products": {
