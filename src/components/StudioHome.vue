@@ -1,18 +1,18 @@
 <template>
   <main ref="rootEl" class="v6-studio">
     <!-- STAGE: hero copy + sky. In the night-sky view the sky is the page background up here and fades out downward -->
-    <div class="v6st-stage" :class="{ sky: view === 'sky' }">
-    <StudioNightSky v-if="view === 'sky'" />
+    <div class="v6st-stage" :class="{ sky: shownView === 'sky' }">
+    <StudioNightSky v-if="shownView === 'sky'" />
 
     <!-- HERO -->
     <section class="v6st-hero">
       <div>
         <p class="v6-eyebrow v6-reveal"><i></i>{{ t('studio.hero.eyebrow') }}</p>
-        <h1 class="v6-h1 v6-reveal">{{ t('studio.hero.titlePre') }} <em>{{ t(view === 'galaxy' ? 'studio.hero.titleEmGalaxy' : 'studio.hero.titleEm') }}</em><b class="v6-dot">.</b></h1>
+        <h1 class="v6-h1 v6-reveal">{{ t('studio.hero.titlePre') }} <em>{{ t(`studio.hero.${HERO_EM[shownView]}`) }}</em><b class="v6-dot">.</b></h1>
       </div>
       <div class="v6st-hero-side">
         <p class="v6st-sub v6-reveal">{{ t('studio.hero.sub') }}</p>
-        <div class="v6st-viewbar v6-reveal" role="group" :aria-label="t('studio.view.label')">
+        <div v-if="!isMobile" class="v6st-viewbar v6-reveal" role="group" :aria-label="t('studio.view.label')">
           <span class="v6-mono v6st-viewlabel" aria-hidden="true">{{ t('studio.view.label') }}</span>
           <button
             v-for="v in VIEWS"
@@ -30,7 +30,7 @@
     </section>
 
     <!-- SKY: galaxy or constellation, switchable -->
-    <section v-if="view !== 'sky'" class="v6st-sky-wrap">
+    <section v-if="!isMobile && view !== 'sky'" class="v6st-sky-wrap">
       <!-- the reveal sits on the static wrapper: elements swapped in later never get initV6Reveals -->
       <div class="v6-reveal">
       <StudioGalaxy v-if="view === 'galaxy'" />
@@ -46,20 +46,16 @@
         <i v-for="(d, i) in dust" :key="i" class="v6st-dust" :style="{ left: d.x + '%', top: d.y + '%', width: d.r + 'px', height: d.r + 'px', animationDelay: d.delay + 's' }" aria-hidden="true"></i>
 
         <!-- constellation lines: one set per layout (wide chart / vertical chart) -->
-        <svg class="v6st-lines v6st-lines-wide" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <svg class="v6st-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <line v-for="(l, i) in lines" :key="'lw' + i" :x1="l.a.x" :y1="l.a.y" :x2="l.b.x" :y2="l.b.y" class="v6st-line" :style="{ animationDelay: 0.5 + i * 0.18 + 's' }" />
           <line v-for="(g, i) in ghostLines" :key="'gw' + i" :x1="g.a.x" :y1="g.a.y" :x2="g.b.x" :y2="g.b.y" class="v6st-line v6st-line-dash" />
-        </svg>
-        <svg class="v6st-lines v6st-lines-tall" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <line v-for="(l, i) in lines" :key="'lt' + i" :x1="l.a.mx" :y1="l.a.my" :x2="l.b.mx" :y2="l.b.my" class="v6st-line" :style="{ animationDelay: 0.5 + i * 0.18 + 's' }" />
-          <line v-for="(g, i) in ghostLines" :key="'gt' + i" :x1="g.a.mx" :y1="g.a.my" :x2="g.b.mx" :y2="g.b.my" class="v6st-line v6st-line-dash" />
         </svg>
 
         <span
           v-for="(g, i) in GHOST_STARS"
           :key="'g' + i"
           class="v6st-ghost"
-          :style="{ '--x': g.x + '%', '--y': g.y + '%', '--mx': g.mx + '%', '--my': g.my + '%' }"
+          :style="{ '--x': g.x + '%', '--y': g.y + '%' }"
           aria-hidden="true"
         ></span>
 
@@ -147,15 +143,13 @@ const starStyle = (p, i) => ({
   ...accentVars(p),
   "--x": `${p.star.x}%`,
   "--y": `${p.star.y}%`,
-  "--mx": `${p.star.mx}%`,
-  "--my": `${p.star.my}%`,
   "--i": i,
 })
 
 const lines = CONSTELLATION_LINES.map(([a, b]) => ({ a: productByKey(a).star, b: productByKey(b).star }))
 const ghostLines = GHOST_STARS.map((g) => ({
   a: productByKey(g.from).star,
-  b: { x: g.x, y: g.y, mx: g.mx, my: g.my },
+  b: { x: g.x, y: g.y },
 }))
 
 /* deterministic "dust" so the sky is the same on every render */
@@ -182,14 +176,25 @@ const readView = () => {
   }
 }
 const view = ref(readView())
+
+/* Phones get the classic page: hero copy, then the app cards. No sky, no switch. */
+const mobileQuery = window.matchMedia("(max-width: 900px)")
+const isMobile = ref(mobileQuery.matches)
+const onMobileChange = (e) => { isMobile.value = e.matches }
+mobileQuery.addEventListener("change", onMobileChange)
+const shownView = computed(() => (isMobile.value ? "classic" : view.value))
+const HERO_EM = { galaxy: "titleEmGalaxy", constellation: "titleEm", sky: "titleEm", classic: "titleEmClassic" }
 const setView = (v) => {
   view.value = v
   try { localStorage.setItem(VIEW_KEY, v) } catch { /* private mode — the choice just isn't remembered */ }
 }
 
 /* tells the shell's transparent nav (global CSS in v6.css) that it sits on the black sky */
-watch(view, (v) => document.body.classList.toggle("v6-sky-hero", v === "sky"), { immediate: true })
-onBeforeUnmount(() => document.body.classList.remove("v6-sky-hero"))
+watch(shownView, (v) => document.body.classList.toggle("v6-sky-hero", v === "sky"), { immediate: true })
+onBeforeUnmount(() => {
+  document.body.classList.remove("v6-sky-hero")
+  mobileQuery.removeEventListener("change", onMobileChange)
+})
 
 const rootEl = ref(null)
 let cleanups = []
@@ -314,8 +319,6 @@ onBeforeUnmount(() => {
   animation-delay: 1.4s;
 }
 @keyframes v6st-fade { to { opacity: 1; } }
-
-.v6st-lines-tall { display: none; }
 
 .v6st-ghost {
   position: absolute;
@@ -463,12 +466,6 @@ onBeforeUnmount(() => {
 /* ── responsive ── */
 @media (max-width: 900px) {
   .v6st-hero { grid-template-columns: 1fr; }
-  .v6st-chart { aspect-ratio: 390 / 720; }
-  .v6st-lines-wide { display: none; }
-  .v6st-lines-tall { display: block; }
-  .v6st-star { left: var(--mx); top: var(--my); gap: 0.7rem; }
-  .v6st-ghost { left: var(--mx); top: var(--my); }
-  .v6st-label { max-width: 11.5rem; }
   .v6st-grid, .v6st-about-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {

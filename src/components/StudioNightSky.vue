@@ -112,7 +112,7 @@ onMounted(() => {
     return sc
   })
 
-  let W = 0, H = 0, narrow = false
+  let W = 0, H = 0
   let px = 0, py = 0                       /* rotation pivot, far below the panel */
   let ox = 0, oy = 0, SW = 0, SH = 0       /* the pre-rendered sky covers [ox, ox+SW] × [oy, oy+SH] in panel px */
   let sky = null, dyn = [], pts = [], ghosts = []
@@ -124,17 +124,14 @@ onMounted(() => {
   const layout = () => {
     const r = panel.getBoundingClientRect()
     W = r.width; H = r.height
-    narrow = W < 900
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr)
     px = W * 0.5; py = H * 1.35
     ox = -0.4 * W; oy = -0.35 * H; SW = 1.8 * W; SH = 1.7 * H
 
     /* the hero copy owns the top of the stage; the constellation lives below it */
-    const skyPos = (s) => narrow
-      ? [(s.mx / 100) * W, (0.6 + (s.my / 100) * 0.27) * H]
-      : [(s.x / 100) * W, (0.4 + (s.y / 100) * 0.46) * H]
+    const skyPos = (s) => [(s.x / 100) * W, (0.4 + (s.y / 100) * 0.46) * H]
     pts = PRODUCTS.map((p) => skyPos(p.star))
-    ghosts = GHOST_STARS.map((g) => ({ pos: skyPos({ x: g.x, y: g.y, mx: g.mx, my: g.my }), from: PRODUCTS.findIndex((p) => p.key === g.from) }))
+    ghosts = GHOST_STARS.map((g) => ({ pos: skyPos({ x: g.x, y: g.y }), from: PRODUCTS.findIndex((p) => p.key === g.from) }))
   }
 
   /* ── Milky Way band geometry (panel coordinates, angle 0) ── */
@@ -200,7 +197,7 @@ onMounted(() => {
        starlight too faint to resolve piles up inside the band as fine grain. */
     dyn = []
     g.globalCompositeOperation = "lighter"
-    const area = Math.min(1.7, (SW * SH) / 2.7e6) /* star density per px stays the same on small panels */
+    const area = Math.min(1.7, (SW * SH) / 2.7e6) /* star density per px stays the same whatever the stage size */
     const candidates = Math.round(190000 * area)
     for (let n = 0; n < candidates; n++) {
       const X = ox + rnd() * SW, Y = oy + rnd() * SH
@@ -517,15 +514,4 @@ onBeforeUnmount(() => cleanup())
 .v6ns-sys.left .v6ns-lab { margin: 0 -0.3rem 0 0; }
 .v6ns-sys:focus-visible { outline: none; }
 .v6ns-sys:focus-visible .v6ns-lab { border-color: var(--ac-hi); }
-
-@media (max-width: 900px) {
-  .v6ns-more, .v6ns-lab em, .v6ns-lab .v6-mono, .v6ns-hint { display: none !important; }
-  .v6ns-lab strong { font-size: 1.05rem; }
-  .v6ns-name { font-size: 0.6rem; letter-spacing: 0.35em; }
-  .v6ns-read { display: none; }
-  .v6ns-sky canvas {
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
-  }
-}
 </style>

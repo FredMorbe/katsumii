@@ -164,8 +164,7 @@ onMounted(() => {
   const ctx = cv.getContext("2d")
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
-  const small = window.innerWidth < 700
-  const { buckets, dust } = buildGalaxy(reduced || small ? 10000 : 22000)
+  const { buckets, dust } = buildGalaxy(reduced ? 10000 : 22000)
 
   /* fixed background stars (they do not turn with the galaxy) */
   const bg = Array.from({ length: 90 }, () => ({ x: rnd(), y: rnd(), s: rnd() < 0.08 ? 2 : 1, c: rnd() < 0.5 ? "170,205,255" : "255,255,255", a: 0.25 + rnd() * 0.5 }))
@@ -194,12 +193,9 @@ onMounted(() => {
     const r = panel.getBoundingClientRect()
     W = r.width; H = r.height
     cv.width = W * dpr; cv.height = H * dpr
-    const narrow = W < 900
-    cx = W * (narrow ? 0.5 : 0.56)
-    cy = H * (narrow ? 0.5 : 0.52)
-    R = Math.min(W * (narrow ? 0.62 : 0.37), H * (narrow ? 0.43 : 0.66))
-    /* portrait panel: stand the galaxy up so it fills the height */
-    phi0 = narrow ? 1.15 : 0.38
+    cx = W * 0.56
+    cy = H * 0.52
+    R = Math.min(W * 0.37, H * 0.66)
     puffK = Math.min(1.2, Math.max(0.45, R / 480))
   }
 
@@ -496,11 +492,6 @@ onBeforeUnmount(() => cleanup())
 .v6sg-sys:focus-visible { outline: none; }
 .v6sg-sys:focus-visible .v6sg-lab { border-color: var(--ac-hi); }
 
-@media (max-width: 900px) {
-  .v6sg-sky { height: 72vh; min-height: 520px; }
-  .v6sg-more, .v6sg-lab em, .v6sg-lab .v6-mono, .v6sg-hint { display: none !important; }
-  .v6sg-lab strong { font-size: 1.05rem; }
-}
 @media (prefers-reduced-motion: reduce) {
   .v6sg-orbit > i { animation: none; }
 }
