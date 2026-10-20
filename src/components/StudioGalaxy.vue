@@ -58,19 +58,19 @@ const readStyle = computed(() => {
 })
 
 /* ── galaxy model ─────────────────────────────────────────────
-   Modelled on a grand-design spiral (M81): a broad golden bulge, tightly wound
-   blue-white arms, pink star-forming knots, dark dust lanes on the inner edge of
-   the arms and a faint violet outer halo. The smooth light (bulge + disc) is a
+   Modelled on the structure of a grand-design spiral (M81): a broad bulge,
+   tightly wound arms, bright star-forming knots, dark dust lanes on the inner
+   edge of the arms and a faint outer halo — in the site's own cyan / indigo. The smooth light (bulge + disc) is a
    gradient; arms, knots, dust and haze are particles in galaxy space (radius
    0..1, angle, height) projected through a tilted, rotated ellipse each frame.
    The star systems use the same projection, so they ride along with the arms. */
 const COL = [
-  [255, 238, 205], /* 0 hot core        */
-  [255, 205, 150], /* 1 warm disc       */
-  [172, 198, 255], /* 2 blue-white arms */
-  [140, 128, 255], /* 3 violet arms     */
-  [255, 120, 182], /* 4 pink HII knots  */
-  [112, 98, 228],  /* 5 outer haze      */
+  [255, 236, 205], /* 0 hot core         */
+  [150, 228, 255], /* 1 inner disc, cyan */
+  [140, 235, 255], /* 2 cyan arms        */
+  [150, 164, 255], /* 3 indigo arms      */
+  [215, 248, 255], /* 4 bright knots     */
+  [110, 118, 255], /* 5 outer haze       */
 ]
 const AL = [0.34, 0.6, 0.92, 0.08] /* last alpha bucket = soft puffs */
 const NB = COL.length * AL.length
@@ -166,7 +166,7 @@ onMounted(() => {
   const { buckets, dust } = buildGalaxy(reduced || small ? 9000 : 20000)
 
   /* fixed background stars (they do not turn with the galaxy) */
-  const bg = Array.from({ length: 90 }, () => ({ x: rnd(), y: rnd(), s: rnd() < 0.08 ? 2 : 1, c: rnd() < 0.3 ? "255,226,170" : rnd() < 0.5 ? "180,200,255" : "255,255,255", a: 0.25 + rnd() * 0.5 }))
+  const bg = Array.from({ length: 90 }, () => ({ x: rnd(), y: rnd(), s: rnd() < 0.08 ? 2 : 1, c: rnd() < 0.5 ? "170,205,255" : "255,255,255", a: 0.25 + rnd() * 0.5 }))
   const bright = Array.from({ length: 5 }, () => ({ x: 0.08 + rnd() * 0.84, y: 0.1 + rnd() * 0.8 }))
 
   /* round, soft sprites for the puff bucket — fillRect puffs read as squares */
@@ -224,25 +224,25 @@ onMounted(() => {
 
     /* background stars */
     bg.forEach((b) => { ctx.fillStyle = `rgba(${b.c},${b.a})`; ctx.fillRect(b.x * W, b.y * H, b.s, b.s) })
-    ctx.strokeStyle = "rgba(255,240,215,.35)"; ctx.lineWidth = 1
+    ctx.strokeStyle = "rgba(215,235,255,.35)"; ctx.lineWidth = 1
     bright.forEach((b) => {
       const x = b.x * W, y = b.y * H
-      ctx.fillStyle = "rgba(255,244,224,.9)"; ctx.fillRect(x - 1, y - 1, 2, 2)
+      ctx.fillStyle = "rgba(235,245,255,.9)"; ctx.fillRect(x - 1, y - 1, 2, 2)
       ctx.beginPath(); ctx.moveTo(x - 6, y); ctx.lineTo(x + 6, y); ctx.moveTo(x, y - 6); ctx.lineTo(x, y + 6); ctx.stroke()
     })
 
     ctx.globalCompositeOperation = "lighter"
-    glow(R * 1.15, S, [[0, "rgba(120,105,235,.10)"], [0.6, "rgba(110,95,225,.05)"], [1, "rgba(100,90,220,0)"]])  /* violet outer halo */
-    glow(R * 0.82, S, [[0, "rgba(255,212,150,.38)"], [0.5, "rgba(255,190,135,.16)"], [1, "rgba(255,170,120,0)"]]) /* golden disc */
-    glow(R * 0.58, S, [[0, "rgba(255,205,140,.22)"], [1, "rgba(255,180,120,0)"]])
-    glow(R * 0.34, (S + 1) / 2, [[0, "rgba(255,240,205,.78)"], [0.3, "rgba(255,216,150,.46)"], [1, "rgba(255,185,120,0)"]]) /* bulge */
+    glow(R * 1.15, S, [[0, "rgba(110,118,255,.10)"], [0.6, "rgba(99,102,241,.05)"], [1, "rgba(99,102,241,0)"]])  /* indigo outer halo */
+    glow(R * 0.82, S, [[0, "rgba(90,200,240,.30)"], [0.5, "rgba(60,170,235,.13)"], [1, "rgba(50,150,230,0)"]]) /* cyan disc */
+    glow(R * 0.58, S, [[0, "rgba(120,215,255,.18)"], [1, "rgba(90,190,255,0)"]])
+    glow(R * 0.34, (S + 1) / 2, [[0, "rgba(255,244,222,.8)"], [0.3, "rgba(200,235,255,.42)"], [1, "rgba(110,200,255,0)"]]) /* bulge */
     glow(R * 0.06, 1, [[0, "rgba(255,255,255,.95)"], [1, "rgba(255,240,210,0)"]]) /* core */
 
     const cp = Math.cos(phi), sp = Math.sin(phi)
 
     /* dust lanes sit on top of the glow, below the stars */
     ctx.globalCompositeOperation = "source-over"
-    ctx.fillStyle = "rgba(10,6,20,.3)"
+    ctx.fillStyle = "rgba(4,10,24,.3)"
     for (let j = 0; j < dust.r.length; j += stride) {
       const r = dust.r[j], a = dust.t[j] + omega(r) * t, x = r * Math.cos(a), y = r * Math.sin(a) * S, s = dust.s[j]
       ctx.fillRect(cx + (x * cp - y * sp) * R - s * 0.5, cy + (x * sp + y * cp) * R - s * 0.5, s, s)
