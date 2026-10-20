@@ -2858,13 +2858,21 @@
     "view": {
       "label": "View",
       "galaxy": "Galaxy",
-      "constellation": "Constellation"
+      "constellation": "Constellation",
+      "sky": "Night sky"
     },
     "galaxy": {
       "aria": "Interactive galaxy chart of the Katsumii apps",
       "readout": "Katsumii galaxy · 4 systems charted · more unexplored",
       "hint": "Slowly turning · hover to lock on",
       "open": "Open system"
+    },
+    "sky": {
+      "aria": "Interactive night sky with the Katsumii constellation",
+      "readout": "Katsumii constellation · 4 stars charted · more still out there",
+      "hint": "Slowly drifting · hover a star",
+      "constellation": "K A T S U M I I",
+      "open": "Open star"
     }
   },
   "products": {

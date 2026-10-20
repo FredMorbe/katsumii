@@ -2865,13 +2865,21 @@
     "view": {
       "label": "檢視",
       "galaxy": "銀河",
-      "constellation": "星座"
+      "constellation": "星座",
+      "sky": "夜空"
     },
     "galaxy": {
       "aria": "Katsumii 應用互動銀河星圖",
       "readout": "Katsumii 銀河 · 已標註 4 個星系 · 更多尚待探索",
       "hint": "緩緩旋轉 · 滑鼠移上去即可鎖定",
       "open": "開啟星系"
+    },
+    "sky": {
+      "aria": "互動夜空與 Katsumii 星座",
+      "readout": "Katsumii 星座 · 已標註 4 顆星 · 更多仍在遠方",
+      "hint": "緩緩漂移 · 滑鼠移到星星上",
+      "constellation": "K A T S U M I I",
+      "open": "開啟星星"
     }
   },
   "products": {

@@ -2858,13 +2858,21 @@
     "view": {
       "label": "Ansicht",
       "galaxy": "Galaxie",
-      "constellation": "Sternbild"
+      "constellation": "Sternbild",
+      "sky": "Nachthimmel"
     },
     "galaxy": {
       "aria": "Interaktive Galaxiekarte der Katsumii-Apps",
       "readout": "Katsumii-Galaxie · 4 Systeme kartiert · weitere unerforscht",
       "hint": "Dreht sich langsam · Maus drauf zum Anvisieren",
       "open": "System öffnen"
+    },
+    "sky": {
+      "aria": "Interaktiver Nachthimmel mit dem Sternbild Katsumii",
+      "readout": "Sternbild Katsumii · 4 Sterne kartiert · weitere noch da draußen",
+      "hint": "Driftet langsam · Maus auf einen Stern",
+      "constellation": "K A T S U M I I",
+      "open": "Stern öffnen"
     }
   },
   "products": {

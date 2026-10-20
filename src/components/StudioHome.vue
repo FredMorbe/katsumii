@@ -30,6 +30,7 @@
       <!-- the reveal sits on the static wrapper: elements swapped in later never get initV6Reveals -->
       <div class="v6-reveal">
       <StudioGalaxy v-if="view === 'galaxy'" />
+      <StudioNightSky v-else-if="view === 'sky'" />
 
       <div v-else class="v6st-chart" :aria-label="t('studio.chart.aria')">
         <!-- graticule + dust: purely decorative -->
@@ -123,6 +124,7 @@ import { useI18n } from "vue-i18n"
 import { useRoute } from "vue-router"
 import { initMagnetic, initV6Reveals } from "../v6/motion.js"
 import StudioGalaxy from "./StudioGalaxy.vue"
+import StudioNightSky from "./StudioNightSky.vue"
 import { normalizeLocale } from "../utils/routes.js"
 import { CONSTELLATION_LINES, GHOST_STARS, PRODUCTS, productByKey } from "../utils/products.js"
 
@@ -165,7 +167,7 @@ const dust = (() => {
 })()
 
 /* galaxy is the default; the visitor's choice is remembered */
-const VIEWS = ["galaxy", "constellation"]
+const VIEWS = ["galaxy", "constellation", "sky"]
 const VIEW_KEY = "katsumii-sky-view"
 const readView = () => {
   try {
@@ -204,7 +206,7 @@ onBeforeUnmount(() => {
   margin: 0 auto;
   padding: clamp(6.5rem, 14vh, 8.5rem) var(--v6-gutter) 0;
   display: grid;
-  grid-template-columns: 1fr minmax(260px, 24rem);
+  grid-template-columns: 1fr minmax(260px, 32rem);
   gap: 1.5rem clamp(2rem, 5vw, 4.5rem);
   align-items: end;
 }
