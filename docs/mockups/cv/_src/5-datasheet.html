@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sam Keller — CV · 5 Datasheet</title>
+<!-- MOCKUP: all CV content is placeholder (see _src/data.js) -->
+<style>/*@FONTS*/
+*,*::before,*::after{box-sizing:border-box}
+:root{--bg:#e9eef3;--sheet:#fff;--ink:#0b1b2b;--mute:#516173;--faint:#8493a4;--line:#c9d3de;--line2:#0b1b2b;--ac:#0b63ce;--acsoft:rgba(11,99,206,.09);--red:#d0342c;
+  --sans:"DM Sans",sans-serif;--mono:"DM Mono",ui-monospace,monospace}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 var(--sans);-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(rgba(11,99,206,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(11,99,206,.07) 1px,transparent 1px),linear-gradient(rgba(11,99,206,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(11,99,206,.035) 1px,transparent 1px);background-size:100px 100px,100px 100px,20px 20px,20px 20px}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}h1,h2,h3,p,ul{margin:0;padding:0}ul{list-style:none}
+.mono{font-family:var(--mono)}
+.bar{position:sticky;top:0;z-index:30;background:rgba(233,238,243,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar>div{max-width:1140px;margin:0 auto;padding:.7rem clamp(.8rem,3vw,1.6rem);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.bar label{font:500 .68rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.seg{display:flex;border:1.5px solid var(--ink);border-radius:8px;overflow:hidden;background:#fff}
+.seg button{padding:.45rem 1rem;font:500 .82rem var(--sans);border-right:1.5px solid var(--ink);transition:all .2s}.seg button:last-child{border:0}
+.seg button:hover{background:var(--acsoft)}.seg button.on{background:var(--ink);color:#fff}
+.tg{display:flex;align-items:center;gap:.55rem;font-size:.82rem;color:var(--mute);cursor:pointer;user-select:none}
+.tg i{width:34px;height:20px;border-radius:99px;background:#cfd8e2;position:relative;transition:background .2s}.tg i::after{content:"";position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.tg.on i{background:var(--red)}.tg.on i::after{transform:translateX(14px)}
+.btn{padding:.5rem 1rem;border:1.5px solid var(--ink);border-radius:8px;font-weight:600;font-size:.82rem;background:#fff;transition:all .2s}.btn:hover{background:var(--ink);color:#fff}
+.sp{flex:1}
+
+.sheet{max-width:1140px;margin:1.6rem auto 3rem;background:var(--sheet);border:1.5px solid var(--ink);box-shadow:10px 10px 0 rgba(11,27,43,.1);position:relative}
+.hd{display:grid;grid-template-columns:1fr 300px;border-bottom:1.5px solid var(--ink)}
+.hd .l{padding:1.6rem 1.8rem;border-right:1.5px solid var(--ink)}
+.pn{font:500 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.hd h1{font:700 clamp(2.4rem,5.4vw,4.2rem)/1 var(--sans);letter-spacing:-.05em;margin:.5rem 0 .3rem}
+.hd h1 small{font:500 .3em var(--mono);letter-spacing:.04em;color:var(--mute);margin-left:.6rem;vertical-align:.8em}
+.hd .st{font-size:1.1rem;color:var(--mute);max-width:34rem}
+.hd .r{display:grid;grid-template-rows:repeat(4,1fr);font:400 .78rem var(--mono)}
+.hd .r div{display:flex;justify-content:space-between;align-items:center;padding:.45rem 1.1rem;border-bottom:1px solid var(--line)}.hd .r div:last-child{border:0}.hd .r b{font-weight:500}.hd .r span{color:var(--faint)}
+.stamp{position:absolute;right:340px;top:2.2rem;transform:rotate(-8deg);border:2.5px solid var(--red);color:var(--red);padding:.25rem .8rem;font:600 .86rem var(--mono);letter-spacing:.2em;border-radius:4px;opacity:.85;pointer-events:none}
+
+.sec{padding:1.6rem 1.8rem;border-bottom:1.5px solid var(--ink)}.sec:last-of-type{border-bottom:0}
+.sec>h2{display:flex;align-items:baseline;gap:.8rem;font:700 1.15rem var(--sans);letter-spacing:-.02em;margin-bottom:1.1rem}
+.sec>h2 span{font:500 .78rem var(--mono);background:var(--ink);color:#fff;padding:.1rem .45rem;border-radius:3px}
+.sec>h2 small{margin-left:auto;font:400 .72rem var(--mono);color:var(--faint);font-weight:400;letter-spacing:0}
+.two{display:grid;grid-template-columns:1fr 540px;gap:2rem;align-items:start}
+.desc{color:var(--mute);margin-bottom:1rem}
+.feat{display:grid;gap:.5rem}.feat li{display:grid;grid-template-columns:22px 1fr;gap:.4rem}.feat li::before{content:"▪";color:var(--ac);font-size:1.1rem;line-height:1.4}
+.swap{animation:swp .4s both}@keyframes swp{from{opacity:0;transform:translateY(4px)}}
+
+/* IC package */
+.ic{width:100%;height:auto;display:block}.ic .pin{cursor:pointer}.ic .pin rect{fill:#dbe3ec;stroke:var(--ink);stroke-width:1.2;transition:fill .2s}.ic .pin text{font:400 11.5px var(--sans);fill:var(--ink)}.ic .pin .pn2{font:400 9px var(--mono);fill:#fff;opacity:.8}
+.ic .pin:hover rect,.ic .pin.hl rect{fill:var(--ac)}.ic .pin.hl text{font-weight:700;fill:var(--ac)}.ic .pin.nc text{fill:var(--faint)}.ic .pin.dim{opacity:.35}
+.ic .body{fill:#142536}.ic .lbl{font:600 22px var(--sans);fill:#fff;letter-spacing:-.02em}.ic .lbl2{font:400 9.5px var(--mono);fill:#9fb3c8;letter-spacing:.1em}
+
+/* block diagram */
+.flow{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding:.4rem .1rem 1rem}
+.blk{flex:1 1 0;min-width:118px;border:1.5px solid var(--ink);border-radius:4px;padding:.8rem .9rem;background:#fff;position:relative;cursor:pointer;transition:all .2s;min-width:0}
+.blk::after{content:"";position:absolute;right:-27px;top:50%;width:26px;height:1.5px;background:var(--ink)}.blk::before{content:"";position:absolute;right:-27px;top:calc(50% - 4px);border-left:7px solid var(--ink);border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;z-index:2}
+.blk:last-child::after,.blk:last-child::before{display:none}.blk{margin-right:27px}.blk:last-child{margin-right:0}
+.blk:hover,.blk.on{background:var(--acsoft);border-color:var(--ac)}
+.blk.cur{border-width:3px;padding:calc(.8rem - 1.5px) calc(.9rem - 1.5px)}
+.blk .k{font:500 .64rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}.blk b{display:block;font:700 1rem/1.15 var(--sans);letter-spacing:-.02em;margin:.2rem 0 .3rem}
+.blk .m{font:400 .74rem/1.35 var(--mono);color:var(--mute)}
+.blk .lv{height:5px;background:#e3e9f0;margin-top:.7rem;border-radius:2px;overflow:hidden}.blk .lv i{display:block;height:100%;background:var(--ac)}
+.notes{margin-top:.4rem;border:1.5px dashed var(--line);border-radius:6px;padding:1.1rem 1.3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;background:#fafcfe}
+.notes h3{font:700 1.05rem var(--sans);letter-spacing:-.02em}.notes .k{font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ac);display:block;margin-bottom:.2rem}.notes p{color:var(--mute);font-size:.9rem;margin-top:.4rem}
+.notes ul{display:grid;gap:.35rem;font-size:.88rem}.notes li{padding-left:1rem;position:relative}.notes li::before{content:"–";position:absolute;left:0;color:var(--ac)}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{font:500 .66rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:left;padding:.5rem .7rem;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+td{padding:.55rem .7rem;border-bottom:1px solid var(--line);vertical-align:middle}
+tr{transition:opacity .25s,background .2s}
+tbody tr:hover{background:var(--acsoft)}
+td.n,th.n{text-align:right}td.mono{font-size:.8rem}
+.grp td{background:#f1f5f9;font:500 .68rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:.4rem .7rem}
+.meter{display:flex;gap:3px;min-width:96px}.meter i{flex:1;height:9px;background:#e3e9f0}.meter i.on{background:var(--ac)}
+tr.skill{cursor:pointer}tr.skill.em td:first-child{font-weight:700}tr.skill.em .meter i.on{background:var(--ink)}tr.skill.dim{opacity:.42}
+tr.hl{background:rgba(11,99,206,.13)}tr.hl td:first-child{box-shadow:inset 3px 0 0 var(--ac)}
+tr.rev{cursor:pointer}tr.rev.cur td:first-child{font-weight:700}
+.rl{display:none;color:var(--red);font:500 .72rem var(--mono);margin-left:.5rem}.markup .rl{display:inline}
+.markup tr.rev td:nth-child(4){outline:0}
+.ratings td:nth-child(3){font:500 .86rem var(--mono)}
+.ord{display:grid;grid-template-columns:1fr 1fr;gap:2rem}.ord .cta{display:inline-block;margin-top:1rem;padding:.7rem 1.2rem;background:var(--ink);color:#fff;border-radius:6px;font-weight:600;transition:background .2s}.ord .cta:hover{background:var(--ac)}
+.foot{display:flex;justify-content:space-between;gap:1rem;padding:.8rem 1.8rem;border-top:1.5px solid var(--ink);font:400 .7rem var(--mono);color:var(--faint);background:#f6f9fc;flex-wrap:wrap}.in-frame .foot .mk{display:none}
+
+@media(max-width:900px){.hd{grid-template-columns:1fr}.hd .l{border-right:0;border-bottom:1.5px solid var(--ink)}.stamp{display:none}.two,.notes,.ord{grid-template-columns:1fr}.sec,.hd .l{padding:1.2rem 1rem}.sec>h2 small{display:none}
+  .flow{flex-direction:column;overflow:visible}.blk{margin:0 0 27px}.blk::after{right:auto;left:50%;top:auto;bottom:-27px;width:1.5px;height:26px}.blk::before{right:auto;left:calc(50% - 4px);top:auto;bottom:-8px;border-left:4.5px solid transparent;border-right:4.5px solid transparent;border-top:7px solid var(--ink);border-bottom:0}
+  .hide-m{display:none}}
+@media print{.bar{display:none}body{background:#fff}.sheet{box-shadow:none;margin:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<div class="bar"><div>
+  <label>Operating mode</label>
+  <div class="seg" id="seg" role="group" aria-label="Operating mode"></div>
+  <span class="sp"></span>
+  <label class="tg" id="tg" role="switch" tabindex="0" aria-checked="false"><i></i>Redline markup</label>
+  <button class="btn" id="print">Print / PDF</button>
+</div></div>
+
+<article class="sheet" id="sheet">
+  <header class="hd">
+    <div class="l"><p class="pn">Datasheet · Rev. 14 · 2026-10</p><h1>SK-14<small>/ Sam Keller</small></h1><p class="st" id="title"></p></div>
+    <div class="r mono" id="spec"></div>
+  </header>
+  <div class="stamp">RELEASED</div>
+
+  <section class="sec"><h2><span>1</span>General description &amp; pin configuration<small>Figure 1 · hover a pin</small></h2>
+    <div class="two"><div class="swap" id="descBox"></div><svg class="ic" id="ic" viewBox="0 0 600 430" role="img" aria-label="Skill pin configuration"></svg></div></section>
+
+  <section class="sec"><h2><span>2</span>Block diagram — career signal path<small>Figure 2 · click a block</small></h2>
+    <div class="flow" id="flow"></div><div class="notes swap" id="notes"></div></section>
+
+  <section class="sec"><h2><span>3</span>Absolute maximum ratings<small>Stress beyond these may cause burnout</small></h2>
+    <table class="ratings"><thead><tr><th>Parameter</th><th>Symbol</th><th>Value</th><th>Unit</th></tr></thead><tbody id="ratings"></tbody></table></section>
+
+  <section class="sec"><h2><span>4</span>Performance characteristics<small id="perfHint"></small></h2>
+    <table><thead><tr><th>Parameter</th><th>Proficiency</th><th class="n">Level</th><th class="n">Experience</th><th class="hide-m">Used in</th></tr></thead><tbody id="perf"></tbody></table></section>
+
+  <section class="sec"><h2><span>5</span>Revision history<small>Latest revision first</small></h2>
+    <table><thead><tr><th>Rev.</th><th>Date</th><th>Organisation</th><th class="hide-m">Change description</th><th class="n">Delta</th></tr></thead><tbody id="rev"></tbody></table></section>
+
+  <section class="sec"><h2><span>6</span>Ordering information<small>Samples available on request</small></h2>
+    <div class="ord"><table><tbody id="ord"></tbody></table><div><p class="desc" id="edu"></p><a class="cta" id="mail" href="#">Request a sample →</a></div></div></section>
+  <footer class="foot"><span>SK-14 · Rev. 14 · Page 1 of 1</span><span class="mk">Mockup · placeholder content</span></footer>
+</article>
+
+<script>/*@DATA*/</script>
+<script>
+const $ = (s) => document.querySelector(s), $$ = (s) => [...document.querySelectorAll(s)];
+const roles = CV.roles, rev = [...roles].reverse(), skills = cvSkills(), cvIdxNow = cvIdx(CV.now);
+const REVL = "ABCDEFG";
+
+const MODES = {
+  recruiter: { label: "Recruiter", hint: "Highlighted: leadership & outcomes",
+    desc: "Staff-level engineer and founder with fourteen years of delivery across payments, analytics and consumer apps. Leads teams of up to nine, hires well, and ties engineering work to numbers the business cares about — conversion, performance, retention.",
+    feat: ["Led nine engineers across three squads; hired and onboarded seven.", "Checkout rebuild: +11 % conversion, p95 load 3.1 s → 1.2 s.", "Introduced RFCs and a design system now used org-wide.", "Mentored six engineers — three promoted within two years.", "Founded and runs a four-product software studio."],
+    em: (s) => ["Technical leadership", "Mentoring", "Product strategy", "Vue", "TypeScript"].includes(s.name),
+    meta: (r) => `${cvDur(r)}<br>${r.metric.v} ${r.metric.l}` },
+  engineer: { label: "Engineer", hint: "Highlighted: frontend, backend & delivery",
+    desc: "Full-stack engineer working mainly in Vue, TypeScript and Python — from design systems and rendering performance down to PostgreSQL schemas and CI pipelines. Prefers boring technology, sharp interfaces and tests that fail for the right reasons.",
+    feat: ["Vue + TypeScript on the front, FastAPI / Node on the back.", "Local-first architecture with SQLite (WAL) for desktop products.", "Design systems, accessibility and p95-driven performance work.", "Zero-downtime migration from monolith to services.", "Three.js for the occasional visual that earns its keep."],
+    em: (s) => ["Frontend", "Backend & data", "Delivery"].includes(s.cat),
+    meta: (r) => r.skills.slice(0, 4).join(" · ") },
+  founder: { label: "Founder", hint: "Highlighted: product, craft & shipping",
+    desc: "Solo founder of an independent software studio. Owns product, design, engineering, release and support for four live products across desktop and mobile. Strong sense of scope: ships small, learns from real users, keeps the cost of change low.",
+    feat: ["Four products live: Journal, Andromeda, Tidii Cleaner, Cubamii.", "End-to-end ownership — from first sketch to support inbox.", "Local-first, privacy-respecting by design; paid and free models.", "Weekly release cadence on every product.", "Previously 5 teams, 14 years: knows what to delegate and when."],
+    em: (s) => ["Product & craft", "Delivery"].includes(s.cat) || ["Vue", "Design systems"].includes(s.name),
+    meta: (r) => `${r.kind}<br>${r.place}` }
+};
+let mode = "recruiter", sel = roles[roles.length - 1].id, focus = null;
+
+/* header */
+$("#title").textContent = CV.title + " · " + CV.location;
+$("#spec").innerHTML = [["Package", "Berlin / remote"], ["Experience", "14+ yrs"], ["Supply", "Open from Jan"], ["Languages", "DE · EN · ZH"]].map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join("");
+$("#seg").innerHTML = Object.entries(MODES).map(([k, m]) => `<button data-m="${k}" class="${k === mode ? "on" : ""}">${m.label}</button>`).join("");
+$("#ratings").innerHTML = [["Teams led (peak)", "N<sub>lead</sub>", "9", "engineers"], ["Products shipped, own", "P<sub>own</sub>", "4", "products"], ["Release cadence", "f<sub>rel</sub>", "weekly", "—"], ["Audience reached", "U", "2.4 M", "people"], ["Continuous focus", "t<sub>focus</sub>", "4", "h"], ["Meetings that could have been a commit", "M<sub>max</sub>", "0", "per week"]].map((r) => `<tr><td>${r[0]}</td><td class="mono">${r[1]}</td><td>${r[2]}</td><td class="mono">${r[3]}</td></tr>`).join("");
+$("#ord").innerHTML = [["Part number", "SK-14"], ["Package", CV.location], ["Lead time", CV.availability], ["E-mail", CV.email], ["Web", CV.site]].map(([a, b]) => `<tr><th style="border:0">${a}</th><td class="mono" style="border-bottom:1px solid var(--line)">${b}</td></tr>`).join("");
+$("#edu").innerHTML = "<b>Qualification:</b> " + CV.education.map((e) => `${e.role}, ${e.org} (${e.from}–${e.to})`).join(" · ");
+$("#mail").href = "mailto:" + CV.email;
+
+/* IC pin configuration */
+const pins = skills.slice(0, 16).concat([{ name: "NC", nc: true }, { name: "NC", nc: true }]).slice(0, 18);
+(function ic() {
+  const svg = $("#ic"); let h = `<rect class="body" x="200" y="28" width="190" height="374" rx="10"/><circle cx="228" cy="54" r="7" fill="none" stroke="#9fb3c8" stroke-width="1.5"/>
+  <text class="lbl" x="295" y="205" text-anchor="middle">SK-14</text><text class="lbl2" x="295" y="226" text-anchor="middle">STAFF · FOUNDER</text><text class="lbl2" x="295" y="244" text-anchor="middle">REV 14 · 2026</text>`;
+  pins.forEach((p, i) => { const left = i < 9, k = left ? i : 17 - i, y = 52 + k * 40, x0 = left ? 150 : 390, n = i + 1;
+    h += `<g class="pin${p.nc ? " nc" : ""}" data-skill="${p.nc ? "" : p.name}" tabindex="${p.nc ? -1 : 0}"><rect x="${x0}" y="${y - 7}" width="50" height="14" rx="2"/><text class="pn2" x="${left ? 228 : 362}" y="${y + 3.5}" text-anchor="${left ? "start" : "end"}">${n}</text>
+    <text x="${left ? 142 : 448}" y="${y + 4}" text-anchor="${left ? "end" : "start"}">${p.name}</text></g>`; });
+  svg.innerHTML = h;
+})();
+
+/* renderers */
+function renderMode() {
+  const m = MODES[mode];
+  $("#descBox").innerHTML = `<p class="desc">${m.desc}</p><ul class="feat">${m.feat.map((f) => `<li>${f}</li>`).join("")}</ul>`;
+  $("#descBox").classList.remove("swap"); void $("#descBox").offsetWidth; $("#descBox").classList.add("swap");
+  $("#perfHint").textContent = m.hint;
+  $$("#seg button").forEach((b) => b.classList.toggle("on", b.dataset.m === mode));
+  renderFlow(); renderPerf(); applyFocus();
+}
+function renderFlow() {
+  const m = MODES[mode];
+  $("#flow").innerHTML = `<div class="blk" data-edu="1"><span class="k">Input</span><b>${CV.education[0].role.replace("M.Sc. ", "M.Sc.<br>")}</b><div class="m">${CV.education[0].org}<br>${CV.education[0].from}–${CV.education[0].to}</div></div>`
+    + roles.map((r, i) => `<div class="blk${r.id === sel ? " on" : ""}${i === roles.length - 1 ? " cur" : ""}" data-role="${r.id}" tabindex="0"><span class="k" style="white-space:nowrap">${i + 1} · ${r.from.slice(0, 4)}–${r.to ? r.to.slice(2, 4) : "now"}</span><b>${r.org}</b><div class="m">${m.meta(r)}</div><div class="lv"><i style="width:${r.lvl[1] * 10}%"></i></div></div>`).join("");
+  notes();
+}
+function notes() {
+  const r = roles.find((x) => x.id === sel); const m = $("#notes");
+  m.innerHTML = `<div><span class="k">Notes · stage ${roles.indexOf(r) + 1}</span><h3>${r.org} — ${r.role}</h3><p>${cvRange(r)} · ${cvDur(r)} · ${r.place}</p><p>${r.summary}</p></div><div><span class="k">Highlights</span><ul>${r.bullets.map((b) => `<li>${b}</li>`).join("")}</ul></div>`;
+  m.classList.remove("swap"); void m.offsetWidth; m.classList.add("swap");
+  $$(".blk[data-role]").forEach((b) => b.classList.toggle("on", b.dataset.role === sel));
+}
+function renderPerf() {
+  const m = MODES[mode]; let h = "";
+  CV.categories.forEach((c) => { h += `<tr class="grp"><td colspan="5">${c}</td></tr>`;
+    skills.filter((s) => s.cat === c).forEach((s) => { h += `<tr class="skill ${m.em(s) ? "em" : "dim"}" data-skill="${s.name}"><td>${s.name}</td><td><div class="meter">${[1, 2, 3, 4, 5].map((i) => `<i class="${i <= s.level ? "on" : ""}"></i>`).join("")}</div></td><td class="n mono">${s.level}/5</td><td class="n mono">${s.years} yrs</td><td class="mono hide-m">${s.roles.map((id) => cvRole(id).org.split(" ")[0]).join(", ")}</td></tr>`; }); });
+  $("#perf").innerHTML = h;
+}
+$("#rev").innerHTML = rev.map((r, i) => { const idx = roles.length - 1 - i, ms = CV.milestones.filter((s) => cvIdx(s.at) >= cvIdx(r.from) && cvIdx(s.at) <= cvIdx(cvEnd(r)) + 1);
+  return `<tr class="rev${i === 0 ? " cur" : ""}" data-role="${r.id}"><td class="mono">${REVL[idx]}${i === 0 ? " ●" : ""}</td><td class="mono">${r.from.replace("-", "/")}</td><td>${r.org}</td><td class="hide-m">${r.role}<span class="rl">${ms.map((x) => "◆ " + x.text).join(" · ")}</span></td><td class="n mono">${r.metric.v}</td></tr>`; }).join("");
+
+/* focus (cross-highlighting between pins, skill rows, blocks and revision rows) */
+function applyFocus() {
+  const f = focus; let roleSet = null, skillSet = null;
+  if (f && f.type === "skill") { const s = skills.find((x) => x.name === f.v); roleSet = new Set(s.roles); skillSet = new Set([f.v]); }
+  if (f && f.type === "role") { const r = cvRole(f.v); roleSet = new Set([f.v]); skillSet = new Set(r.skills); }
+  $$(".pin").forEach((p) => { const n = p.dataset.skill; p.classList.toggle("hl", !!skillSet && skillSet.has(n)); p.classList.toggle("dim", !!skillSet && !!n && !skillSet.has(n)); });
+  $$("tr.skill").forEach((t) => t.classList.toggle("hl", !!skillSet && skillSet.has(t.dataset.skill)));
+  $$(".blk[data-role],tr.rev").forEach((t) => t.classList.toggle("hl", !!roleSet && roleSet.has(t.dataset.role)));
+}
+const setFocus = (t, v) => { focus = t ? { type: t, v } : null; applyFocus(); };
+
+/* events */
+document.addEventListener("pointerover", (e) => {
+  const sk = e.target.closest(".pin[data-skill], tr.skill"), ro = e.target.closest(".blk[data-role], tr.rev");
+  if (sk && sk.dataset.skill) setFocus("skill", sk.dataset.skill); else if (ro) setFocus("role", ro.dataset.role);
+});
+document.addEventListener("pointerout", (e) => { if (e.target.closest(".pin, tr.skill, .blk, tr.rev") && !e.relatedTarget?.closest?.(".pin, tr.skill, .blk, tr.rev")) setFocus(null); });
+document.addEventListener("focusin", (e) => { const sk = e.target.closest(".pin[data-skill]"), ro = e.target.closest(".blk[data-role]"); if (sk) setFocus("skill", sk.dataset.skill); else if (ro) setFocus("role", ro.dataset.role); });
+document.addEventListener("focusout", () => setFocus(null));
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".blk[data-role], tr.rev"); if (b) { sel = b.dataset.role; notes(); $("#flow").scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+  const m = e.target.closest("#seg button"); if (m) { mode = m.dataset.m; renderMode(); }
+});
+document.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".blk[data-role]")) { e.preventDefault(); sel = e.target.dataset.role; notes(); } });
+const tg = $("#tg"), flip = () => { const on = !tg.classList.contains("on"); tg.classList.toggle("on", on); tg.setAttribute("aria-checked", on); $("#sheet").classList.toggle("markup", on); };
+tg.onclick = flip; tg.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } };
+$("#print").onclick = () => print();
+const q = new URLSearchParams(location.search); if (MODES[q.get("mode")]) mode = q.get("mode"); if (q.get("markup")) flip();
+renderMode();
+</script>
+</body></html>

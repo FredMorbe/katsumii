@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sam Keller — CV · 4 Editorial</title>
+<!-- MOCKUP: all CV content is placeholder (see _src/data.js) -->
+<style>/*@FONTS*/
+*,*::before,*::after{box-sizing:border-box}
+:root{--paper:#f3eee4;--paper2:#eae4d6;--ink:#121212;--mute:#5d5a52;--faint:#8c887c;--rule:rgba(18,18,18,.16);--ac:#2b3cff;--dark:#0e0e12;
+  --serif:"Fraunces",Georgia,serif;--sans:"DM Sans",sans-serif;--mono:"DM Mono",ui-monospace,monospace}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.07;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}h1,h2,h3,h4,p,ul,ol,blockquote,figure{margin:0;padding:0}ul,ol{list-style:none}
+.wrap{max-width:1360px;margin:0 auto;padding:0 clamp(1.1rem,4vw,3rem)}
+.mono{font:400 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase}
+#prog{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--ac);transform-origin:0 50%;transform:scaleX(0);z-index:100}
+
+/* masthead */
+.mast{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--ink)}
+.mast .mono{color:var(--mute)}.mast nav{display:flex;gap:1.6rem;justify-content:flex-end}.mast nav a{position:relative}.mast nav a:hover{color:var(--ac)}
+.mast .mk{font:600 1.1rem var(--serif);letter-spacing:-.02em}.mast .mk i{color:var(--ac);font-style:italic}
+
+/* hero */
+.hero{padding:clamp(2rem,6vh,4rem) 0 clamp(1.5rem,4vh,3rem);position:relative}
+.name{font:380 clamp(5rem,21vw,19rem)/.82 var(--serif);letter-spacing:-.065em;margin:0 0 0 -.05em}
+.name span{display:block;overflow:hidden;padding:.03em 0 .08em}
+.name span b{display:block;font-weight:inherit;transform:translateY(105%);animation:up 1.2s cubic-bezier(.2,.8,.15,1) forwards}
+.name span:nth-child(2) b{animation-delay:.12s;font-style:italic;color:var(--ac);padding-left:.55em}
+@keyframes up{to{transform:none}}
+.meta{display:grid;grid-template-columns:repeat(3,1fr) 1.6fr;gap:2rem;margin-top:clamp(1.5rem,4vh,2.8rem);padding-top:1.2rem;border-top:1px solid var(--ink)}
+.meta h4{font:400 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem}
+.meta p{font-size:1rem;line-height:1.5}.meta .sum{font:380 1.25rem/1.45 var(--serif);letter-spacing:-.01em}
+.marq{margin-top:clamp(2rem,6vh,4rem);border-block:1px solid var(--ink);overflow:hidden;white-space:nowrap;padding:.9rem 0;background:var(--ink);color:var(--paper)}
+.marq div{display:inline-block;animation:marq 48s linear infinite}.marq:hover div{animation-play-state:paused}
+.marq span{font:italic 380 1.7rem var(--serif);padding:0 1.4rem}.marq i{font-style:normal;color:#8b95ff;font-size:.7em}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* contents */
+.toc{padding:clamp(4rem,12vh,8rem) 0 0}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.6rem;border-bottom:1px solid var(--ink);padding-bottom:.8rem}
+.sec-h h2{font:380 clamp(2rem,4.4vw,3.6rem)/1 var(--serif);letter-spacing:-.04em}.sec-h h2 i{color:var(--ac)}
+.toc li a{display:grid;grid-template-columns:70px 1.2fr 1.4fr 150px 24px;gap:1rem;align-items:baseline;padding:1.05rem .4rem;border-bottom:1px solid var(--rule);transition:all .3s cubic-bezier(.2,.7,.2,1)}
+.toc li a:hover{background:var(--ink);color:var(--paper);padding-left:1.2rem}.toc li a:hover .n,.toc li a:hover .arr{color:#8b95ff}
+.toc .n{font:400 .8rem var(--mono);color:var(--ac)}.toc .o{font:400 1.7rem var(--serif);letter-spacing:-.03em}.toc .r{color:var(--mute)}.toc li a:hover .r{color:#cfcbbd}.toc .y{font:400 .74rem var(--mono);text-align:right;color:var(--faint)}.toc .arr{transition:transform .3s}.toc a:hover .arr{transform:translateX(5px)}
+
+/* chapters */
+.chap{display:grid;grid-template-columns:minmax(150px,4fr) 8fr;gap:clamp(1.5rem,5vw,5rem);padding:clamp(4rem,11vh,7rem) 0;border-bottom:1px solid var(--rule)}
+.stick{position:sticky;top:5.5rem}
+.num{display:block;font:300 clamp(6rem,14vw,13rem)/.8 var(--serif);letter-spacing:-.07em;color:transparent;-webkit-text-stroke:1.4px var(--ink)}
+.yrs{display:block;margin-top:1.2rem;font:400 .78rem var(--mono);letter-spacing:.1em;text-transform:uppercase}.pl{display:block;color:var(--faint);font-size:.9rem;margin-top:.2rem}
+.kicker{font:400 .72rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac)}
+.chap h2{font:380 clamp(2.8rem,7vw,6.4rem)/.95 var(--serif);letter-spacing:-.055em;margin:.9rem 0 .5rem}
+.rolei{font:italic 380 clamp(1.3rem,2.4vw,2rem)/1.2 var(--serif);color:var(--mute);letter-spacing:-.02em}
+.lead{font:380 clamp(1.25rem,2vw,1.65rem)/1.45 var(--serif);letter-spacing:-.015em;margin:1.8rem 0 2.2rem;max-width:36rem}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.bl{counter-reset:b}.bl li{counter-increment:b;display:grid;grid-template-columns:34px 1fr;gap:.6rem;padding:.9rem 0;border-top:1px solid var(--rule)}
+.bl li::before{content:counter(b,decimal-leading-zero);font:400 .72rem var(--mono);color:var(--ac);padding-top:.35rem}.bl li:last-child{border-bottom:1px solid var(--rule)}
+.metric{padding:1.4rem 0 0;border-top:3px solid var(--ink)}.metric b{display:block;font:300 clamp(3.6rem,7.5vw,6.6rem)/.9 var(--serif);letter-spacing:-.06em;color:var(--ac)}.metric span{display:block;margin-top:.6rem;color:var(--mute);font-size:.95rem;max-width:14rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem .6rem;margin-top:2rem}.tags span{font:400 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:.4rem .75rem;border:1px solid var(--ink);border-radius:99px;transition:all .25s}.tags span:hover{background:var(--ink);color:var(--paper)}
+
+/* quote */
+.quote{padding:clamp(4rem,11vh,7rem) 0;text-align:center;border-bottom:1px solid var(--rule);position:relative}
+.quote::before{content:"“";display:block;font:380 8rem/.6 var(--serif);color:var(--ac);margin-bottom:.4rem}
+.quote blockquote{font:italic 380 clamp(1.7rem,3.8vw,3.1rem)/1.2 var(--serif);letter-spacing:-.03em;max-width:56rem;margin:0 auto}
+.quote cite{display:block;margin-top:1.6rem;font:400 .74rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-style:normal}
+
+/* work */
+.work{background:var(--dark);color:var(--paper);margin-top:0;padding:clamp(4rem,11vh,7rem) 0}
+.work .sec-h{border-color:rgba(243,238,228,.5)}.work .sec-h h2 i{color:#8b95ff}
+.work .sub{max-width:34rem;color:#aaa69a;margin:-.6rem 0 2rem}
+.rail{--edge:max(clamp(1.1rem,4vw,3rem),calc((100vw - 1360px)/2 + clamp(1.1rem,4vw,3rem)));display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);padding:0 var(--edge) 1.4rem;scrollbar-width:none;cursor:grab}
+.rail::-webkit-scrollbar{display:none}.rail.drag{cursor:grabbing;scroll-snap-type:none}
+.pc{flex:0 0 min(380px,82vw);height:480px;scroll-snap-align:start;border:1px solid rgba(243,238,228,.18);border-radius:6px;padding:1.6rem;display:flex;flex-direction:column;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 26%,#0e0e12),#0e0e12 62%);transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .3s}
+.pc:hover{transform:translateY(-8px);border-color:var(--c)}
+.pc .big{position:absolute;right:-.06em;top:-.12em;font:300 13rem/1 var(--serif);letter-spacing:-.08em;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--c) 70%,transparent);opacity:.6;transition:opacity .4s}.pc:hover .big{opacity:1}
+.pc .k{font:400 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#aaa69a}
+.pc h3{margin-top:auto;font:380 2.4rem/1 var(--serif);letter-spacing:-.045em}.pc p{color:#c9c5b8;margin:.8rem 0 1.2rem;font-size:.95rem}
+.pc .st{display:flex;gap:.4rem;flex-wrap:wrap}.pc .st span{font:400 .66rem var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:.3rem .6rem;border:1px solid rgba(243,238,228,.3);border-radius:99px}
+.pc .go{position:absolute;left:1.6rem;top:1.6rem;display:none}
+.ctl{display:flex;align-items:center;gap:1rem;max-width:1360px;margin:.6rem auto 0;padding:0 clamp(1.1rem,4vw,3rem)}.ctl .bar{flex:1;height:1px;background:rgba(243,238,228,.2);position:relative}.ctl .bar i{position:absolute;left:0;top:-1px;height:3px;background:#8b95ff;width:20%}
+.ctl button{width:46px;height:46px;border:1px solid rgba(243,238,228,.35);border-radius:50%;font-size:1.1rem;transition:all .2s}.ctl button:hover{background:var(--paper);color:var(--ink)}
+
+/* numbers + footer */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--ink)}
+.nums div{padding:clamp(2rem,6vh,3.5rem) 1rem clamp(2rem,6vh,3.5rem) 0;border-right:1px solid var(--rule);padding-left:1.4rem}.nums div:first-child{padding-left:0}.nums div:last-child{border-right:0}
+.nums b{display:block;font:300 clamp(3.4rem,8vw,7rem)/.9 var(--serif);letter-spacing:-.06em}.nums span{display:block;margin-top:.6rem;color:var(--mute);max-width:11rem;font-size:.92rem}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;padding:clamp(3rem,8vh,5rem) 0}
+.info h4{font:400 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.9rem}
+.info li{padding:.7rem 0;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:1rem}.info li small{color:var(--faint);font:400 .74rem var(--mono)}
+.talk{padding:clamp(3rem,9vh,6rem) 0 2rem;border-top:1px solid var(--ink)}
+.talk a.big{display:inline-block;font:380 clamp(3.2rem,14vw,13rem)/.9 var(--serif);letter-spacing:-.065em;position:relative;background:linear-gradient(var(--ac),var(--ac)) 0 100%/0 .06em no-repeat;transition:background-size .6s cubic-bezier(.2,.7,.2,1),color .3s}
+.talk a.big:hover{background-size:100% .06em;color:var(--ac)}.talk a.big i{font-style:italic}
+.talk .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:2.4rem;color:var(--mute)}.talk .row a:hover{color:var(--ac)}
+.note{padding:1.5rem 0 2.5rem;text-align:center;color:var(--faint)}.in-frame .note{display:none}
+
+/* side dots */
+.dots{position:fixed;right:1.1rem;top:50%;transform:translateY(-50%);z-index:50;display:grid;gap:.7rem}
+.dots a{display:flex;align-items:center;justify-content:flex-end;gap:.6rem;font:400 .66rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:transparent;transition:color .25s}
+.dots a::after{content:"";width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink);background:var(--paper);transition:all .25s}
+.dots a.on::after{background:var(--ac);border-color:var(--ac);transform:scale(1.25)}.dots a:hover,.dots a.on{color:var(--ink)}
+.dots.dark a::after{border-color:var(--paper);background:var(--dark)}.dots.dark a.on::after{background:#8b95ff;border-color:#8b95ff}.dots.dark a:hover,.dots.dark a.on{color:var(--paper)}
+
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform 1s cubic-bezier(.2,.7,.2,1) var(--d,0s)}.rv.in{opacity:1;transform:none}
+@media(max-width:980px){.dots{display:none}.toc li a{grid-template-columns:44px 1fr 24px}.toc .r,.toc .y{display:none}.chap{grid-template-columns:1fr;gap:1.2rem}.stick{position:static;display:flex;align-items:baseline;gap:1.2rem;flex-wrap:wrap}.num{font-size:5rem}.yrs{margin:0}.two{grid-template-columns:1fr}.meta{grid-template-columns:1fr 1fr}.meta>div:last-child{grid-column:1/-1}.nums{grid-template-columns:1fr 1fr}.nums div:nth-child(2){border-right:0}.nums div:nth-child(3){padding-left:0}.info{grid-template-columns:1fr}.mast nav a:not(:last-child){display:none}.mast{grid-template-columns:auto 1fr auto}.mast>span:first-child{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.name span b{transform:none}.rv{opacity:1;transform:none}.marq div{animation:none}}
+</style></head>
+<body>
+<div id="prog"></div>
+<nav class="dots" id="dots" aria-label="Chapters"></nav>
+
+<div class="wrap">
+  <header class="mast"><span class="mono">Curriculum vitae · Vol. 14</span><a class="mk" href="#top">S<i>K</i></a><nav class="mono"><a href="#toc">Contents</a><a href="#work">Work</a><a href="#talk">Contact</a></nav></header>
+
+  <section class="hero" id="top">
+    <h1 class="name" aria-label="Sam Keller"><span><b>Sam</b></span><span><b>Keller.</b></span></h1>
+    <div class="meta">
+      <div><h4>Craft</h4><p id="m1"></p></div><div><h4>Based</h4><p id="m2"></p></div><div><h4>Status</h4><p id="m3"></p></div>
+      <div><h4>In short</h4><p class="sum" id="m4"></p></div>
+    </div>
+  </section>
+</div>
+<div class="marq" aria-hidden="true"><div id="marq"></div></div>
+
+<div class="wrap">
+  <section class="toc" id="toc"><div class="sec-h"><h2>Contents<i>.</i></h2><span class="mono" id="tocn"></span></div><ul id="tocl"></ul></section>
+  <div id="chaps"></div>
+</div>
+
+<section class="work" id="work">
+  <div class="wrap"><div class="sec-h"><h2>Selected work<i>.</i></h2><span class="mono">Katsumii · 2024 → now</span></div><p class="sub">Four products from one small studio — each built, designed, shipped and supported end to end.</p></div>
+  <div class="rail" id="rail"></div>
+  <div class="ctl"><button id="prev" aria-label="Previous">←</button><div class="bar"><i id="pbar"></i></div><button id="next" aria-label="Next">→</button></div>
+</section>
+
+<div class="wrap">
+  <section class="nums" id="nums"></section>
+  <section class="info"><div><h4>Education</h4><ul id="edu"></ul></div><div><h4>Languages</h4><ul id="lang"></ul></div><div><h4>Elsewhere</h4><ul id="else"></ul></div></section>
+  <section class="talk" id="talk"><p class="mono" style="color:var(--ac);margin-bottom:1rem">Next chapter</p><a class="big" id="mail" href="#">Let’s <i>talk.</i></a>
+    <div class="row"><span id="avail"></span><span>Mockup · placeholder content</span></div></section>
+</div>
+
+<script>/*@DATA*/</script>
+<script>
+const $ = (s) => document.querySelector(s), $$ = (s) => [...document.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII"], rev = [...CV.roles].reverse();
+
+$("#m1").textContent = CV.title; $("#m2").textContent = CV.location; $("#m3").textContent = CV.availability; $("#m4").textContent = CV.summary;
+const skills = cvSkills();
+$("#marq").innerHTML = [0, 1].map(() => skills.map((s) => `<span>${s.name}</span><i>✦</i>`).join("")).join("");
+$("#tocn").textContent = rev.length + " chapters";
+$("#tocl").innerHTML = rev.map((r, i) => `<li><a href="#c-${r.id}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="o">${r.org}</span><span class="r">${r.role}</span><span class="y">${r.from.slice(0, 4)} — ${r.to ? r.to.slice(0, 4) : "now"}</span><span class="arr">→</span></a></li>`).join("")
+  + `<li><a href="#work"><span class="n">+</span><span class="o">Selected work</span><span class="r">Four products, one studio</span><span class="y">2024 — now</span><span class="arr">→</span></a></li>`;
+
+const metricParts = (m) => { const x = /^([^\d]*)(\d+(?:\.\d+)?)(.*)$/.exec(m); return x ? { p: x[1], n: +x[2], s: x[3] } : { p: "", n: 0, s: m }; };
+let html = "";
+rev.forEach((r, i) => {
+  const mt = metricParts(r.metric.v);
+  html += `<section class="chap" id="c-${r.id}" data-chap="${r.org}">
+    <div class="stick rv"><span class="num">${String(i + 1).padStart(2, "0")}</span><span class="yrs">${cvRange(r)}</span><span class="pl">${r.place} · ${r.kind} · ${cvDur(r)}</span></div>
+    <div><p class="kicker rv">Chapter ${ROMAN[i]}</p><h2 class="rv" style="--d:.05s">${r.org}</h2><p class="rolei rv" style="--d:.1s">${r.role}</p><p class="lead rv" style="--d:.15s">${r.summary}</p>
+      <div class="two"><ol class="bl">${r.bullets.map((b, k) => `<li class="rv" style="--d:${.1 * k}s">${b}</li>`).join("")}</ol>
+      <div class="metric rv"><b data-p="${mt.p}" data-n="${mt.n}" data-s="${mt.s}">${r.metric.v}</b><span>${r.metric.l}</span></div></div>
+      <div class="tags rv">${r.skills.map((s) => `<span>${s}</span>`).join("")}</div></div></section>`;
+  const q = CV.quotes[i === 1 ? 0 : i === 3 ? 1 : -1];
+  if (q) html += `<section class="quote rv"><blockquote>${q.text}</blockquote><cite>${q.who}</cite></section>`;
+});
+$("#chaps").innerHTML = html;
+$("#dots").innerHTML = rev.map((r, i) => `<a href="#c-${r.id}" data-t="c-${r.id}">${r.org.split(" ")[0]}</a>`).join("") + `<a href="#work" data-t="work">Work</a>`;
+
+$("#rail").innerHTML = CV.projects.map((p) => `<article class="pc" style="--c:${p.accent}"><span class="big">${p.n}</span><span class="k">${p.kind} · ${p.year}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="st">${p.stack.map((s) => `<span>${s}</span>`).join("")}</div></article>`).join("");
+$("#nums").innerHTML = CV.stats.map((s) => `<div class="rv"><b data-p="" data-n="${s.v}" data-s="${s.suffix}">${s.v}${s.suffix}</b><span>${s.label}</span></div>`).join("");
+$("#edu").innerHTML = CV.education.map((e) => `<li><span>${e.role}<br><small>${e.org}</small></span><small>${e.from}–${e.to}</small></li>`).join("");
+$("#lang").innerHTML = CV.languages.map((l) => `<li><span>${l.name}</span><small>${l.level}</small></li>`).join("");
+$("#else").innerHTML = [["Email", CV.email], ["Web", CV.site], ["LinkedIn", CV.linkedin], ["GitHub", CV.github]].map(([k, v]) => `<li><span>${k}</span><small>${v}</small></li>`).join("");
+$("#mail").href = "mailto:" + CV.email; $("#avail").textContent = CV.availability + " · " + CV.email;
+
+/* reveals, counters, active chapter */
+function count(b) { const n = +b.dataset.n, p = b.dataset.p, s = b.dataset.s; if (reduce) return; const t0 = performance.now(), dec = String(n).includes(".") ? 1 : 0;
+  (function f(t) { const k = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 4); b.textContent = p + (n * e).toFixed(dec) + s; if (k < 1) requestAnimationFrame(f); })(t0); }
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); e.target.querySelectorAll("[data-n]").forEach(count); if (e.target.matches("[data-n]")) count(e.target); io.unobserve(e.target); } }), { threshold: .18 });
+$$(".rv").forEach((n) => io.observe(n)); if (reduce) $$(".rv").forEach((n) => n.classList.add("in"));
+const dots = $$("#dots a"), dk = $("#dots");
+const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { dots.forEach((d) => d.classList.toggle("on", d.dataset.t === e.target.id)); dk.classList.toggle("dark", e.target.id === "work"); } }), { rootMargin: "-45% 0px -50% 0px" });
+$$(".chap,#work").forEach((n) => io2.observe(n));
+addEventListener("scroll", () => { $("#prog").style.transform = `scaleX(${scrollY / (document.documentElement.scrollHeight - innerHeight)})`; }, { passive: true });
+
+/* project rail: drag + buttons + progress */
+const rail = $("#rail"); let down = false, sx = 0, sl = 0, moved = 0;
+rail.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") return; down = true; moved = 0; sx = e.clientX; sl = rail.scrollLeft; rail.classList.add("drag"); });
+addEventListener("pointermove", (e) => { if (!down) return; moved = Math.abs(e.clientX - sx); rail.scrollLeft = sl - (e.clientX - sx); });
+addEventListener("pointerup", () => { if (!down) return; down = false; rail.classList.remove("drag"); });
+const step = () => rail.querySelector(".pc").offsetWidth + 19; $("#next").onclick = () => rail.scrollBy({ left: step(), behavior: "smooth" }); $("#prev").onclick = () => rail.scrollBy({ left: -step(), behavior: "smooth" });
+const bar = () => { const m = rail.scrollWidth - rail.clientWidth; $("#pbar").style.width = (20 + 80 * (m ? rail.scrollLeft / m : 0)) + "%"; $("#pbar").style.left = "0"; }; rail.addEventListener("scroll", bar, { passive: true }); bar();
+</script>
+</body></html>

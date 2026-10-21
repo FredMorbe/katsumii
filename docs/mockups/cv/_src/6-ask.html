@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sam Keller — CV · 6 Ask</title>
+<!-- MOCKUP: all CV content is placeholder (see _src/data.js) -->
+<style>/*@FONTS*/
+*,*::before,*::after{box-sizing:border-box}
+:root{--bg:#080b14;--s1:rgba(17,23,38,.78);--s2:#131a2b;--line:rgba(226,232,240,.09);--line2:rgba(226,232,240,.18);--ink:#eaeffa;--mute:#94a1b8;--faint:#5f6e88;
+  --a:#7c8cff;--b:#38d6f5;--grad:linear-gradient(135deg,#7c8cff,#38d6f5);--ok:#4ade80;
+  --disp:"DM Sans","Manrope",sans-serif;--body:"Manrope",sans-serif;--mono:"DM Mono",ui-monospace,monospace}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font:400 15.5px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 15% 0%,rgba(124,140,255,.16),transparent 65%),radial-gradient(ellipse 50% 45% at 90% 100%,rgba(56,214,245,.1),transparent 65%)}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}h1,h2,h3,h4,p,ul{margin:0;padding:0}ul{list-style:none}
+.app{position:relative;display:grid;grid-template-columns:350px minmax(0,1fr);gap:20px;height:100vh;padding:20px;max-width:1360px;margin:0 auto}
+
+/* sidebar */
+.side{background:var(--s1);border:1px solid var(--line);border-radius:24px;padding:1.7rem;display:flex;flex-direction:column;gap:1.3rem;backdrop-filter:blur(16px);overflow:auto}
+.av{width:84px;height:84px;border-radius:26px;background:var(--grad);display:grid;place-items:center;font:700 1.9rem var(--disp);letter-spacing:-.03em;color:#060912;box-shadow:0 18px 40px -14px var(--a);position:relative}
+.av::after{content:"";position:absolute;right:-4px;bottom:-4px;width:20px;height:20px;border-radius:50%;background:var(--ok);border:4px solid #0f1524}
+.side h1{font:700 1.75rem/1.1 var(--disp);letter-spacing:-.04em}.side .t{color:var(--mute);margin-top:.35rem}
+.pill{display:inline-flex;align-items:center;gap:.5rem;font:400 .76rem var(--mono);padding:.4rem .75rem;border:1px solid rgba(74,222,128,.35);border-radius:99px;color:#86efac;background:rgba(74,222,128,.07);width:fit-content}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pg 2.2s infinite}@keyframes pg{70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}0%{box-shadow:0 0 0 0 rgba(74,222,128,.55)}}
+.facts{display:grid;gap:.1rem}.facts li{display:flex;justify-content:space-between;gap:1rem;padding:.65rem 0;border-top:1px solid var(--line);font-size:.9rem}.facts li span{color:var(--faint);font:400 .74rem var(--mono);letter-spacing:.06em;text-transform:uppercase;padding-top:.15rem}.facts li b{font-weight:600;text-align:right}
+.btns{display:grid;gap:.6rem;margin-top:auto}
+.btn{padding:.8rem 1rem;border-radius:14px;font-weight:700;text-align:center;font-size:.92rem;transition:all .2s}
+.btn.p{background:var(--grad);color:#060912;box-shadow:0 12px 30px -14px var(--a)}.btn.p:hover{transform:translateY(-2px)}
+.btn.g{border:1px solid var(--line2)}.btn.g:hover{background:rgba(255,255,255,.05)}
+.mk{font:400 .66rem var(--mono);color:var(--faint);text-align:center}.in-frame .mk{display:none}
+
+/* chat */
+.chat{background:var(--s1);border:1px solid var(--line);border-radius:24px;display:flex;flex-direction:column;min-height:0;backdrop-filter:blur(16px);overflow:hidden}
+.ch{display:flex;align-items:center;gap:.9rem;padding:1.1rem 1.5rem;border-bottom:1px solid var(--line)}
+.ch .dot{width:38px;height:38px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#060912;font:700 .82rem var(--disp)}
+.ch h2{font:700 1.05rem var(--disp);letter-spacing:-.02em}.ch p{font-size:.78rem;color:var(--faint)}.ch .sp{flex:1}
+.ch button{font:500 .78rem var(--mono);color:var(--faint);padding:.4rem .7rem;border:1px solid var(--line);border-radius:99px;transition:all .2s}.ch button:hover{color:var(--ink);border-color:var(--line2)}
+#log{flex:1;overflow:auto;padding:1.6rem clamp(1rem,3vw,2rem);display:flex;flex-direction:column;gap:1.1rem;scroll-behavior:smooth}
+.m{display:flex;gap:.8rem;max-width:min(760px,100%);animation:in .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.m.me{align-self:flex-end;flex-direction:row-reverse}
+.m .ava{flex:none;width:30px;height:30px;border-radius:10px;background:var(--grad);display:grid;place-items:center;color:#060912;font:700 .64rem var(--disp);margin-top:.2rem}
+.bub{padding:.85rem 1.1rem;border-radius:18px;border-top-left-radius:6px;background:var(--s2);border:1px solid var(--line);min-width:0}
+.m.me .bub{background:linear-gradient(135deg,#5865e8,#2bb4d6);border:0;color:#fff;border-radius:18px;border-top-right-radius:6px;font-weight:600}
+.bub p+p{margin-top:.6rem}
+.typing{display:flex;gap:5px;padding:.4rem .1rem}.typing i{width:7px;height:7px;border-radius:50%;background:var(--mute);animation:bl 1.1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,60%,100%{transform:none;opacity:.35}30%{transform:translateY(-5px);opacity:1}}
+.cur::after{content:"▍";color:var(--b);animation:bk .8s steps(2) infinite;margin-left:1px}@keyframes bk{50%{opacity:0}}
+
+/* cards */
+.card{margin-top:.9rem;border:1px solid var(--line);border-radius:16px;background:rgba(8,11,20,.55);padding:1rem 1.1rem;animation:in .5s both}
+.card h4{font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.7rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}.stats b{display:block;font:700 1.6rem/1 var(--disp);letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}.stats span{font-size:.76rem;color:var(--mute);line-height:1.3;display:block;margin-top:.3rem}
+.tl li{border-top:1px solid var(--line)}.tl li:first-child{border:0}
+.tl button{width:100%;display:grid;grid-template-columns:1fr auto;gap:.2rem .8rem;text-align:left;padding:.7rem .2rem;align-items:center}
+.tl b{font:700 .98rem var(--disp);letter-spacing:-.02em}.tl small{font:400 .72rem var(--mono);color:var(--faint)}.tl .r{grid-column:1;color:var(--mute);font-size:.85rem}
+.tl .bar{grid-column:1/-1;height:4px;border-radius:2px;background:rgba(255,255,255,.06);overflow:hidden}.tl .bar i{display:block;height:100%;background:var(--grad);width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.tl .more{max-height:0;overflow:hidden;transition:max-height .4s ease;color:var(--mute);font-size:.88rem}.tl li.open .more{max-height:260px}.tl .more p{padding:.2rem .2rem .8rem}.tl .more ul{padding:0 .2rem .8rem;display:grid;gap:.3rem}.tl .more li{border:0;padding-left:.9rem;position:relative}.tl .more li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--b)}
+.tl button::after{content:"+";grid-row:1;grid-column:2;justify-self:end;color:var(--faint);font-size:1.1rem;transition:transform .3s}.tl li.open button::after{transform:rotate(45deg)}
+.pj{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.pj div{padding:.9rem;border:1px solid var(--line);border-radius:14px;background:linear-gradient(160deg,color-mix(in srgb,var(--c) 14%,transparent),transparent 70%)}
+.pj b{display:flex;align-items:center;gap:.5rem;font:700 .95rem var(--disp);letter-spacing:-.02em}.pj b i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}.pj small{font:400 .68rem var(--mono);color:var(--faint)}.pj p{font-size:.82rem;color:var(--mute);margin-top:.4rem;line-height:1.45}
+.sk{display:grid;gap:.9rem}.sk .g>span{font:500 .66rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--c);display:block;margin-bottom:.4rem}
+.sk .row{display:grid;grid-template-columns:120px 1fr 38px;align-items:center;gap:.7rem;font-size:.85rem;padding:.12rem 0}.sk .row i{height:6px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}.sk .row i b{display:block;height:100%;width:0;background:var(--c);border-radius:3px;transition:width .9s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 10px var(--c)}.sk .row em{font:400 .7rem var(--mono);color:var(--faint);font-style:normal;text-align:right}
+.qt{font:italic 500 1.15rem/1.45 var(--disp);letter-spacing:-.01em}.qt+small{display:block;margin-top:.6rem;font:400 .72rem var(--mono);color:var(--faint)}
+.ct{display:flex;flex-wrap:wrap;gap:.5rem}.ct a,.ct button{padding:.55rem .9rem;border:1px solid var(--line2);border-radius:99px;font-weight:600;font-size:.85rem;transition:all .2s}.ct a:hover,.ct button:hover{background:rgba(255,255,255,.06)}.ct .p{background:var(--grad);color:#060912;border:0}
+.lg li{display:grid;grid-template-columns:90px 1fr 120px;align-items:center;gap:.7rem;padding:.3rem 0;font-size:.88rem}.lg i{height:6px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}.lg i b{display:block;height:100%;width:0;background:var(--grad);transition:width .9s}.lg small{font:400 .7rem var(--mono);color:var(--faint)}
+
+/* composer */
+.dock{padding:.9rem clamp(1rem,3vw,2rem) 1.2rem;border-top:1px solid var(--line);background:rgba(8,11,20,.4)}
+.sug{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem;min-height:36px}
+.sug button{padding:.45rem .9rem;border:1px solid var(--line2);border-radius:99px;font-size:.84rem;color:var(--mute);transition:all .2s;animation:in .4s both}
+.sug button:hover{color:var(--ink);border-color:var(--a);background:rgba(124,140,255,.1);transform:translateY(-1px)}
+.in{display:flex;gap:.6rem;align-items:center;padding:.4rem .4rem .4rem 1.1rem;border:1px solid var(--line2);border-radius:16px;background:var(--s2);transition:border-color .2s}.in:focus-within{border-color:var(--a);box-shadow:0 0 0 4px rgba(124,140,255,.12)}
+.in input{flex:1;background:none;border:0;outline:0;color:var(--ink);font:500 .98rem var(--body);min-width:0}.in input::placeholder{color:var(--faint)}
+.in button{width:42px;height:42px;border-radius:12px;background:var(--grad);color:#060912;display:grid;place-items:center;font-weight:800;transition:transform .2s}.in button:hover{transform:scale(1.06)}
+.hint{margin-top:.6rem;font:400 .68rem var(--mono);color:var(--faint)}
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,16px);background:var(--ink);color:#080b14;padding:.6rem 1rem;border-radius:12px;font-weight:700;font-size:.85rem;opacity:0;pointer-events:none;transition:all .3s;z-index:50}.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:940px){body{overflow:auto}.app{grid-template-columns:1fr;height:auto;padding:12px;gap:12px}.side{flex-direction:row;flex-wrap:wrap;align-items:center;padding:1.1rem;gap:.9rem 1.1rem}.av{width:56px;height:56px;border-radius:18px;font-size:1.3rem}.side h1{font-size:1.3rem}.facts,.btns .g,.side .mk{display:none}.btns{margin:0 0 0 auto;display:flex}.btns .btn{padding:.55rem .9rem}
+  .chat{height:calc(100vh - 24px);min-height:560px}.stats{grid-template-columns:repeat(2,1fr)}.pj{grid-template-columns:1fr}.sk .row{grid-template-columns:96px 1fr 34px}.lg li{grid-template-columns:70px 1fr}.lg small{display:none}.side .pill,.side .t{display:none}.side h1{font-size:1.15rem}.ch p{display:none}.ch{padding:.8rem 1rem}.chat{height:calc(100vh - 100px);min-height:520px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="av">SK</div>
+    <div><h1>Sam Keller</h1><p class="t" id="title"></p></div>
+    <p class="pill"><i></i><span id="avail"></span></p>
+    <ul class="facts" id="facts"></ul>
+    <div class="btns"><a class="btn p" id="mail" href="#">Email me</a><button class="btn g" id="pdf">Download PDF</button></div>
+    <p class="mk">Mockup · placeholder content</p>
+  </aside>
+  <main class="chat">
+    <div class="ch"><span class="dot">SK</span><div><h2>Ask Sam</h2><p>Scripted answers, written by Sam — not an AI. Pick a question or type your own.</p></div><span class="sp"></span><button id="clear">Clear</button></div>
+    <div id="log" aria-live="polite"></div>
+    <div class="dock"><div class="sug" id="sug"></div>
+      <form class="in" id="form" autocomplete="off"><input id="q" placeholder="Ask about experience, stack, availability…" aria-label="Your question"><button type="submit" aria-label="Send">↑</button></form>
+      <p class="hint">Try: “what did you build?” · “how do you lead?” · “are you free in January?”</p></div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>/*@DATA*/</script>
+<script>
+const $ = (s) => document.querySelector(s), log = $("#log");
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+const skills = cvSkills(), roles = [...CV.roles].reverse(), cur = CV.roles[CV.roles.length - 1];
+
+$("#title").textContent = CV.title; $("#avail").textContent = CV.availability; $("#mail").href = "mailto:" + CV.email;
+$("#facts").innerHTML = [["Based", CV.location], ["Experience", "14+ years"], ["Now", cur.org], ["Languages", "DE · EN · 中文"]].map(([a, b]) => `<li><span>${a}</span><b>${b}</b></li>`).join("");
+$("#pdf").onclick = () => toast("Mockup: would download Sam-Keller-CV.pdf");
+let tt; function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 2200); }
+
+/* ── rich cards ── */
+const CARDS = {
+  stats: () => `<div class="card"><div class="stats">${CV.stats.map((s) => `<div><b>${s.v}${s.suffix}</b><span>${s.label}</span></div>`).join("")}</div></div>`,
+  timeline: () => { const max = Math.max(...CV.roles.map(cvMonths)); return `<div class="card"><h4>Career · tap a stop</h4><ul class="tl">${roles.map((r) => `<li><button type="button"><b>${r.org}</b><small>${r.from.slice(0, 4)}–${r.to ? r.to.slice(0, 4) : "now"}</small><span class="r">${r.role}</span><span class="bar"><i data-w="${cvMonths(r) / max * 100}"></i></span></button><div class="more"><p>${r.summary}</p><ul>${r.bullets.map((b) => `<li>${b}</li>`).join("")}</ul></div></li>`).join("")}</ul></div>`; },
+  projects: () => `<div class="card"><h4>Shipped under Katsumii</h4><div class="pj">${CV.projects.map((p) => `<div style="--c:${p.accent}"><b><i></i>${p.name}</b><small>${p.kind} · ${p.year}</small><p>${p.desc}</p></div>`).join("")}</div></div>`,
+  skills: () => `<div class="card"><h4>Stack · proficiency</h4><div class="sk">${CV.categories.map((c) => `<div class="g" style="--c:${CV.catColor[c]}"><span>${c}</span>${skills.filter((s) => s.cat === c && s.level >= 4).map((s) => `<div class="row"><span>${s.name}</span><i><b data-w="${s.level * 20}"></b></i><em>${s.years}y</em></div>`).join("")}</div>`).join("")}</div></div>`,
+  quote: () => `<div class="card"><p class="qt">“${CV.quotes[0].text}”</p><small>${CV.quotes[0].who}</small></div>`,
+  contact: () => `<div class="card"><div class="ct"><a class="p" href="mailto:${CV.email}">✉ ${CV.email}</a><button type="button" data-copy>Copy address</button><button type="button" data-toast="Mockup: would open ${CV.linkedin}">LinkedIn</button><button type="button" data-toast="Mockup: would open ${CV.github}">GitHub</button></div></div>`,
+  langs: () => `<div class="card"><ul class="lg">${CV.languages.map((l) => `<li><span>${l.name}</span><i><b data-w="${l.pct}"></b></i><small>${l.level}</small></li>`).join("")}</ul></div>`,
+  edu: () => `<div class="card"><ul class="lg" style="display:grid;gap:.5rem">${CV.education.map((e) => `<li style="display:block"><b>${e.role}</b> · ${e.org} <small>${e.from}–${e.to}</small><br><span style="color:var(--mute);font-size:.84rem">${e.note}</span></li>`).join("")}</ul></div>`
+};
+
+/* ── scripted answers ── */
+const A = {
+  what: { q: "What do you do?", keys: ["what do you do", "who are you", "about you", "introduce", "profession", "job", "yourself", "intro"],
+    text: "I'm Sam — a software engineer and product builder. I design and build calm software for complicated work: desktop tools, mobile apps and the web. Today I run Katsumii, a small studio with four products live. Before that I spent nine years in product teams — payments, analytics and consumer apps.", card: "stats", next: ["path", "proud", "stack"] },
+  path: { q: "Walk me through your career", keys: ["career", "path", "experience", "history", "timeline", "cv", "resume", "background", "worked", "companies", "employer"],
+    text: "Five stops in fourteen years — each one a bigger slice of the whole product. Tap a stop for the details.", card: "timeline", next: ["lead", "proud", "avail"] },
+  proud: { q: "What are you most proud of?", keys: ["proud", "best", "achievement", "built", "build", "ship", "product", "katsumii", "journal", "project", "accomplish", "success"],
+    text: "Honestly? The checkout rebuild at Helix — +11 % conversion, p95 load 3.1 s → 1.2 s — and then leaving behind a team that could run without me. These days: four products from one small studio, each one built end to end.", card: "projects", next: ["why", "stack", "avail"] },
+  stack: { q: "What's your stack?", keys: ["stack", "tech", "skill", "language", "tools", "vue", "python", "typescript", "technology", "framework", "frontend", "backend", "code"],
+    text: "Vue and TypeScript on the front, Python (FastAPI) or Node on the back, PostgreSQL or SQLite underneath. I like boring technology and sharp interfaces — and I'm happy to learn whatever the problem needs.", card: "skills", next: ["lead", "proud", "avail"] },
+  lead: { q: "How do you lead teams?", keys: ["lead", "team", "manage", "mentor", "leadership", "hire", "hiring people", "people", "culture", "colleague"],
+    text: "By making the next step obvious and the cost of being wrong small: RFCs for decisions, design reviews for taste, small releases for feedback. I've led up to nine engineers, hired seven and mentored six.", card: "quote", next: ["path", "why", "avail"] },
+  why: { q: "Why did you start Katsumii?", keys: ["why", "start", "found", "studio", "company", "founder", "own", "independent", "leave"],
+    text: "I wanted to own a product end to end — idea, design, code, release, support. A handful of really good, small products beats a long roadmap, and a studio is the honest shape for that. Katsumii is that studio.", card: null, next: ["proud", "stack", "avail"] },
+  avail: { q: "Are you available?", keys: ["available", "availability", "free", "hire me", "contract", "freelance", "contact", "email", "reach", "work together", "january", "rate", "when"],
+    text: `${CV.availability}. I take on a small number of projects at a time — the best way to reach me is a short email with what you're building and by when.`, card: "contact", next: ["path", "stack", "lang"] },
+  lang: { q: "Which languages do you speak?", keys: ["language", "speak", "german", "english", "mandarin", "chinese", "deutsch", "translate"],
+    text: "German is my first language, English is how I work every day, and I get by in Mandarin — better with tea.", card: "langs", next: ["edu", "avail", "what"] },
+  edu: { q: "Where did you study?", keys: ["study", "studied", "education", "degree", "university", "school", "thesis", "master", "bachelor"],
+    text: "Computer science, B.Sc. then M.Sc., with a thesis on visual debugging of distributed systems and a minor in interaction design — which explains a lot.", card: "edu", next: ["path", "lang", "avail"] }
+};
+const ORDER = Object.keys(A);
+const asked = new Set();
+
+/* ── chat engine ── */
+const sleep = (ms) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
+const bottom = () => (log.scrollTop = log.scrollHeight);
+function bubble(who, html) {
+  const m = document.createElement("div"); m.className = "m " + (who === "me" ? "me" : "");
+  m.innerHTML = (who === "me" ? "" : '<span class="ava">SK</span>') + `<div class="bub">${html}</div>`; log.appendChild(m); bottom(); return m.querySelector(".bub");
+}
+async function stream(el, text) {
+  if (reduce) { el.innerHTML = `<p>${text}</p>`; return; }
+  const p = document.createElement("p"); p.className = "cur"; el.innerHTML = ""; el.appendChild(p);
+  const words = text.split(" "); for (let i = 0; i < words.length; i++) { p.textContent += (i ? " " : "") + words[i]; bottom(); await sleep(18 + Math.min(40, words[i].length * 3)); }
+  p.classList.remove("cur");
+}
+let busy = false;
+async function ask(id, label) {
+  if (busy) return; busy = true; setSug([]);
+  bubble("me", cvEsc(label)); await sleep(350);
+  const t = bubble("sam", '<div class="typing"><i></i><i></i><i></i></div>'); await sleep(700 + Math.random() * 400);
+  const a = A[id]; asked.add(id);
+  if (a) { await stream(t, a.text); if (a.card) { t.insertAdjacentHTML("beforeend", CARDS[a.card]()); hydrate(t); bottom(); } setSug(a.next.filter((k) => !asked.has(k)).concat(ORDER.filter((k) => !asked.has(k))).filter((v, i, s) => s.indexOf(v) === i).slice(0, 4)); }
+  else { await stream(t, "I don't have a scripted answer for that one — but I'd happily answer it properly by email. Meanwhile, here's what I can tell you about:"); t.insertAdjacentHTML("beforeend", CARDS.contact()); hydrate(t); setSug(ORDER.filter((k) => !asked.has(k)).slice(0, 4)); }
+  busy = false; bottom();
+}
+function hydrate(root) {
+  requestAnimationFrame(() => requestAnimationFrame(() => root.querySelectorAll("[data-w]").forEach((n) => (n.style.width = n.dataset.w + "%"))));
+}
+function setSug(ids) { $("#sug").innerHTML = ids.map((k, i) => `<button data-id="${k}" style="animation-delay:${i * .06}s">${A[k].q}</button>`).join(""); }
+function match(text) {
+  const t = " " + text.toLowerCase().replace(/[^\p{L}\p{N} ]/gu, " ").replace(/\s+/g, " ") + " "; let best = null, bs = 0;
+  for (const id of ORDER) { let s = 0; A[id].keys.forEach((k) => { if (t.includes(" " + k) || t.includes(k + " ")) s += k.includes(" ") ? 3 : 1; }); if (s > bs) { bs = s; best = id; } }
+  return best;
+}
+
+/* ── events ── */
+$("#sug").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ask(b.dataset.id, A[b.dataset.id].q); });
+$("#form").addEventListener("submit", (e) => { e.preventDefault(); const v = $("#q").value.trim(); if (!v || busy) return; $("#q").value = ""; ask(match(v), v); });
+log.addEventListener("click", (e) => {
+  const tl = e.target.closest(".tl button"); if (tl) tl.parentElement.classList.toggle("open");
+  if (e.target.closest("[data-copy]")) { navigator.clipboard && navigator.clipboard.writeText(CV.email).catch(() => {}); toast("Copied " + CV.email); }
+  const tt2 = e.target.closest("[data-toast]"); if (tt2) toast(tt2.dataset.toast);
+});
+$("#clear").onclick = () => { if (busy) return; log.innerHTML = ""; asked.clear(); hello(); };
+async function hello() {
+  busy = true; const t = bubble("sam", '<div class="typing"><i></i><i></i><i></i></div>'); await sleep(600);
+  await stream(t, `Hi, I'm Sam — thanks for stopping by. Instead of a wall of text, ask me whatever you'd ask in a first call. Here are some ideas:`);
+  setSug(["what", "path", "stack", "avail"]); busy = false;
+}
+hello();
+const demo = new URLSearchParams(location.search).get("demo"); if (demo) setTimeout(() => demo.split(",").forEach((k, i) => setTimeout(() => { busy = false; ask(k, A[k].q); }, i * 6500)), 1800);
+</script>
+</body></html>

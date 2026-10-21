@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sam Keller — CV · 3 Constellation</title>
+<!-- MOCKUP: all CV content is placeholder (see _src/data.js) -->
+<style>/*@FONTS*/
+*,*::before,*::after{box-sizing:border-box}
+:root{--bg:#04060c;--panel:rgba(10,15,26,.72);--line:rgba(226,232,240,.09);--line2:rgba(226,232,240,.18);--ink:#eaf0f8;--mute:#8d9bb0;--faint:#5a6a80;
+  --disp:"DM Sans","Manrope",sans-serif;--body:"Manrope",sans-serif;--mono:"DM Mono",ui-monospace,monospace}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:400 15.5px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}h1,h2,h3,h4,p,ul{margin:0;padding:0}ul{list-style:none}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 55% 45% at 30% 40%,rgba(34,211,238,.08),transparent 70%),radial-gradient(ellipse 45% 40% at 78% 70%,rgba(129,140,248,.1),transparent 70%),radial-gradient(ellipse 40% 30% at 55% 10%,rgba(250,204,21,.04),transparent 70%)}
+.bar{position:relative;z-index:5;display:flex;align-items:center;gap:1rem;padding:.8rem clamp(1rem,3vw,2rem);border-bottom:1px solid var(--line);backdrop-filter:blur(10px);background:rgba(4,6,12,.55);flex-wrap:wrap}
+.mark{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;font:700 .74rem var(--disp);letter-spacing:.05em}
+.who{font:600 .92rem var(--disp)}.who small{display:block;font:400 .68rem var(--mono);color:var(--faint);margin-top:-.2rem}
+.sp{flex:1}
+.filters{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.f{display:flex;align-items:center;gap:.5rem;padding:.38rem .8rem;border:1px solid var(--line);border-radius:99px;font-size:.8rem;color:var(--mute);transition:all .2s;background:rgba(255,255,255,.02)}
+.f i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.f:hover{color:var(--ink);border-color:var(--line2)}.f.on{color:var(--ink);border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.search{display:flex;align-items:center;gap:.5rem;padding:.38rem .8rem;border:1px solid var(--line);border-radius:99px;color:var(--faint);background:rgba(255,255,255,.02)}
+.search input{background:none;border:0;outline:0;color:var(--ink);font:400 .85rem var(--body);width:130px}.search:focus-within{border-color:var(--line2)}
+.stage{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 390px;height:calc(100vh - 62px);min-height:640px}
+#graph{position:relative;min-width:0;overflow:hidden}
+#svg{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+.head{position:absolute;left:clamp(1rem,3vw,2rem);top:clamp(1rem,3vh,1.8rem);z-index:3;pointer-events:none;max-width:26rem}
+.eyebrow{font:500 .7rem var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#67e8f9}
+.head h1{font:700 clamp(1.8rem,3.6vw,2.9rem)/1.05 var(--disp);letter-spacing:-.045em;margin:.5rem 0 .35rem}
+.head p{color:var(--mute);font-size:.95rem}
+.hint{position:absolute;left:clamp(1rem,3vw,2rem);bottom:1.1rem;z-index:3;font:400 .72rem var(--mono);color:var(--faint);pointer-events:none}
+.legend{position:absolute;right:1.2rem;bottom:1.1rem;z-index:3;display:flex;gap:1.1rem;font:400 .7rem var(--mono);color:var(--faint);pointer-events:none}
+.legend span{display:flex;align-items:center;gap:.45rem}.legend b{display:inline-block;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff}
+
+/* svg bits */
+.edge{fill:none;stroke-width:1;opacity:.1;transition:opacity .3s,stroke-width .3s}
+.edge.hl{opacity:.85;stroke-width:1.6;stroke-dasharray:3 7;animation:flow 1.2s linear infinite}
+.edge.dim{opacity:.02}
+@keyframes flow{to{stroke-dashoffset:-20}}
+.spine{fill:none;stroke:rgba(226,232,240,.16);stroke-width:1;stroke-dasharray:2 6}
+.node{cursor:pointer;transition:opacity .3s}.node.dim{opacity:.2}
+.node text{fill:var(--ink);font:500 11.5px var(--body);paint-order:stroke;stroke:#04060c;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.node .core{transition:r .25s}.halo,.ring{pointer-events:none}
+.node.hl .ring{opacity:1}.ring{fill:none;stroke-width:1;opacity:0;transition:opacity .25s}
+.role text.o{font:700 13.5px var(--disp);letter-spacing:-.01em}.role text.y{font:400 10px var(--mono);fill:var(--mute)}
+.role .core{fill:#fff}.role.cur .core{fill:#fff}
+.role .pulse{fill:none;stroke:#fff;opacity:.5;animation:pul 3s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pul{from{transform:scale(1);opacity:.5}to{transform:scale(2.6);opacity:0}}
+.node.pin .ring{opacity:1;stroke-width:1.5}
+
+/* panel */
+.panel{position:relative;z-index:3;border-left:1px solid var(--line);background:var(--panel);backdrop-filter:blur(18px);overflow:auto;padding:1.6rem 1.6rem 2rem}
+.panel h4{font:500 .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:1.3rem 0 .6rem}
+.badge{display:inline-flex;align-items:center;gap:.5rem;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--c,#67e8f9);padding:.28rem .65rem;border:1px solid color-mix(in srgb,var(--c,#67e8f9) 40%,transparent);border-radius:99px;background:color-mix(in srgb,var(--c,#67e8f9) 10%,transparent)}
+.panel h2{font:700 1.9rem/1.1 var(--disp);letter-spacing:-.04em;margin:.9rem 0 .2rem}
+.sub{color:var(--c,#67e8f9);font-weight:600}.meta{font:400 .74rem var(--mono);color:var(--faint);margin:.3rem 0 .9rem}
+.panel p.sum{color:var(--mute)}
+.bl{display:grid;gap:.55rem;margin:.9rem 0}.bl li{position:relative;padding-left:1.1rem;font-size:.92rem}.bl li::before{content:"";position:absolute;left:0;top:.68em;width:5px;height:5px;border-radius:50%;background:var(--c,#67e8f9);box-shadow:0 0 8px var(--c,#67e8f9)}
+.pips{display:flex;gap:5px;margin:.5rem 0}.pips i{width:36px;height:6px;border-radius:3px;background:rgba(255,255,255,.08)}.pips i.on{background:var(--c);box-shadow:0 0 12px var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}.chip{padding:.28rem .7rem;border:1px solid var(--line);border-radius:99px;font-size:.8rem;color:var(--mute);transition:all .2s}
+.chip:hover{color:var(--ink);border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.chip i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c);margin-right:.45rem}
+.used{display:grid;gap:.5rem}.used button{text-align:left;padding:.75rem .9rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02);transition:all .2s}
+.used button:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05)}
+.used b{display:block;font:700 .95rem var(--disp)}.used span{font-size:.8rem;color:var(--mute)}.used small{float:right;font:400 .7rem var(--mono);color:var(--faint)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:1.2rem 0}.stats div{padding:.8rem 1rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+.stats b{display:block;font:700 1.5rem var(--disp);letter-spacing:-.04em}.stats span{font-size:.76rem;color:var(--mute);line-height:1.3;display:block}
+.cta{display:inline-flex;gap:.5rem;margin-top:1rem;padding:.65rem 1.1rem;border-radius:99px;background:#fff;color:#04060c;font-weight:700;font-size:.88rem}
+.ghost{display:inline-flex;margin:1rem 0 0 .5rem;padding:.65rem 1.1rem;border-radius:99px;border:1px solid var(--line2);font-weight:600;font-size:.88rem}
+.fadein{animation:fi .35s both}@keyframes fi{from{opacity:0;transform:translateY(6px)}}
+.note{margin-top:1.6rem;font:400 .66rem var(--mono);color:var(--faint)}.in-frame .note{display:none}
+@media(max-width:900px){.stage{grid-template-columns:1fr;height:auto;min-height:0}#graph{height:68vh;min-height:520px}.panel{border-left:0;border-top:1px solid var(--line)}.legend{display:none}.head p{display:none}.head h1{font-size:1.55rem}.search input{width:90px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+<header class="bar">
+  <span class="mark">SK</span><div class="who">Sam Keller<small>CV · skill constellation</small></div><span class="sp"></span>
+  <div class="filters" id="filters"></div>
+  <label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" placeholder="Find a skill…" autocomplete="off" aria-label="Find a skill"></label>
+</header>
+<main class="stage">
+  <section id="graph">
+    <div class="head"><p class="eyebrow">Career as a constellation</p><h1>Fourteen years,<br>five roles, 17 stars.</h1><p>Big stars are roles, small stars are skills. A line means “used there”.</p></div>
+    <svg id="svg" role="img" aria-label="Network of roles and skills"></svg>
+    <p class="hint" id="hint">Hover a star to trace it · click to pin · drag to rearrange · esc to release</p>
+    <div class="legend"><span><b style="width:12px;height:12px"></b>role</span><span><b style="width:6px;height:6px"></b>skill (size = proficiency)</span></div>
+  </section>
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</main>
+
+<script>/*@DATA*/</script>
+<script>
+const $ = (s) => document.querySelector(s), NS = "http://www.w3.org/2000/svg";
+const el = (n, a = {}, p) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); p && p.appendChild(e); return e; };
+
+/* ── starfield ── */
+(function stars() {
+  const c = $("#stars"), x = c.getContext("2d"); let S = [];
+  function fit() { const d = Math.min(2, devicePixelRatio || 1); c.width = innerWidth * d; c.height = innerHeight * d; x.setTransform(d, 0, 0, d, 0, 0);
+    S = Array.from({ length: Math.round(innerWidth * innerHeight / 5200) }, () => ({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, r: Math.random() ** 3 * 1.3 + .25, p: Math.random() * 6, s: .4 + Math.random() * 1.2 })); }
+  function draw(t) { x.clearRect(0, 0, c.width, c.height); S.forEach((s) => { x.globalAlpha = .25 + .55 * (.5 + .5 * Math.sin(t / 1000 * s.s + s.p)); x.fillStyle = "#cfe3ff"; x.beginPath(); x.arc(s.x, s.y, s.r, 0, 7); x.fill(); }); if (!reduce) requestAnimationFrame(draw); }
+  const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches; addEventListener("resize", () => { fit(); reduce && draw(0); }); fit(); draw(0);
+})();
+
+/* ── data ── */
+const roles = CV.roles.map((r, i) => ({ ...r, kind: "role", i, key: "r:" + r.id }));
+const skills = cvSkills().map((s) => ({ ...s, kind: "skill", key: "s:" + s.name }));
+const catKeys = CV.categories, colorOf = (c) => CV.catColor[c];
+const roleById = Object.fromEntries(roles.map((r) => [r.id, r]));
+const links = []; skills.forEach((s) => s.roles.forEach((id) => links.push({ s, r: roleById[id] })));
+
+/* ── svg build ── */
+const svg = $("#svg"), host = $("#graph");
+let W = 0, H = 0, gEdges, gNodes, edgeEls = [], pin = null, hover = null, catOn = new Set(), query = "", raf = 0, alpha = 0;
+const defs = el("defs", {}, svg);
+catKeys.forEach((c, i) => { const g = el("radialGradient", { id: "h" + i }, defs); el("stop", { offset: "0", "stop-color": colorOf(c), "stop-opacity": ".55" }, g); el("stop", { offset: "1", "stop-color": colorOf(c), "stop-opacity": "0" }, g); });
+const gw = el("radialGradient", { id: "hw" }, defs); el("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".5" }, gw); el("stop", { offset: "1", "stop-color": "#fff", "stop-opacity": "0" }, gw);
+const spine = el("path", { class: "spine" }, svg); gEdges = el("g", {}, svg); gNodes = el("g", {}, svg);
+
+roles.forEach((r) => {
+  const g = el("g", { class: "node role" + (r.i === roles.length - 1 ? " cur" : ""), tabindex: 0, role: "button", "aria-label": r.org }, gNodes); r.g = g;
+  el("circle", { r: 40, fill: "url(#hw)", class: "halo" }, g); if (r.i === roles.length - 1) el("circle", { r: 14, class: "pulse" }, g);
+  el("circle", { r: 24, fill: "transparent" }, g); el("circle", { r: 20, class: "ring", stroke: "#fff" }, g); el("circle", { r: 8, class: "core" }, g);
+  const y = el("text", { class: "y", "text-anchor": "middle", y: 30 }, g); y.textContent = cvRange(r).replace(/ — /, " – ").replace(/[A-Z][a-z]{2} /g, "");
+  const o = el("text", { class: "o", "text-anchor": "middle", y: 46 }, g); o.textContent = r.org;
+  r.rr = 52;
+});
+skills.forEach((s) => {
+  const ci = catKeys.indexOf(s.cat), g = el("g", { class: "node skill", tabindex: 0, role: "button", "aria-label": s.name }, gNodes); s.g = g; s.ci = ci; s.r = 3.2 + s.level * 1.1;
+  el("circle", { r: s.r * 5, fill: `url(#h${ci})`, class: "halo" }, g); el("circle", { r: s.r + 9, fill: "transparent" }, g); el("circle", { r: s.r + 6, class: "ring", stroke: colorOf(s.cat) }, g); el("circle", { r: s.r, class: "core", fill: colorOf(s.cat) }, g);
+  s.t = el("text", { y: 4 }, g); s.t.textContent = s.name; s.rr = 28 + s.level * 2;
+});
+links.forEach((l) => { l.e = el("path", { class: "edge", stroke: colorOf(l.s.cat) }, gEdges); });
+
+/* ── layout + force simulation (springs to a target, rectangle collisions so labels never overlap) ── */
+const BAND = { "Frontend": .18, "Product & craft": .34, "Delivery": .67, "Backend & data": .83 };
+const sbox = (s) => { const left = s.x > W - 190, w = s.r * 2 + 16 + s.name.length * 6.4; return { x: s.x + (left ? -1 : 1) * (w / 2 - s.r - 6), y: s.y, w, h: 26 }; };
+const rbox = (r) => ({ x: r.x, y: r.y + 10, w: Math.max(120, r.org.length * 8), h: 80 });
+let obstacles = [];
+function layout() {
+  W = host.clientWidth; H = host.clientHeight; svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const px = W < 700 ? 52 : 90, wide = W >= 900;
+  roles.forEach((r) => { r.x = px + (W - 2 * px) * (r.i / (roles.length - 1)); r.y = H * .5 + Math.sin(r.i * 1.2) * H * .03; });
+  obstacles = roles.map((r) => ({ f: () => rbox(r) }));
+  obstacles.push(wide ? { down: true, f: () => ({ x: 230, y: 125, w: 480, h: 250 }) } : { down: true, f: () => ({ x: W / 2, y: 50, w: W, h: 100 }) });
+  roles.forEach((r) => { const up = W < 700 && r.i % 2, o = r.g.querySelector("text.o"), y = r.g.querySelector("text.y");
+    o.textContent = W < 700 ? r.org.split(" ")[0] : r.org; o.setAttribute("y", up ? -30 : 46); y.setAttribute("y", up ? -17 : 30); });
+  catKeys.forEach((c) => { const g = skills.filter((s) => s.cat === c).sort((a, b) => a.tx0 - b.tx0 || b.level - a.level);
+    g.forEach((s, k) => { s.tx = Math.max(px, Math.min(W - px - 90, px + (W - 2 * px) * (s.tx0 / (roles.length - 1)) + (k - (g.length - 1) / 2) * (W < 700 ? 26 : 62))); s.ty = H * BAND[c] + (k % 2 ? 22 : -22) * (W < 700 ? .7 : 1);
+      const ang = k * 2.4; s.x = s.tx + Math.cos(ang) * 40; s.y = s.ty + Math.sin(ang) * 20; s.vx = s.vy = 0; }); });
+  for (let i = 0; i < 700; i++) step(1 - i / 700 * .6);
+  draw();
+}
+skills.forEach((s) => { s.tx0 = s.roles.reduce((a, id) => a + roleById[id].i, 0) / s.roles.length; });
+function collide(A, bA, bB, bothMove, down) {
+  const ox = (bA.w + bB.w) / 2 - Math.abs(bA.x - bB.x), oy = (bA.h + bB.h) / 2 - Math.abs(bA.y - bB.y);
+  if (ox <= 0 || oy <= 0) return;
+  if (down) { A.y += oy + 2; return; }
+  const k = bothMove ? .5 : 1;
+  if (ox < oy * 2.2) { const d = bA.x >= bB.x ? 1 : -1; A.x += d * ox * k; if (bothMove) bothMove.x -= d * ox * k; }
+  else { const d = bA.y >= bB.y ? 1 : -1; A.y += d * oy * k; if (bothMove) bothMove.y -= d * oy * k; }
+}
+function step(a) {
+  skills.forEach((s) => { if (s.drag) return; s.vx += (s.tx - s.x) * .012 * a; s.vy += (s.ty - s.y) * .05 * a; s.vx *= .78; s.vy *= .78; s.x += s.vx; s.y += s.vy; });
+  for (let pass = 0; pass < 3; pass++) for (let i = 0; i < skills.length; i++) {
+    const A = skills[i];
+    for (let j = i + 1; j < skills.length; j++) { const B = skills[j]; if (A.drag) collide(B, sbox(B), sbox(A), null); else if (B.drag) collide(A, sbox(A), sbox(B), null); else collide(A, sbox(A), sbox(B), B); }
+    if (!A.drag) obstacles.forEach((o) => collide(A, sbox(A), o.f(), null, o.down));
+  }
+  const mx = W < 700 ? 30 : 50;
+  skills.forEach((s) => { s.x = Math.max(mx, Math.min(W - mx - (W < 700 ? 30 : 56), s.x)); s.y = Math.max(34, Math.min(H - 34, s.y)); });
+}
+function draw() {
+  roles.forEach((r) => r.g.setAttribute("transform", `translate(${r.x},${r.y})`));
+  skills.forEach((s) => { s.g.setAttribute("transform", `translate(${s.x},${s.y})`); const left = s.x > W - 150; s.t.setAttribute("x", left ? -(s.r + 8) : s.r + 8); s.t.setAttribute("text-anchor", left ? "end" : "start"); });
+  links.forEach((l) => { const my = (l.s.y + l.r.y) / 2; l.e.setAttribute("d", `M${l.s.x} ${l.s.y}C${l.s.x} ${my},${l.r.x} ${my},${l.r.x} ${l.r.y}`); });
+  spine.setAttribute("d", roles.map((r, i) => (i ? "L" : "M") + r.x + " " + r.y).join(""));
+}
+function reheat() { alpha = 1; cancelAnimationFrame(raf); (function f() { step(.6 * alpha); draw(); alpha -= .02; if (alpha > 0 || skills.some((s) => s.drag)) raf = requestAnimationFrame(f); })(); }
+
+/* ── state / highlighting ── */
+const act = () => pin || hover;
+function related(n) { return n.kind === "skill" ? n.roles.map((id) => roleById[id]) : skills.filter((s) => s.roles.includes(n.id)); }
+function paint() {
+  const a = act(), rel = a ? new Set(related(a)) : null, qm = query ? skills.filter((s) => s.name.toLowerCase().includes(query)) : null;
+  const hide = (s) => (catOn.size && !catOn.has(s.cat)) || (qm && !qm.includes(s));
+  [...skills, ...roles].forEach((n) => {
+    let dim = false;
+    if (a) dim = n !== a && !rel.has(n);
+    else if (n.kind === "skill") dim = hide(n);
+    n.g.classList.toggle("dim", dim); n.g.classList.toggle("hl", !!a && (n === a || rel.has(n))); n.g.classList.toggle("pin", n === pin);
+  });
+  links.forEach((l) => { const on = a && (l.s === a || l.r === a); l.e.classList.toggle("hl", !!on); l.e.classList.toggle("dim", !!(a ? !on : hide(l.s))); });
+  panel(a);
+}
+let shown = undefined;
+function panel(a) {
+  const key = a ? a.key : "";
+  if (shown === key) return; shown = key; const p = $("#panel");
+  if (!a) {
+    p.innerHTML = `<div class="fadein"><span class="badge">Profile</span><h2>${CV.name}</h2><p class="sub">${CV.title}</p><p class="meta">${CV.location}</p><p class="sum">${CV.summary}</p>
+    <div class="stats">${CV.stats.map((s) => `<div><b>${s.v}${s.suffix}</b><span>${s.label}</span></div>`).join("")}</div>
+    <h4>Start here</h4><div class="chips" style="--c:#fff">${roles.slice().reverse().map((r) => `<button class="chip" data-k="${r.key}">${r.org}</button>`).join("")}</div>
+    <a class="cta" href="mailto:${CV.email}">Get in touch →</a><button class="ghost" data-pdf>Download PDF</button><p class="note">Mockup · placeholder content</p></div>`;
+    return;
+  }
+  if (a.kind === "skill") {
+    const c = colorOf(a.cat);
+    p.innerHTML = `<div class="fadein" style="--c:${c}"><span class="badge">${a.cat}</span><h2>${a.name}</h2><div class="pips">${[1, 2, 3, 4, 5].map((i) => `<i class="${i <= a.level ? "on" : ""}"></i>`).join("")}</div><p class="meta">${a.level}/5 proficiency · ${a.years} years in production · ${a.roles.length} roles</p>
+    <h4>Where it was used</h4><div class="used">${a.roles.map((id) => { const r = roleById[id]; return `<button data-k="${r.key}"><small>${cvDur(r)}</small><b>${r.org}</b><span>${r.role}</span></button>`; }).join("")}</div></div>`;
+  } else {
+    p.innerHTML = `<div class="fadein" style="--c:#67e8f9"><span class="badge">Role · ${a.i + 1} of ${roles.length}</span><h2>${a.org}</h2><p class="sub">${a.role}</p><p class="meta">${cvRange(a)} · ${cvDur(a)} · ${a.place}</p><p class="sum">${a.summary}</p>
+    <ul class="bl">${a.bullets.map((b) => `<li>${b}</li>`).join("")}</ul><h4>Skills used — click to trace</h4>
+    <div class="chips">${related(a).map((s) => `<button class="chip" style="--c:${colorOf(s.cat)}" data-k="${s.key}"><i></i>${s.name}</button>`).join("")}</div></div>`;
+  }
+}
+const byKey = (k) => [...skills, ...roles].find((n) => n.key === k);
+
+/* ── events ── */
+const hitNode = (e) => { const g = e.target.closest(".node"); return g ? [...skills, ...roles].find((n) => n.g === g) : null; };
+svg.addEventListener("pointerover", (e) => { const n = hitNode(e); if (n && !drag) { hover = n; paint(); } });
+svg.addEventListener("pointerout", (e) => { if (hitNode(e) && !drag) { hover = null; paint(); } });
+svg.addEventListener("click", (e) => { if (moved) return; const n = hitNode(e); pin = n && n !== pin ? n : null; if (!n) hover = null; paint(); });
+svg.addEventListener("keydown", (e) => { const n = hitNode(e); if (n && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pin = n === pin ? null : n; paint(); } });
+svg.addEventListener("focusin", (e) => { const n = hitNode(e); if (n) { hover = n; paint(); } }); svg.addEventListener("focusout", () => { hover = null; paint(); });
+$("#panel").addEventListener("click", (e) => { const b = e.target.closest("[data-k]"); if (b) { pin = byKey(b.dataset.k); hover = null; paint(); } else if (e.target.closest("[data-pdf]")) alert("Mockup: would download Sam-Keller-CV.pdf"); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { pin = null; hover = null; query = ""; $("#q").value = ""; paint(); } });
+/* drag skills */
+let drag = null, moved = false;
+svg.addEventListener("pointerdown", (e) => { const n = hitNode(e); if (!n || n.kind !== "skill") return; drag = n; moved = false; n.drag = true; svg.setPointerCapture(e.pointerId); });
+svg.addEventListener("pointermove", (e) => { if (!drag) return; const r = svg.getBoundingClientRect(); const nx = e.clientX - r.left, ny = e.clientY - r.top; if (Math.hypot(nx - drag.x, ny - drag.y) > 3) moved = true; drag.x = nx; drag.y = ny; drag.vx = drag.vy = 0; if (!alpha) reheat(); alpha = Math.max(alpha, .5); });
+svg.addEventListener("pointerup", () => { if (!drag) return; drag.drag = false; drag = null; setTimeout(() => (moved = false), 0); });
+
+/* filters + search */
+$("#filters").innerHTML = catKeys.map((c) => `<button class="f" style="--c:${colorOf(c)}" data-c="${c}"><i></i>${c}</button>`).join("");
+$("#filters").addEventListener("click", (e) => { const b = e.target.closest(".f"); if (!b) return; const c = b.dataset.c; catOn.has(c) ? catOn.delete(c) : catOn.add(c); b.classList.toggle("on"); paint(); });
+$("#q").addEventListener("input", (e) => { query = e.target.value.trim().toLowerCase(); pin = null; paint(); });
+$("#q").addEventListener("keydown", (e) => { if (e.key === "Enter" && query) { const m = skills.filter((s) => s.name.toLowerCase().includes(query)); if (m.length) { pin = m[0]; paint(); } } });
+
+new ResizeObserver(() => { if (Math.abs(host.clientWidth - W) > 2 || Math.abs(host.clientHeight - H) > 2) { layout(); paint(); } }).observe(host);
+if (matchMedia("(hover:none)").matches) $("#hint").textContent = "Tap a star to trace it · drag to rearrange";
+layout(); paint();
+const qs = new URLSearchParams(location.search); if (qs.get("pin")) { pin = byKey(qs.get("pin")); paint(); }
+</script>
+</body></html>
