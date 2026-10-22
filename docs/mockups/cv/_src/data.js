@@ -1,69 +1,99 @@
 /* ───────────────────────────────────────────────────────────────
-   CV DATA — shared by all six concepts. Everything here is PLACEHOLDER.
-   Replace this file (or paste the real data into it), run build.py,
-   and all six mockups pick it up.
+   CV DATA — Modern page. Everything here is PLACEHOLDER: replace with
+   the real résumé, then run build.py.
+   Profile: mechanical engineer, 11 years of experience, passionate about
+   AI-assisted software development (side projects = the Katsumii apps).
    ─────────────────────────────────────────────────────────────── */
 const CV = {
   now: "2026-10",
   name: "Sam Keller",
   first: "Sam",
   initials: "SK",
-  title: "Software engineer & product builder",
-  tagline: "I build calm software for complicated work.",
-  location: "Berlin · remote-friendly",
-  summary: "Fourteen years of turning messy problems into dependable products — from checkout flows serving millions to desktop tools traders open every morning. Equally at home in a code review, a product workshop or a design critique.",
+  title: "Mechanical engineer · AI-assisted software builder",
+  location: "Stuttgart · Germany",
+  city: "Stuttgart",
+  summary: "Eleven years of mechanical engineering — from first concept and simulation to series production. After hours I build software with AI: four apps shipped, many experiments, and the firm belief that engineers who can specify, verify and prompt will shape what comes next.",
   email: "hello@example.com",
   site: "katsumii.com",
   linkedin: "linkedin.com/in/example",
   github: "github.com/example",
-  availability: "Open to select projects from January",
+  availability: "Open to new challenges from January",
   languages: [
     { name: "German", level: "Native", pct: 100 },
-    { name: "English", level: "Fluent · C2", pct: 95 },
-    { name: "Mandarin", level: "Conversational · B1", pct: 45 }
+    { name: "English", level: "Fluent · C1", pct: 90 }
   ],
   stats: [
-    { v: 14, suffix: "+", label: "years shipping software" },
-    { v: 5, suffix: "", label: "teams led or founded" },
-    { v: 4, suffix: "", label: "own products live" },
-    { v: 2.4, suffix: "M", label: "people reached" }
+    { v: 11, suffix: "", label: "years in mechanical engineering" },
+    { v: 40, suffix: "+", label: "product variants designed" },
+    { v: 12, suffix: "", label: "engineers led at peak" },
+    { v: 4, suffix: "", label: "AI-assisted apps shipped" }
   ],
 
-  /* lvl = [scope of responsibility at start, at end] on a 0–10 scale */
+  /* career — side:true marks the hobby/passion track */
   roles: [
-    { id: "kappa", org: "Kappa Systems", role: "Working student, developer", from: "2012-10", to: "2014-08", place: "Hamburg", kind: "Employee", lvl: [1, 2.6],
-      summary: "Internal tooling for a logistics scheduler — first production code, first on-call weekend.",
-      bullets: ["Built the dispatcher UI used by 40 planners every day.", "Replaced a fragile spreadsheet import with a validated pipeline.", "Wrote the team's first automated test suite."],
-      skills: ["JavaScript", "Python", "PostgreSQL"], metric: { v: "40", l: "daily users of the dispatcher UI" } },
-    { id: "brightside", org: "Brightside Mobile", role: "Software engineer", from: "2014-09", to: "2017-03", place: "Berlin", kind: "Employee", lvl: [2.4, 4.6],
-      summary: "Consumer apps at scale — small team, fast releases, real users from day one.",
-      bullets: ["Shipped three consumer apps with 2.4 M downloads in total.", "Moved releases from monthly to weekly with an automated pipeline.", "Led the redesign of onboarding; day-7 retention +18 %."],
-      skills: ["JavaScript", "Mobile apps", "CI/CD", "UX design"], metric: { v: "2.4M", l: "downloads across three apps" } },
-    { id: "lumen", org: "Lumen Analytics", role: "Senior full-stack engineer", from: "2017-04", to: "2020-05", place: "Berlin", kind: "Employee", lvl: [4.3, 6.9],
-      summary: "Self-serve analytics for non-technical teams — data-heavy UI on top of a growing service landscape.",
-      bullets: ["Built the dashboards used by 12 000 analysts across 300 companies.", "Migrated a monolith to services without a single day of downtime.", "Mentored six engineers; three were promoted within two years."],
-      skills: ["Vue", "Python", "PostgreSQL", "Node.js", "Mentoring", "UX design"], metric: { v: "12k", l: "analysts on the dashboards" } },
-    { id: "helix", org: "Helix Payments", role: "Staff engineer, checkout", from: "2020-06", to: "2023-02", place: "Berlin · remote", kind: "Employee", lvl: [6.5, 8.7],
-      summary: "Owned the technical direction of a checkout used by 40+ merchants. Led nine engineers across three squads.",
-      bullets: ["Rebuilt the checkout: conversion +11 %, p95 load 3.1 s → 1.2 s.", "Introduced a design system and RFC process now used org-wide.", "Hired and onboarded seven engineers; ran the staff-level interview loop."],
-      skills: ["Vue", "TypeScript", "Node.js", "PostgreSQL", "Design systems", "Technical leadership", "Mentoring", "CI/CD"], metric: { v: "+11%", l: "checkout conversion" } },
-    { id: "katsumii", org: "Katsumii", role: "Founder & lead engineer", from: "2023-03", to: null, place: "Berlin", kind: "Own studio", lvl: [8.3, 9.7],
-      summary: "An independent software studio. Four products, one person, no meetings that could have been a commit.",
-      bullets: ["Designed, built and shipped four products end to end — desktop, mobile and web.", "Katsumii Journal: a local-first trading journal on Vue + FastAPI + SQLite.", "Own the full chain: product, UX, engineering, release and support."],
-      skills: ["Vue", "TypeScript", "Python", "FastAPI", "SQLite", "Three.js", "CSS & motion", "Design systems", "Product strategy", "Mobile apps", "CI/CD", "UX design"], metric: { v: "4", l: "products shipped" } }
+    { id: "nordwerk", org: "Nordwerk Maschinenbau", role: "Design engineer, gearboxes", from: "2015-10", to: "2018-03", place: "Hannover", kind: "Employee", hue: 150,
+      hook: "Forty gearbox variants from one modular platform — and 18 % fewer parts.",
+      summary: "First job after the degree: industrial gearboxes from customer requirement to released drawing. Where the craft was learned.",
+      bullets: ["Designed 40+ gearbox variants on a modular platform (SolidWorks).", "Cut part count by 18 % through standardised interfaces.", "Ran the first FEM checks (Ansys) on housings and shafts."],
+      skills: ["CAD (SolidWorks)", "FEM (Ansys)", "GD&T", "Design for manufacturing"], metric: { v: "−18%", l: "part count per gearbox" } },
+    { id: "aeron", org: "Aeron Systems", role: "Development engineer, simulation & testing", from: "2018-04", to: "2021-02", place: "Munich", kind: "Employee", hue: 215,
+      hook: "Five prototype iterations became two — simulation first, test to confirm.",
+      summary: "Moved to development and validation: simulation models, test rigs and the data that ties them together.",
+      bullets: ["Built a fatigue test rig and validated the FEM models against it.", "Reduced prototype iterations from five to two.", "Wrote the first Python scripts to evaluate test data automatically."],
+      skills: ["FEM (Ansys)", "Fatigue & materials", "Test engineering", "Python", "MATLAB", "Data analysis"], metric: { v: "5 → 2", l: "prototype iterations" } },
+    { id: "helixdrives", org: "Helix Drives", role: "Senior engineer, product development", from: "2021-03", to: "2024-02", place: "Stuttgart", kind: "Employee", hue: 265,
+      hook: "A compact drive unit, 22 % lighter — and on the market four months earlier.",
+      summary: "Technical lead for a new compact drive unit: concept, design, supplier selection and industrialisation, with a team of six.",
+      bullets: ["Led a six-person team from concept to series release.", "Reduced weight by 22 % with topology optimisation and a lighter housing.", "Cut time-to-market by four months through early supplier involvement and DFM reviews."],
+      skills: ["CAD (SolidWorks)", "FEM (Ansys)", "Design for manufacturing", "Supplier management", "Project management", "Mentoring", "Automation scripting"], metric: { v: "−22%", l: "weight of the drive unit" } },
+    { id: "meridian", org: "Meridian Industrial", role: "Lead engineer & technical project manager", from: "2024-03", to: null, place: "Stuttgart", kind: "Employee", hue: 190,
+      hook: "A new drive platform, twelve people, one plan — and AI in the daily workflow.",
+      summary: "Technical and budget responsibility for a new drive platform. Introduced AI-assisted workflows for documentation, test evaluation and design-of-experiments.",
+      bullets: ["Lead a cross-functional team of twelve; budget of €3.2 M, on plan.", "Introduced AI-assisted reporting and test evaluation — hours saved every week.", "Own the roadmap between design, testing, purchasing and production."],
+      skills: ["Project management", "Supplier management", "Cost engineering", "Mentoring", "Data analysis", "LLM prompting", "Automation scripting"], metric: { v: "12", l: "people, €3.2 M budget" } },
+    { id: "lab", side: true, org: "Katsumii", role: "Independent software builder — AI-assisted", from: "2023-03", to: null, place: "After hours", kind: "Passion project", hue: 155,
+      hook: "Four apps shipped, built with AI pair-programming — specified like an engineer.",
+      summary: "A small studio on the side: desktop and mobile apps, planned in specs, built with AI assistance, verified by hand.",
+      bullets: ["Four products live: Journal, Andromeda, Tidii Cleaner, Cubamii.", "Spec-first workflow: requirements, tests and review stay human.", "Local-first architecture: Vue + FastAPI + SQLite."],
+      skills: ["AI-assisted coding", "LLM prompting", "Python", "Vue", "FastAPI", "Local-first apps", "Automation scripting"], metric: { v: "4", l: "apps shipped" } }
   ],
 
   milestones: [
-    { at: "2014-08", text: "M.Sc. Computer Science" },
-    { at: "2016-05", text: "First app passes 1 M downloads" },
-    { at: "2018-09", text: "Promoted to senior" },
-    { at: "2019-11", text: "Zero-downtime migration to services" },
-    { at: "2021-03", text: "Checkout relaunch: +11 % conversion" },
-    { at: "2022-06", text: "Promoted to staff engineer" },
-    { at: "2023-03", text: "Founded Katsumii" },
-    { at: "2024-05", text: "Katsumii Journal 1.0" },
-    { at: "2025-09", text: "Tidii Cleaner released" }
+    { at: "2015-09", text: "M.Sc. Mechanical Engineering" },
+    { at: "2018-04", text: "Moved into development & testing" },
+    { at: "2021-03", text: "Senior engineer, technical lead" },
+    { at: "2023-03", text: "First AI pair-programming experiments" },
+    { at: "2024-03", text: "Lead engineer & project manager" },
+    { at: "2024-05", text: "Katsumii Journal 1.0" }
   ],
+
+  /* the passion track */
+  lab: {
+    headline: "By day: machines. By night: models.",
+    sub: "AI-assisted software development is my second craft. I treat it like engineering: write the spec, build in small loops, verify everything.",
+    principles: [
+      { t: "Specify like an engineer", d: "Clear requirements are the best prompt. If I can't write the spec, I don't ask the model." },
+      { t: "Verify everything", d: "AI proposes, I decide. Tests, review and measurement stay human." },
+      { t: "Small loops", d: "Short iterations, visible results, easy to roll back — the same as a good test campaign." },
+      { t: "Automate the boring", d: "Reports, test evaluation, documentation: let the machine do the typing." }
+    ],
+    timeline: [
+      { y: "2023", t: "First LLM pair-programming experiments" },
+      { y: "2024", t: "Katsumii Journal 1.0 — built end to end with AI" },
+      { y: "2025", t: "Tidii Cleaner released; AI writes tests & docs" },
+      { y: "2026", t: "Cubamii on mobile; agents in the daily workflow" }
+    ],
+    tools: ["Claude Code", "LLM APIs", "Local models", "Eval & test harnesses", "Prompt libraries"],
+    terminal: [
+      { t: "cmd", s: "claude" },
+      { t: "you", s: "Add offline sync to the Journal. Keep it local-first." },
+      { t: "dim", s: "● Reading spec.md and the existing data layer…" },
+      { t: "dim", s: "● Plan: 3 steps · 6 files · no new dependencies" },
+      { t: "ok", s: "✓ Sync queue implemented" },
+      { t: "ok", s: "✓ 24 tests passing" },
+      { t: "ask", s: "? Review the diff before merging  [y/n]" }
+    ]
+  },
 
   projects: [
     { id: "journal", n: "01", name: "Katsumii Journal", year: "2024", kind: "Desktop · paid", accent: "#22d3ee",
@@ -71,52 +101,31 @@ const CV = {
     { id: "andromeda", n: "02", name: "Andromeda", year: "2025", kind: "Desktop · paid", accent: "#818cf8",
       desc: "A focused desktop app. One-line pitch goes here: what it does, in plain words.", stack: ["Vue", "Python"] },
     { id: "tidii", n: "03", name: "Tidii Cleaner", year: "2025", kind: "Desktop · free", accent: "#4ade80",
-      desc: "Keeps a PC tidy — says exactly what it clears and what it never touches.", stack: ["Python", "CI/CD"] },
+      desc: "Keeps a PC tidy — says exactly what it clears and what it never touches.", stack: ["Python"] },
     { id: "cubamii", n: "04", name: "Cubamii", year: "2026", kind: "Mobile · free", accent: "#facc15",
-      desc: "The Katsumii mobile app. One-line pitch goes here: the one thing it does best.", stack: ["Mobile apps", "Vue"] }
+      desc: "The Katsumii mobile app. One-line pitch goes here: the one thing it does best.", stack: ["Vue"] }
   ],
 
   education: [
-    { id: "msc", org: "State University", role: "M.Sc. Computer Science", from: "2012", to: "2014", note: "Thesis: visual debugging of distributed systems" },
-    { id: "bsc", org: "State University", role: "B.Sc. Computer Science", from: "2009", to: "2012", note: "Minor in interaction design" }
+    { id: "msc", org: "Technical University", role: "M.Sc. Mechanical Engineering", from: "2012", to: "2015", note: "Thesis: topology optimisation of lightweight drive housings" },
+    { id: "bsc", org: "Technical University", role: "B.Sc. Mechanical Engineering", from: "2009", to: "2012", note: "Focus: machine elements & lightweight design" }
   ],
 
   quotes: [
-    { text: "Sam is the rare engineer who makes the whole team calmer — and the product faster.", who: "Head of Product, Helix Payments" },
-    { text: "Ask for a prototype on Monday and you'll get a working product with documentation on Friday.", who: "CTO, Lumen Analytics" }
+    { text: "Sam brings an engineer's rigour to everything — including the code.", who: "Head of Development, Helix Drives" },
+    { text: "Ask for a prototype on Monday and you'll get a validated one on Friday.", who: "CTO, Meridian Industrial" }
   ],
 
   /* name → category + proficiency (1–5). years / roles are derived from `roles`. */
   skillMeta: {
-    "Vue": ["Frontend", 5], "TypeScript": ["Frontend", 5], "JavaScript": ["Frontend", 5], "CSS & motion": ["Frontend", 4], "Three.js": ["Frontend", 3], "Design systems": ["Frontend", 5],
-    "Python": ["Backend & data", 4], "FastAPI": ["Backend & data", 4], "Node.js": ["Backend & data", 4], "PostgreSQL": ["Backend & data", 4], "SQLite": ["Backend & data", 4],
-    "Product strategy": ["Product & craft", 4], "UX design": ["Product & craft", 3], "Technical leadership": ["Product & craft", 5], "Mentoring": ["Product & craft", 5],
-    "CI/CD": ["Delivery", 4], "Mobile apps": ["Delivery", 3]
+    "CAD (SolidWorks)": ["Engineering", 5], "FEM (Ansys)": ["Engineering", 5], "GD&T": ["Engineering", 4], "Design for manufacturing": ["Engineering", 5], "Fatigue & materials": ["Engineering", 4], "Test engineering": ["Engineering", 4],
+    "Python": ["Data & automation", 4], "MATLAB": ["Data & automation", 4], "Data analysis": ["Data & automation", 4], "Automation scripting": ["Data & automation", 4],
+    "Project management": ["Leadership", 5], "Supplier management": ["Leadership", 4], "Cost engineering": ["Leadership", 4], "Mentoring": ["Leadership", 4],
+    "AI-assisted coding": ["AI & software", 5], "LLM prompting": ["AI & software", 5], "Vue": ["AI & software", 3], "FastAPI": ["AI & software", 3], "Local-first apps": ["AI & software", 3]
   },
-  categories: ["Frontend", "Backend & data", "Product & craft", "Delivery"],
-  catColor: { "Frontend": "#22d3ee", "Backend & data": "#818cf8", "Product & craft": "#facc15", "Delivery": "#4ade80" }
+  categories: ["Engineering", "Data & automation", "Leadership", "AI & software"],
+  catColor: { "Engineering": "#22d3ee", "Data & automation": "#818cf8", "Leadership": "#facc15", "AI & software": "#4ade80" }
 };
-
-
-/* ── story layer (round 2: the "gripping" concepts) ── */
-const STORY = {
-  kappa:      { word: "CURIOUS",     hue: 150, hook: "Day two. Production goes down. The working student fixes it before lunch.",
-    before: ["Planners juggle spreadsheets and phone calls", "Every schedule change means a manual re-import", "No tests — Fridays are scary"],
-    after: "One dispatcher UI. Forty planners. Zero spreadsheets.", delta: { from: "12 spreadsheets", to: "1 UI", label: "tools replaced" } },
-  brightside: { word: "FAST",        hue: 28,  hook: "Three apps. 2.4 million downloads. One very patient release pipeline.",
-    before: ["One release a month — if everything goes right", "New users drop off during onboarding", "Hotfixes are done by hand, at night"],
-    after: "Weekly releases. Day-7 retention +18 %. 2.4 M downloads.", delta: { from: "monthly", to: "weekly", label: "release cadence" } },
-  lumen:      { word: "DEPENDABLE",  hue: 215, hook: "A monolith nobody dared to touch. Migrated — without a single minute of downtime.",
-    before: ["Analysts wait days for the data team", "A monolith nobody dares to deploy", "Reports end up in spreadsheets again"],
-    after: "12 000 analysts answer their own questions. No downtime.", delta: { from: "days", to: "seconds", label: "time to an answer" } },
-  helix:      { word: "TRUSTED",     hue: 265, hook: "Nine engineers, forty merchants, one checkout. Faster. And it converts.",
-    before: ["Checkout loads in 3.1 s at p95", "Three squads, three component libraries", "Every release needs a war room"],
-    after: "One design system, one RFC process — and +11 % conversion.", delta: { from: "3.1 s", to: "1.2 s", label: "p95 checkout load" } },
-  katsumii:   { word: "INDEPENDENT", hue: 190, hook: "Leave a team that no longer needs a hero. Build your own.",
-    before: ["A blank repository", "An idea for a trading journal", "A very stubborn calendar"],
-    after: "Four products, end to end: Journal, Andromeda, Tidii Cleaner, Cubamii.", delta: { from: "0", to: "4", label: "products live" } }
-};
-CV.roles.forEach((r) => Object.assign(r, STORY[r.id]));
 
 /* ── helpers ── */
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -126,7 +135,6 @@ const cvFmt = (ym) => { const [y, m] = ym.split("-"); return MONTHS[+m - 1] + " 
 const cvRange = (r) => cvFmt(r.from) + " — " + (r.to ? cvFmt(r.to) : "Present");
 const cvMonths = (r) => cvIdx(cvEnd(r)) - cvIdx(r.from) + 1;
 const cvDur = (r) => { const m = cvMonths(r), y = Math.floor(m / 12), mo = m % 12; return (y ? y + " yr" + (y > 1 ? "s" : "") : "") + (y && mo ? " " : "") + (mo ? mo + " mo" : ""); };
-const cvYear = (ym) => +ym.split("-")[0] + (+ym.split("-")[1] - 1) / 12;
 const cvRole = (id) => CV.roles.find((r) => r.id === id);
 const cvSkills = () => Object.entries(CV.skillMeta).map(([name, [cat, level]]) => {
   const roles = CV.roles.filter((r) => r.skills.includes(name));

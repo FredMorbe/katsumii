@@ -1,6 +1,9 @@
 # CV concepts (mockups)
 
-Résumé designs for the planned *Lab* section. All share one placeholder dataset.
+Résumé designs for the planned *Lab* section. All content is placeholder.
+
+- **Modern** (`cv-r3-modern.html`) uses `_src/data.js`: mechanical engineer, 11 years, passion for AI-assisted software development.
+- The six earlier concepts use `_src/data-sw-sample.js` (software-engineer sample profile).
 
 | # | File | Idea |
 |---|------|------|
@@ -16,7 +19,7 @@ Résumé designs for the planned *Lab* section. All share one placeholder datase
 
 ## Editing
 
-- **Content:** `_src/data.js` (name, roles, skills, projects, milestones, quotes). All values are placeholders.
+- **Content:** `_src/data.js` (Modern) / `_src/data-sw-sample.js` (earlier concepts): name, roles, skills, projects, lab (AI side track), quotes. All values are placeholders.
 - **Design:** `_src/N-name.html` templates. `/*@FONTS*/` and `/*@DATA*/` are replaced at build time.
 - **Build:** `python3 docs/mockups/cv/_src/build.py` writes the standalone pages (fonts inlined as base64, no network needed).
 
