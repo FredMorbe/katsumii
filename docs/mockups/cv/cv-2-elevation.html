@@ -207,6 +207,27 @@ const CV = {
   catColor: { "Frontend": "#22d3ee", "Backend & data": "#818cf8", "Product & craft": "#facc15", "Delivery": "#4ade80" }
 };
 
+
+/* ── story layer (round 2: the "gripping" concepts) ── */
+const STORY = {
+  kappa:      { word: "CURIOUS",     hue: 150, hook: "Day two. Production goes down. The working student fixes it before lunch.",
+    before: ["Planners juggle spreadsheets and phone calls", "Every schedule change means a manual re-import", "No tests — Fridays are scary"],
+    after: "One dispatcher UI. Forty planners. Zero spreadsheets.", delta: { from: "12 spreadsheets", to: "1 UI", label: "tools replaced" } },
+  brightside: { word: "FAST",        hue: 28,  hook: "Three apps. 2.4 million downloads. One very patient release pipeline.",
+    before: ["One release a month — if everything goes right", "New users drop off during onboarding", "Hotfixes are done by hand, at night"],
+    after: "Weekly releases. Day-7 retention +18 %. 2.4 M downloads.", delta: { from: "monthly", to: "weekly", label: "release cadence" } },
+  lumen:      { word: "DEPENDABLE",  hue: 215, hook: "A monolith nobody dared to touch. Migrated — without a single minute of downtime.",
+    before: ["Analysts wait days for the data team", "A monolith nobody dares to deploy", "Reports end up in spreadsheets again"],
+    after: "12 000 analysts answer their own questions. No downtime.", delta: { from: "days", to: "seconds", label: "time to an answer" } },
+  helix:      { word: "TRUSTED",     hue: 265, hook: "Nine engineers, forty merchants, one checkout. Faster. And it converts.",
+    before: ["Checkout loads in 3.1 s at p95", "Three squads, three component libraries", "Every release needs a war room"],
+    after: "One design system, one RFC process — and +11 % conversion.", delta: { from: "3.1 s", to: "1.2 s", label: "p95 checkout load" } },
+  katsumii:   { word: "INDEPENDENT", hue: 190, hook: "Leave a team that no longer needs a hero. Build your own.",
+    before: ["A blank repository", "An idea for a trading journal", "A very stubborn calendar"],
+    after: "Four products, end to end: Journal, Andromeda, Tidii Cleaner, Cubamii.", delta: { from: "0", to: "4", label: "products live" } }
+};
+CV.roles.forEach((r) => Object.assign(r, STORY[r.id]));
+
 /* ── helpers ── */
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const cvIdx = (ym) => { const [y, m] = ym.split("-").map(Number); return y * 12 + (m - 1); };

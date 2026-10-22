@@ -11,10 +11,10 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:po
 body{display:flex;flex-direction:column;overflow:hidden}
 .top{flex:none;display:flex;align-items:center;gap:1.2rem;padding:.7rem clamp(.8rem,2vw,1.4rem);border-bottom:1px solid var(--line);background:rgba(7,11,18,.9);backdrop-filter:blur(10px);z-index:5}
 .top h1{font:700 .98rem var(--disp);letter-spacing:-.02em;white-space:nowrap}.top h1 small{display:block;font:400 .66rem var(--mono);color:var(--faint);letter-spacing:.04em;margin-top:-.1rem}
-.tabs{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;flex:1}.tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;display:flex;align-items:center;gap:.5rem;padding:.45rem .85rem;border:1px solid transparent;border-radius:10px;color:var(--mute);font-weight:600;font-size:.86rem;transition:all .2s;white-space:nowrap}
+.tabs{display:flex;gap:.15rem;min-width:0;overflow-x:auto;scrollbar-width:none;flex:1}.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;display:flex;align-items:center;gap:.45rem;padding:.45rem .65rem;border:1px solid transparent;border-radius:10px;color:var(--mute);font-weight:600;font-size:.86rem;transition:all .2s;white-space:nowrap}
 .tab i{font:500 .66rem var(--mono);font-style:normal;color:var(--faint);border:1px solid var(--line2);border-radius:5px;padding:.05rem .35rem}
-.tab:hover{color:var(--ink);background:var(--s1)}.tab.on{color:var(--ink);background:var(--s2);border-color:var(--line2)}.tab.on i{color:#04121a;background:var(--ac);border-color:var(--ac)}
+.tab:hover{color:var(--ink);background:var(--s1)}.tab.on{color:var(--ink);background:var(--s2);border-color:var(--line2)}.tab.star{color:var(--ac2)}.tab.on i{color:#04121a;background:var(--ac);border-color:var(--ac)}
 .dev{display:flex;border:1px solid var(--line2);border-radius:10px;overflow:hidden}.dev button{padding:.4rem .75rem;font:500 .74rem var(--mono);color:var(--mute);border-right:1px solid var(--line2)}.dev button:last-child{border:0}.dev button.on{background:var(--ac);color:#04121a}
 .open{font:500 .74rem var(--mono);padding:.45rem .8rem;border:1px solid var(--line2);border-radius:10px;color:var(--mute)}.open:hover{color:var(--ink)}
 main{flex:1;min-height:0;position:relative}
@@ -24,6 +24,7 @@ section{position:absolute;inset:0;display:none}section.on{display:block}
 #ov{overflow:auto;padding:clamp(1rem,3vw,2.2rem)}.wrap{max-width:1320px;margin:0 auto}
 .lead{max-width:46rem;margin-bottom:1.8rem}.lead h2{font:700 clamp(1.6rem,3vw,2.3rem)/1.1 var(--disp);letter-spacing:-.04em}.lead p{color:var(--mute);margin-top:.6rem}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.card.feat{display:grid;grid-template-columns:1.35fr 1fr;width:100%;border-color:rgba(34,211,238,.4);box-shadow:0 30px 80px -40px var(--ac)}.card.feat .th{aspect-ratio:auto;min-height:340px;border:0;border-right:1px solid var(--line)}.card.feat .bd{align-content:center;padding:2rem}.card.feat h3{font-size:2rem}.card.feat p{font-size:1rem}.card.feat .th b{left:auto;right:.8rem;background:var(--ac);color:#04121a;border-color:var(--ac)}
 .card{background:var(--s1);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;text-align:left;transition:all .25s}
 .card:hover{border-color:var(--ac);transform:translateY(-3px);box-shadow:0 24px 60px -30px var(--ac)}
 .card .th{aspect-ratio:16/10;background:#000 center/cover no-repeat;border-bottom:1px solid var(--line);position:relative}
@@ -51,19 +52,20 @@ h2.sub{font:700 1.3rem var(--disp);letter-spacing:-.03em;margin:2.6rem 0 1rem}
 .stage.fr{padding:14px 0}
 .frame{width:100%;height:100%;border:0;background:#000;transition:width .3s}
 .stage.fr .frame{border:1px solid var(--line2);border-radius:14px;box-shadow:0 30px 80px -30px #000}
-@media(max-width:1000px){.grid,.pick{grid-template-columns:1fr 1fr}.dev,.top h1 small{display:none}}
+@media(max-width:1000px){.card.feat{grid-template-columns:1fr}.card.feat .th{min-height:220px;border-right:0;border-bottom:1px solid var(--line)}.grid,.pick{grid-template-columns:1fr 1fr}.dev,.top h1 small{display:none}}
 @media(max-width:640px){.grid,.pick{grid-template-columns:1fr}.top h1{display:none}.tbl{display:block;overflow:auto}.open{display:none}}
 </style></head>
 <body>
 <header class="top">
-  <h1>CV-Konzepte<small>6 Ideen · Platzhalter-Daten</small></h1>
+  <h1>CV-Konzepte<small>7 Ideen · Platzhalter-Daten</small></h1>
   <nav class="tabs" id="tabs" aria-label="Konzepte"></nav>
   <div class="dev" id="dev" role="group" aria-label="Gerät"><button data-w="100%" class="on">Desktop</button><button data-w="820px">Tablet</button><button data-w="390px">Phone</button></div>
   <a class="open" id="open" href="#" target="_blank" rel="noopener">Neuer Tab ↗</a>
 </header>
 <main>
   <section id="ov" class="on"><div class="wrap">
-    <div class="lead"><h2>Sechs Wege, einen Lebenslauf zu erzählen.</h2><p>Alle sechs nutzen dieselben Platzhalter-Daten (<code>_src/data.js</code>) — du siehst also nur den Unterschied in Idee, Interaktion und Anmutung. Klick auf eine Karte oder einen Tab; Tasten <b>1–6</b> springen direkt, <b>0</b> kommt hierher zurück.</p></div>
+    <div class="lead"><h2>Ein Lebenslauf, der nicht nach Lebenslauf aussieht.</h2><p>Neu und ganz oben: <b>★ Modern</b> — ohne Thema, einfach eine schöne, moderne UX. Darunter die sechs früheren Ideen mit klarer Metapher. Alle nutzen dieselben Platzhalter-Daten (<code>_src/data.js</code>). Tasten <b>1–7</b> springen direkt, <b>0</b> kommt hierher zurück.</p></div>
+    <div id="feat"></div><h2 class="sub" style="margin-top:2.2rem">Frühere Ideen mit Metapher</h2>
     <div class="grid" id="grid"></div>
     <h2 class="sub">Vergleich</h2>
     <table class="tbl"><thead><tr><th>Konzept</th><th>Wow</th><th>Seriös</th><th>Schnell erfasst</th><th>Mobil</th><th>Pflegeleicht</th><th>Passt zum Katsumii-Look</th><th>Am besten für</th></tr></thead><tbody id="cmp"></tbody></table>
@@ -87,16 +89,21 @@ const C = [
   { f: "cv-5-datasheet.html", n: "Datasheet", pitch: "Der Lebenslauf als Chip-Datenblatt. Der „Operating mode“ (Recruiter/Engineer/Founder) wechselt Text und Schwerpunkt.", tryit: "Modus oben umschalten, über die Chip-Pins fahren, „Redline markup“ einschalten.", tags: ["Perspektiv-Schalter", "Hell · Technisch", "Witzig-seriös"], best: "Verschiedene Zielgruppen bedienen",
     r: [4, 4, 3, 3, 4, 2], take: "Clever, weil ein Lebenslauf mehrere Leser bedient. Der Humor ist dosiert, die Optik eigenständig." },
   { f: "cv-6-ask.html", n: "Ask", pitch: "Dialog statt Textwüste: vorformulierte Fragen oder Freitext, Antworten mit Karten (Timeline, Stack, Projekte). Keine KI — geskriptet.", tryit: "Vorschlag anklicken oder tippen: „what did you build?“, „are you free in January?“", tags: ["Chat", "Dark · Weich", "Persönlich"], best: "Nahbarkeit, Freelance-Akquise",
-    r: [4, 3, 3, 4, 3, 4], take: "Sehr persönlich und mobil-tauglich, aber man muss etwas tun, um alles zu sehen." }
+    r: [4, 3, 3, 4, 3, 4], take: "Sehr persönlich und mobil-tauglich, aber man muss etwas tun, um alles zu sehen." },
+  { f: "cv-r3-modern.html", n: "Modern", star: true, pitch: "Kein Thema, keine Metapher — einfach eine ruhige, hochwertige Produkt-UX. Schwebende Glas-Karten im Hero, die Seitenfarbe wechselt beim Scrollen mit der Station, und jede Rolle bekommt eine kleine Produkt-Oberfläche statt einer Aufzählung.", tryit: "Scrollen; links Stationen anklicken; Maus über Karten und Buttons; Sonnen-Symbol oben schaltet Hell/Dunkel.", tags: ["Glas · Aurora", "Hell + Dunkel", "Mobil gut"], best: "Wenn es einfach schön, modern und kein CV-Klischee sein soll",
+    r: [5, 5, 4, 5, 4, 5], take: "Sieht aus wie eine Produktseite, nicht wie ein Lebenslauf — und bleibt dabei ruhig und seriös." }
 ];
 const CRIT = ["Wow", "Seriös", "Schnell erfasst", "Mobil", "Pflegeleicht", "Passt zum Katsumii-Look"];
 const $ = (s) => document.querySelector(s), tabs = $("#tabs");
-tabs.innerHTML = `<button class="tab on" data-i="0"><i>0</i>Übersicht</button>` + C.map((c, i) => `<button class="tab" data-i="${i + 1}"><i>${i + 1}</i>${c.n}</button>`).join("");
-$("#grid").innerHTML = C.map((c, i) => `<button class="card" data-i="${i + 1}"><div class="th" style="background-image:url(thumbs/cv-${i + 1}.jpg)"><b>${i + 1}</b></div><div class="bd"><h3>${c.n}</h3><p>${c.pitch}</p><p class="try">▸ ${c.tryit}</p><div class="tags">${c.tags.map((t) => `<span>${t}</span>`).join("")}</div></div></button>`).join("");
-$("#cmp").innerHTML = C.map((c, i) => `<tr><td><i>${i + 1}</i>${c.n}</td>${c.r.map((v) => `<td><div class="dots" title="${v}/5">${[1, 2, 3, 4, 5].map((k) => `<i class="${k <= v ? "on" : ""}"></i>`).join("")}</div></td>`).join("")}<td style="color:var(--mute)">${c.best}</td></tr>`).join("");
-$("#pick").innerHTML = [["Wenn du nur einen nimmst", "4 · Editorial", "Wirkt am teuersten, läuft auf jedem Gerät, braucht am wenigsten Pflege. Die ruhigste Antwort auf „professionell, aber nicht langweilig“."],
-  ["Wenn es zur Studio-Marke passen soll", "3 · Constellation  ·  1 · Command", "Constellation setzt die Galaxy-Idee fort, Command ist das „Entwickler-Werkzeug“-Pendant. Beide sehen nach Katsumii aus."],
-  ["Wenn du auffallen willst", "2 · Elevation  ·  5 · Datasheet", "Zwei Ideen, die man erinnert: das Etappenprofil und das Datenblatt mit Perspektiv-Schalter."]].map(([a, b, c]) => `<div><span>${a}</span><b>${b}</b><p>${c}</p></div>`).join("");
+const ORDER = [6, 0, 1, 2, 3, 4, 5];   // index into C — the featured one first
+tabs.innerHTML = `<button class="tab on" data-i="0"><i>0</i>Übersicht</button>` + ORDER.map((k) => `<button class="tab${C[k].star ? " star" : ""}" data-i="${k + 1}"><i>${k + 1}</i>${C[k].star ? "★ " : ""}${C[k].n}</button>`).join("");
+const card = (c, i) => `<button class="card" data-i="${i + 1}"><div class="th" style="background-image:url(thumbs/cv-${i + 1}.jpg)"><b>${i + 1}</b></div><div class="bd"><h3>${c.n}</h3><p>${c.pitch}</p><p class="try">▸ ${c.tryit}</p><div class="tags">${c.tags.map((t) => `<span>${t}</span>`).join("")}</div></div></button>`;
+$("#feat").innerHTML = card(C[6], 6).replace('class="card"', 'class="card feat"').replace("<b>7</b>", "<b>★ Empfehlung</b>");
+$("#grid").innerHTML = C.slice(0, 6).map(card).join("");
+$("#cmp").innerHTML = ORDER.map((k) => [C[k], k]).map(([c, i]) => `<tr><td><i>${i + 1}</i>${c.n}</td>${c.r.map((v) => `<td><div class="dots" title="${v}/5">${[1, 2, 3, 4, 5].map((k) => `<i class="${k <= v ? "on" : ""}"></i>`).join("")}</div></td>`).join("")}<td style="color:var(--mute)">${c.best}</td></tr>`).join("");
+$("#pick").innerHTML = [["Wenn es einfach nur schön sein soll", "★ 7 · Modern", "Keine Metapher, kein Gag: eine hochwertige Produkt-UX, die nicht nach Lebenslauf aussieht. Mein Favorit für die Lab-Seite."],
+  ["Wenn es eine Idee tragen soll", "4 · Editorial  ·  2 · Elevation", "Editorial ist die ruhigste Antwort auf „professionell, aber nicht langweilig“, Elevation die erinnerungsstärkste Idee."],
+  ["Wenn es zur Studio-Marke passen soll", "3 · Constellation  ·  1 · Command", "Constellation setzt die Galaxy-Idee fort, Command ist das „Entwickler-Werkzeug“-Pendant."]].map(([a, b, c]) => `<div><span>${a}</span><b>${b}</b><p>${c}</p></div>`).join("");
 
 let cur = 0;
 function go(i, push = true) {
@@ -110,7 +117,7 @@ function go(i, push = true) {
 tabs.addEventListener("click", (e) => { const t = e.target.closest(".tab"); if (t) go(+t.dataset.i); });
 $("#grid").addEventListener("click", (e) => { const t = e.target.closest(".card"); if (t) go(+t.dataset.i); });
 $("#dev").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; document.querySelectorAll("#dev button").forEach((x) => x.classList.toggle("on", x === b)); $("#frame").style.width = b.dataset.w; $("#stage").classList.toggle("fr", b.dataset.w !== "100%"); });
-document.addEventListener("keydown", (e) => { if (e.target.matches("input,textarea") || e.metaKey || e.ctrlKey || e.altKey) return; if (/^[0-6]$/.test(e.key)) go(+e.key); else if (e.key === "ArrowRight" && cur) go(cur % 6 + 1); else if (e.key === "ArrowLeft" && cur) go((cur + 4) % 6 + 1); });
-go(Math.max(0, Math.min(6, parseInt(location.hash.slice(1)) || 0)), false);
+document.addEventListener("keydown", (e) => { if (e.target.matches("input,textarea") || e.metaKey || e.ctrlKey || e.altKey) return; if (/^[0-7]$/.test(e.key)) go(+e.key); else if (e.key === "ArrowRight" && cur) go(cur % 7 + 1); else if (e.key === "ArrowLeft" && cur) go((cur + 5) % 7 + 1); });
+go(Math.max(0, Math.min(7, parseInt(location.hash.slice(1)) || 0)), false);
 </script>
 </body></html>

@@ -1,9 +1,10 @@
 # CV concepts (mockups)
 
-Six interactive ways to present the résumé inside the planned *Lab* section. All six share one placeholder dataset.
+Résumé designs for the planned *Lab* section. All share one placeholder dataset.
 
 | # | File | Idea |
 |---|------|------|
+| ★ 7 | `cv-r3-modern.html` | **Recommended.** No metaphor — modern product-style UX: floating glass cards, page tint follows the active role, per-role mini UIs, bento, light/dark |
 | 1 | `cv-1-command.html` | Command palette (Ctrl/⌘+K) with live preview pane |
 | 2 | `cv-2-elevation.html` | Career as a stage elevation profile, scrub / "Ride the route" |
 | 3 | `cv-3-constellation.html` | Roles + skills as a force-laid-out star map |

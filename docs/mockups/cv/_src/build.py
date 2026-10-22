@@ -35,6 +35,7 @@ FONTS_FOR = {
     "4-editorial":     ["serif", "sans", "mono"],
     "5-datasheet":     ["sans", "mono"],
     "6-ask":           ["sans", "manrope", "mono"],
+    "r3-modern":       ["sans", "mono", "sora"],
     "selector":        ["sans", "mono"],   # → index.html (comparison page)
 }
 
