@@ -2,12 +2,14 @@
 
 Résumé designs for the planned *Lab* section. All content is placeholder.
 
-- **Modern** (`cv-r3-modern.html`) uses `_src/data.js`: mechanical engineer, 11 years, passion for AI-assisted software development.
+- **Modern, Workspace, Stack** (`cv-r3-…`, `cv-r4-…`, `cv-r5-…`) use `_src/data.js` (+ shared graphics in `visuals.js` / `visuals.css`): mechanical engineer, 11 years, passion for AI-assisted software development.
 - The six earlier concepts use `_src/data-sw-sample.js` (software-engineer sample profile).
 
 | # | File | Idea |
 |---|------|------|
 | ★ 7 | `cv-r3-modern.html` | **Recommended.** No metaphor — modern product-style UX: floating glass cards, page tint follows the active role, per-role mini UIs, bento, light/dark |
+| 8 | `cv-r4-workspace.html` | Workspace — app-like layout: sidebar, 5 views (overview, experience master-detail, AI lab, skills explorer, contact form), light/dark |
+| 9 | `cv-r5-stack.html` | Stack — bold colour blocks, oversized type, sticky cards that stack while scrolling, dark AI card with terminal |
 | 1 | `cv-1-command.html` | Command palette (Ctrl/⌘+K) with live preview pane |
 | 2 | `cv-2-elevation.html` | Career as a stage elevation profile, scrub / "Ride the route" |
 | 3 | `cv-3-constellation.html` | Roles + skills as a force-laid-out star map |
