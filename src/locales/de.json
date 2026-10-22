@@ -2242,6 +2242,7 @@
       "security": "Sicherheit - Katsumii",
       "welcome": "Willkommen - Katsumii",
       "bugreport": "Fehler melden - Katsumii",
+      "sandbox": "Sandbox - Katsumii",
       "notFound": "404 - Katsumii"
     },
     "pageDescriptions": {
@@ -2266,6 +2267,7 @@
       "security": "Wie du eine Sicherheitslücke in Katsumii meldest und was danach passiert.",
       "welcome": "Eine geführte Einführung in Katsumii und die ersten Schritte, um dein Trading-Journal sinnvoll zu nutzen.",
       "bugreport": "Melde einen Katsumii-Fehler und teile Reproduktionsschritte, damit wir das Problem untersuchen können.",
+      "sandbox": "Arbeitsstand der kommenden Katsumii-Entwicklerseite.",
       "notFound": "Diese Katsumii-Seite existiert nicht oder wurde verschoben."
     },
     "cta": {
@@ -2817,6 +2819,90 @@
       "hint": "Driftet langsam · Maus auf einen Stern",
       "constellation": "K A T S U M I I",
       "open": "Stern öffnen"
+    },
+    "galaxy": {
+      "aria": "Interaktive Karte der Katsumii-Galaxie mit den vier Apps",
+      "eyebrow": "Software-Studio",
+      "h1": {
+        "pre": "Vier Systeme.",
+        "em": "Eine Galaxie"
+      },
+      "sub": "Jede Katsumii-App ist ein eigenes Sternensystem. Finde eines auf der Karte – mit der Maus bremst du die Galaxie und fokussierst es.",
+      "readout": "Katsumii-Galaxie · 4 Systeme kartiert · weitere unerforscht",
+      "hint": "Dreht sich langsam · 1 Umdrehung ≈ 5 Min.",
+      "open": "System öffnen",
+      "soon": "Details folgen bald",
+      "tabsAria": "Apps",
+      "price": {
+        "paid": "Kostenpflichtig",
+        "free": "Kostenlos"
+      }
+    },
+    "page": {
+      "nav": {
+        "apps": "Apps",
+        "journal": "Journal",
+        "contact": "Kontakt"
+      },
+      "apps": {
+        "eyebrow": "Die Auswahl",
+        "title": {
+          "pre": "Kleine Apps,",
+          "em": "sauber gemacht"
+        },
+        "sub": "Vier fokussierte Apps für Desktop und Mobil – jede mit eigenem Zweck, eigenem Look und eigener Seite.",
+        "visit": "Produktseite ansehen",
+        "soon": "Bald verfügbar"
+      },
+      "spotlight": {
+        "eyebrow": "Flaggschiff",
+        "title": {
+          "pre": "Starte mit dem",
+          "em": "Journal"
+        },
+        "points": [
+          "Jeder Kontotyp behält seine eigenen, getrennten Daten",
+          "Läuft offline – deine Trades verlassen deinen Rechner nie",
+          "Analysen, Reviews und Screenshots sind eingebaut"
+        ],
+        "cta": "Katsumii Journal entdecken",
+        "imageAlt": "Das Dashboard des Katsumii Journals"
+      },
+      "principles": {
+        "eyebrow": "Wie wir bauen",
+        "title": {
+          "pre": "Ruhige Software,",
+          "em": "zu deinen Bedingungen"
+        },
+        "items": [
+          {
+            "title": "Local first",
+            "copy": "Apps, die offline funktionieren und deine Daten auf deinem eigenen Gerät lassen."
+          },
+          {
+            "title": "Mit Absicht fokussiert",
+            "copy": "Eine Aufgabe pro App, sauber gelöst – kein Funktionswildwuchs, kein Rauschen."
+          },
+          {
+            "title": "Stetig und ehrlich",
+            "copy": "Kleine, regelmäßige Updates und Release Notes in klaren Worten."
+          }
+        ]
+      },
+      "cta": {
+        "title": {
+          "pre": "Fragen, Ideen,",
+          "em": "Feedback"
+        },
+        "sub": "Sag uns, was du dir im nächsten System wünschst.",
+        "button": "Kontakt aufnehmen",
+        "mail": "oder schreib an"
+      },
+      "footer": {
+        "apps": "Apps",
+        "studio": "Studio",
+        "tagline": "Software-Studio"
+      }
     }
   },
   "products": {

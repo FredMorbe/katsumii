@@ -540,6 +540,10 @@
   gap: 2rem clamp(1rem, 2.4vw, 2rem);
   align-items: flex-start;
 }
+/* the studio footer has three link columns instead of five */
+@media (min-width: 901px) {
+  .v6-footer-cols.is-studio { grid-template-columns: 1.4fr repeat(3, 1fr); }
+}
 .v6-footer-brand { display: flex; flex-direction: column; gap: 0.8rem; }
 .v6-footer .v6-footer-brand-link { font-size: 1rem; color: var(--v6-ink); }
 .v6-footer-tagline {

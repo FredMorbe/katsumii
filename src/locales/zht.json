@@ -2242,6 +2242,7 @@
       "security": "資安 - Katsumii",
       "welcome": "歡迎 - Katsumii",
       "bugreport": "回報問題 - Katsumii",
+      "sandbox": "沙盒 - Katsumii",
       "notFound": "404 - Katsumii"
     },
     "pageDescriptions": {
@@ -2266,6 +2267,7 @@
       "security": "如何回報 Katsumii 的資安漏洞，以及回報後可以期待什麼。",
       "welcome": "Katsumii 的導覽介紹，協助你開始使用交易日誌並建立清楚流程。",
       "bugreport": "回報 Katsumii 問題並提供重現步驟，協助我們調查。",
+      "sandbox": "即將推出的 Katsumii 開發者網站的製作中預覽。",
       "notFound": "這個 Katsumii 頁面不存在，或已被移動。"
     },
     "cta": {
@@ -2824,6 +2826,90 @@
       "hint": "緩緩漂移 · 滑鼠移到星星上",
       "constellation": "K A T S U M I I",
       "open": "開啟星星"
+    },
+    "galaxy": {
+      "aria": "Katsumii 銀河的互動地圖與四款應用程式",
+      "eyebrow": "軟體工作室",
+      "h1": {
+        "pre": "四個星系。",
+        "em": "一座銀河"
+      },
+      "sub": "每款 Katsumii 應用程式都是一個獨立的星系。在星圖上找到它——滑鼠移上去，銀河會放慢並鎖定。",
+      "readout": "Katsumii 銀河 · 已標註 4 個星系 · 更多尚待探索",
+      "hint": "緩緩旋轉 · 一圈約 5 分鐘",
+      "open": "開啟星系",
+      "soon": "詳情即將公布",
+      "tabsAria": "應用程式",
+      "price": {
+        "paid": "付費",
+        "free": "免費"
+      }
+    },
+    "page": {
+      "nav": {
+        "apps": "應用程式",
+        "journal": "Journal",
+        "contact": "聯絡我們"
+      },
+      "apps": {
+        "eyebrow": "產品陣容",
+        "title": {
+          "pre": "小而專注的應用程式，",
+          "em": "用心打造"
+        },
+        "sub": "四款專注的桌面與行動應用程式——各有自己的用途、風格與專屬頁面。",
+        "visit": "前往產品頁面",
+        "soon": "即將推出"
+      },
+      "spotlight": {
+        "eyebrow": "旗艦產品",
+        "title": {
+          "pre": "你的第一站：",
+          "em": "Journal"
+        },
+        "points": [
+          "每種帳戶類型都有各自獨立的資料",
+          "離線運作——你的交易紀錄不會離開你的電腦",
+          "內建分析、覆盤與截圖"
+        ],
+        "cta": "了解 Katsumii Journal",
+        "imageAlt": "Katsumii Journal 的儀表板"
+      },
+      "principles": {
+        "eyebrow": "我們如何打造",
+        "title": {
+          "pre": "安靜的軟體，",
+          "em": "由你作主"
+        },
+        "items": [
+          {
+            "title": "本機優先",
+            "copy": "離線也能運作，資料留在你自己的裝置上。"
+          },
+          {
+            "title": "刻意專注",
+            "copy": "每款應用程式只做好一件事——沒有雜亂的功能，沒有多餘的干擾。"
+          },
+          {
+            "title": "穩定且坦誠",
+            "copy": "小幅、規律的更新，並以白話說明每次的變更。"
+          }
+        ]
+      },
+      "cta": {
+        "title": {
+          "pre": "問題、想法、",
+          "em": "回饋"
+        },
+        "sub": "告訴我們，你希望下一個星系是什麼樣子。",
+        "button": "與我們聯絡",
+        "mail": "或寄信至"
+      },
+      "footer": {
+        "apps": "應用程式",
+        "studio": "工作室",
+        "tagline": "軟體工作室"
+      }
     }
   },
   "products": {

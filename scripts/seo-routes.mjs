@@ -66,6 +66,7 @@ export const staticRouteMeta = [
   { path: "/security", source: "src/components/SecurityPage.vue", titleKey: "common.pageTitles.security", descriptionKey: "common.pageDescriptions.security" },
   { path: "/welcome", source: "src/components/WelcomePage.vue", titleKey: "common.pageTitles.welcome", descriptionKey: "common.pageDescriptions.welcome", robots: "noindex, follow" },
   { path: "/bugreport", source: "src/components/BugReportPage.vue", titleKey: "common.pageTitles.bugreport", descriptionKey: "common.pageDescriptions.bugreport", robots: "noindex, follow" },
+  { path: "/sandbox", source: "src/components/SandboxPage.vue", titleKey: "common.pageTitles.sandbox", descriptionKey: "common.pageDescriptions.sandbox", robots: "noindex, follow" },
 ]
 
 export const indexableRoutes = staticRouteMeta.filter((route) => !route.robots?.includes("noindex"))

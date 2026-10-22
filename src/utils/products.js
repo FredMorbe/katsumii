@@ -6,6 +6,8 @@ export const PRODUCTS = [
   {
     key: "journal",
     path: "/journal",
+    /* where the product page lives today — the others have none yet */
+    page: "/app",
     platform: "desktop",
     price: "paid",
     accent: { dark: ["#22d3ee", "#67e8f9"], light: ["#0369a1", "#075985"] },

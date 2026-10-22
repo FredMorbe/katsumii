@@ -2242,6 +2242,7 @@
       "security": "Security - Katsumii",
       "welcome": "Welcome - Katsumii",
       "bugreport": "Report a Bug - Katsumii",
+      "sandbox": "Sandbox - Katsumii",
       "notFound": "404 - Katsumii"
     },
     "pageDescriptions": {
@@ -2266,6 +2267,7 @@
       "security": "How to report a security vulnerability in Katsumii and what to expect after you do.",
       "welcome": "A guided introduction to Katsumii and the first steps for getting value from your trading journal.",
       "bugreport": "Report a Katsumii bug and share reproduction steps so the issue can be investigated.",
+      "sandbox": "Work-in-progress preview of the upcoming Katsumii developer site.",
       "notFound": "This Katsumii page does not exist or has moved."
     },
     "cta": {
@@ -2817,6 +2819,90 @@
       "hint": "Slowly drifting · hover a star",
       "constellation": "K A T S U M I I",
       "open": "Open star"
+    },
+    "galaxy": {
+      "aria": "Interactive map of the Katsumii galaxy with its four apps",
+      "eyebrow": "Software studio",
+      "h1": {
+        "pre": "Four systems.",
+        "em": "One galaxy"
+      },
+      "sub": "Every Katsumii app is a star system of its own. Find one on the chart — hover to slow the galaxy and lock on.",
+      "readout": "Katsumii galaxy · 4 systems charted · more unexplored",
+      "hint": "Slowly turning · 1 rev ≈ 5 min",
+      "open": "Open system",
+      "soon": "Details follow soon",
+      "tabsAria": "Apps",
+      "price": {
+        "paid": "Paid",
+        "free": "Free"
+      }
+    },
+    "page": {
+      "nav": {
+        "apps": "Apps",
+        "journal": "Journal",
+        "contact": "Contact"
+      },
+      "apps": {
+        "eyebrow": "The line-up",
+        "title": {
+          "pre": "Small apps,",
+          "em": "made properly"
+        },
+        "sub": "Four focused apps for desktop and mobile — each with its own purpose, its own look and its own page.",
+        "visit": "Visit product page",
+        "soon": "Coming soon"
+      },
+      "spotlight": {
+        "eyebrow": "Flagship",
+        "title": {
+          "pre": "Start with the",
+          "em": "Journal"
+        },
+        "points": [
+          "Every account type keeps its own, separate data",
+          "Runs offline — your trades never leave your machine",
+          "Analytics, reviews and screenshots built in"
+        ],
+        "cta": "Explore Katsumii Journal",
+        "imageAlt": "The Katsumii Journal dashboard"
+      },
+      "principles": {
+        "eyebrow": "How we build",
+        "title": {
+          "pre": "Calm software,",
+          "em": "on your terms"
+        },
+        "items": [
+          {
+            "title": "Local first",
+            "copy": "Apps that work offline and keep your data on your own device."
+          },
+          {
+            "title": "Focused on purpose",
+            "copy": "One job per app, done well — no feature sprawl, no noise."
+          },
+          {
+            "title": "Steady and honest",
+            "copy": "Small, regular updates and release notes in plain language."
+          }
+        ]
+      },
+      "cta": {
+        "title": {
+          "pre": "Questions, ideas,",
+          "em": "feedback"
+        },
+        "sub": "Tell us what you would like to see in the next system.",
+        "button": "Get in touch",
+        "mail": "or write to"
+      },
+      "footer": {
+        "apps": "Apps",
+        "studio": "Studio",
+        "tagline": "software studio"
+      }
     }
   },
   "products": {

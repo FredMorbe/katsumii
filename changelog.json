@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.17.3",
+    "date": "2026-10-23",
+    "title": "Preview of the studio landing page",
+    "changes": [
+      "A new landing page for the Katsumii studio, built around an interactive galaxy where every app is its own star system, is available as an unlisted preview",
+      "The preview has its own navigation and footer, in English, German and Traditional Chinese"
+    ]
+  },
+  {
     "version": "0.17.2",
     "date": "2026-10-03",
     "title": "Pages are readable for search engines and AI assistants",

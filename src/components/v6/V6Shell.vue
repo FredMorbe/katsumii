@@ -9,12 +9,17 @@
 
     <!-- NAV -->
     <header ref="navEl" class="v6-nav" :class="{ scrolled }">
-      <RouterLink class="v6-brand" :to="`/${lang}/app`">
+      <RouterLink class="v6-brand" :to="homePath">
         <img :src="asset('logo.png')" :alt="t('common.alts.logo')" width="32" height="32" />
         <span>Katsumii<b class="v6-dot" aria-hidden="true">.</b></span>
       </RouterLink>
 
-      <nav class="v6-nav-links" :aria-label="t('shell.nav.ariaMain')">
+      <nav v-if="isStudio" class="v6-nav-links" :aria-label="t('shell.nav.ariaMain')">
+        <RouterLink :to="{ path: homePath, hash: '#apps' }">{{ t('studio.page.nav.apps') }}</RouterLink>
+        <RouterLink :to="{ path: homePath, hash: '#journal' }">{{ t('studio.page.nav.journal') }}</RouterLink>
+        <RouterLink :to="`/${lang}/contact`">{{ t('studio.page.nav.contact') }}</RouterLink>
+      </nav>
+      <nav v-else class="v6-nav-links" :aria-label="t('shell.nav.ariaMain')">
         <span class="v6-nav-home-slot" :class="{ 'is-visible': !isLandingRoute }">
           <RouterLink
             :to="`/${lang}/app`"
@@ -98,7 +103,7 @@
             <path d="M20.4 14.2A8.4 8.4 0 0 1 9.8 3.6a8.4 8.4 0 1 0 10.6 10.6z" />
           </svg>
         </button>
-        <span class="v6-btn v6-btn-sm v6-btn-static" aria-disabled="true">{{ t('shell.comingSoon') }}</span>
+        <span v-if="!isStudio" class="v6-btn v6-btn-sm v6-btn-static" aria-disabled="true">{{ t('shell.comingSoon') }}</span>
         <button
           type="button"
           class="v6-menu-toggle"
@@ -118,7 +123,12 @@
         <button class="v6-mobile-backdrop" type="button" :aria-label="t('common.aria.closeMenu')" @click="mobileOpen = false"></button>
         <nav ref="mobilePanelEl" class="v6-mobile-panel" :aria-label="t('shell.mobile.ariaNav')">
           <p class="v6-mobile-kicker">{{ t('shell.mobile.kicker') }}</p>
-          <div class="v6-mobile-nav">
+          <div v-if="isStudio" class="v6-mobile-nav">
+            <RouterLink :to="{ path: homePath, hash: '#apps' }">{{ t('studio.page.nav.apps') }}</RouterLink>
+            <RouterLink :to="{ path: homePath, hash: '#journal' }">{{ t('studio.page.nav.journal') }}</RouterLink>
+            <RouterLink :to="`/${lang}/contact`">{{ t('studio.page.nav.contact') }}</RouterLink>
+          </div>
+          <div v-else class="v6-mobile-nav">
             <RouterLink :to="`/${lang}/features`">
               {{ t('shell.nav.features') }}<small>{{ t('shell.mobile.featuresSub') }}</small>
             </RouterLink>
@@ -158,8 +168,10 @@
             <RouterLink :to="`/${lang}/pricing`">{{ t('shell.nav.pricing') }}</RouterLink>
             <RouterLink :to="`/${lang}/faq`">{{ t('shell.nav.faq') }}</RouterLink>
           </div>
-          <span class="v6-btn v6-btn-static" aria-disabled="true">{{ t('shell.comingSoon') }}</span>
-          <p class="v6-mobile-note">{{ t('shell.mobile.note') }}</p>
+          <template v-if="!isStudio">
+            <span class="v6-btn v6-btn-static" aria-disabled="true">{{ t('shell.comingSoon') }}</span>
+            <p class="v6-mobile-note">{{ t('shell.mobile.note') }}</p>
+          </template>
         </nav>
       </div>
     </Transition>
@@ -167,9 +179,9 @@
     <slot />
 
     <footer class="v6-footer">
-      <div class="v6-footer-cols">
+      <div class="v6-footer-cols" :class="{ 'is-studio': isStudio }">
         <div class="v6-footer-brand">
-          <RouterLink class="v6-brand v6-footer-brand-link" :to="`/${lang}/app`">
+          <RouterLink class="v6-brand v6-footer-brand-link" :to="homePath">
             <img :src="asset('logo.png')" :alt="t('common.alts.logo')" width="28" height="28" />
             <span>Katsumii<b class="v6-dot" aria-hidden="true">.</b></span>
           </RouterLink>
@@ -199,6 +211,22 @@
           </a>
         </div>
 
+        <template v-if="isStudio">
+          <nav class="v6-footer-col" :aria-label="t('studio.page.footer.apps')">
+            <p class="v6-footer-head">{{ t('studio.page.footer.apps') }}</p>
+            <RouterLink v-for="p in PRODUCTS" :key="p.key" :to="p.page ? `/${lang}${p.page}` : { path: homePath, hash: `#apps-${p.key}` }">
+              {{ t(`products.${p.key}.name`) }}
+            </RouterLink>
+          </nav>
+
+          <nav class="v6-footer-col" :aria-label="t('studio.page.footer.studio')">
+            <p class="v6-footer-head">{{ t('studio.page.footer.studio') }}</p>
+            <RouterLink :to="`/${lang}/contact`">{{ t('shell.footer.contact') }}</RouterLink>
+            <a :href="INSTAGRAM_URL" target="_blank" rel="noopener">{{ t('shell.footer.instagram') }}</a>
+          </nav>
+        </template>
+
+        <template v-else>
         <nav class="v6-footer-col" :aria-label="t('shell.footer.product')">
           <p class="v6-footer-head">{{ t('shell.footer.product') }}</p>
           <RouterLink :to="`/${lang}/app`">{{ t('shell.nav.home') }}</RouterLink>
@@ -230,6 +258,7 @@
           <RouterLink :to="`/${lang}/contact`">{{ t('shell.footer.contact') }}</RouterLink>
           <a :href="INSTAGRAM_URL" target="_blank" rel="noopener">{{ t('shell.footer.instagram') }}</a>
         </nav>
+        </template>
 
         <nav class="v6-footer-col" :aria-label="t('shell.footer.legal')">
           <p class="v6-footer-head">{{ t('shell.footer.legal') }}</p>
@@ -242,7 +271,7 @@
       </div>
 
       <div class="v6-footer-bottom">
-        <p>© {{ year }} Katsumii — {{ t('shell.footer.tagline') }}</p>
+        <p>© {{ year }} Katsumii — {{ isStudio ? t('studio.page.footer.tagline') : t('shell.footer.tagline') }}</p>
         <p class="v6-footer-version">v{{ siteVersion }}</p>
       </div>
     </footer>
@@ -256,6 +285,7 @@ import { useRoute } from "vue-router"
 import { createV6Background } from "../../v6/gl.js"
 import { initMagnetic, prefersReducedMotion } from "../../v6/motion.js"
 import { normalizeLocale } from "../../utils/routes.js"
+import { PRODUCTS } from "../../utils/products.js"
 import { useConsent } from "../../composables/useConsent.js"
 import PreviewNoticeModal from "./PreviewNoticeModal.vue"
 import V6LangSwitch from "./V6LangSwitch.vue"
@@ -302,6 +332,8 @@ const route = useRoute()
 const isDark = inject("isDark")
 const toggleTheme = inject("toggleTheme")
 const isLandingRoute = computed(() => route.meta.canonicalPath === "/app")
+/* the developer-site pages (route meta studio) swap the journal's nav and footer for the studio's */
+const isStudio = computed(() => !!route.meta.studio)
 
 const rootEl = ref(null)
 const glEl = ref(null)
@@ -319,6 +351,7 @@ const lang = computed(() => {
   const raw = Array.isArray(route.params.locale) ? route.params.locale[0] : route.params.locale
   return normalizeLocale(raw)
 })
+const homePath = computed(() => `/${lang.value}${isStudio.value ? "/sandbox" : "/app"}`)
 
 /* Route meta sets the page tint; pages can override live. */
 const DEFAULT_ACCENT = {
