@@ -2805,6 +2805,41 @@
         ]
       }
     ]
+  },
+  "studio": {
+    "platform": {
+      "desktop": "Desktop",
+      "mobile": "Mobil"
+    },
+    "sky": {
+      "aria": "Interaktiver Nachthimmel mit dem Sternbild Katsumii",
+      "readout": "Sternbild Katsumii · 4 Sterne kartiert · weitere noch da draußen",
+      "hint": "Driftet langsam · Maus auf einen Stern",
+      "constellation": "K A T S U M I I",
+      "open": "Stern öffnen"
+    }
+  },
+  "products": {
+    "journal": {
+      "name": "Katsumii Journal",
+      "tagline": "Dein Vorteil, im Griff.",
+      "desc": "Das Offline-Trading-Journal für Funded-, Challenge-, Personal- und Backtest-Konten. Deine Daten bleiben auf deinem Rechner."
+    },
+    "andromeda": {
+      "name": "Andromeda",
+      "tagline": "Gebaut für die Weite.",
+      "desc": "Eine fokussierte Desktop-App von Katsumii. Details folgen in Kürze."
+    },
+    "tidii": {
+      "name": "Tidii Cleaner",
+      "tagline": "Ein aufgeräumter Rechner, ganz leise.",
+      "desc": "Hält deinen PC aufgeräumt. Kostenlos herunterladen. Details folgen in Kürze."
+    },
+    "cubamii": {
+      "name": "Cubamii",
+      "tagline": "Klein. In deiner Tasche.",
+      "desc": "Die mobile App von Katsumii. Details folgen in Kürze."
+    }
   }
 }
 

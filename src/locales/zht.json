@@ -2812,6 +2812,41 @@
         ]
       }
     ]
+  },
+  "studio": {
+    "platform": {
+      "desktop": "桌面",
+      "mobile": "行動"
+    },
+    "sky": {
+      "aria": "互動夜空與 Katsumii 星座",
+      "readout": "Katsumii 星座 · 已標註 4 顆星 · 更多仍在遠方",
+      "hint": "緩緩漂移 · 滑鼠移到星星上",
+      "constellation": "K A T S U M I I",
+      "open": "開啟星星"
+    }
+  },
+  "products": {
+    "journal": {
+      "name": "Katsumii Journal",
+      "tagline": "掌握你的優勢。",
+      "desc": "離線交易日誌，適用於資助帳戶、挑戰帳戶、個人帳戶與回測。你的資料留在你的電腦上。"
+    },
+    "andromeda": {
+      "name": "Andromeda",
+      "tagline": "為遠行而生。",
+      "desc": "Katsumii 推出的專注型桌面應用，詳情即將公布。"
+    },
+    "tidii": {
+      "name": "Tidii Cleaner",
+      "tagline": "安靜地整理你的電腦。",
+      "desc": "讓你的電腦保持整潔，可免費下載，詳情即將公布。"
+    },
+    "cubamii": {
+      "name": "Cubamii",
+      "tagline": "小巧，隨身攜帶。",
+      "desc": "Katsumii 的行動應用，詳情即將公布。"
+    }
   }
 }
 

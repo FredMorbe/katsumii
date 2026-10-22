@@ -2805,6 +2805,41 @@
         ]
       }
     ]
+  },
+  "studio": {
+    "platform": {
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    },
+    "sky": {
+      "aria": "Interactive night sky with the Katsumii constellation",
+      "readout": "Katsumii constellation · 4 stars charted · more still out there",
+      "hint": "Slowly drifting · hover a star",
+      "constellation": "K A T S U M I I",
+      "open": "Open star"
+    }
+  },
+  "products": {
+    "journal": {
+      "name": "Katsumii Journal",
+      "tagline": "Own your edge.",
+      "desc": "The offline trading journal for funded, challenge, personal and backtest accounts. Your data stays on your machine."
+    },
+    "andromeda": {
+      "name": "Andromeda",
+      "tagline": "Built to go far.",
+      "desc": "A focused desktop app from Katsumii. Details follow soon."
+    },
+    "tidii": {
+      "name": "Tidii Cleaner",
+      "tagline": "A tidy machine, quietly.",
+      "desc": "Keeps your PC tidy. Free to download. Details follow soon."
+    },
+    "cubamii": {
+      "name": "Cubamii",
+      "tagline": "Small. In your pocket.",
+      "desc": "The Katsumii mobile app. Details follow soon."
+    }
   }
 }
 
