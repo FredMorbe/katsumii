@@ -10,7 +10,7 @@ Templates (_src/N-name.html) use two markers:
 Output goes to docs/mockups/cv/cv-N-name.html (standalone, no network needed);
 selector.html becomes docs/mockups/cv/index.html (comparison page; thumbnails live in ../thumbs/).
 """
-import base64, pathlib
+import base64, pathlib, subprocess
 
 HERE = pathlib.Path(__file__).parent
 OUT = HERE.parent
@@ -38,18 +38,25 @@ FONTS_FOR = {
     "6-ask":           ["sans", "manrope", "mono"],
     "r3-modern":       ["sans", "mono", "sora"],
     "r4-workspace":    ["sans", "mono", "sora"],
-    "r5-stack":        ["sans", "mono", "sora"],
+    "r6-glass":        ["sans", "mono", "sora"],
+    "r7-function":     ["sans", "mono", "sora"],
     "selector":        ["sans", "mono"],   # → index.html (comparison page)
 }
 
 # the six earlier concepts keep the software-engineer sample profile; the Modern page uses the current profile (data.js)
-DATA_FOR = {"r3-modern": "data.js", "r4-workspace": "data.js", "r5-stack": "data.js"}
+DATA_FOR = {"r3-modern": "data.js", "r4-workspace": "data.js", "r6-glass": "data.js", "r7-function": "data.js"}
 DEFAULT_DATA = "data-sw-sample.js"
 for key, fams in FONTS_FOR.items():
     src = HERE / f"{key}.html"
     if not src.exists():
         continue
-    html = src.read_text().replace("/*@VIS_CSS*/", (HERE / "visuals.css").read_text()).replace("/*@VIS_JS*/", (HERE / "visuals.js").read_text()).replace("/*@FONTS*/", "".join(FACES[f]() for f in fams)).replace("/*@DATA*/", (HERE / DATA_FOR.get(key, DEFAULT_DATA)).read_text())
+    text = src.read_text()
+    if "/*@BUNDLE*/" in text:   # three.js scene: <key>.entry.js is bundled with esbuild (needs repo node_modules)
+        entry = HERE / (key.split("-", 1)[1] + "3d.entry.js")
+        esb = HERE.parents[3] / "node_modules" / ".bin" / "esbuild"
+        js = subprocess.run([str(esb), str(entry), "--bundle", "--minify", "--format=iife", "--log-level=warning"], check=True, capture_output=True, text=True, env={"PATH": "/usr/bin:/bin:/opt/node22/bin", "NODE_PATH": str(HERE.parents[3] / "node_modules")}).stdout
+        text = text.replace("/*@BUNDLE*/", js.replace("</script", "<\\/script"))
+    html = text.replace("/*@VIS_CSS*/", (HERE / "visuals.css").read_text()).replace("/*@VIS_JS*/", (HERE / "visuals.js").read_text()).replace("/*@FONTS*/", "".join(FACES[f]() for f in fams)).replace("/*@DATA*/", (HERE / DATA_FOR.get(key, DEFAULT_DATA)).read_text())
     out = OUT / ("index.html" if key == "selector" else f"cv-{key}.html")
     out.write_text(html)
     print(out.name, len(html) // 1024, "KB")
