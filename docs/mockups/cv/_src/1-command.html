@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sam Keller — CV · 1 Command</title>
+<!-- MOCKUP: all CV content is placeholder (see _src/data.js) -->
+<style>/*@FONTS*/
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#06090e;--s1:#0c1118;--s2:#111823;--line:rgba(226,232,240,.08);--line2:rgba(226,232,240,.16);
+  --ink:#eaf0f7;--mute:#8d9aac;--faint:#5b687a;--ac:#22d3ee;--ac2:#67e8f9;--acsoft:rgba(34,211,238,.12);--ok:#4ade80;
+  --disp:"DM Sans","Manrope",sans-serif;--body:"Manrope","Segoe UI",sans-serif;--mono:"DM Mono",ui-monospace,monospace;
+  --shadow:0 40px 120px -30px rgba(0,0,0,.8);
+}
+html[data-theme=light]{--bg:#f6f8fb;--s1:#fff;--s2:#eef2f7;--line:rgba(15,23,42,.09);--line2:rgba(15,23,42,.18);--ink:#0f172a;--mute:#475569;--faint:#64748b;--ac:#0369a1;--ac2:#075985;--acsoft:rgba(3,105,161,.09);--shadow:0 40px 100px -30px rgba(15,23,42,.35)}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 70% -10%,var(--acsoft),transparent 65%),radial-gradient(ellipse 40% 40% at 0% 60%,rgba(129,140,248,.07),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000,transparent 75%);mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000,transparent 75%)}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+h1,h2,h3,p,ul{margin:0;padding:0}ul{list-style:none}
+kbd{font:500 .72rem/1 var(--mono);padding:.28rem .45rem;border:1px solid var(--line2);border-bottom-width:2px;border-radius:6px;color:var(--mute);background:var(--s2)}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+.mono{font-family:var(--mono)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:.9rem;height:64px}
+.mark{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;border:1px solid var(--line2);font:700 .8rem var(--disp);letter-spacing:.04em;background:var(--s1)}
+.who{font:600 .95rem var(--disp)}.who small{display:block;font:400 .7rem var(--mono);color:var(--faint);margin-top:-.15rem}
+.sp{flex:1}
+.kbtn{display:flex;align-items:center;gap:.6rem;padding:.5rem .6rem .5rem .9rem;border:1px solid var(--line2);border-radius:10px;background:var(--s1);color:var(--mute);font-size:.85rem;transition:border-color .2s,color .2s}
+.kbtn:hover{border-color:var(--ac);color:var(--ink)}
+.ghost{padding:.5rem .95rem;border-radius:10px;border:1px solid var(--line2);font-size:.85rem;font-weight:600;transition:background .2s}
+.ghost:hover{background:var(--s2)}
+.ico-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line2);display:grid;place-items:center;color:var(--mute)}
+.ico-btn:hover{color:var(--ink);border-color:var(--ac)}
+
+/* hero */
+.hero{padding:clamp(4rem,12vh,8rem) 0 clamp(2rem,5vh,3.5rem)}
+.eyebrow{display:inline-flex;align-items:center;gap:.6rem;font:400 .78rem var(--mono);color:var(--mute);padding:.4rem .8rem;border:1px solid var(--line);border-radius:99px;background:var(--s1)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:ping 2.2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+h1{font:700 clamp(2.5rem,6.4vw,5.4rem)/1.02 var(--disp);letter-spacing:-.045em;margin:1.4rem 0 1.3rem;max-width:15ch}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--ac),var(--ac2) 40%,#a5b4fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{max-width:40rem;color:var(--mute);font-size:1.12rem}
+.cmd{margin-top:2.2rem;display:flex;align-items:center;gap:.9rem;width:min(100%,640px);padding:1rem 1.1rem;border:1px solid var(--line2);border-radius:16px;background:linear-gradient(var(--s1),var(--s1)) padding-box,linear-gradient(120deg,var(--ac),transparent 40%,#818cf8) border-box;border:1px solid transparent;color:var(--mute);text-align:left;font-size:1rem;box-shadow:0 20px 60px -30px var(--ac);transition:transform .25s}
+.cmd:hover{transform:translateY(-2px)}.cmd span:nth-child(2){flex:1}.cmd .kb{display:flex;gap:.25rem}
+.quick{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.chip{padding:.38rem .8rem;border:1px solid var(--line);border-radius:99px;font-size:.84rem;color:var(--mute);background:var(--s1);transition:all .2s}
+.chip:hover{color:var(--ink);border-color:var(--ac);background:var(--acsoft)}
+.chip.sm{padding:.2rem .6rem;font:400 .74rem var(--mono)}
+
+/* glance */
+.glance{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:14px;margin-top:clamp(2rem,6vh,4rem)}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:1.4rem;position:relative;overflow:hidden;transition:border-color .25s}
+.card:hover{border-color:var(--line2)}
+.card h3{font:500 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:1rem}
+.now{grid-row:span 2;cursor:pointer;display:flex;flex-direction:column}
+.now b{display:block;font:700 2rem/1.1 var(--disp);letter-spacing:-.03em}
+.now .r{color:var(--ac2);margin:.3rem 0 1rem;font-weight:600}
+.now p{color:var(--mute);font-size:.95rem}
+.now .more{margin-top:auto;padding-top:1.3rem;font:400 .8rem var(--mono);color:var(--ac2)}
+.stats{grid-column:span 2;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.stat b{display:block;font:700 2.1rem/1 var(--disp);letter-spacing:-.04em}.stat span{font-size:.8rem;color:var(--mute);line-height:1.3;display:block;margin-top:.35rem}
+.strip{grid-column:span 2}
+.bars{display:flex;gap:4px;height:44px}
+.bars button{border-radius:8px;background:var(--s2);border:1px solid var(--line);position:relative;text-align:left;padding:0 .6rem;font:500 .72rem var(--mono);color:var(--mute);overflow:hidden;white-space:nowrap;transition:all .2s}
+.bars button:hover{background:var(--acsoft);border-color:var(--ac);color:var(--ink)}
+.bars button:last-child{background:linear-gradient(90deg,var(--acsoft),transparent);border-color:var(--ac)}
+.axis{display:flex;justify-content:space-between;margin-top:.5rem;font:400 .7rem var(--mono);color:var(--faint)}
+.skl{display:grid;gap:.7rem}.skl .cat{display:grid;grid-template-columns:130px 1fr;gap:.8rem;align-items:center}.skl .cat>span{font:500 .7rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:.5rem}.skl .cat>span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c)}.skl .cat>div{display:flex;flex-wrap:wrap;gap:.4rem}
+.proj li{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-top:1px solid var(--line);cursor:pointer;font-weight:600;font-size:.92rem}
+.proj li:first-child{border-top:0;padding-top:0}.proj li i{width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.proj li small{margin-left:auto;font:400 .72rem var(--mono);color:var(--faint)}.proj li:hover{color:var(--ac2)}
+
+/* experience table */
+.sec{padding:clamp(3rem,9vh,6rem) 0 0}
+.sec>h2{font:700 clamp(1.7rem,3.4vw,2.5rem)/1.1 var(--disp);letter-spacing:-.035em;margin-bottom:1.6rem;display:flex;align-items:baseline;gap:.9rem}
+.sec>h2 small{font:400 .8rem var(--mono);color:var(--faint);letter-spacing:0}
+.tbl li{display:grid;grid-template-columns:150px 1.1fr 1.3fr 1.6fr 24px;gap:1.2rem;align-items:center;padding:1.1rem .6rem;border-top:1px solid var(--line);cursor:pointer;transition:background .2s,padding .25s;border-radius:6px}
+.tbl li:last-child{border-bottom:1px solid var(--line)}
+.tbl li:hover{background:var(--s1);padding-left:1.1rem}
+.tbl .yr{font:400 .8rem var(--mono);color:var(--faint)}.tbl .o{font:700 1.1rem var(--disp);letter-spacing:-.02em}.tbl .ro{color:var(--mute)}
+.tbl .sk{white-space:nowrap;overflow:hidden}.tbl .arr{color:var(--faint);transition:transform .2s,color .2s}.tbl li:hover .arr{transform:translateX(4px);color:var(--ac2)}
+.foot{padding:5rem 0 3rem;align-items:flex-end;color:var(--faint);font:400 .8rem var(--mono);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+/* palette */
+.pal{position:fixed;inset:0;z-index:50;display:none;align-items:flex-start;justify-content:center;padding:12vh 1rem 1rem}
+.pal.on{display:flex}
+.pal-scrim{position:absolute;inset:0;background:rgba(2,5,10,.6);backdrop-filter:blur(6px);animation:fade .2s}
+html[data-theme=light] .pal-scrim{background:rgba(15,23,42,.35)}
+@keyframes fade{from{opacity:0}}
+.pal-box{position:relative;width:min(920px,100%);background:var(--s1);border:1px solid var(--line2);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;animation:pop .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.985)}}
+.pal-in{display:flex;align-items:center;gap:.8rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line);color:var(--mute)}
+.pal-in input{flex:1;background:none;border:0;outline:0;font:500 1.12rem var(--body);color:var(--ink)}
+.pal-in input::placeholder{color:var(--faint)}
+.pal-body{display:grid;grid-template-columns:minmax(260px,.9fr) 1.15fr;height:min(480px,58vh)}
+.pal-list{overflow:auto;padding:.5rem;border-right:1px solid var(--line)}
+.pal-list h4{margin:.8rem .7rem .3rem;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.pal-list h4:first-child{margin-top:.3rem}
+.it{display:flex;align-items:center;gap:.75rem;padding:.55rem .7rem;border-radius:10px;cursor:pointer}
+.it.sel{background:var(--acsoft);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ac) 40%,transparent)}
+.it .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--s2);border:1px solid var(--line);flex:none;font:500 .66rem var(--mono);color:var(--mute)}
+.it.sel .ic{color:var(--ac2);border-color:var(--ac)}
+.it .t{font-weight:600;font-size:.93rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it .t mark{background:none;color:var(--ac2);text-decoration:underline;text-underline-offset:3px}
+.it .s{font-size:.76rem;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it .m{min-width:0}.it .ret{margin-left:auto;opacity:0;font:400 .72rem var(--mono);color:var(--ac2)}.it.sel .ret{opacity:1}
+.empty{padding:2rem 1rem;text-align:center;color:var(--faint);font-size:.92rem}
+.pal-prev{overflow:auto;padding:1.4rem 1.5rem}
+.pal-foot{display:flex;gap:1.1rem;align-items:center;padding:.7rem 1.2rem;border-top:1px solid var(--line);font:400 .74rem var(--mono);color:var(--faint)}
+.pal-foot kbd{margin-right:.25rem}
+.pal-foot .sp{flex:1}
+
+/* detail (shared by preview + sheet) */
+.dt .badge{display:inline-block;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ac2);padding:.25rem .6rem;border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);border-radius:99px;background:var(--acsoft)}
+.dt h3{font:700 1.7rem/1.1 var(--disp);letter-spacing:-.03em;margin:.9rem 0 .15rem}
+.dt .sub{color:var(--ac2);font-weight:600}
+.dt .meta{font:400 .76rem var(--mono);color:var(--faint);margin:.35rem 0 1rem}
+.dt p.sum{color:var(--mute)}
+.dt ul.bl{margin:1rem 0;display:grid;gap:.55rem}
+.dt ul.bl li{position:relative;padding-left:1.2rem;font-size:.93rem;color:var(--ink)}
+.dt ul.bl li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:2px;background:var(--ac)}
+.dt .metric{display:flex;align-items:baseline;gap:.8rem;margin:1.1rem 0;padding:.9rem 1.1rem;border:1px solid var(--line);border-radius:14px;background:var(--s2)}
+.dt .metric b{font:700 1.9rem var(--disp);letter-spacing:-.04em;color:var(--ac2)}.dt .metric span{color:var(--mute);font-size:.85rem}
+.dt .chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.dt h5{margin:1.2rem 0 .5rem;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.pips{display:flex;gap:5px;margin:.4rem 0}.pips i{width:34px;height:7px;border-radius:4px;background:var(--s2);border:1px solid var(--line)}.pips i.on{background:var(--ac);border-color:var(--ac);box-shadow:0 0 12px var(--ac)}
+.usedin li{display:flex;align-items:center;gap:.7rem;padding:.55rem .7rem;border:1px solid var(--line);border-radius:10px;margin-bottom:.4rem;cursor:pointer;font-size:.9rem}
+.usedin li:hover{border-color:var(--ac);background:var(--acsoft)}.usedin li small{margin-left:auto;font:400 .72rem var(--mono);color:var(--faint)}
+.hint{margin-top:1.2rem;font:400 .78rem var(--mono);color:var(--faint)}
+
+/* sheet */
+.sheet-scrim{position:fixed;inset:0;z-index:30;background:rgba(2,5,10,.5);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .25s}
+.sheet{position:fixed;top:0;right:0;bottom:0;z-index:40;width:min(520px,100%);background:var(--s1);border-left:1px solid var(--line2);box-shadow:var(--shadow);transform:translateX(102%);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.sheet.on{transform:none}.sheet-scrim.on{opacity:1;pointer-events:auto}
+.sheet-bar{display:flex;align-items:center;gap:.5rem;padding:.9rem 1.1rem;border-bottom:1px solid var(--line)}
+.sheet-bar .c{margin-left:.5rem;font:400 .76rem var(--mono);color:var(--faint)}
+.sheet-body{padding:1.6rem 1.7rem 3rem;overflow:auto}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:80;background:var(--ink);color:var(--bg);padding:.7rem 1.1rem;border-radius:12px;font-weight:600;font-size:.88rem;opacity:0;pointer-events:none;transition:all .3s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.note{display:inline-block;margin-top:.7rem;opacity:.6}
+.in-frame .note{display:none}
+
+@media(max-width:900px){
+  .glance{grid-template-columns:1fr 1fr}.now{grid-row:auto;grid-column:span 2}.stats,.strip{grid-column:span 2}.stats{grid-template-columns:repeat(2,1fr)}
+  .tbl li{grid-template-columns:1fr 24px}.tbl .ro,.tbl .sk{display:none}.tbl .yr{grid-column:1/2}
+  .pal-body{grid-template-columns:1fr}.pal-prev{display:none}.pal-list{border:0}.pal{padding-top:6vh}
+  .who small,.ghost,.kbtn span.lbl{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="mark" href="#">SK</a>
+  <div class="who">Sam Keller<small>CV · 2026</small></div>
+  <span class="sp"></span>
+  <button class="kbtn" id="openPal" aria-label="Open command palette"><span class="lbl">Search</span><span><kbd class="mod">⌘</kbd> <kbd>K</kbd></span></button>
+  <button class="ghost" data-act="pdf">Download PDF</button>
+  <button class="ico-btn" data-act="theme" aria-label="Toggle theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow"><i class="dot"></i><span id="avail"></span></p>
+    <h1>I build <em>calm software</em> for complicated work.</h1>
+    <p class="lede" id="lede"></p>
+    <button class="cmd" id="heroCmd"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search roles, skills, projects…</span><span class="kb"><kbd class="mod">⌘</kbd><kbd>K</kbd></span></button>
+    <div class="quick" id="quick"></div>
+  </section>
+
+  <section class="glance" aria-label="At a glance">
+    <article class="card now" id="now" tabindex="0"></article>
+    <article class="card stats" id="stats"></article>
+    <article class="card strip"><h3>Career in one line</h3><div class="bars" id="bars"></div><div class="axis"><span>2012</span><span>2016</span><span>2020</span><span>today</span></div></article>
+    <article class="card" style="grid-column:span 2"><h3>Skills by area</h3><div class="skl" id="skl"></div></article>
+    <article class="card"><h3>Shipped under Katsumii</h3><ul class="proj" id="proj"></ul></article>
+  </section>
+
+  <section class="sec" id="exp"><h2>Experience <small id="expn"></small></h2><ul class="tbl" id="tbl"></ul></section>
+
+  <footer class="foot"><span id="contact"></span><span>Press <kbd class="mod">⌘</kbd> <kbd>K</kbd> anywhere · <kbd>/</kbd> also works<br><span class="note">Mockup · placeholder content</span></span></footer>
+</main>
+
+<div class="sheet-scrim" id="sscrim"></div>
+<aside class="sheet" id="sheet" aria-hidden="true">
+  <div class="sheet-bar"><button class="ico-btn" id="sprev" aria-label="Previous">←</button><button class="ico-btn" id="snext" aria-label="Next">→</button><span class="c" id="scount"></span><span class="sp"></span><button class="ico-btn" id="sclose" aria-label="Close">✕</button></div>
+  <div class="sheet-body dt" id="sbody"></div>
+</aside>
+
+<div class="pal" id="pal" aria-hidden="true">
+  <div class="pal-scrim" data-close></div>
+  <div class="pal-box" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="pal-in"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" placeholder="Search roles, skills, projects — or run an action" autocomplete="off" spellcheck="false"><kbd>esc</kbd></div>
+    <div class="pal-body"><ul class="pal-list" id="list" role="listbox"></ul><div class="pal-prev dt" id="prev"></div></div>
+    <div class="pal-foot"><span><kbd>↑</kbd><kbd>↓</kbd>navigate</span><span><kbd>↵</kbd>open</span><span><kbd>esc</kbd>close</span><span class="sp"></span><span id="count"></span></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>/*@DATA*/</script>
+<script>
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const isMac = /Mac|iPhone|iPad/.test(navigator.platform);
+$$(".mod").forEach((k) => (k.textContent = isMac ? "⌘" : "Ctrl"));
+
+/* ── static page ── */
+const skills = cvSkills();
+const cur = CV.roles[CV.roles.length - 1];
+$("#avail").textContent = CV.availability;
+$("#lede").textContent = CV.summary;
+$("#contact").textContent = CV.email + " · " + CV.location;
+$("#expn").textContent = CV.roles.length + " roles · " + CV.stats[0].v + "+ years";
+$("#quick").innerHTML = ["Experience", "Projects", "Skills", "Education", "Actions"].map((g) => `<button class="chip" data-open="${g}">${g}</button>`).join("");
+$("#now").innerHTML = `<h3><i class="dot" style="display:inline-block;margin-right:.5rem"></i>Now</h3><b>${cur.org}</b><p class="r">${cur.role}</p><p>${cur.summary}</p><span class="more">${cvRange(cur)} · open →</span>`;
+$("#stats").innerHTML = CV.stats.map((s) => `<div class="stat"><b data-v="${s.v}" data-s="${s.suffix}">0</b><span>${s.label}</span></div>`).join("");
+const total = CV.roles.reduce((a, r) => a + cvMonths(r), 0);
+$("#bars").innerHTML = CV.roles.map((r) => `<button style="flex:${cvMonths(r)}" data-role="${r.id}" title="${r.org} · ${cvDur(r)}">${r.org.split(" ")[0]}</button>`).join("");
+$("#skl").innerHTML = CV.categories.map((c) => `<div class="cat"><span style="--c:${CV.catColor[c]}">${c}</span><div>${skills.filter((s) => s.cat === c).map((s) => `<button class="chip" data-skill="${s.name}">${s.name}</button>`).join("")}</div></div>`).join("");
+$("#proj").innerHTML = CV.projects.map((p) => `<li data-proj="${p.id}" style="--c:${p.accent}"><i></i>${p.name}<small>${p.year}</small></li>`).join("");
+$("#tbl").innerHTML = [...CV.roles].reverse().map((r) => `<li data-role="${r.id}"><span class="yr">${cvRange(r).replace(" — ", " – ")}</span><span class="o">${r.org}</span><span class="ro">${r.role}</span><span class="sk">${r.skills.slice(0, 3).map((s) => `<span class="chip sm">${s}</span>`).join(" ")}</span><span class="arr">→</span></li>`).join("");
+
+/* count-up */
+const io = new IntersectionObserver((es) => es.forEach((e) => {
+  if (!e.isIntersecting) return; io.unobserve(e.target);
+  const v = +e.target.dataset.v, s = e.target.dataset.s, t0 = performance.now();
+  (function f(t) { const k = Math.min(1, (t - t0) / 1100), e2 = 1 - Math.pow(1 - k, 3); e.target.textContent = (v % 1 ? (v * e2).toFixed(1) : Math.round(v * e2)) + s; if (k < 1) requestAnimationFrame(f); })(t0);
+}), { threshold: .6 });
+$$("[data-v]").forEach((n) => io.observe(n));
+
+/* ── searchable items ── */
+const ICON = { Experience: "EX", Projects: "PR", Skills: "SK", Education: "ED", Actions: "⚡" };
+const items = [];
+[...CV.roles].reverse().forEach((r) => items.push({ id: "role:" + r.id, group: "Experience", title: r.org, sub: r.role + " · " + cvRange(r).split(" — ").map((x) => x.split(" ")[1]).join("–"),
+  kw: [r.role, r.place, ...r.skills, ...r.bullets].join(" ").toLowerCase(), detail: () => roleHtml(r) }));
+CV.projects.forEach((p) => items.push({ id: "proj:" + p.id, group: "Projects", title: p.name, sub: p.kind + " · " + p.year, kw: [p.desc, ...p.stack, "product", "app"].join(" ").toLowerCase(), detail: () => projHtml(p) }));
+skills.forEach((s) => items.push({ id: "skill:" + s.name, group: "Skills", title: s.name, sub: s.cat + " · " + s.years + " yrs", kw: s.cat.toLowerCase(), detail: () => skillHtml(s) }));
+CV.education.forEach((e) => items.push({ id: "edu:" + e.id, group: "Education", title: e.role, sub: e.org + " · " + e.from + "–" + e.to, kw: e.note.toLowerCase() + " university degree study", detail: () => eduHtml(e) }));
+const actions = [
+  ["Download CV as PDF", "Mockup — would download Sam-Keller-CV.pdf", () => toast("Mockup: would download Sam-Keller-CV.pdf")],
+  ["Copy email address", CV.email, () => { navigator.clipboard && navigator.clipboard.writeText(CV.email).catch(() => {}); toast("Copied " + CV.email); }],
+  ["Send an email", "Opens your mail app", () => (location.href = "mailto:" + CV.email)],
+  ["Open LinkedIn", CV.linkedin, () => toast("Mockup: would open " + CV.linkedin)],
+  ["Open GitHub", CV.github, () => toast("Mockup: would open " + CV.github)],
+  ["Toggle light / dark theme", "Switch appearance", () => toggleTheme()]
+];
+actions.forEach(([title, sub, run], i) => items.push({ id: "act:" + i, group: "Actions", title, sub, kw: "action command contact hire", run, detail: () => `<span class="badge">Action</span><h3>${title}</h3><p class="sum">${sub}</p><p class="hint">Press ↵ to run</p>` }));
+
+/* ── detail renderers ── */
+const chips = (arr) => `<div class="chips">${arr.map((s) => `<button class="chip sm" data-skill="${cvEsc(s)}">${cvEsc(s)}</button>`).join("")}</div>`;
+function roleHtml(r) {
+  return `<span class="badge">Experience</span><h3>${r.org}</h3><p class="sub">${r.role}</p><p class="meta">${cvRange(r)} · ${cvDur(r)} · ${r.place}</p><p class="sum">${r.summary}</p>
+  <ul class="bl">${r.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
+  <div class="metric"><b>${r.metric.v}</b><span>${r.metric.l}</span></div><h5>Stack &amp; skills</h5>${chips(r.skills)}`;
+}
+function skillHtml(s) {
+  return `<span class="badge">Skill · ${s.cat}</span><h3>${s.name}</h3><div class="pips">${[1, 2, 3, 4, 5].map((i) => `<i class="${i <= s.level ? "on" : ""}"></i>`).join("")}</div>
+  <p class="meta">${s.level}/5 proficiency · ${s.years} years in production</p><h5>Used in ${s.roles.length} roles</h5>
+  <ul class="usedin">${s.roles.map((id) => { const r = cvRole(id); return `<li data-role="${id}"><b>${r.org}</b><span style="color:var(--mute)">${r.role}</span><small>${cvDur(r)}</small></li>`; }).join("")}</ul>`;
+}
+function projHtml(p) {
+  return `<span class="badge">Project · ${p.year}</span><h3 style="color:${p.accent}">${p.name}</h3><p class="meta">${p.kind}</p><p class="sum">${p.desc}</p><h5>Built with</h5>${chips(p.stack)}`;
+}
+function eduHtml(e) { return `<span class="badge">Education</span><h3>${e.role}</h3><p class="sub">${e.org}</p><p class="meta">${e.from} – ${e.to}</p><p class="sum">${e.note}</p>`; }
+
+/* ── fuzzy search ── */
+function fz(q, s) {
+  const l = s.toLowerCase(), i = l.indexOf(q);
+  if (i >= 0) return { score: 100 - i * 2 + (i === 0 ? 40 : 0) + (l[i - 1] === " " ? 20 : 0), idx: Array.from({ length: q.length }, (_, k) => i + k) };
+  let qi = 0, idx = [], score = 0, last = -2;
+  for (let k = 0; k < l.length && qi < q.length; k++) if (l[k] === q[qi]) { idx.push(k); score += (k === last + 1 ? 8 : 3) + (k === 0 || l[k - 1] === " " ? 6 : 0); last = k; qi++; }
+  return qi === q.length && q.length > 1 ? { score, idx } : null;
+}
+function search(raw) {
+  const terms = raw.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!terms.length) {
+    const take = { Experience: 5, Projects: 4, Skills: 6, Actions: 6, Education: 0 };
+    const cnt = {};
+    return items.filter((it) => (cnt[it.group] = (cnt[it.group] || 0) + 1) <= take[it.group]).map((it) => ({ it, idx: [] }));
+  }
+  const out = [];
+  for (const it of items) {
+    let total = 0, idx = [], ok = true;
+    for (const t of terms) {
+      const a = fz(t, it.title), b = a || fz(t, it.sub);
+      if (a) { total += a.score * 3; idx = idx.concat(a.idx); }
+      else if (b) total += b.score * 1.5;
+      else if (it.kw.includes(t)) total += 20;
+      else { ok = false; break; }
+    }
+    if (ok) out.push({ it, idx: [...new Set(idx)], score: total });
+  }
+  return out.sort((a, b) => b.score - a.score).slice(0, 40);
+}
+function hl(title, idx) { if (!idx.length) return cvEsc(title); const set = new Set(idx); return [...title].map((c, i) => (set.has(i) ? `<mark>${cvEsc(c)}</mark>` : cvEsc(c))).join(""); }
+
+/* ── palette ── */
+const pal = $("#pal"), q = $("#q"), list = $("#list"), prev = $("#prev");
+let results = [], sel = 0, opener = null;
+function render() {
+  results = search(q.value);
+  sel = Math.min(sel, Math.max(0, results.length - 1));
+  let last = "", html = "";
+  results.forEach((r, i) => {
+    if (r.it.group !== last) { html += `<h4>${r.it.group}</h4>`; last = r.it.group; }
+    html += `<li class="it${i === sel ? " sel" : ""}" role="option" data-i="${i}"><span class="ic">${ICON[r.it.group]}</span><span class="m"><div class="t">${hl(r.it.title, r.idx)}</div><div class="s">${cvEsc(r.it.sub)}</div></span><span class="ret">↵</span></li>`;
+  });
+  list.innerHTML = html || `<li class="empty">No match for “${cvEsc(q.value)}”.<br>Try “vue”, “lead” or “checkout”.</li>`;
+  $("#count").textContent = results.length ? results.length + " results" : "";
+  showPrev();
+}
+function showPrev() { prev.innerHTML = results[sel] ? results[sel].it.detail() : `<p class="hint">Nothing selected</p>`; const el = $(".it.sel", list); el && el.scrollIntoView({ block: "nearest" }); }
+function move(d) { if (!results.length) return; sel = (sel + d + results.length) % results.length; $$(".it", list).forEach((n, i) => n.classList.toggle("sel", i === sel)); showPrev(); }
+function openPal(prefill = "", focusGroup = "") {
+  opener = document.activeElement; pal.classList.add("on"); pal.setAttribute("aria-hidden", "false"); q.value = prefill; sel = 0;
+  render(); if (focusGroup) { const i = results.findIndex((r) => r.it.group === focusGroup); if (i >= 0) { sel = i; render(); } }
+  setTimeout(() => q.focus(), 20);
+}
+function closePal() { pal.classList.remove("on"); pal.setAttribute("aria-hidden", "true"); opener && opener.focus && opener.focus(); }
+function run(i) { const r = results[i]; if (!r) return; closePal(); if (r.it.run) r.it.run(); else openSheet(r.it.id); }
+q.addEventListener("input", () => { sel = 0; render(); });
+list.addEventListener("click", (e) => { const li = e.target.closest(".it"); if (li) run(+li.dataset.i); });
+list.addEventListener("mousemove", (e) => { const li = e.target.closest(".it"); if (li && +li.dataset.i !== sel) { sel = +li.dataset.i; $$(".it", list).forEach((n, i) => n.classList.toggle("sel", i === sel)); showPrev(); } });
+prev.addEventListener("click", (e) => detailClick(e, true));
+pal.addEventListener("click", (e) => { if (e.target.hasAttribute("data-close")) closePal(); });
+function detailClick(e, inPal) {
+  const sk = e.target.closest("[data-skill]"), ro = e.target.closest("[data-role]");
+  if (sk && inPal) { q.value = sk.dataset.skill; sel = 0; render(); q.focus(); }
+  else if (sk) openPal(sk.dataset.skill);
+  else if (ro) { if (inPal) closePal(); openSheet("role:" + ro.dataset.role); }
+}
+
+/* ── sheet ── */
+const sheet = $("#sheet"), sscrim = $("#sscrim");
+let sheetId = null;
+const sheetGroup = () => items.filter((it) => it.group === items.find((x) => x.id === sheetId).group);
+function openSheet(id) {
+  sheetId = id; const it = items.find((x) => x.id === id), g = sheetGroup();
+  $("#sbody").innerHTML = it.detail(); $("#scount").textContent = it.group + " · " + (g.indexOf(it) + 1) + "/" + g.length; $("#sbody").scrollTop = 0;
+  sheet.classList.add("on"); sscrim.classList.add("on"); sheet.setAttribute("aria-hidden", "false");
+}
+function closeSheet() { sheet.classList.remove("on"); sscrim.classList.remove("on"); sheet.setAttribute("aria-hidden", "true"); sheetId = null; }
+function stepSheet(d) { const g = sheetGroup(), i = g.findIndex((x) => x.id === sheetId); openSheet(g[(i + d + g.length) % g.length].id); }
+$("#sclose").onclick = closeSheet; sscrim.onclick = closeSheet; $("#sprev").onclick = () => stepSheet(-1); $("#snext").onclick = () => stepSheet(1);
+$("#sbody").addEventListener("click", (e) => detailClick(e, false));
+
+/* ── global wiring ── */
+document.addEventListener("click", (e) => {
+  const t = e.target.closest("[data-open],[data-role],[data-skill],[data-proj],[data-act]");
+  if (!t || pal.contains(t) || sheet.contains(t)) return;
+  if (t.dataset.open) openPal("", t.dataset.open);
+  else if (t.dataset.role) openSheet("role:" + t.dataset.role);
+  else if (t.dataset.skill) openPal(t.dataset.skill);
+  else if (t.dataset.proj) openSheet("proj:" + t.dataset.proj);
+  else if (t.dataset.act === "pdf") toast("Mockup: would download Sam-Keller-CV.pdf");
+  else if (t.dataset.act === "theme") toggleTheme();
+});
+$("#openPal").onclick = () => openPal(); $("#heroCmd").onclick = () => openPal();
+$("#now").onclick = () => openSheet("role:" + cur.id);
+document.addEventListener("keydown", (e) => {
+  const on = pal.classList.contains("on");
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); on ? closePal() : openPal(); return; }
+  if (!on && e.key === "/" && !/input|textarea/i.test(document.activeElement.tagName)) { e.preventDefault(); openPal(); return; }
+  if (on) {
+    if (e.key === "Escape") closePal();
+    else if (e.key === "ArrowDown") { e.preventDefault(); move(1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); move(-1); }
+    else if (e.key === "Enter") { e.preventDefault(); run(sel); }
+  } else if (sheet.classList.contains("on")) {
+    if (e.key === "Escape") closeSheet(); else if (e.key === "ArrowRight") stepSheet(1); else if (e.key === "ArrowLeft") stepSheet(-1);
+  }
+});
+function toggleTheme() { const h = document.documentElement; h.dataset.theme = h.dataset.theme === "dark" ? "light" : "dark"; }
+let tt; function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 2200); }
+if (/[?&]open=1/.test(location.search)) openPal(new URLSearchParams(location.search).get("q") || "");
+</script>
+</body></html>

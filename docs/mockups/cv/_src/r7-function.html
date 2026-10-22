@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sam Keller — CV · Function</title>
+<!-- MOCKUP: all CV content is placeholder (see _src/data.js) -->
+<style>/*@FONTS*/
+*,*::before,*::after{box-sizing:border-box}
+:root{--bg:#e9e8e3;--s:#f5f4f0;--s2:#dedcd6;--ink:#16161a;--mute:#6a6a70;--faint:#9a9aa0;--line:rgba(22,22,26,.16);--line2:rgba(22,22,26,.32);--or:#ff4f00;--dk:#16161a;--dkink:#f2f1ec;
+  --body:"DM Sans",sans-serif;--mono:"DM Mono",ui-monospace,monospace;--disp:"Sora","DM Sans",sans-serif}
+html[data-theme=dark]{--bg:#121214;--s:#1a1a1d;--s2:#26262a;--ink:#efeee9;--mute:#9b9ba2;--faint:#64646b;--line:rgba(239,238,233,.14);--line2:rgba(239,238,233,.3);--dk:#0a0a0c;--dkink:#efeee9}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}h1,h2,h3,h4,p,ul{margin:0;padding:0}ul{list-style:none}
+.mono{font:500 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.wrap{max-width:1360px;margin:0 auto;padding:0 clamp(1.1rem,4vw,3rem)}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .8s cubic-bezier(.2,.7,.2,1) var(--d,0s)}.rv.in{opacity:1;transform:none}
+
+/* top */
+.top{position:fixed;left:0;right:0;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:1rem}
+.brand{display:flex;align-items:center;gap:.7rem;font-weight:600;letter-spacing:-.02em}.brand i{width:10px;height:10px;border-radius:50%;background:var(--or)}.brand span{color:var(--faint);font:500 .7rem var(--mono);letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+.tn{display:flex;align-items:center;gap:1.8rem}.tn a{font-size:.9rem;color:var(--mute);transition:color .2s;position:relative}.tn a:hover,.tn a.on{color:var(--ink)}.tn a.on::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--or)}
+.sw{display:flex;align-items:center;gap:.6rem;font:500 .68rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sw button{width:46px;height:26px;border-radius:7px;background:var(--s2);box-shadow:inset 0 1px 3px rgba(0,0,0,.25),0 1px 0 rgba(255,255,255,.4);position:relative}.sw button::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:5px;background:var(--s);box-shadow:0 1px 2px rgba(0,0,0,.35);transition:transform .25s cubic-bezier(.3,1.3,.5,1)}
+html[data-theme=dark] .sw button::after{transform:translateX(20px);background:var(--or)}
+#prog{position:fixed;left:0;top:58px;height:2px;width:0;background:var(--or);z-index:60}
+
+/* hero */
+.hero{min-height:100svh;padding:7.5rem 0 3rem;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,5vw,5rem);align-items:center}
+.kick{display:flex;align-items:center;gap:.7rem;color:var(--mute)}.kick i{width:8px;height:8px;border-radius:50%;background:#2fbf71;animation:pl 2.2s infinite}@keyframes pl{70%{box-shadow:0 0 0 8px transparent}0%{box-shadow:0 0 0 0 rgba(47,191,113,.55)}}
+.hero h1{font:500 clamp(2.8rem,6.4vw,6rem)/1.02 var(--body);letter-spacing:-.06em;margin:1.4rem 0 1.4rem}.hero h1 em{font-style:normal;color:var(--faint)}
+.lead{font-size:clamp(1.05rem,1.5vw,1.22rem);color:var(--mute);max-width:32rem}
+.cta{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem}.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.5rem;border-radius:12px;font-weight:600;font-size:.95rem;transition:all .2s;border:1px solid var(--line2)}
+.btn.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}.btn.p:hover{background:var(--or);border-color:var(--or);color:#fff}.btn:not(.p):hover{background:var(--s2)}
+.facts{display:grid;grid-template-columns:repeat(4,auto);gap:2rem;margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line);justify-content:start}.facts b{display:block;font:300 2.4rem/1 var(--body);letter-spacing:-.05em}.facts span{font:500 .66rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+/* dial */
+.dialw{position:relative;justify-self:center;width:min(100%,520px)}
+#dial{width:100%;height:auto;display:block;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;outline:none}#dial:active{cursor:grabbing}#dial:focus-visible .knob{stroke:var(--or);stroke-width:2}
+#dial text{font:500 10px var(--mono);fill:var(--faint);text-anchor:middle;letter-spacing:.06em}
+.tickM{stroke:var(--line2);stroke-width:1}.tickY{stroke:var(--ink);stroke-width:1.4}
+.arcD{fill:none;stroke:var(--s2);stroke-width:8;stroke-linecap:butt}.arcD.on{stroke:var(--ink)}.arcL{fill:none;stroke:var(--or);stroke-width:3;opacity:.45;stroke-linecap:round}.arcL.on{opacity:1}
+.knob{fill:url(#kg);stroke:var(--line2);stroke-width:1}
+#hand{transition:transform .5s cubic-bezier(.3,1.2,.4,1)}#hand.drag{transition:none}
+.ctr{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:41%;text-align:center;pointer-events:none}
+.ctr .yr{font:300 clamp(2.4rem,6vw,4.2rem)/1 var(--body);letter-spacing:-.06em}.ctr .og{margin-top:.5rem;font-weight:600;font-size:clamp(.85rem,1.4vw,1.05rem);letter-spacing:-.02em;line-height:1.2}.ctr .rl{font-size:.74rem;color:var(--mute);line-height:1.3;margin-top:.2rem}.ctr .lb{margin-top:.6rem;color:var(--or)}
+.dhint{display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;color:var(--faint)}.dhint button{padding:.5rem .9rem;border-radius:10px;border:1px solid var(--line2);font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);transition:all .2s}.dhint button:hover{background:var(--ink);color:var(--bg)}
+.lg{display:flex;gap:1.2rem}.lg span{display:flex;align-items:center;gap:.4rem}.lg i{width:14px;height:4px;background:var(--ink)}.lg i.o{background:var(--or)}
+
+/* sections */
+.sec{padding:clamp(5rem,13vh,8rem) 0 0}
+.sg{display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(1.4rem,4vw,4rem);border-top:1px solid var(--ink);padding-top:1.4rem}
+.sl{position:sticky;top:5rem;align-self:start}.sl .n{color:var(--or)}.sl h2{font:500 clamp(1.4rem,2vw,1.8rem)/1.1 var(--body);letter-spacing:-.04em;margin-top:.5rem}.sl p{color:var(--mute);font-size:.9rem;margin-top:.7rem;max-width:15rem}
+/* accordion */
+.row{border-bottom:1px solid var(--line)}.row:first-child{border-top:0}
+.rh{display:grid;grid-template-columns:44px 1.2fr 1.5fr 150px 28px;gap:1rem;align-items:baseline;width:100%;text-align:left;padding:1.5rem 0;transition:padding .3s}
+.rh:hover{padding-left:.5rem}.ix{font:500 .72rem var(--mono);color:var(--faint)}.org{font:500 clamp(1.3rem,2.2vw,1.9rem) var(--body);letter-spacing:-.045em}.rl2{color:var(--mute)}.yr2{font:500 .72rem var(--mono);color:var(--faint);letter-spacing:.06em}
+.pm{width:20px;height:20px;position:relative;justify-self:end;align-self:center}.pm::before,.pm::after{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--ink);transition:transform .3s}.pm::after{transform:rotate(90deg)}.row.open .pm::after{transform:rotate(0)}.row.open .org{color:var(--or)}
+.rb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1)}.row.open .rb{grid-template-rows:1fr}.rb>div{overflow:hidden}
+.rbi{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(1.4rem,3vw,3rem);padding:.4rem 0 2.4rem 60px}
+.hook{font:500 clamp(1.25rem,1.8vw,1.55rem)/1.3 var(--body);letter-spacing:-.04em}.sum{color:var(--mute);margin-top:.9rem}
+.outs{display:grid;gap:.6rem;margin:1.3rem 0}.outs li{display:grid;grid-template-columns:22px 1fr;gap:.4rem;font-size:.96rem}.outs li::before{content:"—";color:var(--or);font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}.tags span{padding:.25rem .7rem;border:1px solid var(--line2);border-radius:7px;font:400 .72rem var(--mono);color:var(--mute)}
+.pnl{background:var(--s);border:1px solid var(--line);border-radius:16px;padding:1.2rem 1.3rem 1.1rem;position:relative}.pnl .vzh{font:500 .66rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:.9rem}
+.pnl .mt{display:flex;align-items:baseline;gap:.7rem;padding-bottom:.9rem;margin-bottom:.9rem;border-bottom:1px solid var(--line)}.pnl .mt b{font:300 2.6rem/1 var(--body);letter-spacing:-.06em}.pnl .mt span{font-size:.82rem;color:var(--mute)}
+.vz{--vc:var(--ink);--vi:var(--ink);--vl:var(--line2)}.vz-fat .cv{stroke:var(--or)!important}.vz-cmp .tr i.a{background:var(--or)!important}.vz-ring .v{stroke:var(--or)!important}.vz-gears .g{stroke:var(--ink)!important}
+/* lab block */
+.dk{background:var(--dk);color:var(--dkink);border-radius:24px;padding:clamp(1.4rem,3vw,2.6rem)}.dk .lbl{color:#8d8d94}
+.dk h3{font:500 clamp(1.7rem,3.2vw,2.8rem)/1.05 var(--body);letter-spacing:-.05em}.dk h3 em{font-style:normal;color:#8d8d94}.dk .sub{color:#b3b3ba;margin-top:.9rem;max-width:34rem}
+.lab{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(1.2rem,3vw,2.4rem);margin-top:2rem}
+.tm{border:1px solid #2c2c32;border-radius:14px;overflow:hidden;background:#0f0f12}.tm .uh{display:flex;gap:.4rem;align-items:center;padding:.65rem .9rem;border-bottom:1px solid #2c2c32;font:400 .68rem var(--mono);color:#777}.tm .uh i{width:9px;height:9px;border-radius:50%;background:#2c2c32}.tm .uh span{margin-left:.6rem}
+.tm pre{margin:0;padding:1.1rem 1.2rem;font:400 .84rem/1.85 var(--mono);white-space:pre-wrap;min-height:236px}.tm .cmd::before{content:"$ ";color:var(--or)}.tm .you{font-weight:500}.tm .you::before{content:"> ";color:#8d8d94}.tm .dim{color:#777}.tm .ok{color:#5fd49a}.tm .ask{color:var(--or)}.tm .cur::after{content:"▍";color:var(--or);animation:bk 1s steps(2) infinite}@keyframes bk{50%{opacity:0}}
+.pr{display:grid;gap:0}.pr div{padding:.9rem 0;border-top:1px solid #2c2c32}.pr div:first-child{border:0;padding-top:0}.pr b{font:500 .98rem var(--body);letter-spacing:-.02em}.pr b i{font:500 .68rem var(--mono);color:var(--or);font-style:normal;margin-right:.6rem}.pr p{font-size:.88rem;color:#a7a7ae;margin-top:.25rem;line-height:1.5}
+.apps{margin-top:2rem;border-top:1px solid #2c2c32}.apps div{display:grid;grid-template-columns:30px 1.1fr 1.4fr 1.2fr 80px;gap:1rem;align-items:baseline;padding:1rem 0;border-bottom:1px solid #2c2c32;transition:padding .25s}.apps div:hover{padding-left:.6rem}.apps i{width:9px;height:9px;border-radius:50%;background:var(--c);align-self:center}.apps b{font:500 1.15rem var(--body);letter-spacing:-.03em}.apps span{color:#a7a7ae;font-size:.9rem}.apps small{font:500 .68rem var(--mono);letter-spacing:.06em;color:#777;text-align:right}
+.stp{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:1.6rem}.stp div{padding-top:.8rem;border-top:2px solid #2c2c32}.stp div:last-child{border-color:var(--or)}.stp b{font:500 .98rem var(--body)}.stp p{font-size:.86rem;color:#a7a7ae;margin-top:.2rem;line-height:1.45}
+/* matrix */
+.mx{overflow:auto;padding-bottom:.5rem}.mxi{min-width:760px}
+.mh,.mr{display:grid;grid-template-columns:230px repeat(12,1fr) 60px;align-items:center}
+.mh{margin-bottom:.4rem;font:500 .66rem var(--mono);color:var(--faint);letter-spacing:.06em}.mh span{text-align:center}
+.bands{display:grid;grid-template-columns:230px repeat(12,1fr) 60px;margin-bottom:.7rem}.lane{grid-column:2/14;position:relative;height:24px}.bands>b{font:500 .66rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);align-self:center}
+.band{position:absolute;top:0;height:24px;border-radius:5px;background:var(--ink);color:var(--bg);font:500 .62rem var(--mono);padding:0 .5rem;display:flex;align-items:center;overflow:hidden;white-space:nowrap;margin-right:2px}.band.l{background:var(--or);color:#fff}.band.a{background:var(--s2);color:var(--ink)}
+.cat{grid-column:1/-1;margin:1.2rem 0 .3rem;font:500 .68rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);padding-bottom:.4rem;border-bottom:1px solid var(--line2)}
+.mr{padding:.1rem 0;border-radius:6px;cursor:default;transition:background .15s}.mr:hover{background:var(--s)}.mr>span{font-size:.92rem;padding:.25rem .3rem}.mr .c{height:22px;margin:2px 2px;border-radius:4px;background:var(--s2);opacity:.55;transition:all .2s}.mr .c.u{background:var(--ink);opacity:var(--o)}.mr.ai .c.u{background:var(--or)}.mr:hover .c.u{opacity:1}
+.mr .y{font:500 .68rem var(--mono);color:var(--faint);text-align:right;padding-right:.3rem}
+.mi{margin-top:1rem;min-height:3rem;font-size:.92rem;color:var(--mute);border-top:1px solid var(--line);padding-top:.8rem}.mi b{color:var(--ink)}
+/* profile */
+.pf{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3vw,3rem)}.tbl div{display:grid;grid-template-columns:130px 1fr;gap:1rem;padding:.9rem 0;border-top:1px solid var(--line)}.tbl div:first-child{border-top:0;padding-top:0}.tbl span{font:500 .68rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:.2rem}
+.q{padding:1.4rem 0;border-top:1px solid var(--line)}.q:first-child{border-top:0;padding-top:0}.q blockquote{font:300 clamp(1.4rem,2.2vw,2rem)/1.25 var(--body);letter-spacing:-.04em;margin:0}.q cite{display:block;margin-top:.8rem;font:500 .68rem var(--mono);letter-spacing:.1em;color:var(--faint);font-style:normal;text-transform:uppercase}
+/* contact */
+.end{margin-top:clamp(6rem,15vh,10rem);background:var(--dk);color:var(--dkink);padding:clamp(4rem,10vh,7rem) 0 2rem}
+.end h2{font:500 clamp(2.4rem,7vw,6.6rem)/1 var(--body);letter-spacing:-.065em;max-width:14ch;margin-top:1.2rem}.end h2 em{font-style:normal;color:#8d8d94}
+.mail{display:inline-flex;align-items:center;gap:1rem;margin-top:clamp(2rem,5vh,3.2rem);font:500 clamp(1.4rem,4vw,3.4rem)/1.1 var(--body);letter-spacing:-.05em;border-bottom:2px solid #3a3a41;padding-bottom:.2em;transition:border-color .3s,color .3s}.mail i{width:.32em;height:.32em;border-radius:50%;background:var(--or);transition:transform .3s}.mail:hover{border-color:var(--or)}.mail:hover i{transform:scale(1.8)}
+.end .row2{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem;color:#a7a7ae;font-size:.95rem}.end .row2 a:hover{color:var(--or)}
+.foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:clamp(3rem,8vh,5rem);padding-top:1.4rem;border-top:1px solid #2c2c32;font:500 .68rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#6d6d74}.in-frame .foot .mk{display:none}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:90;padding:.75rem 1.2rem;border-radius:10px;background:var(--ink);color:var(--bg);font-weight:600;font-size:.9rem;opacity:0;pointer-events:none;transition:all .35s}.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:1000px){body{overflow-x:hidden}.brand{white-space:nowrap}.brand span,.sw span{display:none}.hero{grid-template-columns:minmax(0,1fr);padding-top:6.5rem}.dialw{order:-1;width:min(86vw,440px)}.sg{grid-template-columns:minmax(0,1fr)}.sl{position:static}.sl p{max-width:none}.rh{grid-template-columns:34px minmax(0,1fr) 28px}.rl2,.yr2{display:none}.rbi{grid-template-columns:minmax(0,1fr);padding-left:0}.lab,.pf{grid-template-columns:minmax(0,1fr)}.rb>div,.rbi>*{min-width:0}.apps div{grid-template-columns:20px 1fr 70px}.apps div span{display:none}.stp{grid-template-columns:1fr 1fr}.tn a:not(.keep){display:none}.facts{grid-template-columns:repeat(2,auto)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.vz-fat .cv{stroke-dashoffset:0}.vz-fat circle{opacity:.85}}
+/*@VIS_CSS*/
+.vz{--vc:var(--ink);--vi:var(--ink);--vl:var(--line2)}.vz-fat .cv{stroke:var(--or)!important}.vz-cmp .tr i.a{background:var(--or)!important}.vz-ring .v{stroke:var(--or)!important}.vz-gears .g{stroke:var(--ink)!important}
+</style></head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="#top"><i></i>Sam Keller<span>CV · 2026</span></a>
+  <nav class="tn" id="tn"><a href="#work">Experience</a><a href="#lab">After hours</a><a href="#skills">Skills</a><a href="#profile">Profile</a><a class="keep" href="#contact">Contact</a></nav>
+  <div class="sw"><span>Light</span><button id="theme" role="switch" aria-label="Dark mode"></button><span>Dark</span></div></div></header>
+<div id="prog"></div>
+
+<main id="top">
+<div class="wrap"><section class="hero">
+  <div>
+    <p class="kick mono rv"><i></i><span id="avail"></span></p>
+    <h1 class="rv" style="--d:.05s">Engineering,<br>with <em>intent.</em></h1>
+    <p class="lead rv" style="--d:.12s" id="lede"></p>
+    <div class="cta rv" style="--d:.2s"><a class="btn p" href="#contact">Get in touch</a><a class="btn" href="#work">Experience ↓</a></div>
+    <div class="facts rv" style="--d:.28s" id="facts"></div>
+  </div>
+  <div class="dialw rv" style="--d:.15s">
+    <svg id="dial" viewBox="-24 -24 448 448" tabindex="0" role="slider" aria-label="Time dial — 2015 to today" aria-valuemin="0" aria-valuemax="100"></svg>
+    <div class="ctr"><div class="yr" id="dy"></div><div class="og" id="do"></div><div class="rl" id="dr"></div><div class="lb mono" id="dl"></div></div>
+    <div class="dhint mono"><span class="lg"><span><i></i>Day job</span><span><i class="o"></i>After hours</span></span><button id="dopen">Open ↓</button></div>
+  </div>
+</section></div>
+
+<div class="wrap sec" id="work"><div class="sg">
+  <div class="sl rv"><p class="mono n">01</p><h2>Experience</h2><p>Four stations of day-job engineering. Turn the dial above, or open a row.</p></div>
+  <div id="rows"></div>
+</div></div>
+
+<div class="wrap sec" id="lab"><div class="sg">
+  <div class="sl rv"><p class="mono n">02</p><h2>After hours</h2><p>The passion project: building software with AI, engineered like a product.</p></div>
+  <div class="dk rv"><p class="lbl mono">Passion · since March 2023</p><h3 style="margin-top:.7rem">By day: machines.<br><em>By night: models.</em></h3><p class="sub" id="labs"></p>
+    <div class="lab"><div class="tm"><div class="uh"><i></i><i></i><i></i><span>~/katsumii — claude</span></div><pre id="term"></pre></div><div class="pr" id="prin"></div></div>
+    <div class="apps" id="apps"></div><div class="stp" id="stp"></div></div>
+</div></div>
+
+<div class="wrap sec" id="skills"><div class="sg">
+  <div class="sl rv"><p class="mono n">03</p><h2>Skills over time</h2><p>Darker = stronger. Each cell is a year the skill was in daily use.</p></div>
+  <div class="rv"><div class="mx"><div class="mxi" id="mx"></div></div><div class="mi" id="mi">Hover a row.</div></div>
+</div></div>
+
+<div class="wrap sec" id="profile"><div class="sg">
+  <div class="sl rv"><p class="mono n">04</p><h2>Profile</h2><p>The short facts, and what others say.</p></div>
+  <div class="pf rv"><div class="tbl" id="tbl"></div><div id="qs"></div></div>
+</div></div>
+
+<footer class="end" id="contact"><div class="wrap">
+  <p class="mono rv" style="color:#8d8d94">05 · Contact</p>
+  <h2 class="rv" style="--d:.05s">Something that<br><em>has to work?</em></h2>
+  <a class="mail rv" style="--d:.1s" id="mail" href="#"><span id="mailtxt"></span><i></i></a>
+  <div class="row2 rv" style="--d:.15s" id="links"></div>
+  <div class="foot"><span>© 2026 Sam Keller · Stuttgart</span><span class="mk">Mockup · placeholder content</span></div>
+</div></footer>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>/*@DATA*/</script>
+<script>/*@VIS_JS*/</script>
+<script>
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const jobs = CV.roles.filter((r) => !r.side), lab = cvRole("lab"), skills = cvSkills(), LAB = CV.lab;
+let tt; const toast = (m) => { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 2200); };
+
+/* ── static copy ── */
+$("#avail").textContent = CV.availability; $("#lede").textContent = CV.summary;
+$("#facts").innerHTML = [CV.stats[0], CV.stats[1], CV.stats[2], CV.stats[3]].map((s) => `<div><b>${s.v}${s.suffix}</b><span>${s.label.split(" ").slice(0, 2).join(" ")}</span></div>`).join("");
+$("#mailtxt").textContent = CV.email; $("#mail").href = "mailto:" + CV.email;
+$("#links").innerHTML = [["LinkedIn", CV.linkedin], ["GitHub", CV.github], ["katsumii.com", CV.site]].map(([a, b]) => `<a href="#" title="${b}">${a} ↗</a>`).join("");
+$("#links").addEventListener("click", (e) => { const a = e.target.closest("a"); if (a) { e.preventDefault(); toast("Mockup: would open " + a.title); } });
+
+/* ── the time dial ── */
+const T0 = cvIdx(jobs[0].from), T1 = cvIdx(CV.now), A0 = -135, A1 = 135, CX = 200, CY = 200;
+const angOf = (m) => A0 + (m - T0) / (T1 - T0) * (A1 - A0), mOf = (a) => T0 + (a - A0) / (A1 - A0) * (T1 - T0);
+const P = (r, a) => [CX + r * Math.sin(a * Math.PI / 180), CY - r * Math.cos(a * Math.PI / 180)];
+const arc = (r, a, b) => { const [x1, y1] = P(r, a), [x2, y2] = P(r, b); return `M${x1.toFixed(2)} ${y1.toFixed(2)}A${r} ${r} 0 ${b - a > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`; };
+(function buildDial() {
+  let h = `<defs><radialGradient id="kg" cx="40%" cy="32%" r="80%"><stop offset="0" stop-color="var(--s)"/><stop offset="1" stop-color="var(--s2)"/></radialGradient><filter id="ks" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#000" flood-opacity=".22"/></filter></defs>`;
+  for (let y = 2016; y <= 2026; y++) { const m = y * 12; if (m < T0 || m > T1) continue; const a = angOf(m), [x1, y1] = P(174, a), [x2, y2] = P(188, a), [tx, ty] = P(204, a); h += `<line class="tickY" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/><text x="${tx}" y="${ty + 3}">${y}</text>`; }
+  for (let m = Math.ceil(T0 / 3) * 3; m <= T1; m += 3) { const a = angOf(m), [x1, y1] = P(178, a), [x2, y2] = P(185, a); h += `<line class="tickM" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`; }
+  jobs.forEach((r) => { h += `<path class="arcD" data-id="${r.id}" d="${arc(160, angOf(cvIdx(r.from)) + .6, angOf(cvIdx(cvEnd(r)) + 1 > T1 ? T1 : cvIdx(cvEnd(r)) + 1) - .6)}"/>`; });
+  h += `<path class="arcL" id="arcL" d="${arc(148, angOf(cvIdx(lab.from)), A1)}"/>`;
+  h += `<circle class="knob" cx="${CX}" cy="${CY}" r="112" filter="url(#ks)"/><circle cx="${CX}" cy="${CY}" r="100" fill="none" stroke="var(--line)"/>`;
+  h += `<g id="hand" style="transform-origin:${CX}px ${CY}px"><line x1="${CX}" y1="${CY - 112}" x2="${CX}" y2="${CY - 156}" stroke="var(--or)" stroke-width="3" stroke-linecap="round"/><circle cx="${CX}" cy="${CY - 112}" r="5" fill="var(--or)"/></g>`;
+  $("#dial").innerHTML = h;
+})();
+let cur = T1, dragging = false, openId = null;
+const roleAt = (m) => jobs.find((r) => m >= cvIdx(r.from) && m <= cvIdx(cvEnd(r))) || (m < cvIdx(jobs[0].from) ? jobs[0] : jobs[jobs.length - 1]);
+function setDial(m, silent) {
+  cur = clamp(Math.round(m), T0, T1); const a = angOf(cur), r = roleAt(cur), y = Math.floor(cur / 12), mo = cur % 12;
+  $("#hand").style.transform = `rotate(${a}deg)`; $("#hand").classList.toggle("drag", dragging);
+  $("#dy").textContent = y; $("#do").textContent = r.org; $("#dr").textContent = r.role + " · " + MONTHS[mo]; const inLab = cur >= cvIdx(lab.from); $("#dl").textContent = inLab ? "+ AI after hours" : "";
+  $$(".arcD").forEach((p) => p.classList.toggle("on", p.dataset.id === r.id)); $("#arcL").classList.toggle("on", inLab);
+  $("#dial").setAttribute("aria-valuenow", Math.round((cur - T0) / (T1 - T0) * 100)); $("#dial").setAttribute("aria-valuetext", `${MONTHS[mo]} ${y}, ${r.org}`); $("#dopen").dataset.id = r.id;
+}
+const dial = $("#dial");
+function fromPointer(e) { const r = dial.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2); let d = Math.atan2(dx, -dy) * 180 / Math.PI; if (d > A1 || d < A0) d = (Math.abs(d) > 135 && Math.abs(d) < 180 ? (d > 0 ? A1 : A0) : d); if (Math.abs(d) > 135) d = d > 0 ? A1 : A0; return mOf(clamp(d, A0, A1)); }
+dial.addEventListener("pointerdown", (e) => { dragging = true; dial.setPointerCapture(e.pointerId); setDial(fromPointer(e)); });
+dial.addEventListener("pointermove", (e) => { if (dragging) setDial(fromPointer(e)); });
+const endDrag = () => { if (!dragging) return; dragging = false; setDial(cur); }; dial.addEventListener("pointerup", endDrag); dial.addEventListener("pointercancel", endDrag);
+dial.addEventListener("keydown", (e) => { const k = { ArrowLeft: -1, ArrowDown: -1, ArrowRight: 1, ArrowUp: 1 }[e.key]; if (k) { e.preventDefault(); setDial(cur + k * (e.shiftKey ? 12 : 1)); } else if (e.key === "Home") setDial(T0); else if (e.key === "End") setDial(T1); else if (e.key === "Enter") openRow($("#dopen").dataset.id, true); });
+$("#dopen").onclick = () => openRow($("#dopen").dataset.id, true);
+// intro sweep from the start to today
+if (reduce) setDial(T1); else { setDial(T0); const t0 = performance.now() + 500; (function f(t) { if (dragging) return; const k = clamp((t - t0) / 1800), e = 1 - Math.pow(1 - k, 3); if (k > 0) setDial(T0 + (T1 - T0) * e); if (k < 1) requestAnimationFrame(f); })(performance.now()); }
+
+/* ── accordion ── */
+$("#rows").innerHTML = jobs.slice().reverse().map((r, i) => { const v = VZ.by[r.id](), n = jobs.length - i;
+  return `<div class="row" data-id="${r.id}"><button class="rh" aria-expanded="false"><span class="ix">${String(n).padStart(2, "0")}</span><span class="org">${r.org}</span><span class="rl2">${r.role}</span><span class="yr2">${r.from.slice(0, 4)} — ${r.to ? r.to.slice(0, 4) : "now"}</span><span class="pm"></span></button>
+  <div class="rb"><div><div class="rbi"><div><p class="hook">${r.hook}</p><p class="sum">${r.summary}</p><ul class="outs">${r.bullets.map((b) => `<li>${b}</li>`).join("")}</ul><div class="tags">${r.skills.slice(0, 6).map((s) => `<span>${s}</span>`).join("")}</div></div>
+  <div class="pnl"><div class="mt"><b>${r.metric.v}</b><span>${r.metric.l}</span></div><div class="vzh">${v.title}</div><div class="vz">${v.html}<p class="vcap">${v.cap}</p></div></div></div></div></div></div>`; }).join("");
+function openRow(id, scroll) { openId = openId === id && !scroll ? null : id; $$(".row").forEach((r) => { const on = r.dataset.id === openId; r.classList.toggle("open", on); $(".rh", r).setAttribute("aria-expanded", on); $(".vz", r).classList.toggle("in", on); });
+  if (scroll && openId) { const el = $(`.row[data-id="${id}"]`); setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60); } }
+$("#rows").addEventListener("click", (e) => { const h = e.target.closest(".rh"); if (h) { openRow(h.parentElement.dataset.id); const r = roleAt(0); } });
+openRow(jobs[jobs.length - 1].id);
+
+/* ── after hours ── */
+$("#labs").textContent = LAB.sub;
+$("#prin").innerHTML = LAB.principles.map((p, i) => `<div><b><i>0${i + 1}</i>${p.t}</b><p>${p.d}</p></div>`).join("");
+$("#apps").innerHTML = CV.projects.map((p) => `<div style="--c:${p.accent}"><i></i><b>${p.name}</b><span>${p.desc.split(".")[0]}.</span><span>${p.stack.join(" · ")} · AI-assisted</span><small>${p.year}</small></div>`).join("");
+$("#stp").innerHTML = LAB.timeline.map((t) => `<div><b>${t.y}</b><p>${t.t}</p></div>`).join("");
+let termRan = false; async function runTerm() { if (termRan) return; termRan = true; const pre = $("#term"), sl = (ms) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
+  for (const l of LAB.terminal) { const d = document.createElement("div"); d.className = l.t; pre.appendChild(d); if (l.t === "cmd" || l.t === "you") { d.classList.add("cur"); for (const ch of l.s) { d.textContent += ch; await sl(l.t === "cmd" ? 70 : 22); } d.classList.remove("cur"); await sl(420); } else { d.textContent = l.s; await sl(l.t === "dim" ? 600 : 480); } } pre.lastChild.classList.add("cur"); }
+
+/* ── skills matrix ── */
+const Y0 = 2015, Y1 = 2026, cols = Y1 - Y0 + 1;
+const used = (s, y) => { let v = 0; s.roles.forEach((id) => { const r = cvRole(id), a = cvIdx(r.from), b = cvIdx(cvEnd(r)); if (y * 12 + 11 >= a && y * 12 <= b) v = Math.max(v, s.level / 5); }); return v; };
+const pos = (r) => { const a = (cvIdx(r.from) - Y0 * 12) / (cols * 12) * 100, b = (cvIdx(cvEnd(r)) + 1 - Y0 * 12) / (cols * 12) * 100; return `left:${a.toFixed(2)}%;width:${(b - a - .4).toFixed(2)}%`; };
+let mxh = `<div class="bands"><b>Career</b><div class="lane">${jobs.map((r, i) => `<div class="band${i % 2 ? " a" : ""}" style="${pos(r)}" title="${r.org}">${r.org.split(" ")[0]}</div>`).join("")}</div><span></span></div><div class="bands"><b>After hours</b><div class="lane"><div class="band l" style="${pos(lab)}">Katsumii · AI</div></div><span></span></div>`;
+mxh += `<div class="mh"><span></span>${Array.from({ length: cols }, (_, i) => `<span>${String(Y0 + i).slice(2)}</span>`).join("")}<span></span></div><div class="mrs">`;
+CV.categories.forEach((c) => { mxh += `<div class="cat">${c}</div>`; skills.filter((s) => s.cat === c).forEach((s) => { mxh += `<div class="mr${c === "AI & software" ? " ai" : ""}" data-s="${cvEsc(s.name)}"><span>${s.name}</span>${Array.from({ length: cols }, (_, i) => { const v = used(s, Y0 + i); return `<i class="c${v ? " u" : ""}" style="--o:${(.3 + v * .7).toFixed(2)}"></i>`; }).join("")}<span class="y">${s.years} yr</span></div>`; }); });
+$("#mx").innerHTML = mxh + "</div>";
+$("#mx").addEventListener("pointerover", (e) => { const r = e.target.closest(".mr"); if (!r) return; const s = skills.find((x) => x.name === r.dataset.s); $("#mi").innerHTML = `<b>${s.name}</b> — proficiency ${s.level}/5 · ${s.years} years · used at ${s.roles.map((id) => cvRole(id).org).join(", ")}`; });
+
+/* ── profile ── */
+$("#tbl").innerHTML = [["Based", CV.location], ["Status", CV.availability], ["Languages", CV.languages.map((l) => l.name + " (" + l.level.split(" ·")[0] + ")").join(" · ")], ...CV.education.map((e) => ["Education", `${e.role}<br><span style="font:400 .85rem var(--body);letter-spacing:0;text-transform:none;color:var(--mute)">${e.org} · ${e.from}–${e.to}</span>`]), ["Contact", CV.email]].map(([a, b]) => `<div><span>${a}</span><p>${b}</p></div>`).join("");
+$("#qs").innerHTML = CV.quotes.map((q) => `<div class="q"><blockquote>“${q.text}”</blockquote><cite>${q.who}</cite></div>`).join("");
+
+/* ── behaviours ── */
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); if (e.target.querySelector("#term")) runTerm(); io.unobserve(e.target); } }), { threshold: .15 });
+$$(".rv").forEach((n) => io.observe(n)); if (reduce) { $$(".rv").forEach((n) => n.classList.add("in")); runTerm(); }
+const links = $$("#tn a"), secs = ["work", "lab", "skills", "profile", "contact"].map((id) => document.getElementById(id));
+addEventListener("scroll", () => { $("#prog").style.width = (scrollY / (document.documentElement.scrollHeight - innerHeight)) * 100 + "%"; let a = -1; secs.forEach((s, i) => { if (s.getBoundingClientRect().top < innerHeight * .4) a = i; }); links.forEach((l, i) => l.classList.toggle("on", i === a)); }, { passive: true });
+const setTheme = (n) => { document.documentElement.dataset.theme = n; try { localStorage.setItem("cv-fn-theme", n); } catch (_) {} };
+$("#theme").onclick = () => setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+try { const s = localStorage.getItem("cv-fn-theme"); if (s) document.documentElement.dataset.theme = s; } catch (_) {}
+</script>
+</body></html>
