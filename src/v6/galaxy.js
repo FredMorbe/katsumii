@@ -5,13 +5,15 @@
 
    Arms are trailing log spirals that turn rigidly at the pattern speed; disk light and dust
    lanes are baked once into textures, stars are dots on top. The star systems (product
-   links) are DOM elements that ride the same projection. */
+   links) are DOM elements that ride the same projection. Opening a product flies the camera
+   into its system first (zoomTo), then hands over to `open(key)`. */
 
-export function createGalaxy({ panel, canvas, systems, tabs, readout }) {
+export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
   var cv = canvas, ctx = cv.getContext("2d");
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var dpr = Math.min(devicePixelRatio || 1, 1.5), W = 0, H = 0, cx = 0, cy = 0, R = 0;
-  function size() { var r = panel.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; cx = W * (W < 900 ? .5 : .58); cy = H * (W < 900 ? .62 : .52); R = Math.min(W * (W < 900 ? .5 : .39), H * (W < 900 ? .5 : .84)) }
+  var dpr = Math.min(devicePixelRatio || 1, 1.5), W = 0, H = 0, cx = 0, cy = 0, R = 0, S0 = .54;
+  /* a portrait panel gets a rounder (less tilted) disk so the galaxy fills it instead of lying flat */
+  function size() { var r = panel.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; cx = W * (W < 900 ? .5 : .58); cy = H * (W < 900 ? .62 : .52); R = Math.min(W * (W < 900 ? .5 : .39), H * (W < 900 ? .5 : .84)); S0 = W < 900 ? .74 : .54 }
   size();
   var onResize = function () { size(); draw(); place() };
   addEventListener("resize", onResize);
@@ -87,7 +89,13 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout }) {
   for(i=0;i<500*Q;i++){var d=.2+Math.abs(nrm())*.55,z=2*rnd()-1;   /* halo, gives the disk depth */
     star(d*Math.sqrt(1-z*z),rnd()*6.283,d*z*.7,1,0,1,WP*.6)}
 
-  var t=0,speed=1,target=1,ptrX=0,ptrY=0,phi=-.3,S=.54,hover=null;
+  var t=0,speed=1,target=1,ptrX=0,ptrY=0,phi=-.3,S=S0,hover=null;
+  /* camera: while a system is being opened the view zooms (zz) around a focus point (zf) that
+     glides from the panel centre onto the system, so the system ends up in the middle */
+  var zoomEl=null,zp=0,ze=0,zz=1,zf=[0,0],zy=0,opened=false,ZMAX=3;
+  /* a system's star sits half its label's height below its projected point (zy), so the flight
+     pulls that much extra to land the star, not the point, in the middle */
+  function cam(p){return zoomEl?[W/2+(p[0]-zf[0])*zz,H/2+(p[1]-zf[1])*zz-zy*ze]:p}
   function proj(r,th,h){
     var x=r*Math.cos(th),y=r*Math.sin(th)*S-(h||0)*.86;
     var cp=Math.cos(phi),sp=Math.sin(phi);
@@ -95,6 +103,7 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout }) {
   }
   function draw(){
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    if(zoomEl){ctx.translate(W/2,H/2);ctx.scale(zz,zz);ctx.translate(-zf[0],-zf[1])}
     var cp=Math.cos(phi),sp=Math.sin(phi),rot=WP*t;
     function disk(img){ctx.save();ctx.translate(cx,cy);ctx.rotate(phi);ctx.scale(R,R*S);ctx.rotate(rot);ctx.drawImage(img,-EXT,-EXT,EXT*2,EXT*2);ctx.restore()}
     function blob(rad,ry,stops){ctx.save();ctx.translate(cx,cy);ctx.rotate(phi);ctx.scale(1,ry);var g=ctx.createRadialGradient(0,0,0,0,0,rad);
@@ -129,24 +138,46 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout }) {
   /* ── star systems follow the galaxy ── */
   var sys = systems, tabEls = tabs, read = readout, readDef = "";
   function place() {
-    sys.forEach(function (el) {
-      var r = +el.dataset.r, th = +el.dataset.th + w(r) * t, p = proj(r, th, 0);
-      var lw = Math.max(el.offsetWidth, 140), flip = p[0] + lw > W - 12 && p[0] - lw > 12;
+    var items = sys.map(function (el) {
+      var r = +el.dataset.r, th = +el.dataset.th + w(r) * t, p = cam(proj(r, th, 0));
+      var ew = el.offsetWidth, lw = Math.max(ew, 140), flip = p[0] + lw > W - 12 && p[0] - lw > 12;
       el.classList.toggle("left", flip);
       el.style.transform = "translate3d(" + p[0].toFixed(1) + "px," + p[1].toFixed(1) + "px,0)" + (flip ? " translateX(-100%)" : "");
       if (el.dataset.k === hover) {
         var ra = ((((th % 6.283) + 6.283) % 6.283) / 6.283 * 24), dec = (1 - r) * 62 - 18;
         read.textContent = el.dataset.cat + " · RA " + (ra | 0) + "h " + (((ra % 1) * 60) | 0) + "m · DEC " + (dec >= 0 ? "+" : "") + dec.toFixed(1) + "°"
       }
+      return {
+        el: el, lab: el.querySelector(".gx-lab"), y: p[1], h: el.offsetHeight, dy: 0,
+        x0: flip ? p[0] - ew : p[0], x1: flip ? p[0] : p[0] + ew,
+        /* a label that fits on neither side slides back into the panel */
+        ox: !flip && p[0] + ew > W - 8 ? W - 8 - p[0] - ew : 0
+      };
+    });
+    /* labels that would sit on top of each other are pushed apart vertically (the focused one stays put) */
+    items.sort(function (a, b) { return a.y - b.y });
+    items.forEach(function (a, i) {
+      if (a.el.dataset.k === hover) return;
+      for (var j = 0; j < i; j++) {
+        var b = items[j], gap = (a.h + b.h) / 2 + 2, d = a.y + a.dy - b.y - b.dy;
+        if (a.x1 > b.x0 && a.x0 < b.x1 && d < gap) a.dy += gap - d
+      }
+    });
+    items.forEach(function (a) {
+      var dy = (a.el._dy || 0) + (a.dy - (a.el._dy || 0)) * (reduced ? 1 : .18);
+      a.el._dy = dy;
+      a.lab.style.transform = a.ox || dy > .05 ? "translate(" + a.ox.toFixed(1) + "px," + dy.toFixed(1) + "px)" : ""
     });
   }
   function focus(k) {
+    if (zoomEl) return;   /* the camera is flying — leave the focus alone */
     hover = k; target = k ? .05 : 1;
     sys.forEach(function (e) { e.classList.toggle("on", e.dataset.k === k) });
     tabEls.forEach(function (e) { e.classList.toggle("on", e.dataset.k === k) });
     read.classList.toggle("on", !!k);
     if (k) { var e = sys.filter(function (s) { return s.dataset.k === k })[0]; read.style.setProperty("--rc", getComputedStyle(e).getPropertyValue("--ac")) }
     else read.textContent = readDef;
+    place();   /* the loop is idle under reduced motion — the card still has to find its place */
   }
   var offs = [];
   function listen(el, ev, fn, opt) { el.addEventListener(ev, fn, opt); offs.push(function () { el.removeEventListener(ev, fn, opt) }) }
@@ -154,6 +185,36 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout }) {
     ["mouseenter", "focus"].forEach(function (ev) { listen(el, ev, function () { focus(el.dataset.k) }) });
     ["mouseleave", "blur"].forEach(function (ev) { listen(el, ev, function () { focus(null) }) });
   });
+  /* touch has no hover: the first tap focuses a system and shows its card, the second opens it.
+     pointerdown comes before the emulated mouseenter, so it still sees the state from before the tap. */
+  var fresh = false;
+  sys.forEach(function (el) {
+    listen(el, "pointerdown", function (e) { fresh = e.pointerType === "touch" && el.dataset.k !== hover });
+    /* capture phase: preventDefault here keeps the router link from navigating */
+    listen(el, "click", function (e) {
+      var tapOnly = fresh; fresh = false;
+      if (tapOnly) { e.preventDefault(); return }
+      if (!el.dataset.zoom || reduced || !open || zoomEl || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault(); zoomTo(el)
+    }, true);
+  });
+  function zoomTo(el) {
+    zoomEl = el; zp = 0; ze = 0; opened = false; zz = 1; zf = [W / 2, H / 2]; zy = el.offsetHeight / 2;
+    panel.classList.add("zooming"); kick()
+  }
+  function stepZoom(dt) {
+    zp = Math.min(zp + dt / .9, 1);
+    var e = ze = zp < .5 ? 4 * zp * zp * zp : 1 - Math.pow(-2 * zp + 2, 3) / 2;   /* ease in-out */
+    var r = +zoomEl.dataset.r, p = proj(r, +zoomEl.dataset.th + w(r) * t, 0);
+    zf = [W / 2 + (p[0] - W / 2) * e, H / 2 + (p[1] - H / 2) * e]; zz = 1 + (ZMAX - 1) * e;
+    if (zp >= 1 && !opened) { opened = true; Promise.resolve(open(zoomEl.dataset.k)).finally(unzoom) }
+  }
+  /* only reached when the navigation did not take this page away */
+  function unzoom() {
+    if (disposed) return;
+    zoomEl = null; ze = 0; zz = 1; panel.classList.remove("zooming"); focus(null)
+  }
+  listen(panel, "pointerdown", function (e) { if (e.pointerType === "touch" && hover && !e.target.closest(".gx-sys")) focus(null) });
   listen(panel, "pointermove", function (e) { var r = panel.getBoundingClientRect(); ptrX = (e.clientX - r.left) / r.width * 2 - 1; ptrY = (e.clientY - r.top) / r.height * 2 - 1 });
 
   /* ── loop (paused offscreen / hidden tab / reduced motion) ── */
@@ -163,7 +224,8 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout }) {
     if (disposed || !(run && vis)) { last = 0; return }
     var dt = last ? Math.min((now - last) / 1000, .1) : 0; last = now;
     speed += (target - speed) * Math.min(dt * 4, 1); t += dt * speed;
-    S += ((.54 + ptrY * .05) - S) * .05; phi += ((-.3 + ptrX * .05) - phi) * .05;
+    S += ((S0 + ptrY * .05) - S) * .05; phi += ((-.3 + ptrX * .05) - phi) * .05;
+    if (zoomEl) stepZoom(dt);
     draw(); place(); raf = requestAnimationFrame(frame);
   }
   function kick() { if (!raf && !disposed) raf = requestAnimationFrame(frame) }

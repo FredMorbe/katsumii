@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.18.0",
+    "date": "2026-10-23",
+    "title": "Studio galaxy: info cards, camera flight and uncharted regions",
+    "changes": [
+      "Each star system opens into an info card with its status (live or coming soon), price and a clear way in; on touch screens the first tap shows the card and the second opens the page",
+      "Opening a product flies the camera into its system before the page loads",
+      "Live systems pulse softly, systems that are not built yet are dimmed, and the list below the sky shows the same status",
+      "Three uncharted regions drift through the galaxy and lead to the contact page",
+      "Labels no longer overlap, and the galaxy is larger and rounder on phones"
+    ]
+  },
+  {
     "version": "0.17.4",
     "date": "2026-10-23",
     "title": "Studio preview is dark only",

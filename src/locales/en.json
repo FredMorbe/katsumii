@@ -2828,10 +2828,20 @@
         "em": "One galaxy"
       },
       "sub": "Every Katsumii app is a star system of its own. Find one on the chart — hover to slow the galaxy and lock on.",
+      "subTouch": "Every Katsumii app is a star system of its own. Find one on the chart — tap to slow the galaxy and lock on, tap again to open it.",
       "readout": "Katsumii galaxy · 4 systems charted · more unexplored",
       "hint": "Slowly turning · 1 rev ≈ 5 min",
       "open": "Open system",
       "soon": "Details follow soon",
+      "status": {
+        "live": "Live",
+        "soon": "Coming soon"
+      },
+      "void": {
+        "label": "Uncharted",
+        "text": "Nothing charted here yet. Got an idea for the next system?",
+        "cta": "Tell us"
+      },
       "tabsAria": "Apps",
       "price": {
         "paid": "Paid",

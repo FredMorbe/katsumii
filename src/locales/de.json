@@ -2828,10 +2828,20 @@
         "em": "Eine Galaxie"
       },
       "sub": "Jede Katsumii-App ist ein eigenes Sternensystem. Finde eines auf der Karte – mit der Maus bremst du die Galaxie und fokussierst es.",
+      "subTouch": "Jede Katsumii-App ist ein eigenes Sternensystem. Finde eines auf der Karte – tippe darauf, um die Galaxie zu bremsen und es zu fokussieren, tippe erneut, um es zu öffnen.",
       "readout": "Katsumii-Galaxie · 4 Systeme kartiert · weitere unerforscht",
       "hint": "Dreht sich langsam · 1 Umdrehung ≈ 5 Min.",
       "open": "System öffnen",
       "soon": "Details folgen bald",
+      "status": {
+        "live": "Live",
+        "soon": "Bald verfügbar"
+      },
+      "void": {
+        "label": "Unerforscht",
+        "text": "Hier ist noch nichts kartiert. Hast du eine Idee für das nächste System?",
+        "cta": "Schreib uns"
+      },
       "tabsAria": "Apps",
       "price": {
         "paid": "Kostenpflichtig",
