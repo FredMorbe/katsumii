@@ -5,7 +5,8 @@
 
    Arms are trailing log spirals that turn rigidly at the pattern speed; disk light and dust
    lanes are baked once into textures, stars are dots on top. The star systems (product
-   links) are DOM elements that ride the same projection. Opening a product flies the camera
+   links) are DOM elements that ride the same projection and the same pattern speed, so they
+   turn with the arms. Opening a product flies the camera
    into its system first (zoomTo), then hands over to `open(key)`. */
 
 export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
@@ -85,17 +86,15 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
         star(r,k>1?t0+nrm()*cs/r0:t0,nrm()*.012,q[0]<.28?(rnd()<.6?0:1):r>.25&&rnd()<.03?4:rnd()<.5?1:rnd()<.35?3:2,lum(),rnd()<.05?2:1,WP)}}
   });
   for(i=0;i<4000*Q;i++){var r=Math.min(-Math.log(rnd()||1e-9)*.3,1.2);if(r<.04)continue;   /* disk field */
-    star(r,rnd()*6.283,nrm()*.02,r<.3?0:1,rnd()<.15?1:0,1,WP*(1+.35*(.5-r)))}
+    star(r,rnd()*6.283,nrm()*.02,r<.3?0:1,rnd()<.15?1:0,1,WP)}   /* the disk turns as one body (WP, like arms and dust), so the star systems stay put in it */
   for(i=0;i<500*Q;i++){var d=.2+Math.abs(nrm())*.55,z=2*rnd()-1;   /* halo, gives the disk depth */
     star(d*Math.sqrt(1-z*z),rnd()*6.283,d*z*.7,1,0,1,WP*.6)}
 
   var t=0,speed=1,target=1,ptrX=0,ptrY=0,phi=-.3,S=S0,hover=null;
   /* camera: while a system is being opened the view zooms (zz) around a focus point (zf) that
      glides from the panel centre onto the system, so the system ends up in the middle */
-  var zoomEl=null,zp=0,ze=0,zz=1,zf=[0,0],zy=0,opened=false,ZMAX=3;
-  /* a system's star sits half its label's height below its projected point (zy), so the flight
-     pulls that much extra to land the star, not the point, in the middle */
-  function cam(p){return zoomEl?[W/2+(p[0]-zf[0])*zz,H/2+(p[1]-zf[1])*zz-zy*ze]:p}
+  var zoomEl=null,zp=0,zz=1,zf=[0,0],opened=false,ZMAX=3;
+  function cam(p){return zoomEl?[W/2+(p[0]-zf[0])*zz,H/2+(p[1]-zf[1])*zz]:p}
   function proj(r,th,h){
     var x=r*Math.cos(th),y=r*Math.sin(th)*S-(h||0)*.86;
     var cp=Math.cos(phi),sp=Math.sin(phi);
@@ -142,7 +141,7 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
       var r = +el.dataset.r, th = +el.dataset.th + w(r) * t, p = cam(proj(r, th, 0));
       var ew = el.offsetWidth, lw = Math.max(ew, 140), flip = p[0] + lw > W - 12 && p[0] - lw > 12;
       el.classList.toggle("left", flip);
-      el.style.transform = "translate3d(" + p[0].toFixed(1) + "px," + p[1].toFixed(1) + "px,0)" + (flip ? " translateX(-100%)" : "");
+      el.style.transform = "translate3d(" + p[0].toFixed(1) + "px," + p[1].toFixed(1) + "px,0)" + (flip ? " translateX(-100%)" : "") + " translateY(-50%)";   /* the star, not the label's corner, sits on the point */
       if (el.dataset.k === hover) {
         var ra = ((((th % 6.283) + 6.283) % 6.283) / 6.283 * 24), dec = (1 - r) * 62 - 18;
         read.textContent = el.dataset.cat + " · RA " + (ra | 0) + "h " + (((ra % 1) * 60) | 0) + "m · DEC " + (dec >= 0 ? "+" : "") + dec.toFixed(1) + "°"
@@ -199,12 +198,12 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
     }, true);
   });
   function zoomTo(el) {
-    zoomEl = el; zp = 0; ze = 0; opened = false; zz = 1; zf = [W / 2, H / 2]; zy = el.offsetHeight / 2;
+    zoomEl = el; zp = 0; opened = false; zz = 1; zf = [W / 2, H / 2];
     panel.classList.add("zooming"); kick()
   }
   function stepZoom(dt) {
     zp = Math.min(zp + dt / .9, 1);
-    var e = ze = zp < .5 ? 4 * zp * zp * zp : 1 - Math.pow(-2 * zp + 2, 3) / 2;   /* ease in-out */
+    var e = zp < .5 ? 4 * zp * zp * zp : 1 - Math.pow(-2 * zp + 2, 3) / 2;   /* ease in-out */
     var r = +zoomEl.dataset.r, p = proj(r, +zoomEl.dataset.th + w(r) * t, 0);
     zf = [W / 2 + (p[0] - W / 2) * e, H / 2 + (p[1] - H / 2) * e]; zz = 1 + (ZMAX - 1) * e;
     if (zp >= 1 && !opened) { opened = true; Promise.resolve(open(zoomEl.dataset.k)).finally(unzoom) }
@@ -212,7 +211,7 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
   /* only reached when the navigation did not take this page away */
   function unzoom() {
     if (disposed) return;
-    zoomEl = null; ze = 0; zz = 1; panel.classList.remove("zooming"); focus(null)
+    zoomEl = null; zz = 1; panel.classList.remove("zooming"); focus(null)
   }
   listen(panel, "pointerdown", function (e) { if (e.pointerType === "touch" && hover && !e.target.closest(".gx-sys")) focus(null) });
   listen(panel, "pointermove", function (e) { var r = panel.getBoundingClientRect(); ptrX = (e.clientX - r.left) / r.width * 2 - 1; ptrY = (e.clientY - r.top) / r.height * 2 - 1 });

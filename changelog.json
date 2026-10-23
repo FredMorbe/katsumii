@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.18.1",
+    "date": "2026-10-24",
+    "title": "Studio galaxy: deep-space backdrop and systems locked to the disk",
+    "changes": [
+      "The studio page now sits on a near-black space backdrop without the particle flow",
+      "Star systems sit exactly on their point in the galaxy and turn rigidly with the disk, arms and dust"
+    ]
+  },
+  {
     "version": "0.18.0",
     "date": "2026-10-23",
     "title": "Studio galaxy: info cards, camera flight and uncharted regions",

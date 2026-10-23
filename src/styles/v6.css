@@ -56,6 +56,19 @@
 }
 .v6 ::selection { background: rgba(34, 211, 238, 0.3); color: var(--v6-ink); }
 
+/* ── studio pages (route meta studio): deep space — near black with only a faint cool glow.
+   Dark only; the light theme keeps its own ground. ── */
+.v6.is-studio:not(.light) {
+  --v6-bg: #02030a;
+  --v6-bg-soft: #060913;
+  --v6-panel: rgba(16, 24, 42, 0.4);
+  background:
+    radial-gradient(ellipse 80% 40% at 62% -10%, rgba(34, 211, 238, 0.05), transparent 62%),
+    var(--v6-bg);
+}
+.v6.is-studio:not(.light) .v6-card { background: linear-gradient(165deg, var(--v6-panel), rgba(3, 6, 12, 0.3)); }
+.v6.is-studio:not(.light) .v6-nav.scrolled { background: rgba(2, 3, 10, 0.78); }
+
 /* ── light theme ── */
 .v6.light {
   --v6-bg: #f8fafc;

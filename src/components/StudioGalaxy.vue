@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
 .gx-sub{color:#94a3b8;max-width:34rem;margin:0}
 .gx-sky{--v6-ink:#eef2f7;--v6-muted:#94a3b8;--v6-faint:#64748b;--v6-gold:#22d3ee;--v6-gold-hi:#67e8f9;--v6-line:rgba(226,232,240,.1);--v6-line-strong:rgba(34,211,238,.3);
  position:relative;margin:5.5rem 0 0;height:clamp(600px,80vh,820px);border-radius:22px;overflow:hidden;color:var(--v6-ink);
- background:radial-gradient(ellipse 70% 80% at 58% 56%,#0b1730 0%,#060c18 55%,#04080f 100%);border:1px solid rgba(226,232,240,.1)}
+ background:radial-gradient(ellipse 70% 80% at 58% 56%,#08122a 0%,#03060e 55%,#010206 100%);border:1px solid rgba(226,232,240,.1)}
 .gx-sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .gx-sky::before,.gx-sky::after{content:"";position:absolute;width:26px;height:26px;border:1px solid rgba(103,232,249,.45);z-index:3;pointer-events:none}
 .gx-sky::before{left:16px;top:16px;border-right:0;border-bottom:0}.gx-sky::after{right:16px;bottom:16px;border-left:0;border-top:0}

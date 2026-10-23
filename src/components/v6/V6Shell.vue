@@ -1,5 +1,5 @@
 <template>
-  <div ref="rootEl" class="v6" :class="{ light: !isDark }" :style="accentStyle">
+  <div ref="rootEl" class="v6" :class="{ light: !isDark, 'is-studio': isStudio }" :style="accentStyle">
     <canvas ref="glEl" class="v6-gl" :class="{ dim: route.meta.v6DimBg, off: route.meta.v6NoBg }" aria-hidden="true"></canvas>
     <div class="v6-noise" aria-hidden="true"></div>
     <div class="v6-progress" aria-hidden="true"><span ref="progressEl"></span></div>
