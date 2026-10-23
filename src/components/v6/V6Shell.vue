@@ -89,6 +89,7 @@
       <div class="v6-nav-right">
         <V6LangSwitch />
         <button
+          v-if="!route.meta.forceDark"
           ref="menuToggleEl"
           type="button"
           class="v6-theme"

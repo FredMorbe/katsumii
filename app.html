@@ -74,6 +74,8 @@
         var h = new Date().getHours();
         t = (h >= 6 && h < 19) ? 'light' : 'dark';
       }
+      /* dark-only pages (route meta forceDark in src/router.js) */
+      if (location.pathname.replace(/\/$/, '').slice(-8) === '/sandbox') t = 'dark';
       if (t === 'dark') document.documentElement.classList.add('dark-init');
     })();
   </script>

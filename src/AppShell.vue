@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, provide, watch } from "vue"
+import { computed, defineAsyncComponent, provide, watch } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRoute } from "vue-router"
 const V6Shell = defineAsyncComponent(() => import("./components/v6/V6Shell.vue"))
@@ -24,13 +24,18 @@ import { localizedAlternatesForPath, localizedPathForRoute, normalizeLocale, unl
 
 const route = useRoute()
 const { locale, t, tm } = useI18n()
-const { theme, isDark, toggleTheme, isThemeGlitching, nextTheme } = useTheme()
+const { theme, isDark: themeIsDark, toggleTheme, isThemeGlitching, nextTheme } = useTheme()
 const { consent } = useConsent()
 
 const SITE_URL = "https://www.katsumii.com"
 const DEFAULT_SOCIAL_IMAGE = `${SITE_URL}/og-image.png`
 
 const htmlLangForLocale = (lang) => lang === "zht" ? "zh-TW" : lang
+
+/* Pages with route meta forceDark are dark-only for now (the sandbox landing): the visitor's saved
+   theme stays untouched and applies again on every other page. Light support stays in the code. */
+const isDark = computed(() => !!route.meta.forceDark || themeIsDark.value)
+watch(isDark, (dark) => document.documentElement.classList.toggle("dark", dark), { immediate: true })
 
 provide("theme", theme)
 provide("isDark", isDark)

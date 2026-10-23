@@ -62,7 +62,7 @@ const router = createRouter({
     })),
     { path: `/:locale(${localePattern})`, redirect: (to) => localizedPathForRoute("/app", to.params.locale) },
     withLocale("/app",       LandingV6,     { titleKey: "common.pageTitles.app",       descriptionKey: "common.pageDescriptions.app" }),
-    withLocale("/sandbox",   SandboxPage,   { titleKey: "common.pageTitles.sandbox",   descriptionKey: "common.pageDescriptions.sandbox", robots: "noindex, follow", studio: true, v6DimBg: true }),
+    withLocale("/sandbox",   SandboxPage,   { titleKey: "common.pageTitles.sandbox",   descriptionKey: "common.pageDescriptions.sandbox", robots: "noindex, follow", studio: true, forceDark: true, v6DimBg: true }),
     withLocale("/features",  FeaturesPage,  { titleKey: "common.pageTitles.features",  descriptionKey: "common.pageDescriptions.features" }),
     withLocale("/prop-firm-challenges", PropFirmChallengesPage, { titleKey: "common.pageTitles.propFirmChallenges", descriptionKey: "common.pageDescriptions.propFirmChallenges", v6Accent: V6_ACCENTS.challenge }),
     withLocale("/funded-accounts", FundedAccountsPage, { titleKey: "common.pageTitles.fundedAccounts", descriptionKey: "common.pageDescriptions.fundedAccounts", v6Accent: V6_ACCENTS.funded }),
