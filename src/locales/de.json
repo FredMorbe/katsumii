@@ -2930,7 +2930,13 @@
       "brandSub": "3D-Nonogramm",
       "h1": {
         "pre": "Meißle den Block.",
-        "em": "Finde das Tier"
+        "em": "Finde {word}",
+        "words": [
+          "Tiere",
+          "Wahrzeichen",
+          "Fahrzeuge",
+          "Szenen"
+        ]
       },
       "sub": "In jedem Block steckt mehr, als du zuerst siehst. Lies die Zahlen, meißle die leeren Würfel weg und male die sicheren an – bis aus einem Logikrätsel ein farbiges Voxelmodell wird.",
       "chips": [

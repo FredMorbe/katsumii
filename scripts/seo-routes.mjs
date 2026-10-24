@@ -87,8 +87,11 @@ export const gitLastChangeDate = (file) => {
   if (gitDateCache.has(file)) return gitDateCache.get(file)
   let date
   try {
-    date = execFileSync("git", ["log", "-1", "--format=%cs", "--", file], {
+    // UTC on purpose: seo-audit rejects a lastmod after today's UTC date, and %cs would
+    // report the committer's local day (a commit made after midnight in UTC+8 is "tomorrow")
+    date = execFileSync("git", ["log", "-1", "--format=%cd", "--date=format-local:%Y-%m-%d", "--", file], {
       cwd: ROOT,
+      env: { ...process.env, TZ: "UTC" },
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
     }).trim()

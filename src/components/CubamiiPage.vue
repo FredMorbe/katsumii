@@ -8,8 +8,13 @@
           <span><strong>Cubamii</strong><small>{{ t('cubamiiPage.hero.brandSub') }}</small></span>
         </p>
         <p class="v6-eyebrow v6-reveal"><i></i>{{ t('cubamiiPage.hero.eyebrow') }}</p>
-        <h1 class="v6-h1 v6-reveal">
-          {{ t('cubamiiPage.hero.h1.pre') }} <em>{{ t('cubamiiPage.hero.h1.em') }}</em><b class="v6-dot">.</b>
+        <h1 class="v6-h1 v6-reveal" :aria-label="headlineLabel">
+          <span aria-hidden="true">{{ t('cubamiiPage.hero.h1.pre') }}</span>
+          <!-- the ghost holds the longest line so the headline keeps its height while the word is typed -->
+          <em class="cm-typed" aria-hidden="true">
+            <span class="cm-typed-ghost">{{ headline(longestWord) }}.</span>
+            <span class="cm-typed-live">{{ headline(typedBody) }}<b class="v6-dot">{{ typedDot }}</b><b class="cm-type-cursor">|</b></span>
+          </em>
         </h1>
         <p class="cm-sub v6-reveal">{{ t('cubamiiPage.hero.sub') }}</p>
         <ul class="v6-card-chips v6-reveal">
@@ -233,6 +238,47 @@ const features = computed(() => zip("cubamiiPage.features.items", ["title", "cop
 const pricing = computed(() => zip("cubamiiPage.pricing.items", ["label", "title", "copy"]))
 const calm = computed(() => zip("cubamiiPage.calm.items", ["title", "copy"]))
 
+/* ── hero typewriter — same timing as the landing page: 115 ms typing, 100 ms deleting, 5 s hold ── */
+const words = computed(() => list("cubamiiPage.hero.h1.words"))
+const headline = (word) => t("cubamiiPage.hero.h1.em", { word })
+const headlineLabel = computed(() => `${t("cubamiiPage.hero.h1.pre")} ${headline(words.value.join(", "))}.`)
+const longestWord = computed(() => words.value.reduce((a, b) => (b.length > a.length ? b : a), ""))
+const typed = ref(`${words.value[0] ?? ""}.`)
+/* the trailing dot is rendered apart so it can take the ember accent */
+const TERMINAL_DOT = /[.。]$/
+const typedBody = computed(() => typed.value.replace(TERMINAL_DOT, ""))
+const typedDot = computed(() => (TERMINAL_DOT.test(typed.value) ? typed.value.slice(-1) : ""))
+let typingTimer = 0
+
+const startTypewriter = () => {
+  const HOLD_MS = 5000
+  let wordIdx = 0
+  let charIdx = (words.value[0] ?? "").length + 1
+  let deleting = false
+
+  const tick = () => {
+    const pool = words.value
+    const word = `${pool[wordIdx % pool.length]}.`
+    if (deleting) {
+      charIdx--
+      typed.value = word.slice(0, charIdx)
+      if (charIdx === 0) {
+        deleting = false
+        wordIdx = (wordIdx + 1) % pool.length
+        typingTimer = window.setTimeout(tick, 390)
+      } else {
+        typingTimer = window.setTimeout(tick, 100)
+      }
+    } else {
+      charIdx++
+      typed.value = word.slice(0, charIdx)
+      typingTimer = window.setTimeout(charIdx === word.length ? () => { deleting = true; tick() } : tick, charIdx === word.length ? HOLD_MS : 115)
+    }
+  }
+
+  typingTimer = window.setTimeout(() => { deleting = true; tick() }, 4400)
+}
+
 /* ── the hero cube ── */
 const canvasEl = ref(null)
 const phase = ref("block")
@@ -251,6 +297,7 @@ let cleanups = []
 onMounted(() => {
   cleanups.push(initV6Reveals(rootEl.value))
   cleanups.push(initMagnetic(rootEl.value))
+  startTypewriter()
 
   try {
     cube = createCubamiiCube(canvasEl.value, {
@@ -267,6 +314,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  clearTimeout(typingTimer)
   clearTimeout(autoplay)
   cube?.dispose()
   cube = null
@@ -290,7 +338,21 @@ onBeforeUnmount(() => {
   align-items: center;
 }
 .cm-hero .v6-h1 { font-size: clamp(2.5rem, 5vw, 4.3rem); }
-.cm-hero .v6-h1 em { white-space: nowrap; }
+.cm-typed { display: grid; }
+.cm-typed > * { grid-area: 1 / 1; }
+.cm-typed-ghost { visibility: hidden; }
+.cm-type-cursor {
+  display: inline-block;
+  color: var(--v6-gold);
+  font-weight: 300;
+  font-style: normal;
+  margin-left: 0.04em;
+  animation: cm-cursor-blink 0.75s step-end infinite;
+}
+@keyframes cm-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 .cm-brand {
   display: flex;
   align-items: center;
@@ -571,6 +633,7 @@ onBeforeUnmount(() => {
   .cm-actions .v6-quiet, .cm-cta-actions .v6-quiet { justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .cm-type-cursor { animation: none; }
   .cm-carve { transition: none; }
 }
 </style>

@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.21.0",
+    "date": "2026-10-25",
+    "title": "Cubamii headline types through animals, landmarks, vehicles and scenes",
+    "changes": [
+      "The Cubamii hero headline now types its last word like the landing page and cycles through animals, landmarks, vehicles and scenes",
+      "Sitemap dates are now taken in UTC, so a commit made after midnight in UTC+8 no longer fails the deploy audit (the 0.20.0 deploy was stopped by this)"
+    ]
+  },
+  {
     "version": "0.20.0",
     "date": "2026-10-25",
     "title": "Cubamii product page with a rotating voxel cube",

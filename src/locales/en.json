@@ -2930,7 +2930,13 @@
       "brandSub": "3D Nonogram",
       "h1": {
         "pre": "Carve a block.",
-        "em": "Find the animal"
+        "em": "Find {word}",
+        "words": [
+          "animals",
+          "landmarks",
+          "vehicles",
+          "scenes"
+        ]
       },
       "sub": "Every block hides something waiting to be found. Read the numbers, chisel away the empty cubes and paint the sure ones — until a logic puzzle turns into a colourful voxel model.",
       "chips": [
