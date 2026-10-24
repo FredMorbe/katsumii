@@ -62,27 +62,11 @@
       <p ref="readEl" class="gx-read" aria-hidden="true"></p>
       <p class="gx-hint" aria-hidden="true">{{ t('studio.galaxy.hint') }}</p>
     </section>
-
-    <nav class="gx-tabs" :aria-label="t('studio.galaxy.tabsAria')">
-      <RouterLink
-        v-for="(p, i) in PRODUCTS"
-        :key="p.key"
-        ref="tabEls"
-        class="gx-tab"
-        :to="linkFor(p)"
-        :data-k="p.key"
-        :style="accentStyle(p)"
-      >
-        <span class="gx-mono"><i class="gx-dot" :class="{ live: p.page }"></i>KAT-0{{ i + 1 }}</span>
-        <b>{{ t(`products.${p.key}.name`) }}</b>
-        <em class="gx-mono">{{ t(`studio.platform.${p.platform}`) }} · {{ t(`studio.galaxy.price.${p.price}`) }}</em>
-      </RouterLink>
-    </nav>
   </div>
 </template>
 
 <script setup>
-import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from "vue"
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRoute, useRouter } from "vue-router"
 import { normalizeLocale } from "../utils/routes.js"
@@ -92,7 +76,6 @@ import { createGalaxy } from "../v6/galaxy.js"
 const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
-const isDark = inject("isDark")
 
 /* unexplored regions of the galaxy — same polar coordinates as the products (r from the core, th in rad) */
 const UNCHARTED = [
@@ -109,18 +92,11 @@ const lang = computed(() => {
 /* a system opens its product page; one without a page yet jumps to its card further down */
 const linkFor = (p) => (p.page ? `/${lang.value}${p.page}` : { hash: `#apps-${p.key}` })
 
-/* the sky itself is always dark; the tab row below follows the page theme */
-const accentStyle = (p) => {
-  const [ac, hi] = isDark.value ? p.accent.dark : p.accent.light
-  return { "--ac": ac, "--ac-hi": hi }
-}
-
 const skyEl = ref(null)
 const canvasEl = ref(null)
 const readEl = ref(null)
 const sysEls = ref([])
 const voidEls = ref([])
-const tabEls = ref([])
 let galaxy = null
 
 /* touch screens have no hover — the copy and the card behaviour say "tap" there */
@@ -134,7 +110,6 @@ onMounted(() => {
     panel: skyEl.value,
     canvas: canvasEl.value,
     systems: sysEls.value.concat(voidEls.value).map(elOf),
-    tabs: tabEls.value.map(elOf),
     readout: readEl.value,
     /* the camera has flown into the system — now go to its page */
     open: (key) => router.push(linkFor(PRODUCTS.find((p) => p.key === key))),
@@ -153,7 +128,6 @@ onBeforeUnmount(() => {
 <style scoped>
 /* Galaxy hero — styles ported 1:1 from docs/mockups/concept-e-galaxy.html */
 .gx{max-width:var(--v6-container);margin:0 auto;padding:0 var(--v6-gutter)}
-.gx-tab em{font-style:normal}
 .gx-mono{font-family:var(--v6-mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
 .gx-sub{color:#94a3b8;max-width:34rem;margin:0}
 .gx-sky{--v6-ink:#eef2f7;--v6-muted:#94a3b8;--v6-faint:#64748b;--v6-gold:#22d3ee;--v6-gold-hi:#67e8f9;--v6-line:rgba(226,232,240,.1);--v6-line-strong:rgba(34,211,238,.3);
@@ -187,7 +161,7 @@ onBeforeUnmount(() => {
 .gx-more{display:none;margin-top:.5rem;color:#94a3b8;font-size:.82rem;line-height:1.5}
 .gx-meta{display:flex;align-items:center;gap:.6rem;margin-top:.7rem;color:#64748b;font-family:var(--v6-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase}
 .gx-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.15rem .55rem;border-radius:999px;border:1px solid rgba(148,163,184,.35);color:#94a3b8;font-style:normal}
-.gx-chip::before,.gx-dot{content:"";width:6px;height:6px;border-radius:50%;border:1px solid currentColor;flex:none}
+.gx-chip::before{content:"";width:6px;height:6px;border-radius:50%;border:1px solid currentColor;flex:none}
 .gx-sys.live .gx-chip{color:var(--ac-hi);border-color:color-mix(in srgb,var(--ac) 55%,transparent)}
 .gx-sys.live .gx-chip::before{background:currentColor}
 .gx-cta{display:block;width:fit-content;margin-top:.7rem;text-decoration:none;color:var(--ac-hi);font-family:var(--v6-display);font-weight:700}
@@ -213,16 +187,7 @@ onBeforeUnmount(() => {
 .gx-sys.on .gx-star b{transform:scale(1.35)}
 .gx-sys.left{flex-direction:row-reverse;text-align:right}.gx-sys.left .gx-star{margin:-22px -22px -22px 0}.gx-sys.left .gx-lab{margin:0 .2rem 0 0}
 .gx-sys:focus-visible{outline:none}.gx-sys:focus-visible .gx-lab{border-color:var(--ac-hi)}
-/* system list under the sky */
-.gx-tabs{display:grid;grid-template-columns:repeat(4,1fr);margin:1.6rem 0 0}
-.gx-tab{display:grid;gap:.1rem;padding:1.1rem 1.2rem 1.3rem 0;border-top:1px solid var(--v6-line);position:relative;transition:border-color .3s}
-.gx-tab+.gx-tab{padding-left:1.2rem;border-left:0}
-.gx-tab::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--ac);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.22,1,.36,1)}
-.gx-tab.on::before,.gx-tab:hover::before{transform:scaleX(1)}
-.gx-tab .gx-mono{display:flex;align-items:center;gap:.5rem;color:var(--v6-faint)}.gx-tab.on .gx-mono{color:var(--ac)}
-.gx-dot.live{background:var(--ac);border-color:var(--ac)}
-.gx-tab b{font-family:var(--v6-display);font-size:1.25rem;letter-spacing:-.02em;transition:color .3s}.gx-tab.on b,.gx-tab:hover b{color:var(--ac-hi)}
 /* narrow: the labels shrink to the name, the focused system opens its full card */
-@media (max-width:900px){.gx-sky{height:78vh}.gx-copy{max-width:20rem}.gx-lab em,.gx-lab .gx-mono{display:none}.gx-sys.on .gx-lab em,.gx-sys.on .gx-lab .gx-mono{display:block}.gx-lab strong{font-size:1.05rem}.gx-tabs{grid-template-columns:1fr 1fr}.gx-tab:nth-child(odd){padding-left:0}.gx-hint{display:none}}
+@media (max-width:900px){.gx-sky{height:78vh}.gx-copy{max-width:20rem}.gx-lab em,.gx-lab .gx-mono{display:none}.gx-sys.on .gx-lab em,.gx-sys.on .gx-lab .gx-mono{display:block}.gx-lab strong{font-size:1.05rem}.gx-hint{display:none}}
 @media (prefers-reduced-motion:reduce){.gx-orbit>i,.gx-sys.live .gx-star::after{animation:none}}
 </style>

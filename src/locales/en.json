@@ -2243,7 +2243,8 @@
       "welcome": "Welcome - Katsumii",
       "bugreport": "Report a Bug - Katsumii",
       "sandbox": "Sandbox - Katsumii",
-      "notFound": "404 - Katsumii"
+      "notFound": "404 - Katsumii",
+      "cubamii": "Cubamii: 3D nonogram for Android - Katsumii"
     },
     "pageDescriptions": {
       "default": "Katsumii is an offline trading journal for prop firm and funded traders: log trades, track challenge rules, review analytics. One-time license, data stays local.",
@@ -2268,7 +2269,8 @@
       "welcome": "A guided introduction to Katsumii and the first steps for getting value from your trading journal.",
       "bugreport": "Report a Katsumii bug and share reproduction steps so the issue can be investigated.",
       "sandbox": "Work-in-progress preview of the upcoming Katsumii developer site.",
-      "notFound": "This Katsumii page does not exist or has moved."
+      "notFound": "This Katsumii page does not exist or has moved.",
+      "cubamii": "Cubamii is a calm 3D logic puzzle for Android: read the numbers, chisel away the empty cubes and uncover a hidden voxel animal. Offline and free."
     },
     "cta": {
       "getKatsumii": "Get Katsumii",
@@ -2842,7 +2844,6 @@
         "text": "Nothing charted here yet. Got an idea for the next system?",
         "cta": "Tell us"
       },
-      "tabsAria": "Apps",
       "price": {
         "paid": "Paid",
         "free": "Free"
@@ -2851,8 +2852,11 @@
     "page": {
       "nav": {
         "apps": "Apps",
-        "journal": "Journal",
         "contact": "Contact"
+      },
+      "filter": {
+        "aria": "Filter apps by platform",
+        "all": "All"
       },
       "apps": {
         "eyebrow": "The line-up",
@@ -2860,32 +2864,13 @@
           "pre": "Small apps,",
           "em": "made properly"
         },
-        "sub": "Four focused apps for desktop and mobile — each with its own purpose, its own look and its own page.",
+        "download": "Download",
         "visit": "Visit product page",
         "shotAlt": "{name} app screenshot",
         "preview": "{name} preview",
         "soon": "Coming soon"
       },
-      "spotlight": {
-        "eyebrow": "For traders",
-        "title": {
-          "pre": "The journal for",
-          "em": "traders"
-        },
-        "points": [
-          "Every account type keeps its own, separate data",
-          "Runs offline — your trades never leave your machine",
-          "Analytics, reviews and screenshots built in"
-        ],
-        "cta": "Explore Katsumii Journal",
-        "imageAlt": "The Katsumii Journal dashboard"
-      },
       "principles": {
-        "eyebrow": "How we build",
-        "title": {
-          "pre": "Calm software,",
-          "em": "on your terms"
-        },
         "items": [
           {
             "title": "Local first",
@@ -2935,8 +2920,217 @@
     },
     "cubamii": {
       "name": "Cubamii",
-      "tagline": "Small. In your pocket.",
-      "desc": "The Katsumii mobile app. Details follow soon."
+      "tagline": "Carve the hidden.",
+      "desc": "A calm 3D logic puzzle for Android. Chisel away empty cubes, paint the right ones and uncover a hidden voxel animal. Offline and free."
+    }
+  },
+  "cubamiiPage": {
+    "hero": {
+      "eyebrow": "Android · Free · Closed test",
+      "brandSub": "3D Nonogram",
+      "h1": {
+        "pre": "Carve a block.",
+        "em": "Find the animal"
+      },
+      "sub": "Every block hides something waiting to be found. Read the numbers, chisel away the empty cubes and paint the sure ones — until a logic puzzle turns into a colourful voxel model.",
+      "chips": [
+        "Android 10+",
+        "Works offline",
+        "No account",
+        "English · Deutsch · 繁體中文"
+      ],
+      "cta": "Join the closed test",
+      "more": "How it plays"
+    },
+    "cube": {
+      "aria": "Interactive 3D model of a Cubamii puzzle block with its clue numbers. Drag to rotate it.",
+      "hint": "Drag to rotate",
+      "carve": "Chisel the block",
+      "busy": "Carving…",
+      "again": "Play again",
+      "caption": "A fox hides in this block: 96 of its 343 cubes belong to the animal.",
+      "captionDone": "There it is — the fox, built from 438 small voxels.",
+      "fallbackAlt": "A Cubamii puzzle block with a clue number on every cube"
+    },
+    "how": {
+      "eyebrow": "How it plays",
+      "title": {
+        "pre": "Three moves,",
+        "em": "no guessing"
+      },
+      "sub": "Every puzzle can be solved by pure logic — a test checks every single one. You never have to guess.",
+      "steps": [
+        {
+          "title": "Read the numbers",
+          "copy": "Every row through the block carries a clue, printed on the cube faces that point along it. A 3 means: three cubes of the animal in this row.",
+          "alt": "Cubamii: a full puzzle block covered in clue numbers"
+        },
+        {
+          "title": "Chisel what is empty",
+          "copy": "A 0 says the row holds nothing. Chisel it away, or let Clear 0s sweep every empty row at once. A wrong cut is refused and counted.",
+          "alt": "Cubamii: a half-carved block with the fox starting to appear"
+        },
+        {
+          "title": "Paint the sure ones",
+          "copy": "Paint a cube you know belongs to the animal and it shows its true colour right away. Step by step the animal appears.",
+          "alt": "Cubamii: the finished voxel fox"
+        }
+      ]
+    },
+    "clues": {
+      "eyebrow": "Reading the clues",
+      "title": {
+        "pre": "Four symbols,",
+        "em": "one language"
+      },
+      "sub": "The number is how many cubes of the animal sit in that row. Its frame tells you how they are grouped.",
+      "items": [
+        {
+          "copy": "Three cubes in one unbroken run."
+        },
+        {
+          "copy": "Three cubes, split into two groups."
+        },
+        {
+          "copy": "Three cubes, split into three or more groups."
+        },
+        {
+          "copy": "Nothing here — chisel the whole row away."
+        }
+      ],
+      "note": "Some faces stay blank on purpose. The other two directions always give you enough."
+    },
+    "models": {
+      "eyebrow": "The collection",
+      "title": {
+        "pre": "From the first fox to",
+        "em": "whole scenes"
+      },
+      "sub": "Solve small puzzles, unlock more animals, then take on larger models built from several puzzle cubes. Landmarks, vehicles and whole dioramas grow your collection.",
+      "alt": "{name}, solved in Cubamii",
+      "items": [
+        "Fox",
+        "Squirrel",
+        "Tarantula",
+        "Tikal Temple I",
+        "Pirate ship",
+        "Western town",
+        "Fairy-tale castle",
+        "Japanese garden",
+        "Lighthouse"
+      ],
+      "stats": [
+        {
+          "value": "7³ → 10³",
+          "label": "Puzzle blocks from 7 × 7 × 7 to 10 × 10 × 10 cubes"
+        },
+        {
+          "value": "27 × 27 × 9",
+          "label": "Master puzzles: one big model made of many puzzle cubes"
+        },
+        {
+          "value": "4",
+          "label": "Collections: animals, landmarks, vehicles and dioramas"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "Made for thinking",
+      "title": {
+        "pre": "Small things",
+        "em": "that help"
+      },
+      "items": [
+        {
+          "title": "Rotate, peel, X-ray",
+          "copy": "Turn the block, peel away single layers and switch to X-ray when a row hides behind another."
+        },
+        {
+          "title": "Hints and undo",
+          "copy": "Stuck? A hint reveals a cube that one single row proves. Undo and redo are always there."
+        },
+        {
+          "title": "Three ways to play",
+          "copy": "Classic, Strict (three lives, no hints) or Time attack. Strict and Time attack earn a crown."
+        },
+        {
+          "title": "Daily puzzle",
+          "copy": "A new puzzle every day, a bigger one every week. Keep your streak, collect achievements and follow your statistics."
+        },
+        {
+          "title": "Materials and themes",
+          "copy": "Solve puzzles to unlock nine stone materials — wood, ice, lava, neon and more — plus colour themes, light and dark."
+        },
+        {
+          "title": "Share the result",
+          "copy": "Share your solved model as a picture or as a spinning video."
+        },
+        {
+          "title": "Interactive tutorial",
+          "copy": "A short guided puzzle teaches the basics on a tiny mushroom — right inside the real game."
+        },
+        {
+          "title": "Comfortable to use",
+          "copy": "Text size, left-handed controls, a compact layout and switches for sound and haptics."
+        }
+      ]
+    },
+    "pricing": {
+      "eyebrow": "Free to play",
+      "title": {
+        "pre": "Free to start.",
+        "em": "Pay once, if you like"
+      },
+      "items": [
+        {
+          "label": "Free",
+          "title": "Play for free",
+          "copy": "Download Cubamii for free. The first six motifs come without ads. From the seventh motif on, a full-screen ad can appear between puzzles — at most every eight minutes, never during a puzzle and never for the daily puzzle."
+        },
+        {
+          "label": "€3.99 · once",
+          "title": "Premium",
+          "copy": "One purchase, no subscription: no more ads, all three content packs and the golden Treasure material."
+        },
+        {
+          "label": "€1.99 each",
+          "title": "Content packs",
+          "copy": "Landmarks, vehicles and dioramas open their whole category from the fourth motif on. A pack does not remove ads."
+        }
+      ],
+      "note": "Diamonds are a play currency: you earn them by solving puzzles and spend them on comfort such as hints. Progress itself cannot be bought."
+    },
+    "calm": {
+      "eyebrow": "Calm by design",
+      "title": {
+        "pre": "Offline.",
+        "em": "No account"
+      },
+      "items": [
+        {
+          "title": "Offline",
+          "copy": "Every puzzle works without a connection. Your progress is saved on your device."
+        },
+        {
+          "title": "No account",
+          "copy": "No sign-up, no profile. Cubamii does not need to know who you are."
+        },
+        {
+          "title": "A calm pace",
+          "copy": "Ads only ever appear between two puzzles, never in the middle of one."
+        }
+      ],
+      "privacy": "Read the privacy policy",
+      "spec": "Android 10 or newer · English, German and Traditional Chinese"
+    },
+    "cta": {
+      "title": {
+        "pre": "Ready to",
+        "em": "carve"
+      },
+      "sub": "Free to download for Android — and the first six motifs come without ads.",
+      "button": "Join the closed test",
+      "studio": "All Katsumii apps"
     }
   }
 }

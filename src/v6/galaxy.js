@@ -9,7 +9,7 @@
    turn with the arms. Opening a product flies the camera
    into its system first (zoomTo), then hands over to `open(key)`. */
 
-export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
+export function createGalaxy({ panel, canvas, systems, readout, open }) {
   var cv = canvas, ctx = cv.getContext("2d");
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var dpr = Math.min(devicePixelRatio || 1, 1.5), W = 0, H = 0, cx = 0, cy = 0, R = 0, S0 = .54;
@@ -135,7 +135,7 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
   }
 
   /* ── star systems follow the galaxy ── */
-  var sys = systems, tabEls = tabs, read = readout, readDef = "";
+  var sys = systems, read = readout, readDef = "";
   function place() {
     var items = sys.map(function (el) {
       var r = +el.dataset.r, th = +el.dataset.th + w(r) * t, p = cam(proj(r, th, 0));
@@ -172,7 +172,6 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
     if (zoomEl) return;   /* the camera is flying — leave the focus alone */
     hover = k; target = k ? .05 : 1;
     sys.forEach(function (e) { e.classList.toggle("on", e.dataset.k === k) });
-    tabEls.forEach(function (e) { e.classList.toggle("on", e.dataset.k === k) });
     read.classList.toggle("on", !!k);
     if (k) { var e = sys.filter(function (s) { return s.dataset.k === k })[0]; read.style.setProperty("--rc", getComputedStyle(e).getPropertyValue("--ac")) }
     else read.textContent = readDef;
@@ -180,7 +179,7 @@ export function createGalaxy({ panel, canvas, systems, tabs, readout, open }) {
   }
   var offs = [];
   function listen(el, ev, fn, opt) { el.addEventListener(ev, fn, opt); offs.push(function () { el.removeEventListener(ev, fn, opt) }) }
-  sys.concat(tabEls).forEach(function (el) {
+  sys.forEach(function (el) {
     ["mouseenter", "focus"].forEach(function (ev) { listen(el, ev, function () { focus(el.dataset.k) }) });
     ["mouseleave", "blur"].forEach(function (ev) { listen(el, ev, function () { focus(null) }) });
   });

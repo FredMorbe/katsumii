@@ -1,6 +1,7 @@
 /* The Katsumii product line — single source for the studio landing, the nav,
    the footer and the product pages. Copy lives in locales under products.<key>;
-   this file only carries what is not text: route, accent, platform, price, screenshot. */
+   this file only carries what is not text: route, accent, platform, price, screenshot.
+   Optional `download`: a direct file URL — when set, the app card shows a download button. */
 
 export const PRODUCTS = [
   {
@@ -41,9 +42,11 @@ export const PRODUCTS = [
   {
     key: "cubamii",
     path: "/cubamii",
+    page: "/cubamii",
     platform: "mobile",
     price: "free",
     accent: { dark: ["#facc15", "#fde68a"], light: ["#ab7503", "#8a5e02"] },
+    shot: { dark: "cubamii_d.webp" },
     star: { x: 79, y: 70 },
     galaxy: { r: 0.74, th: 4.75 },
   },

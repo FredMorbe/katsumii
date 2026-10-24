@@ -2243,7 +2243,8 @@
       "welcome": "Willkommen - Katsumii",
       "bugreport": "Fehler melden - Katsumii",
       "sandbox": "Sandbox - Katsumii",
-      "notFound": "404 - Katsumii"
+      "notFound": "404 - Katsumii",
+      "cubamii": "Cubamii: 3D-Nonogramm für Android - Katsumii"
     },
     "pageDescriptions": {
       "default": "Katsumii: Offline-Trading-Journal für Prop-Firm- und Funded-Trader. Trades erfassen, Challenge-Regeln verfolgen, Analytics nutzen. Einmalige Lizenz, lokale Daten.",
@@ -2268,7 +2269,8 @@
       "welcome": "Eine geführte Einführung in Katsumii und die ersten Schritte, um dein Trading-Journal sinnvoll zu nutzen.",
       "bugreport": "Melde einen Katsumii-Fehler und teile Reproduktionsschritte, damit wir das Problem untersuchen können.",
       "sandbox": "Arbeitsstand der kommenden Katsumii-Entwicklerseite.",
-      "notFound": "Diese Katsumii-Seite existiert nicht oder wurde verschoben."
+      "notFound": "Diese Katsumii-Seite existiert nicht oder wurde verschoben.",
+      "cubamii": "Cubamii ist ein ruhiges 3D-Logikrätsel für Android: Zahlen lesen, leere Würfel wegmeißeln und ein verborgenes Voxel-Tier freilegen. Offline und kostenlos."
     },
     "cta": {
       "getKatsumii": "Katsumii holen",
@@ -2842,7 +2844,6 @@
         "text": "Hier ist noch nichts kartiert. Hast du eine Idee für das nächste System?",
         "cta": "Schreib uns"
       },
-      "tabsAria": "Apps",
       "price": {
         "paid": "Kostenpflichtig",
         "free": "Kostenlos"
@@ -2851,8 +2852,11 @@
     "page": {
       "nav": {
         "apps": "Apps",
-        "journal": "Journal",
         "contact": "Kontakt"
+      },
+      "filter": {
+        "aria": "Apps nach Plattform filtern",
+        "all": "Alle"
       },
       "apps": {
         "eyebrow": "Die Auswahl",
@@ -2860,32 +2864,13 @@
           "pre": "Kleine Apps,",
           "em": "sauber gemacht"
         },
-        "sub": "Vier fokussierte Apps für Desktop und Mobil – jede mit eigenem Zweck, eigenem Look und eigener Seite.",
+        "download": "Herunterladen",
         "visit": "Produktseite ansehen",
         "shotAlt": "Screenshot von {name}",
         "preview": "Vorschau {name}",
         "soon": "Bald verfügbar"
       },
-      "spotlight": {
-        "eyebrow": "Für Trader",
-        "title": {
-          "pre": "Das Journal für",
-          "em": "Trader"
-        },
-        "points": [
-          "Jeder Kontotyp behält seine eigenen, getrennten Daten",
-          "Läuft offline – deine Trades verlassen deinen Rechner nie",
-          "Analysen, Reviews und Screenshots sind eingebaut"
-        ],
-        "cta": "Katsumii Journal entdecken",
-        "imageAlt": "Das Dashboard des Katsumii Journals"
-      },
       "principles": {
-        "eyebrow": "Wie wir bauen",
-        "title": {
-          "pre": "Ruhige Software,",
-          "em": "zu deinen Bedingungen"
-        },
         "items": [
           {
             "title": "Local first",
@@ -2935,8 +2920,217 @@
     },
     "cubamii": {
       "name": "Cubamii",
-      "tagline": "Klein. In deiner Tasche.",
-      "desc": "Die mobile App von Katsumii. Details folgen in Kürze."
+      "tagline": "Meißle das Verborgene.",
+      "desc": "Ein ruhiges 3D-Logikrätsel für Android. Meißle leere Würfel weg, male die richtigen an und lege ein verborgenes Voxel-Tier frei. Offline und kostenlos."
+    }
+  },
+  "cubamiiPage": {
+    "hero": {
+      "eyebrow": "Android · Kostenlos · Geschlossener Test",
+      "brandSub": "3D-Nonogramm",
+      "h1": {
+        "pre": "Meißle den Block.",
+        "em": "Finde das Tier"
+      },
+      "sub": "In jedem Block steckt mehr, als du zuerst siehst. Lies die Zahlen, meißle die leeren Würfel weg und male die sicheren an – bis aus einem Logikrätsel ein farbiges Voxelmodell wird.",
+      "chips": [
+        "Android 10+",
+        "Funktioniert offline",
+        "Ohne Konto",
+        "English · Deutsch · 繁體中文"
+      ],
+      "cta": "Am geschlossenen Test teilnehmen",
+      "more": "So wird gespielt"
+    },
+    "cube": {
+      "aria": "Interaktives 3D-Modell eines Cubamii-Rätselblocks mit seinen Hinweiszahlen. Zum Drehen ziehen.",
+      "hint": "Zum Drehen ziehen",
+      "carve": "Block meißeln",
+      "busy": "Es wird gemeißelt …",
+      "again": "Nochmal spielen",
+      "caption": "In diesem Block steckt ein Fuchs: 96 seiner 343 Würfel gehören zum Tier.",
+      "captionDone": "Da ist er – der Fuchs, gebaut aus 438 kleinen Voxeln.",
+      "fallbackAlt": "Ein Cubamii-Rätselblock mit einer Hinweiszahl auf jedem Würfel"
+    },
+    "how": {
+      "eyebrow": "So wird gespielt",
+      "title": {
+        "pre": "Drei Züge,",
+        "em": "kein Raten"
+      },
+      "sub": "Jedes Rätsel lässt sich allein mit Logik lösen – ein Test prüft jedes einzelne. Raten musst du nie.",
+      "steps": [
+        {
+          "title": "Zahlen lesen",
+          "copy": "Jede Reihe durch den Block hat einen Hinweis, aufgedruckt auf den Würfelflächen, die entlang der Reihe zeigen. Eine 3 heißt: drei Würfel des Tieres in dieser Reihe.",
+          "alt": "Cubamii: ein voller Rätselblock voller Hinweiszahlen"
+        },
+        {
+          "title": "Leeres wegmeißeln",
+          "copy": "Eine 0 sagt: In dieser Reihe steckt nichts. Meißle sie weg oder lass „0 räumen“ alle leeren Reihen auf einmal abräumen. Ein falscher Schlag wird abgelehnt und gezählt.",
+          "alt": "Cubamii: ein halb ausgemeißelter Block, in dem der Fuchs sichtbar wird"
+        },
+        {
+          "title": "Sichere Würfel malen",
+          "copy": "Male einen Würfel an, von dem du weißt, dass er zum Tier gehört, und er zeigt sofort seine echte Farbe. Schritt für Schritt erscheint das Tier.",
+          "alt": "Cubamii: der fertige Voxel-Fuchs"
+        }
+      ]
+    },
+    "clues": {
+      "eyebrow": "Hinweise lesen",
+      "title": {
+        "pre": "Vier Zeichen,",
+        "em": "eine Sprache"
+      },
+      "sub": "Die Zahl sagt, wie viele Würfel des Tieres in der Reihe liegen. Der Rahmen verrät, wie sie gruppiert sind.",
+      "items": [
+        {
+          "copy": "Drei Würfel am Stück."
+        },
+        {
+          "copy": "Drei Würfel in zwei Gruppen."
+        },
+        {
+          "copy": "Drei Würfel in drei oder mehr Gruppen."
+        },
+        {
+          "copy": "Hier ist nichts – meißle die ganze Reihe weg."
+        }
+      ],
+      "note": "Manche Flächen bleiben absichtlich leer. Die beiden anderen Richtungen reichen immer aus."
+    },
+    "models": {
+      "eyebrow": "Die Sammlung",
+      "title": {
+        "pre": "Vom ersten Fuchs bis zu",
+        "em": "ganzen Szenen"
+      },
+      "sub": "Löse kleine Rätsel, schalte weitere Tiere frei und wage dich dann an größere Modelle aus mehreren Rätselwürfeln. Wahrzeichen, Fahrzeuge und ganze Dioramen erweitern deine Sammlung.",
+      "alt": "{name}, gelöst in Cubamii",
+      "items": [
+        "Fuchs",
+        "Eichhörnchen",
+        "Vogelspinne",
+        "Tikal, Tempel I",
+        "Piratenschiff",
+        "Westernstadt",
+        "Märchenburg",
+        "Japanischer Garten",
+        "Leuchtturm"
+      ],
+      "stats": [
+        {
+          "value": "7³ → 10³",
+          "label": "Rätselblöcke von 7 × 7 × 7 bis 10 × 10 × 10 Würfeln"
+        },
+        {
+          "value": "27 × 27 × 9",
+          "label": "Meisterrätsel: ein großes Modell aus vielen Rätselwürfeln"
+        },
+        {
+          "value": "4",
+          "label": "Sammlungen: Tiere, Wahrzeichen, Fahrzeuge und Dioramen"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "Zum Knobeln gemacht",
+      "title": {
+        "pre": "Kleine Dinge,",
+        "em": "die helfen"
+      },
+      "items": [
+        {
+          "title": "Drehen, schälen, durchblicken",
+          "copy": "Dreh den Block, trage einzelne Schichten ab und schalte auf Röntgen, wenn sich eine Reihe hinter einer anderen versteckt."
+        },
+        {
+          "title": "Tipps und Zurück",
+          "copy": "Festgefahren? Ein Tipp deckt einen Würfel auf, den eine einzelne Reihe beweist. Zurück und Wiederholen sind immer da."
+        },
+        {
+          "title": "Drei Spielweisen",
+          "copy": "Klassisch, Strikt (drei Leben, keine Tipps) oder Zeitangriff. Strikt und Zeitangriff bringen eine Krone."
+        },
+        {
+          "title": "Tagesrätsel",
+          "copy": "Jeden Tag ein neues Rätsel, jede Woche ein größeres. Halte deine Serie, sammle Erfolge und behalte deine Statistik im Blick."
+        },
+        {
+          "title": "Materialien und Themen",
+          "copy": "Schalte durch gelöste Rätsel neun Steinmaterialien frei – Holz, Eis, Lava, Neon und mehr – dazu Farbthemen, hell und dunkel."
+        },
+        {
+          "title": "Ergebnis teilen",
+          "copy": "Teile dein gelöstes Modell als Bild oder als Drehvideo."
+        },
+        {
+          "title": "Interaktives Tutorial",
+          "copy": "Ein kurzes, geführtes Rätsel erklärt die Grundlagen an einem winzigen Pilz – direkt im echten Spiel."
+        },
+        {
+          "title": "Bequem bedienbar",
+          "copy": "Textgröße, linkshändige Bedienung, ein kompaktes Layout und Schalter für Ton und Haptik."
+        }
+      ]
+    },
+    "pricing": {
+      "eyebrow": "Gratis spielen",
+      "title": {
+        "pre": "Gratis starten.",
+        "em": "Einmal zahlen, wenn du magst"
+      },
+      "items": [
+        {
+          "label": "Gratis",
+          "title": "Kostenlos spielen",
+          "copy": "Lade Cubamii kostenlos herunter. Die ersten sechs Motive laufen ohne Werbung. Ab dem siebten Motiv kann zwischen zwei Rätseln eine Vollbild-Anzeige erscheinen – höchstens alle acht Minuten, nie mitten im Rätsel und nie beim Tagesrätsel."
+        },
+        {
+          "label": "3,99 € · einmalig",
+          "title": "Premium",
+          "copy": "Ein Kauf, kein Abo: keine Werbung mehr, alle drei Inhaltspakete und das goldene Material Schatz."
+        },
+        {
+          "label": "je 1,99 €",
+          "title": "Inhaltspakete",
+          "copy": "Wahrzeichen, Fahrzeuge und Dioramen öffnen ab dem vierten Motiv ihre ganze Kategorie. Ein Paket entfernt keine Werbung."
+        }
+      ],
+      "note": "Diamanten sind eine Spielwährung: Du verdienst sie beim Lösen von Rätseln und gibst sie für Komfort wie Tipps aus. Fortschritt selbst lässt sich nicht kaufen."
+    },
+    "calm": {
+      "eyebrow": "Ruhig gemacht",
+      "title": {
+        "pre": "Offline.",
+        "em": "Ohne Konto"
+      },
+      "items": [
+        {
+          "title": "Offline",
+          "copy": "Alle Rätsel funktionieren ohne Verbindung. Dein Fortschritt liegt auf deinem Gerät."
+        },
+        {
+          "title": "Ohne Konto",
+          "copy": "Keine Anmeldung, kein Profil. Cubamii muss nicht wissen, wer du bist."
+        },
+        {
+          "title": "Ruhiges Tempo",
+          "copy": "Werbung erscheint nur zwischen zwei Rätseln, nie mitten im Rätsel."
+        }
+      ],
+      "privacy": "Datenschutzerklärung lesen",
+      "spec": "Android 10 oder neuer · Deutsch, Englisch und Traditionelles Chinesisch"
+    },
+    "cta": {
+      "title": {
+        "pre": "Bereit zum",
+        "em": "Meißeln"
+      },
+      "sub": "Kostenlos für Android – und die ersten sechs Motive laufen ohne Werbung.",
+      "button": "Am geschlossenen Test teilnehmen",
+      "studio": "Alle Katsumii-Apps"
     }
   }
 }

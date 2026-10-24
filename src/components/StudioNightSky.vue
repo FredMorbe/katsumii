@@ -1,33 +1,36 @@
 <template>
   <div ref="skyEl" class="v6ns-sky" :class="{ ready }" :aria-label="t('studio.sky.aria')">
     <canvas ref="canvasEl" aria-hidden="true"></canvas>
+    <canvas ref="lensEl" class="v6ns-lens" aria-hidden="true"></canvas>
 
-    <p ref="nameEl" class="v6ns-name v6-mono" aria-hidden="true">{{ t('studio.sky.constellation') }}</p>
+    <div ref="uiEl" class="v6ns-ui" :class="{ off: uiOff }">
+      <p ref="nameEl" class="v6ns-name v6-mono" aria-hidden="true">{{ t('studio.sky.constellation') }}</p>
 
-    <RouterLink
-      v-for="(p, i) in PRODUCTS"
-      :key="p.key"
-      :ref="(el) => (systemEls[i] = el?.$el || el)"
-      class="v6ns-sys"
-      :class="{ on: active === p.key }"
-      :to="`/${lang}${p.path}`"
-      :style="{ '--ac': p.accent.dark[0], '--ac-hi': p.accent.dark[1] }"
-      @mouseenter="focus(p.key)"
-      @mouseleave="focus(null)"
-      @focus="focus(p.key)"
-      @blur="focus(null)"
-    >
-      <span class="v6ns-star" aria-hidden="true"><b></b></span>
-      <span class="v6ns-lab">
-        <span class="v6-mono">KAT-0{{ i + 1 }} · {{ t(`studio.platform.${p.platform}`) }}</span>
-        <strong>{{ t(`products.${p.key}.name`) }}</strong>
-        <em>{{ t(`products.${p.key}.tagline`) }}</em>
-        <span class="v6ns-more">{{ t(`products.${p.key}.desc`) }}<u>{{ t('studio.sky.open') }} →</u></span>
-      </span>
-    </RouterLink>
+      <RouterLink
+        v-for="(p, i) in PRODUCTS"
+        :key="p.key"
+        :ref="(el) => (systemEls[i] = el?.$el || el)"
+        class="v6ns-sys"
+        :class="{ on: active === p.key }"
+        :to="`/${lang}${p.path}`"
+        :style="{ '--ac': p.accent.dark[0], '--ac-hi': p.accent.dark[1] }"
+        @mouseenter="focus(p.key)"
+        @mouseleave="focus(null)"
+        @focus="focus(p.key)"
+        @blur="focus(null)"
+      >
+        <span class="v6ns-star" aria-hidden="true"><b></b></span>
+        <span class="v6ns-lab">
+          <span class="v6-mono">KAT-0{{ i + 1 }} · {{ t(`studio.platform.${p.platform}`) }}</span>
+          <strong>{{ t(`products.${p.key}.name`) }}</strong>
+          <em>{{ t(`products.${p.key}.tagline`) }}</em>
+          <span class="v6ns-more">{{ t(`products.${p.key}.desc`) }}<u>{{ t('studio.sky.open') }} →</u></span>
+        </span>
+      </RouterLink>
 
-    <p class="v6ns-read v6-mono" :class="{ on: active }" :style="readStyle" aria-hidden="true">{{ readout }}</p>
-    <p class="v6ns-hint v6-mono" aria-hidden="true">{{ t('studio.sky.hint') }}</p>
+      <p class="v6ns-read v6-mono" :class="{ on: active }" :style="readStyle" aria-hidden="true">{{ readout }}</p>
+      <p class="v6ns-hint v6-mono" aria-hidden="true">{{ t('studio.sky.hint') }}</p>
+    </div>
   </div>
 </template>
 
@@ -47,9 +50,12 @@ const lang = computed(() => {
 
 const skyEl = ref(null)
 const canvasEl = ref(null)
+const lensEl = ref(null)
 const nameEl = ref(null)
 const systemEls = []
 const ready = ref(false)
+const uiEl = ref(null)
+const uiOff = ref(false)
 const active = ref(null)
 const liveReadout = ref("")
 const readout = computed(() => (active.value ? liveReadout.value : t("studio.sky.readout")))
@@ -94,8 +100,8 @@ onMounted(() => {
   const cv = canvasEl.value
   const ctx = cv.getContext("2d")
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
-  const sdpr = Math.min(dpr, 1.25)
+  const dpr = Math.min(window.devicePixelRatio || 1, 2)
+  const sdpr = Math.min(dpr, 1.5)
 
   /* glow sprites, one per colour class */
   const sprites = TEMPS.map((c) => {
@@ -112,13 +118,109 @@ onMounted(() => {
     return sc
   })
 
+  /* accent colours of the app stars as rgb triplets, for the canvas signals */
+  const accRGB = PRODUCTS.map((p) => {
+    const h = p.accent.dark[1].slice(1)
+    return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16))
+  })
+
+  /* ── gravitational lens at the pointer ──
+     A point-mass lens: a ray that would land at distance r is pulled in so that the sky we see there is the sky at
+     β = r − E²/r (E = Einstein radius). Stars near the ring are stretched into arcs, a bright Einstein ring forms at
+     r = E, and inside it the picture is mirrored around a dark core. The deflection fades out towards the rim so the
+     patch blends into the sky without a seam. The pixel map is built once; each frame only copies the small patch under
+     the pointer from the sky canvas, remaps it and lays it back on top. */
+  const LENS_R = 56 /* CSS px */
+  const initLens = () => {
+    if (reduced || !window.matchMedia("(pointer: fine)").matches) return null
+    const N = Math.round(LENS_R * 2 * dpr)
+    const el = lensEl.value
+    el.width = el.height = N
+    el.style.width = el.style.height = `${LENS_R * 2}px`
+    el.style.opacity = "0"
+    const src = document.createElement("canvas")
+    src.width = src.height = N
+    const sctx = src.getContext("2d", { willReadFrequently: true })
+    const lctx = el.getContext("2d")
+    const out = lctx.createImageData(N, N)
+    const R = N / 2, E = 0.25 * R
+    const mx = new Float32Array(N * N), my = new Float32Array(N * N)
+    const boost = new Float32Array(N * N), fade = new Float32Array(N * N), rim = new Float32Array(N * N)
+    for (let y = 0; y < N; y++) {
+      for (let x = 0; x < N; x++) {
+        const i = y * N + x
+        const dx = x + 0.5 - R, dy = y + 0.5 - R
+        const r = Math.max(Math.hypot(dx, dy), 1e-3)
+        const t = smooth(0.5 * R, R, r) /* 0 inside, 1 at the rim */
+        const beta = r - ((E * E) / r) * (1 - t)
+        mx[i] = R + (dx / r) * beta - 0.5 /* -0.5: pixel centres, so the identity at the rim hits pixels exactly */
+        my[i] = R + (dy / r) * beta - 0.5
+        /* point-lens magnification 1/|1 − (E/r)⁴|, tamed so the ring glows instead of blowing out */
+        const mu = Math.min(1 / Math.max(Math.abs(1 - Math.pow(E / r, 4)), 0.01), 2.6)
+        fade[i] = 1 - smooth(0.8 * R, R, Math.abs(beta)) * (1 - t) /* sky beyond the patch (the very centre) goes dark; the rim stays untouched */
+        boost[i] = (mu - 1) * (1 - t) /* stars brighten where they are magnified; the faint haze keeps its brightness */
+        rim[i] = 0.2 * Math.exp(-(((r - E) / (0.05 * R)) ** 2)) * (1 - t)
+        out.data[i * 4 + 3] = r >= R ? 0 : Math.round(255 * (1 - smooth(0.94 * R, R, r)))
+      }
+    }
+    return { el, sctx, lctx, out, N, R, mx, my, boost, fade, rim, x: 0, y: 0, alpha: 0 }
+  }
+  const lens = initLens()
+
+  const drawLens = () => {
+    if (!lens) return
+    const on = ptrIn && !active.value && !covered
+    if (!on && lens.alpha < 0.02) { /* idle: park the lens under the pointer so it appears in place */
+      lens.alpha = 0; lens.el.style.opacity = "0"; lens.x = ptrPx; lens.y = ptrPy
+      return
+    }
+    lens.alpha += ((on ? 1 : 0) - lens.alpha) * 0.18
+    lens.x += (ptrPx - lens.x) * 0.3
+    lens.y += (ptrPy - lens.y) * 0.3
+    const { el, sctx, lctx, out, N, mx, my, boost, fade, rim } = lens
+    el.style.opacity = lens.alpha.toFixed(3)
+    /* snap to whole device pixels so the patch lines up with the sky underneath it exactly */
+    const ox = Math.round((lens.x - LENS_R) * dpr), oy = Math.round((lens.y - LENS_R) * dpr)
+    el.style.transform = `translate3d(${ox / dpr}px,${oy / dpr}px,0)`
+    sctx.clearRect(0, 0, N, N)
+    sctx.drawImage(canvasEl.value, ox, oy, N, N, 0, 0, N, N)
+    const sd = sctx.getImageData(0, 0, N, N).data
+    const od = out.data
+    const last = N - 2
+    for (let i = 0, n = N * N; i < n; i++) {
+      if (od[i * 4 + 3] === 0) continue
+      let sx = mx[i], sy = my[i]
+      sx = sx < 0 ? 0 : sx > last ? last : sx
+      sy = sy < 0 ? 0 : sy > last ? last : sy
+      const x0 = sx | 0, y0 = sy | 0, fx = sx - x0, fy = sy - y0
+      const a = (y0 * N + x0) * 4, b = a + 4, c = a + N * 4, d = c + 4
+      const w00 = (1 - fx) * (1 - fy), w10 = fx * (1 - fy), w01 = (1 - fx) * fy, w11 = fx * fy
+      const bs = boost[i], fd = fade[i], rm = rim[i] * 255
+      const k = i * 4
+      let v = sd[a] * w00 + sd[b] * w10 + sd[c] * w01 + sd[d] * w11
+      v = (v + (v > 70 ? bs * (v - 70) : 0)) * fd + rm * 0.8
+      od[k] = v > 255 ? 255 : v
+      v = sd[a + 1] * w00 + sd[b + 1] * w10 + sd[c + 1] * w01 + sd[d + 1] * w11
+      v = (v + (v > 70 ? bs * (v - 70) : 0)) * fd + rm * 0.9
+      od[k + 1] = v > 255 ? 255 : v
+      v = sd[a + 2] * w00 + sd[b + 2] * w10 + sd[c + 2] * w01 + sd[d + 2] * w11
+      v = (v + (v > 70 ? bs * (v - 70) : 0)) * fd + rm
+      od[k + 2] = v > 255 ? 255 : v
+    }
+    lctx.putImageData(out, 0, 0)
+  }
+
   let W = 0, H = 0
   let px = 0, py = 0                       /* rotation pivot, far below the panel */
   let ox = 0, oy = 0, SW = 0, SH = 0       /* the pre-rendered sky covers [ox, ox+SW] × [oy, oy+SH] in panel px */
   let sky = null, dyn = [], pts = [], ghosts = []
   let angle = 0, tSec = 0, panX = 0, panY = 0, ptrX = 0, ptrY = 0
+  let ptrPx = 0, ptrPy = 0, ptrIn = false /* pointer in panel px, for the lens */
+  let meteors = [], pulses = [], pings = [], nextMeteor = 2.2
+  let lineNext = CONSTELLATION_LINES.map(() => 0.8 + rnd() * 3.5)
   let raf = 0, last = 0, visible = true, tabVisible = !document.hidden
   let buildToken = 0, resizeTimer = 0
+  let uiFade = 1, covered = false /* scroll: app stars fade out, then the page covers the sky and we stop drawing */
 
   /* ── layout in panel coordinates ── */
   const layout = () => {
@@ -181,7 +283,7 @@ onMounted(() => {
         data[k] = 55 + 150 * warm
         data[k + 1] = 135 + 55 * warm
         data[k + 2] = 185 - 20 * warm
-        data[k + 3] = Math.max(0, Math.min(0.66, light * 0.36)) * 255
+        data[k + 3] = Math.max(0, Math.min(0.6, light * 0.31)) * 255
       }
       if (j % 24 === 0) {
         await new Promise((r) => setTimeout(r, 0))
@@ -217,6 +319,10 @@ onMounted(() => {
         g.fillRect(X - 0.25, Y - 0.25, 1.5, 1.5)
       } else if (u < 0.9965) {
         const s = 3 + rnd() * 2.5
+        if (rnd() < 0.14) {
+          dyn.push({ x: X, y: Y, s, ti, ph: rnd() * 6.283, f: 0.5 + rnd() * 1.8 })
+          continue
+        }
         g.globalAlpha = 0.85
         g.drawImage(sprites[ti], X - s / 2, Y - s / 2, s, s)
         g.globalAlpha = 1
@@ -233,7 +339,7 @@ onMounted(() => {
     const gi = gg.createImageData(200, 200)
     for (let k = 0; k < gi.data.length; k += 4) {
       gi.data[k] = gi.data[k + 1] = gi.data[k + 2] = 200
-      gi.data[k + 3] = rnd() * 12
+      gi.data[k + 3] = rnd() * 7
     }
     gg.putImageData(gi, 0, 0)
     g.fillStyle = g.createPattern(gn, "repeat")
@@ -266,6 +372,7 @@ onMounted(() => {
       ctx.drawImage(sky, ox, oy, SW, SH)
 
       /* constellation lines, in sky space */
+      ctx.globalAlpha = uiFade
       const hot = PRODUCTS.findIndex((p) => p.key === active.value)
       CONSTELLATION_LINES.forEach(([ka, kb]) => {
         const ia = PRODUCTS.findIndex((p) => p.key === ka), ib = PRODUCTS.findIndex((p) => p.key === kb)
@@ -281,24 +388,113 @@ onMounted(() => {
         ctx.strokeStyle = "rgba(170,205,245,.3)"; ctx.lineWidth = 0.6; ctx.setLineDash([2, 5])
         ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke(); ctx.setLineDash([])
         ctx.globalCompositeOperation = "lighter"
-        ctx.globalAlpha = 0.7
+        ctx.globalAlpha = (0.45 + 0.3 * Math.sin(tSec * 0.9 + bx * 0.05)) * uiFade
         ctx.drawImage(sprites[2], bx - 6, by - 6, 12, 12)
-        ctx.globalAlpha = 1
+        ctx.globalAlpha = uiFade
         ctx.globalCompositeOperation = "source-over"
       })
 
-      /* the few bright stars scintillate a little */
+      /* atmospheric scintillation: the brighter stars waver a little in brightness and
+         drift between their own colour and the neighbouring one, never in size */
       ctx.globalCompositeOperation = "lighter"
       for (let i = 0; i < dyn.length; i++) {
         const d = dyn[i]
-        const tw = reduced ? 1 : 0.85 + 0.15 * Math.sin(tSec * d.f * 2.2 + d.ph) * Math.sin(tSec * d.f * 0.7 + d.ph * 1.9)
-        ctx.globalAlpha = Math.min(1, tw)
-        ctx.drawImage(sprites[d.ti], d.x - d.s / 2, d.y - d.s / 2, d.s, d.s)
+        const a = 0.78 + 0.14 * Math.sin(tSec * d.f * 3.1 + d.ph) + 0.08 * Math.sin(tSec * d.f * 7.3 + d.ph * 2.7)
+        const m = 0.45 * (0.5 + 0.5 * Math.sin(tSec * d.f * 1.3 + d.ph * 1.7)) /* share of the neighbouring colour */
+        const alt = d.ti === 0 ? 1 : d.ti === TEMPS.length - 1 ? d.ti - 1 : d.ph > 3.14 ? d.ti + 1 : d.ti - 1
+        const x = d.x - d.s / 2, y = d.y - d.s / 2
+        ctx.globalAlpha = a * (1 - m)
+        ctx.drawImage(sprites[d.ti], x, y, d.s, d.s)
+        ctx.globalAlpha = a * m
+        ctx.drawImage(sprites[alt], x, y, d.s, d.s)
       }
+      ctx.globalAlpha = 1
+
+      /* signals travelling the constellation lines, and the ping when one arrives */
+      const ease = (p) => p * p * (3 - 2 * p)
+      ctx.globalAlpha = uiFade
+      if (uiFade > 0.02) pulses.forEach((pl) => {
+        const k = Math.min(1, (tSec - pl.t0) / pl.dur)
+        const [ax, ay] = pts[pl.a], [bx, by] = pts[pl.b]
+        const hk = ease(k), tk = ease(Math.max(0, k - 0.14))
+        const hx = ax + (bx - ax) * hk, hy = ay + (by - ay) * hk
+        const tx = ax + (bx - ax) * tk, ty = ay + (by - ay) * tk
+        const [r, g, b] = accRGB[pl.b]
+        const fade = Math.sin(k * Math.PI)
+        const tail = ctx.createLinearGradient(tx, ty, hx, hy)
+        tail.addColorStop(0, `rgba(${r},${g},${b},0)`)
+        tail.addColorStop(1, `rgba(${r},${g},${b},${(0.9 * fade).toFixed(2)})`)
+        ctx.strokeStyle = tail; ctx.lineWidth = 1.6; ctx.lineCap = "round"
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(hx, hy); ctx.stroke()
+        const glow = ctx.createRadialGradient(hx, hy, 0, hx, hy, 9)
+        glow.addColorStop(0, `rgba(255,255,255,${(0.95 * fade).toFixed(2)})`)
+        glow.addColorStop(0.3, `rgba(${r},${g},${b},${(0.6 * fade).toFixed(2)})`)
+        glow.addColorStop(1, `rgba(${r},${g},${b},0)`)
+        ctx.fillStyle = glow; ctx.fillRect(hx - 9, hy - 9, 18, 18)
+      })
+      if (uiFade > 0.02) pings.forEach((pg) => {
+        const k = (tSec - pg.t0) / 1.4
+        const [x, y] = pts[pg.i], [r, g, b] = accRGB[pg.i]
+        ctx.strokeStyle = `rgba(${r},${g},${b},${(0.7 * (1 - k) * (1 - k)).toFixed(2)})`
+        ctx.lineWidth = 1
+        ctx.beginPath(); ctx.arc(x, y, 6 + 32 * (1 - (1 - k) * (1 - k)), 0, 6.283); ctx.stroke()
+      })
+      ctx.lineCap = "butt"
       ctx.globalAlpha = 1
       ctx.globalCompositeOperation = "source-over"
       ctx.restore()
+
+      /* shooting stars cross the panel in screen space */
+      ctx.globalCompositeOperation = "lighter"
+      ctx.lineCap = "round"
+      meteors.forEach((m) => {
+        const el = tSec - m.t0
+        const fade = Math.sin(Math.min(1, el / m.dur) * Math.PI)
+        const hx = m.x + m.vx * el, hy = m.y + m.vy * el
+        const sp = Math.hypot(m.vx, m.vy)
+        const tx = hx - (m.vx / sp) * m.len * fade, ty = hy - (m.vy / sp) * m.len * fade
+        const gr = ctx.createLinearGradient(tx, ty, hx, hy)
+        gr.addColorStop(0, "rgba(190,225,255,0)")
+        gr.addColorStop(1, `rgba(235,246,255,${(0.95 * fade).toFixed(2)})`)
+        ctx.strokeStyle = gr; ctx.lineWidth = 1.5
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(hx, hy); ctx.stroke()
+        ctx.globalAlpha = fade
+        ctx.drawImage(sprites[1], hx - 7, hy - 7, 14, 14)
+        ctx.globalAlpha = 1
+      })
+      ctx.lineCap = "butt"
+      ctx.globalCompositeOperation = "source-over"
     }
+  }
+
+  /* signs of life: meteors now and then, signals running along the constellation lines */
+  const tick = () => {
+    if (tSec > nextMeteor) {
+      const dir = rnd() < 0.5 ? 1 : -1
+      const ang = (22 + rnd() * 20) * (Math.PI / 180)
+      const speed = 750 + rnd() * 450
+      meteors.push({
+        x: W * (dir > 0 ? 0.08 + rnd() * 0.45 : 0.47 + rnd() * 0.45), y: H * (0.22 + rnd() * 0.36),
+        vx: Math.cos(ang) * speed * dir, vy: Math.sin(ang) * speed,
+        len: 110 + rnd() * 110, dur: 0.7 + rnd() * 0.5, t0: tSec,
+      })
+      nextMeteor = tSec + 5 + rnd() * 7
+    }
+    meteors = meteors.filter((m) => tSec - m.t0 < m.dur)
+
+    CONSTELLATION_LINES.forEach(([ka, kb], li) => {
+      if (tSec < lineNext[li]) return
+      const ia = PRODUCTS.findIndex((p) => p.key === ka), ib = PRODUCTS.findIndex((p) => p.key === kb)
+      const rev = rnd() < 0.5
+      pulses.push({ a: rev ? ib : ia, b: rev ? ia : ib, t0: tSec, dur: 1.8 + rnd() * 0.8 })
+      lineNext[li] = tSec + 3.5 + rnd() * 5
+    })
+    pulses = pulses.filter((pl) => {
+      if (tSec - pl.t0 < pl.dur) return true
+      pings.push({ i: pl.b, t0: tSec })
+      return false
+    })
+    pings = pings.filter((pg) => tSec - pg.t0 < 1.4)
   }
 
   /* markers follow the sky */
@@ -317,17 +513,17 @@ onMounted(() => {
         liveReadout.value = `KAT-0${i + 1} · RA ${ra | 0}h ${((ra % 1) * 60) | 0}m · DEC ${dec >= 0 ? "+" : ""}${dec.toFixed(1)}°`
       }
     })
-    if (nameEl.value && pts.length) {
+    if (pts.length) {
       const cx = pts.reduce((s, q) => s + q[0], 0) / pts.length
       const cy = pts.reduce((s, q) => s + q[1], 0) / pts.length
       const [x, y] = rot(cx, cy)
-      nameEl.value.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) translate(-50%,-50%)`
+      if (nameEl.value) nameEl.value.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) translate(-50%,-50%)`
     }
   }
 
   const frame = (now) => {
     raf = 0
-    if (!(visible && tabVisible)) { last = 0; return }
+    if (!(visible && tabVisible) || covered) { last = 0; return }
     const dt = last ? Math.min((now - last) / 1000, 0.1) : 0
     last = now
     tSec += dt
@@ -336,19 +532,35 @@ onMounted(() => {
     panX += (ptrX * 10 - panX) * 0.05
     panY += (ptrY * 6 - panY) * 0.05
 
-    draw(); place()
+    tick(); draw(); drawLens(); place()
     raf = requestAnimationFrame(frame)
   }
-  const start = () => { if (!reduced && !raf && visible && tabVisible) raf = requestAnimationFrame(frame) }
+  const start = () => { if (!reduced && !raf && visible && tabVisible && !covered) raf = requestAnimationFrame(frame) }
 
   const onPointer = (e) => {
     const r = panel.getBoundingClientRect()
     ptrX = ((e.clientX - r.left) / r.width) * 2 - 1
     ptrY = ((e.clientY - r.top) / r.height) * 2 - 1
+    ptrPx = e.clientX - r.left; ptrPy = e.clientY - r.top
+    ptrIn = ptrPx >= 0 && ptrPx <= r.width && ptrPy >= 0 && ptrPy <= r.height
+  }
+  const onLeave = () => { ptrIn = false }
+  const onScroll = () => {
+    const vh = window.innerHeight, y = window.scrollY
+    const k = Math.min(1, Math.max(0, y / (vh * 0.5)))
+    uiFade = 1 - k * k * (3 - 2 * k)
+    if (uiEl.value) uiEl.value.style.opacity = uiFade.toFixed(3)
+    uiOff.value = uiFade < 0.02
+    if (uiOff.value) active.value = null
+    const wasCovered = covered
+    covered = y >= vh
+    if (wasCovered && !covered) start()
+    if (!covered && !raf && sky) { draw(); place() } /* reduced motion: no loop, repaint on scroll */
   }
   const onVisibility = () => { tabVisible = !document.hidden; if (tabVisible) start() }
 
   layout()
+  onScroll()
   build().then(() => start())
   const ro = new ResizeObserver(() => {
     clearTimeout(resizeTimer)
@@ -358,6 +570,8 @@ onMounted(() => {
   const io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible) start() })
   io.observe(panel)
   window.addEventListener("pointermove", onPointer, { passive: true })
+  document.documentElement.addEventListener("mouseleave", onLeave)
+  window.addEventListener("scroll", onScroll, { passive: true })
   document.addEventListener("visibilitychange", onVisibility)
 
   cleanup = () => {
@@ -366,6 +580,8 @@ onMounted(() => {
     cancelAnimationFrame(raf)
     ro.disconnect(); io.disconnect()
     window.removeEventListener("pointermove", onPointer)
+    document.documentElement.removeEventListener("mouseleave", onLeave)
+    window.removeEventListener("scroll", onScroll)
     document.removeEventListener("visibilitychange", onVisibility)
   }
 })
@@ -374,18 +590,20 @@ onBeforeUnmount(() => cleanup())
 </script>
 
 <style scoped>
-/* The sky is the page background of the stage: full-bleed, black, and it dissolves
-   into the page toward the bottom. It carries its own tokens so it stays dark in both themes. */
+/* The sky is the fixed page background: full-bleed and black; the page content scrolls over it. It carries its own tokens so it stays dark in both themes. */
 .v6ns-sky {
   --v6-ink: #eef2f7;
   --v6-faint: #64748b;
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   overflow: hidden;
   color: var(--v6-ink);
   pointer-events: none;
 }
+/* everything that is not the sky itself: app stars, labels, readout. Fades out on scroll. */
+.v6ns-ui { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.v6ns-ui.off { visibility: hidden; }
 .v6ns-sky canvas {
   position: absolute;
   inset: 0;
@@ -394,10 +612,19 @@ onBeforeUnmount(() => cleanup())
   display: block;
   opacity: 0;
   transition: opacity 1.4s;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 74%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 74%, transparent 100%);
 }
 .v6ns-sky.ready canvas { opacity: 1; }
+/* the lens patch follows the pointer; opacity and position are set from script every frame */
+.v6ns-sky .v6ns-lens {
+  inset: auto;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  transition: none;
+  will-change: transform, opacity;
+}
 /* quiet zone: dims the starfield behind the hero copy and the nav so they stay readable */
 .v6ns-sky::before {
   content: "";
@@ -461,6 +688,22 @@ onBeforeUnmount(() => cleanup())
   display: grid;
   place-items: center;
 }
+.v6ns-star::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--ac) 55%, transparent) 0%, transparent 70%);
+  animation: v6ns-breathe 4.2s ease-in-out infinite;
+}
+.v6ns-sys:nth-of-type(2) .v6ns-star::before { animation-delay: -1.1s; }
+.v6ns-sys:nth-of-type(3) .v6ns-star::before { animation-delay: -2.3s; }
+.v6ns-sys:nth-of-type(4) .v6ns-star::before { animation-delay: -3.2s; }
+@keyframes v6ns-breathe {
+  0%, 100% { transform: scale(0.8); opacity: 0.45; }
+  50% { transform: scale(1.5); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .v6ns-star::before { animation: none; } }
 .v6ns-star b {
   position: relative;
   width: 7px;

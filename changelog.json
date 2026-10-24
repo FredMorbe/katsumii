@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.20.0",
+    "date": "2026-10-25",
+    "title": "Cubamii product page with a rotating voxel cube",
+    "changes": [
+      "New product page at /cubamii in English, German and Traditional Chinese: a draggable 7×7×7 puzzle block that carves itself into the Cubamii fox, with how-to-play, clue legend, collection gallery, features and pricing",
+      "The studio page links to it, and the apps filter, the lighter nav and the reworked night sky of the studio preview ship along"
+    ]
+  },
+  {
     "version": "0.19.0",
     "date": "2026-10-24",
     "title": "Studio page: app cards with screenshots and a rearranged galaxy",

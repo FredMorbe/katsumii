@@ -16,7 +16,6 @@
 
       <nav v-if="isStudio" class="v6-nav-links" :aria-label="t('shell.nav.ariaMain')">
         <RouterLink :to="{ path: homePath, hash: '#apps' }">{{ t('studio.page.nav.apps') }}</RouterLink>
-        <RouterLink :to="{ path: homePath, hash: '#journal' }">{{ t('studio.page.nav.journal') }}</RouterLink>
         <RouterLink :to="`/${lang}/contact`">{{ t('studio.page.nav.contact') }}</RouterLink>
       </nav>
       <nav v-else class="v6-nav-links" :aria-label="t('shell.nav.ariaMain')">
@@ -126,7 +125,6 @@
           <p class="v6-mobile-kicker">{{ t('shell.mobile.kicker') }}</p>
           <div v-if="isStudio" class="v6-mobile-nav">
             <RouterLink :to="{ path: homePath, hash: '#apps' }">{{ t('studio.page.nav.apps') }}</RouterLink>
-            <RouterLink :to="{ path: homePath, hash: '#journal' }">{{ t('studio.page.nav.journal') }}</RouterLink>
             <RouterLink :to="`/${lang}/contact`">{{ t('studio.page.nav.contact') }}</RouterLink>
           </div>
           <div v-else class="v6-mobile-nav">
