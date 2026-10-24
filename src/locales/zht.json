@@ -2869,12 +2869,14 @@
         },
         "sub": "四款專注的桌面與行動應用程式——各有自己的用途、風格與專屬頁面。",
         "visit": "前往產品頁面",
+        "shotAlt": "{name} 應用程式截圖",
+        "preview": "{name} 預覽",
         "soon": "即將推出"
       },
       "spotlight": {
-        "eyebrow": "旗艦產品",
+        "eyebrow": "給交易者",
         "title": {
-          "pre": "你的第一站：",
+          "pre": "專為交易者打造的",
           "em": "Journal"
         },
         "points": [

@@ -2862,13 +2862,15 @@
         },
         "sub": "Vier fokussierte Apps für Desktop und Mobil – jede mit eigenem Zweck, eigenem Look und eigener Seite.",
         "visit": "Produktseite ansehen",
+        "shotAlt": "Screenshot von {name}",
+        "preview": "Vorschau {name}",
         "soon": "Bald verfügbar"
       },
       "spotlight": {
-        "eyebrow": "Flaggschiff",
+        "eyebrow": "Für Trader",
         "title": {
-          "pre": "Starte mit dem",
-          "em": "Journal"
+          "pre": "Das Journal für",
+          "em": "Trader"
         },
         "points": [
           "Jeder Kontotyp behält seine eigenen, getrennten Daten",

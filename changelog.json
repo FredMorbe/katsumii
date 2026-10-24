@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.18.2",
+    "date": "2026-10-24",
+    "title": "Studio page: Journal section framed for traders",
+    "changes": [
+      "The Journal section no longer reads as the starting point of the line-up; it now says plainly that it is the journal for traders"
+    ]
+  },
+  {
     "version": "0.18.1",
     "date": "2026-10-24",
     "title": "Studio galaxy: deep-space backdrop and systems locked to the disk",

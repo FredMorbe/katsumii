@@ -2862,13 +2862,15 @@
         },
         "sub": "Four focused apps for desktop and mobile — each with its own purpose, its own look and its own page.",
         "visit": "Visit product page",
+        "shotAlt": "{name} app screenshot",
+        "preview": "{name} preview",
         "soon": "Coming soon"
       },
       "spotlight": {
-        "eyebrow": "Flagship",
+        "eyebrow": "For traders",
         "title": {
-          "pre": "Start with the",
-          "em": "Journal"
+          "pre": "The journal for",
+          "em": "traders"
         },
         "points": [
           "Every account type keeps its own, separate data",
