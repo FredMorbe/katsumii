@@ -18,6 +18,18 @@
           class="v6-card std-app v6-reveal"
           :style="accentStyle(p)"
         >
+          <div class="std-app-shot">
+            <img
+              v-if="p.shot"
+              :src="shotSrc(p)"
+              :alt="t('studio.page.apps.shotAlt', { name: t(`products.${p.key}.name`) })"
+              width="1600"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+            />
+            <span v-else class="std-app-shot-empty">{{ t('studio.page.apps.preview', { name: t(`products.${p.key}.name`) }) }}</span>
+          </div>
           <p class="std-app-cat"><span class="std-star" aria-hidden="true"></span>KAT-0{{ i + 1 }}</p>
           <h3>{{ t(`products.${p.key}.name`) }}</h3>
           <p class="std-app-tag">{{ t(`products.${p.key}.tagline`) }}</p>
@@ -120,6 +132,8 @@ const accentStyle = (p) => {
   return { "--ac": ac, "--ac-hi": hi }
 }
 
+const shotSrc = (p) => `${baseUrl}Screenshots/opt/${(isDark.value && p.shot.dark) || p.shot.light || p.shot.dark}`
+
 const spotlightPoints = computed(() => (tm("studio.page.spotlight.points") || []).map(rt))
 const principles = computed(() =>
   (tm("studio.page.principles.items") || []).map((item) => ({ title: rt(item.title), copy: rt(item.copy) })),
@@ -154,9 +168,12 @@ onBeforeUnmount(() => {
 /* ── apps ── */
 .std-apps {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.1rem;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(0.9rem, 2vw, 1.4rem);
 }
+/* bento rhythm: wide / narrow, then narrow / wide */
+.std-app { grid-column: span 5; }
+.std-app:nth-child(4n + 1), .std-app:nth-child(4n + 4) { grid-column: span 7; }
 .std-app {
   display: flex;
   flex-direction: column;
@@ -165,6 +182,26 @@ onBeforeUnmount(() => {
   --ac-line: color-mix(in srgb, var(--ac) 45%, transparent);
 }
 .std-app:hover { border-color: var(--ac-line); }
+.std-app-shot {
+  height: 13.5rem;
+  margin-bottom: 1.4rem;
+  border: 1px solid color-mix(in srgb, var(--ac) 28%, transparent);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--v6-bg-soft);
+}
+.std-app-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.std-app-shot-empty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-family: var(--v6-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ac);
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--ac) 10%, transparent) 0 14px, transparent 14px 28px);
+}
 .std-app-cat {
   display: flex;
   align-items: center;
@@ -328,10 +365,9 @@ onBeforeUnmount(() => {
   margin-top: 2.2rem;
 }
 
-@media (max-width: 1100px) {
-  .std-apps { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 900px) {
+  .std-apps { grid-template-columns: repeat(2, 1fr); }
+  .std-app, .std-app:nth-child(4n + 1), .std-app:nth-child(4n + 4) { grid-column: auto; }
   .std-spot { grid-template-columns: 1fr; }
   .std-principles { grid-template-columns: 1fr; }
   .std-principle, .std-principle + .std-principle { padding-left: 0; padding-right: 0; }

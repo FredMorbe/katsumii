@@ -98,7 +98,7 @@ const isDark = inject("isDark")
 const UNCHARTED = [
   { key: "void1", r: 0.78, th: 0.6 },
   { key: "void2", r: 0.46, th: 1.6 },
-  { key: "void3", r: 0.93, th: 4.3 },
+  { key: "void3", r: 0.93, th: 4.05 },
 ]
 
 const lang = computed(() => {
