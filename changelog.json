@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.22.0",
+    "date": "2026-10-26",
+    "title": "Galaxy opens a system with a page fade instead of a zoom",
+    "changes": [
+      "Clicking a system in the Studio galaxy no longer zooms the camera into it: the whole page fades out quickly and the product page fades in"
+    ]
+  },
+  {
     "version": "0.21.0",
     "date": "2026-10-25",
     "title": "Cubamii headline types through animals, landmarks, vehicles and scenes",

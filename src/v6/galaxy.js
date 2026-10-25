@@ -6,8 +6,8 @@
    Arms are trailing log spirals that turn rigidly at the pattern speed; disk light and dust
    lanes are baked once into textures, stars are dots on top. The star systems (product
    links) are DOM elements that ride the same projection and the same pattern speed, so they
-   turn with the arms. Opening a product flies the camera
-   into its system first (zoomTo), then hands over to `open(key)`. */
+   turn with the arms. Opening a product fades the whole page out first (leave), then hands
+   over to `open(key)`; the next page fades in again. */
 
 export function createGalaxy({ panel, canvas, systems, readout, open }) {
   var cv = canvas, ctx = cv.getContext("2d");
@@ -91,10 +91,7 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
     star(d*Math.sqrt(1-z*z),rnd()*6.283,d*z*.7,1,0,1,WP*.6)}
 
   var t=0,speed=1,target=1,ptrX=0,ptrY=0,phi=-.3,S=S0,hover=null;
-  /* camera: while a system is being opened the view zooms (zz) around a focus point (zf) that
-     glides from the panel centre onto the system, so the system ends up in the middle */
-  var zoomEl=null,zp=0,zz=1,zf=[0,0],opened=false,ZMAX=3;
-  function cam(p){return zoomEl?[W/2+(p[0]-zf[0])*zz,H/2+(p[1]-zf[1])*zz]:p}
+  var leaving=false;
   function proj(r,th,h){
     var x=r*Math.cos(th),y=r*Math.sin(th)*S-(h||0)*.86;
     var cp=Math.cos(phi),sp=Math.sin(phi);
@@ -102,7 +99,6 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
   }
   function draw(){
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
-    if(zoomEl){ctx.translate(W/2,H/2);ctx.scale(zz,zz);ctx.translate(-zf[0],-zf[1])}
     var cp=Math.cos(phi),sp=Math.sin(phi),rot=WP*t;
     function disk(img){ctx.save();ctx.translate(cx,cy);ctx.rotate(phi);ctx.scale(R,R*S);ctx.rotate(rot);ctx.drawImage(img,-EXT,-EXT,EXT*2,EXT*2);ctx.restore()}
     function blob(rad,ry,stops){ctx.save();ctx.translate(cx,cy);ctx.rotate(phi);ctx.scale(1,ry);var g=ctx.createRadialGradient(0,0,0,0,0,rad);
@@ -138,7 +134,7 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
   var sys = systems, read = readout, readDef = "";
   function place() {
     var items = sys.map(function (el) {
-      var r = +el.dataset.r, th = +el.dataset.th + w(r) * t, p = cam(proj(r, th, 0));
+      var r = +el.dataset.r, th = +el.dataset.th + w(r) * t, p = proj(r, th, 0);
       var ew = el.offsetWidth, lw = Math.max(ew, 140), flip = p[0] + lw > W - 12 && p[0] - lw > 12;
       el.classList.toggle("left", flip);
       el.style.transform = "translate3d(" + p[0].toFixed(1) + "px," + p[1].toFixed(1) + "px,0)" + (flip ? " translateX(-100%)" : "") + " translateY(-50%)";   /* the star, not the label's corner, sits on the point */
@@ -169,7 +165,7 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
     });
   }
   function focus(k) {
-    if (zoomEl) return;   /* the camera is flying — leave the focus alone */
+    if (leaving) return;   /* the page is fading out — leave the focus alone */
     hover = k; target = k ? .05 : 1;
     sys.forEach(function (e) { e.classList.toggle("on", e.dataset.k === k) });
     read.classList.toggle("on", !!k);
@@ -192,25 +188,30 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
     listen(el, "click", function (e) {
       var tapOnly = fresh; fresh = false;
       if (tapOnly) { e.preventDefault(); return }
-      if (!el.dataset.zoom || reduced || !open || zoomEl || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      e.preventDefault(); zoomTo(el)
+      if (!el.dataset.zoom || reduced || !open || leaving || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault(); leave(el)
     }, true);
   });
-  function zoomTo(el) {
-    zoomEl = el; zp = 0; opened = false; zz = 1; zf = [W / 2, H / 2];
-    panel.classList.add("zooming"); kick()
-  }
-  function stepZoom(dt) {
-    zp = Math.min(zp + dt / .9, 1);
-    var e = zp < .5 ? 4 * zp * zp * zp : 1 - Math.pow(-2 * zp + 2, 3) / 2;   /* ease in-out */
-    var r = +zoomEl.dataset.r, p = proj(r, +zoomEl.dataset.th + w(r) * t, 0);
-    zf = [W / 2 + (p[0] - W / 2) * e, H / 2 + (p[1] - H / 2) * e]; zz = 1 + (ZMAX - 1) * e;
-    if (zp >= 1 && !opened) { opened = true; Promise.resolve(open(zoomEl.dataset.k)).finally(unzoom) }
-  }
-  /* only reached when the navigation did not take this page away */
-  function unzoom() {
-    if (disposed) return;
-    zoomEl = null; zz = 1; panel.classList.remove("zooming"); focus(null)
+  /* the whole page fades out quickly, the next one fades in once the navigation is done */
+  var FADE_OUT = 220, FADE_IN = 380;
+  function leave(el) {
+    leaving = true;
+    var body = document.body;
+    body.style.pointerEvents = "none";
+    body.style.transition = "opacity " + FADE_OUT + "ms ease-in";
+    body.style.opacity = "0";
+    setTimeout(function () {
+      Promise.resolve(open(el.dataset.k)).finally(function () {
+        requestAnimationFrame(function () {
+          body.style.transition = "opacity " + FADE_IN + "ms ease-out";
+          body.style.opacity = "";
+          body.style.pointerEvents = "";
+          setTimeout(function () { body.style.transition = "" }, FADE_IN);
+        });
+        /* only reached with this page still alive when the navigation did not take it away */
+        if (!disposed) { leaving = false; focus(null) }
+      })
+    }, FADE_OUT)
   }
   listen(panel, "pointerdown", function (e) { if (e.pointerType === "touch" && hover && !e.target.closest(".gx-sys")) focus(null) });
   listen(panel, "pointermove", function (e) { var r = panel.getBoundingClientRect(); ptrX = (e.clientX - r.left) / r.width * 2 - 1; ptrY = (e.clientY - r.top) / r.height * 2 - 1 });
@@ -223,7 +224,6 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
     var dt = last ? Math.min((now - last) / 1000, .1) : 0; last = now;
     speed += (target - speed) * Math.min(dt * 4, 1); t += dt * speed;
     S += ((S0 + ptrY * .05) - S) * .05; phi += ((-.3 + ptrX * .05) - phi) * .05;
-    if (zoomEl) stepZoom(dt);
     draw(); place(); raf = requestAnimationFrame(frame);
   }
   function kick() { if (!raf && !disposed) raf = requestAnimationFrame(frame) }

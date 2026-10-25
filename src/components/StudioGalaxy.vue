@@ -111,7 +111,7 @@ onMounted(() => {
     canvas: canvasEl.value,
     systems: sysEls.value.concat(voidEls.value).map(elOf),
     readout: readEl.value,
-    /* the camera has flown into the system — now go to its page */
+    /* the page has faded out — now go to the product's page */
     open: (key) => router.push(linkFor(PRODUCTS.find((p) => p.key === key))),
   })
   galaxy.setReadout(t("studio.galaxy.readout"))
@@ -178,11 +178,6 @@ onBeforeUnmount(() => {
 .gx-sys.void .gx-star b{background:transparent;border:1px dashed var(--ac);box-shadow:none;opacity:.7}
 .gx-sys.void:not(.on) .gx-lab{opacity:.5}
 .gx-sys.void .gx-lab .gx-mono{color:var(--ac)}
-/* camera flight into a system: everything but the system itself fades out */
-.gx-sky.zooming{pointer-events:none}
-.gx-sky.zooming .gx-copy,.gx-sky.zooming .gx-read,.gx-sky.zooming .gx-hint{opacity:0;transition:opacity .4s}
-.gx-sky.zooming .gx-sys:not(.on){opacity:0}
-.gx-sky.zooming .gx-sys.on .gx-lab{opacity:0;transition:opacity .35s}
 .gx-sys.on .gx-more{display:block}
 .gx-sys.on .gx-star b{transform:scale(1.35)}
 .gx-sys.left{flex-direction:row-reverse;text-align:right}.gx-sys.left .gx-star{margin:-22px -22px -22px 0}.gx-sys.left .gx-lab{margin:0 .2rem 0 0}
