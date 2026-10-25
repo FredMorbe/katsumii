@@ -14,7 +14,15 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var dpr = Math.min(devicePixelRatio || 1, 1.5), W = 0, H = 0, cx = 0, cy = 0, R = 0, S0 = .54;
   /* a portrait panel gets a rounder (less tilted) disk so the galaxy fills it instead of lying flat */
-  function size() { var r = panel.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; cx = W * (W < 900 ? .5 : .58); cy = H * (W < 900 ? .62 : .52); R = Math.min(W * (W < 900 ? .5 : .39), H * (W < 900 ? .5 : .84)); S0 = W < 900 ? .74 : .54 }
+  var copy = panel.querySelector(".gx-copy");
+  function size() {
+    var r = panel.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; S0 = W < 900 ? .74 : .54;
+    if (W < 900) {
+      /* portrait: the chart gets the space between the copy and the readout line, so the two never overlap */
+      var top = (copy ? copy.offsetTop + copy.offsetHeight : 0) + 12, bottom = H - 56;
+      cx = W * .5; cy = (top + bottom) / 2; R = Math.min(W * .5, (bottom - top) / (2 * 1.1 * S0))
+    } else { cx = W * .58; cy = H * .52; R = Math.min(W * .39, H * .84) }
+  }
   size();
   var onResize = function () { size(); draw(); place() };
   addEventListener("resize", onResize);
@@ -126,7 +134,7 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
     [.33,.66,1].forEach(function(k){ctx.beginPath();ctx.ellipse(cx,cy,R*k*1.04,R*k*1.04*S,phi,0,6.283);ctx.stroke()});
     ctx.fillStyle='rgba(148,163,184,.4)';ctx.font='10px "DM Mono",monospace';ctx.textAlign='center';ctx.textBaseline='middle';
     for(var d=0;d<360;d+=30){var a2=d*Math.PI/180,pp=proj(1.16,a2,0),p1=proj(1.07,a2,0),p2=proj(1.1,a2,0);
-      ctx.beginPath();ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);ctx.stroke();ctx.fillText(d+'°',pp[0],pp[1])}
+      ctx.beginPath();ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);ctx.stroke();if(W>=900)ctx.fillText(d+'°',pp[0],pp[1])}
     ctx.strokeStyle='rgba(148,163,184,.1)';ctx.beginPath();ctx.moveTo(cx-R*1.1,cy);ctx.lineTo(cx+R*1.1,cy);ctx.moveTo(cx,cy-R*.62);ctx.lineTo(cx,cy+R*.62);ctx.stroke();
   }
 
@@ -228,6 +236,12 @@ export function createGalaxy({ panel, canvas, systems, readout, open }) {
   }
   function kick() { if (!raf && !disposed) raf = requestAnimationFrame(frame) }
   draw(); place(); panel.classList.add("ready");
+  /* the copy's height settles late (web fonts, translation): the chart follows it */
+  if (copy && window.ResizeObserver) {
+    var ro = new ResizeObserver(onResize);
+    ro.observe(copy);
+    offs.push(function () { ro.disconnect() });
+  }
   if (!reduced) {
     io = new IntersectionObserver(function (es) { vis = es[0].isIntersecting; if (vis && run) kick() });
     io.observe(panel);

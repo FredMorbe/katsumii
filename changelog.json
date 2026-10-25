@@ -1,5 +1,15 @@
 [
   {
+    "version": "0.23.0",
+    "date": "2026-10-26",
+    "title": "Studio galaxy tidied up for phones",
+    "changes": [
+      "On narrow screens the galaxy chart now sits between the intro text and the readout line instead of running into the text, and the degree labels at its rim are gone",
+      "System names on phones are compact badges with a dark background and an accent-coloured outline, so they stay readable on top of the bright galaxy core",
+      "Intro text and readout line are smaller on phones"
+    ]
+  },
+  {
     "version": "0.22.0",
     "date": "2026-10-26",
     "title": "Galaxy opens a system with a page fade instead of a zoom",

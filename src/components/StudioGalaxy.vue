@@ -183,6 +183,8 @@ onBeforeUnmount(() => {
 .gx-sys.left{flex-direction:row-reverse;text-align:right}.gx-sys.left .gx-star{margin:-22px -22px -22px 0}.gx-sys.left .gx-lab{margin:0 .2rem 0 0}
 .gx-sys:focus-visible{outline:none}.gx-sys:focus-visible .gx-lab{border-color:var(--ac-hi)}
 /* narrow: the labels shrink to the name, the focused system opens its full card */
-@media (max-width:900px){.gx-sky{height:78vh}.gx-copy{max-width:20rem}.gx-lab em,.gx-lab .gx-mono{display:none}.gx-sys.on .gx-lab em,.gx-sys.on .gx-lab .gx-mono{display:block}.gx-lab strong{font-size:1.05rem}.gx-hint{display:none}}
+@media (max-width:900px){.gx-sky{height:78vh}.gx-copy{max-width:20rem;gap:.7rem}.gx-copy .v6-h1{font-size:clamp(2rem,9vw,2.6rem)}.gx-sub{font-size:.9rem;line-height:1.5}.gx-read{font-size:.6rem;letter-spacing:.1em;max-width:calc(100% - 5rem)}.gx-lab em,.gx-lab .gx-mono{display:none}.gx-sys.on .gx-lab em,.gx-sys.on .gx-lab .gx-mono{display:block}.gx-lab strong{font-size:1.05rem}.gx-hint{display:none}
+ .gx-sys:not(.on):not(.void) .gx-lab{padding:.2rem .6rem;border-radius:999px;text-shadow:none;background:rgba(6,12,24,.78);backdrop-filter:blur(4px);border-color:color-mix(in srgb,var(--ac) 45%,transparent)}
+ .gx-sys:not(.on):not(.void) .gx-lab strong{font-size:.85rem;letter-spacing:-.01em;white-space:nowrap}}
 @media (prefers-reduced-motion:reduce){.gx-orbit>i,.gx-sys.live .gx-star::after{animation:none}}
 </style>

@@ -35,3 +35,7 @@ public/Screenshots/**/*.png
 
 # Generated at build time by vite.config.js (scripts/seo-routes.mjs)
 public/sitemap.xml
+
+# Local galaxy mockups
+docs/mockups/concept-e-galaxy-light.html
+docs/mockups/concept-e-galaxy-pencil.html
