@@ -39,3 +39,6 @@ public/sitemap.xml
 # Local galaxy mockups
 docs/mockups/concept-e-galaxy-light.html
 docs/mockups/concept-e-galaxy-pencil.html
+
+# Andromeda image exports
+andromeda-exports/

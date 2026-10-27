@@ -2244,7 +2244,8 @@
       "bugreport": "回報問題 - Katsumii",
       "sandbox": "沙盒 - Katsumii",
       "notFound": "404 - Katsumii",
-      "cubamii": "Cubamii：Android 3D 數織 - Katsumii"
+      "cubamii": "Cubamii：Android 3D 數織 - Katsumii",
+      "mediacenter": "Midomii Mediacenter：電影、影集與音樂，開發中 - Katsumii"
     },
     "pageDescriptions": {
       "default": "Katsumii 是為 Prop Firm 與 Funded 交易者打造的離線交易日誌：記錄交易、追蹤 Challenge 規則、檢視分析報告，一次買斷，資料留在本機。",
@@ -2270,7 +2271,8 @@
       "bugreport": "回報 Katsumii 問題並提供重現步驟，協助我們調查。",
       "sandbox": "即將推出的 Katsumii 開發者網站的製作中預覽。",
       "notFound": "這個 Katsumii 頁面不存在，或已被移動。",
-      "cubamii": "Cubamii 是一款寧靜的 Android 3D 邏輯謎題：讀懂數字、鑿掉空白方塊，找出隱藏的體素動物。可離線遊玩，免費下載。"
+      "cubamii": "Cubamii 是一款寧靜的 Android 3D 邏輯謎題：讀懂數字、鑿掉空白方塊，找出隱藏的體素動物。可離線遊玩，免費下載。",
+      "mediacenter": "Midomii Mediacenter 是 Windows 媒體中心，整合你自己的電影、影集、音樂、廣播與電視直播，本機儲存、不需要帳號。目前仍在開發中。"
     },
     "cta": {
       "getKatsumii": "取得 Katsumii",
@@ -2830,21 +2832,22 @@
       "open": "開啟星星"
     },
     "galaxy": {
-      "aria": "Katsumii 銀河的互動地圖與四款應用程式",
+      "aria": "Katsumii 銀河的互動地圖與五款應用程式",
       "eyebrow": "軟體工作室",
       "h1": {
-        "pre": "四個星系。",
+        "pre": "五個星系。",
         "em": "一座銀河"
       },
       "sub": "每款 Katsumii 應用程式都是一個獨立的星系。在星圖上找到它——滑鼠移上去，銀河會放慢並鎖定。",
       "subTouch": "每款 Katsumii 應用程式都是一個獨立的星系。在星圖上找到它——點一下，銀河會放慢並鎖定，再點一下即可開啟。",
-      "readout": "Katsumii 銀河 · 已標註 4 個星系 · 更多尚待探索",
+      "readout": "Katsumii 銀河 · 已標註 5 個星系 · 更多尚待探索",
       "hint": "緩緩旋轉 · 一圈約 5 分鐘",
       "open": "開啟星系",
       "soon": "詳情即將公布",
       "status": {
         "live": "已上線",
-        "soon": "即將推出"
+        "soon": "即將推出",
+        "dev": "開發中"
       },
       "void": {
         "label": "未探索",
@@ -2853,7 +2856,8 @@
       },
       "price": {
         "paid": "付費",
-        "free": "免費"
+        "free": "免費",
+        "tbd": "價格未定"
       }
     },
     "page": {
@@ -2929,6 +2933,11 @@
       "name": "Cubamii",
       "tagline": "鑿出藏起來的模樣。",
       "desc": "一款寧靜的 Android 3D 邏輯謎題。鑿掉空白方塊、為正確的方塊上色，找出隱藏的體素動物。可離線遊玩，免費下載。"
+    },
+    "mediacenter": {
+      "name": "Midomii Mediacenter",
+      "tagline": "你播放的一切，同一個安靜的家。",
+      "desc": "給你自己的電影、影集、音樂、廣播與電視直播的 Windows 媒體中心。本機儲存、不需要帳號。開發中，尚無下載。"
     }
   },
   "cubamiiPage": {
@@ -3144,6 +3153,155 @@
       "sub": "Android 免費下載，前六個造型完全沒有廣告。",
       "button": "加入封閉測試",
       "studio": "所有 Katsumii 應用程式"
+    }
+  },
+  "mediacenterPage": {
+    "hero": {
+      "eyebrow": "開發中 · Windows",
+      "brandSub": "開發中",
+      "h1": {
+        "pre": "電影、影集、音樂、廣播。",
+        "em": "一個安靜的家"
+      },
+      "sub": "Midomii Mediacenter 把你自己的媒體庫與直播來源集中在一個安靜的 Windows 應用程式裡：核心是一個快速的播放器，不上雲端，不需要帳號。",
+      "chips": [
+        "Windows 桌面版",
+        "本機儲存",
+        "不需要帳號",
+        "開發中"
+      ],
+      "cta": "追蹤開發進度",
+      "more": "裡面有什麼"
+    },
+    "dev": {
+      "title": "仍在開發中。",
+      "copy": "這是我們正在打造的內容預覽。目前尚無下載、價格與上市日期。下方列出已經能運作與仍在驗證的功能——在真實硬體上測試之前，都不算承諾。",
+      "link": "告訴我們你的需求"
+    },
+    "inside": {
+      "eyebrow": "裡面有什麼",
+      "title": {
+        "pre": "一個媒體庫，",
+        "em": "放下所有播放內容"
+      },
+      "sub": "本機檔案留在原處。Midomii 會監看你的資料夾、自動整理，然後默默退到一旁。",
+      "items": [
+        {
+          "title": "電影與影集",
+          "copy": "海報、劇情簡介與演員資訊由程式幫你取得。影集認得每一集，下一集自動播放，行事曆告訴你接下來播什麼。"
+        },
+        {
+          "title": "音樂",
+          "copy": "專輯、演出者與播放清單，附播放佇列、淡入淡出、歌詞、等化器與睡眠計時器。支援媒體鍵，標籤也能編輯。"
+        },
+        {
+          "title": "廣播與 Podcast",
+          "copy": "搜尋網路廣播電台與 Podcast，追蹤訂閱源，與你自己的音樂並排播放。"
+        },
+        {
+          "title": "電視直播",
+          "copy": "載入你的 M3U 播放清單與節目表，在同一個播放器裡收看直播頻道。"
+        },
+        {
+          "title": "認真的播放器",
+          "copy": "以 mpv 為核心：支援所有編碼、HDR、色彩 LUT，字幕可直接拖入，需要時還能在你自己的電腦上翻譯。畫面比例、速度、縮放與旋轉隨時調整。"
+        },
+        {
+          "title": "你的客廳",
+          "copy": "含 PIN 碼的使用者檔案與兒童檔案、遊戲手把、投放到電視，還有在家用網路中用手機操作的網頁遙控器。"
+        }
+      ]
+    },
+    "shots": {
+      "eyebrow": "畫面預覽",
+      "title": {
+        "pre": "看看",
+        "em": "目前的版本"
+      },
+      "sub": "截圖來自開發版，使用虛構片名的示範媒體庫。介面與文案仍會調整。",
+      "items": [
+        {
+          "caption": "首頁",
+          "alt": "Midomii Mediacenter 首頁，顯示繼續觀看的主視覺與看到一半的電影"
+        },
+        {
+          "caption": "電影頁面",
+          "alt": "Midomii Mediacenter 電影頁面，顯示劇情、演員、類型與繼續播放按鈕"
+        },
+        {
+          "caption": "媒體庫",
+          "alt": "Midomii Mediacenter 媒體庫，顯示電影與影集海報"
+        },
+        {
+          "caption": "音樂",
+          "alt": "Midomii Mediacenter 音樂頁面，顯示專輯與播放列"
+        },
+        {
+          "caption": "影集",
+          "alt": "Midomii Mediacenter 影集頁面，顯示集數清單"
+        }
+      ]
+    },
+    "status": {
+      "eyebrow": "誠實的進度",
+      "title": {
+        "pre": "已經能用的，",
+        "em": "與仍在驗證的"
+      },
+      "sub": "我們目前只在一台電腦上測試。以下這些部分還沒有在真實硬體上驗證過。",
+      "works": {
+        "label": "在我們的測試中可運作",
+        "items": [
+          "電影、影集與音樂媒體庫，自動監看資料夾",
+          "支援 HDR、字幕、音訊與畫面設定的播放器",
+          "播放清單、播放佇列、歌詞、等化器與睡眠計時器",
+          "從你自己的播放清單收聽廣播、Podcast 與收看電視直播",
+          "含 PIN 碼的使用者檔案、備份與還原",
+          "家用網路中的網頁遙控器（已在同一台電腦上測試）"
+        ]
+      },
+      "testing": {
+        "label": "仍在驗證",
+        "items": [
+          "投放到真實的電視",
+          "PlayStation 5 手把按鍵對應",
+          "DVD 與藍光光碟",
+          "Trakt 帳號同步",
+          "手機與平板在家用 Wi-Fi 下的存取",
+          "在真實 HDR 螢幕上輸出 HDR"
+        ]
+      }
+    },
+    "calm": {
+      "eyebrow": "安靜的設計",
+      "title": {
+        "pre": "本機、",
+        "em": "原生、私密"
+      },
+      "items": [
+        {
+          "title": "你的檔案仍是你的",
+          "copy": "媒體庫只是你電腦上的一個檔案。不會上傳任何東西，也不需要註冊帳號。"
+        },
+        {
+          "title": "原生 Windows",
+          "copy": "內部沒有瀏覽器引擎的 Windows 應用程式——開啟快速、記憶體負擔小。"
+        },
+        {
+          "title": "不是串流服務",
+          "copy": "Midomii 播放你擁有的內容，以及廣播與 Podcast 等公開來源。不需要登入任何串流服務。"
+        }
+      ],
+      "spec": "Windows 桌面版 · 尚未發布"
+    },
+    "cta": {
+      "title": {
+        "pre": "想追蹤",
+        "em": "開發進度"
+      },
+      "sub": "告訴我們你期待一個媒體中心有什麼功能——我們還在塑造它。",
+      "button": "聯絡我們",
+      "studio": "所有工作室應用程式"
     }
   }
 }

@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.24.0",
+    "date": "2026-10-27",
+    "title": "Midomii Mediacenter product page, in development",
+    "changes": [
+      "New /mediacenter page for the Midomii Mediacenter with a clear \"in development\" notice, an honest list of what works and what is still being tested, and five screenshots: home with keep watching, a film page, library, music and a series",
+      "The studio galaxy gains a fifth system with an \"In development\" status chip and an undecided price; the Sandbox lists it as well",
+      "Screenshots use a demo library of fictional titles with generated artwork",
+      "Available in English, German and Traditional Chinese"
+    ]
+  },
+  {
     "version": "0.23.0",
     "date": "2026-10-26",
     "title": "Studio galaxy tidied up for phones",

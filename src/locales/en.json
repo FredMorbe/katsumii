@@ -2244,7 +2244,8 @@
       "bugreport": "Report a Bug - Katsumii",
       "sandbox": "Sandbox - Katsumii",
       "notFound": "404 - Katsumii",
-      "cubamii": "Cubamii: 3D nonogram for Android - Katsumii"
+      "cubamii": "Cubamii: 3D nonogram for Android - Katsumii",
+      "mediacenter": "Midomii Mediacenter: films, series and music, in development - Katsumii"
     },
     "pageDescriptions": {
       "default": "Katsumii is an offline trading journal for prop firm and funded traders: log trades, track challenge rules, review analytics. One-time license, data stays local.",
@@ -2270,7 +2271,8 @@
       "bugreport": "Report a Katsumii bug and share reproduction steps so the issue can be investigated.",
       "sandbox": "Work-in-progress preview of the upcoming Katsumii developer site.",
       "notFound": "This Katsumii page does not exist or has moved.",
-      "cubamii": "Cubamii is a calm 3D logic puzzle for Android: read the numbers, chisel away the empty cubes and uncover a hidden voxel animal. Offline and free."
+      "cubamii": "Cubamii is a calm 3D logic puzzle for Android: read the numbers, chisel away the empty cubes and uncover a hidden voxel animal. Offline and free.",
+      "mediacenter": "Midomii Mediacenter is a Windows media center for your own films, series, music, radio and live TV — local-first, no account. Still in development."
     },
     "cta": {
       "getKatsumii": "Get Katsumii",
@@ -2823,21 +2825,22 @@
       "open": "Open star"
     },
     "galaxy": {
-      "aria": "Interactive map of the Katsumii galaxy with its four apps",
+      "aria": "Interactive map of the Katsumii galaxy with its five apps",
       "eyebrow": "Software studio",
       "h1": {
-        "pre": "Four systems.",
+        "pre": "Five systems.",
         "em": "One galaxy"
       },
       "sub": "Every Katsumii app is a star system of its own. Find one on the chart — hover to slow the galaxy and lock on.",
       "subTouch": "Every Katsumii app is a star system of its own. Find one on the chart — tap to slow the galaxy and lock on, tap again to open it.",
-      "readout": "Katsumii galaxy · 4 systems charted · more unexplored",
+      "readout": "Katsumii galaxy · 5 systems charted · more unexplored",
       "hint": "Slowly turning · 1 rev ≈ 5 min",
       "open": "Open system",
       "soon": "Details follow soon",
       "status": {
         "live": "Live",
-        "soon": "Coming soon"
+        "soon": "Coming soon",
+        "dev": "In development"
       },
       "void": {
         "label": "Uncharted",
@@ -2846,7 +2849,8 @@
       },
       "price": {
         "paid": "Paid",
-        "free": "Free"
+        "free": "Free",
+        "tbd": "Price to be announced"
       }
     },
     "page": {
@@ -2922,6 +2926,11 @@
       "name": "Cubamii",
       "tagline": "Carve the hidden.",
       "desc": "A calm 3D logic puzzle for Android. Chisel away empty cubes, paint the right ones and uncover a hidden voxel animal. Offline and free."
+    },
+    "mediacenter": {
+      "name": "Midomii Mediacenter",
+      "tagline": "Everything you play, one quiet home.",
+      "desc": "A Windows media center for your own films, series, music, radio and live TV. Local-first, no account. In development — no download yet."
     }
   },
   "cubamiiPage": {
@@ -3137,6 +3146,155 @@
       "sub": "Free to download for Android — and the first six motifs come without ads.",
       "button": "Join the closed test",
       "studio": "All Katsumii apps"
+    }
+  },
+  "mediacenterPage": {
+    "hero": {
+      "eyebrow": "In development · Windows",
+      "brandSub": "In development",
+      "h1": {
+        "pre": "Films, series, music, radio.",
+        "em": "One quiet home"
+      },
+      "sub": "Midomii Mediacenter brings your own library and live sources together in one calm Windows app: a fast player at the centre, nothing in the cloud, no account.",
+      "chips": [
+        "Windows desktop",
+        "Local-first",
+        "No account",
+        "In development"
+      ],
+      "cta": "Follow the build",
+      "more": "What's inside"
+    },
+    "dev": {
+      "title": "Still in development.",
+      "copy": "This is a preview of what we are building. There is no download yet, no price and no release date. Below you can see what already works and what we are still checking — nothing here is a promise before it has been tested on real hardware.",
+      "link": "Tell us what you would need"
+    },
+    "inside": {
+      "eyebrow": "What's inside",
+      "title": {
+        "pre": "One library for",
+        "em": "everything you play"
+      },
+      "sub": "Local files stay where they are. Midomii watches your folders, sorts them and then gets out of the way.",
+      "items": [
+        {
+          "title": "Films & series",
+          "copy": "Posters, plots and cast are fetched for you. Series know their episodes, the next one starts on its own, and a calendar shows what airs next."
+        },
+        {
+          "title": "Music",
+          "copy": "Albums, artists and playlists with a queue, crossfade, lyrics, an equaliser and a sleep timer. Media keys work and tags are editable."
+        },
+        {
+          "title": "Radio & podcasts",
+          "copy": "Search internet radio stations and podcasts, follow feeds and play them next to your own music."
+        },
+        {
+          "title": "Live TV",
+          "copy": "Load your M3U playlist and programme guide and watch live channels in the same player."
+        },
+        {
+          "title": "A serious player",
+          "copy": "Built on mpv: every codec, HDR, colour LUTs and subtitles you can simply drop in — translated on your own PC if you like. Aspect, speed, zoom and rotation on demand."
+        },
+        {
+          "title": "Your living room",
+          "copy": "Profiles with a PIN and a kids profile, a game controller, casting to a TV and a web remote for your phone on your home network."
+        }
+      ]
+    },
+    "shots": {
+      "eyebrow": "In pictures",
+      "title": {
+        "pre": "A look at",
+        "em": "the current build"
+      },
+      "sub": "Screenshots from the development build with a demo library of fictional titles. Design and wording will still change.",
+      "items": [
+        {
+          "caption": "Home",
+          "alt": "Midomii Mediacenter home screen with a keep-watching hero and a row of films in progress"
+        },
+        {
+          "caption": "Film page",
+          "alt": "Midomii Mediacenter film page with plot, cast, genres and a resume button"
+        },
+        {
+          "caption": "Library",
+          "alt": "Midomii Mediacenter library with posters of films and series"
+        },
+        {
+          "caption": "Music",
+          "alt": "Midomii Mediacenter music view with albums and a player bar"
+        },
+        {
+          "caption": "Series",
+          "alt": "Midomii Mediacenter series page with the episode list"
+        }
+      ]
+    },
+    "status": {
+      "eyebrow": "Honest status",
+      "title": {
+        "pre": "What works,",
+        "em": "and what we still check"
+      },
+      "sub": "We test on one PC. These are the parts that have not met real-world hardware yet.",
+      "works": {
+        "label": "Works in our tests",
+        "items": [
+          "Library for films, series and music with automatic folder watching",
+          "Player with HDR, subtitles, audio and picture controls",
+          "Playlists, queue, lyrics, equaliser and sleep timer",
+          "Radio, podcasts and live TV from your own playlists",
+          "Profiles with a PIN, backup and restore",
+          "Web remote on the home network (tested on the same PC)"
+        ]
+      },
+      "testing": {
+        "label": "Still being tested",
+        "items": [
+          "Casting to a real TV",
+          "PlayStation 5 controller mapping",
+          "DVD and Blu-ray discs",
+          "Trakt account sync",
+          "Phone and tablet access over home Wi-Fi",
+          "HDR output on a real HDR display"
+        ]
+      }
+    },
+    "calm": {
+      "eyebrow": "Calm by design",
+      "title": {
+        "pre": "Local.",
+        "em": "Native. Private"
+      },
+      "items": [
+        {
+          "title": "Your files stay yours",
+          "copy": "The library is a single file on your PC. Nothing is uploaded and there is no account to create."
+        },
+        {
+          "title": "Native Windows",
+          "copy": "A Windows app without a browser engine inside — quick to open and light on memory."
+        },
+        {
+          "title": "No streaming service",
+          "copy": "Midomii plays what you own and open sources such as radio and podcasts. No logins to streaming services."
+        }
+      ],
+      "spec": "Windows desktop · Not released yet"
+    },
+    "cta": {
+      "title": {
+        "pre": "Want to follow",
+        "em": "the build"
+      },
+      "sub": "Tell us what you would want from a media centre — we are still shaping it.",
+      "button": "Get in touch",
+      "studio": "All studio apps"
     }
   }
 }

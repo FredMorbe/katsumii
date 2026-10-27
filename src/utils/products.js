@@ -1,6 +1,7 @@
 /* The Katsumii product line — single source for the studio landing, the nav,
    the footer and the product pages. Copy lives in locales under products.<key>;
    this file only carries what is not text: route, accent, platform, price, screenshot.
+   Optional `status`: the product is announced but not released ("dev") — it replaces the live/soon badge.
    Optional `download`: a direct file URL — when set, the app card shows a download button. */
 
 export const PRODUCTS = [
@@ -49,6 +50,17 @@ export const PRODUCTS = [
     shot: { dark: "cubamii_d.webp" },
     star: { x: 79, y: 70 },
     galaxy: { r: 0.74, th: 4.75 },
+  },
+  {
+    key: "mediacenter",
+    path: "/mediacenter",
+    page: "/mediacenter",
+    status: "dev",
+    platform: "desktop",
+    price: "tbd",
+    accent: { dark: ["#fb7185", "#fda4af"], light: ["#be123c", "#9f1239"] },
+    star: { x: 55, y: 52 },
+    galaxy: { r: 0.62, th: 3.2 },
   },
 ]
 

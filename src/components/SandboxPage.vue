@@ -24,7 +24,7 @@
           :id="`apps-${p.key}`"
           :key="p.key"
           class="v6-card std-app v6-reveal"
-          :class="{ wide: [0, 3].includes(shown.indexOf(p) % 4) }"
+          :class="{ wide: [0, 3].includes(shown.indexOf(p) % 4), full: shown.indexOf(p) === shown.length - 1 && shown.indexOf(p) % 2 === 0 }"
           :style="accentStyle(p)"
         >
           <div class="std-app-shot">
@@ -45,6 +45,7 @@
           <p class="std-app-desc">{{ t(`products.${p.key}.desc`) }}</p>
           <ul class="v6-card-chips std-app-chips">
             <li>{{ t(`studio.platform.${p.platform}`) }}</li>
+            <li v-if="p.status">{{ t(`studio.galaxy.status.${p.status}`) }}</li>
             <li>{{ t(`studio.galaxy.price.${p.price}`) }}</li>
           </ul>
           <RouterLink v-if="p.page" class="std-app-link" :to="`/${lang}${p.page}`">
@@ -152,6 +153,7 @@ onBeforeUnmount(() => {
 /* bento rhythm: wide / narrow, then narrow / wide (counted among the cards the filter leaves visible) */
 .std-app { grid-column: span 5; }
 .std-app.wide { grid-column: span 7; }
+.std-app.full { grid-column: 1 / -1; }
 .std-filter { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.4rem; padding: 0; }
 .std-chip {
   padding: 0.35rem 0.95rem;
@@ -305,7 +307,7 @@ onBeforeUnmount(() => {
 
 @media (max-width: 900px) {
   .std-apps { grid-template-columns: repeat(2, 1fr); }
-  .std-app, .std-app.wide { grid-column: auto; }
+  .std-app, .std-app.wide, .std-app.full { grid-column: auto; }
   .std-principles { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {

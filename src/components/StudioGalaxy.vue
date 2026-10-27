@@ -30,7 +30,7 @@
           <em>{{ t(`products.${p.key}.tagline`) }}</em>
           <span class="gx-more">
             {{ t(`products.${p.key}.desc`) }}
-            <span class="gx-meta"><i class="gx-chip">{{ t(p.page ? 'studio.galaxy.status.live' : 'studio.galaxy.status.soon') }}</i>{{ t(`studio.galaxy.price.${p.price}`) }}</span>
+            <span class="gx-meta"><i class="gx-chip">{{ t(`studio.galaxy.status.${p.status || (p.page ? 'live' : 'soon')}`) }}</i>{{ t(`studio.galaxy.price.${p.price}`) }}</span>
             <u class="gx-cta">{{ p.page ? t('studio.galaxy.open') + ' →' : t('studio.galaxy.soon') }}</u>
           </span>
         </span>

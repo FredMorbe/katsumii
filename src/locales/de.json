@@ -2244,7 +2244,8 @@
       "bugreport": "Fehler melden - Katsumii",
       "sandbox": "Sandbox - Katsumii",
       "notFound": "404 - Katsumii",
-      "cubamii": "Cubamii: 3D-Nonogramm für Android - Katsumii"
+      "cubamii": "Cubamii: 3D-Nonogramm für Android - Katsumii",
+      "mediacenter": "Midomii Mediacenter: Filme, Serien und Musik, in Entwicklung - Katsumii"
     },
     "pageDescriptions": {
       "default": "Katsumii: Offline-Trading-Journal für Prop-Firm- und Funded-Trader. Trades erfassen, Challenge-Regeln verfolgen, Analytics nutzen. Einmalige Lizenz, lokale Daten.",
@@ -2270,7 +2271,8 @@
       "bugreport": "Melde einen Katsumii-Fehler und teile Reproduktionsschritte, damit wir das Problem untersuchen können.",
       "sandbox": "Arbeitsstand der kommenden Katsumii-Entwicklerseite.",
       "notFound": "Diese Katsumii-Seite existiert nicht oder wurde verschoben.",
-      "cubamii": "Cubamii ist ein ruhiges 3D-Logikrätsel für Android: Zahlen lesen, leere Würfel wegmeißeln und ein verborgenes Voxel-Tier freilegen. Offline und kostenlos."
+      "cubamii": "Cubamii ist ein ruhiges 3D-Logikrätsel für Android: Zahlen lesen, leere Würfel wegmeißeln und ein verborgenes Voxel-Tier freilegen. Offline und kostenlos.",
+      "mediacenter": "Midomii Mediacenter ist ein Windows-Mediacenter für deine eigenen Filme, Serien, Musik, Radio und Live-TV – lokal und ohne Konto. Noch in Entwicklung."
     },
     "cta": {
       "getKatsumii": "Katsumii holen",
@@ -2823,21 +2825,22 @@
       "open": "Stern öffnen"
     },
     "galaxy": {
-      "aria": "Interaktive Karte der Katsumii-Galaxie mit den vier Apps",
+      "aria": "Interaktive Karte der Katsumii-Galaxie mit den fünf Apps",
       "eyebrow": "Software-Studio",
       "h1": {
-        "pre": "Vier Systeme.",
+        "pre": "Fünf Systeme.",
         "em": "Eine Galaxie"
       },
       "sub": "Jede Katsumii-App ist ein eigenes Sternensystem. Finde eines auf der Karte – mit der Maus bremst du die Galaxie und fokussierst es.",
       "subTouch": "Jede Katsumii-App ist ein eigenes Sternensystem. Finde eines auf der Karte – tippe darauf, um die Galaxie zu bremsen und es zu fokussieren, tippe erneut, um es zu öffnen.",
-      "readout": "Katsumii-Galaxie · 4 Systeme kartiert · weitere unerforscht",
+      "readout": "Katsumii-Galaxie · 5 Systeme kartiert · weitere unerforscht",
       "hint": "Dreht sich langsam · 1 Umdrehung ≈ 5 Min.",
       "open": "System öffnen",
       "soon": "Details folgen bald",
       "status": {
         "live": "Live",
-        "soon": "Bald verfügbar"
+        "soon": "Bald verfügbar",
+        "dev": "In Entwicklung"
       },
       "void": {
         "label": "Unerforscht",
@@ -2846,7 +2849,8 @@
       },
       "price": {
         "paid": "Kostenpflichtig",
-        "free": "Kostenlos"
+        "free": "Kostenlos",
+        "tbd": "Preis folgt"
       }
     },
     "page": {
@@ -2922,6 +2926,11 @@
       "name": "Cubamii",
       "tagline": "Meißle das Verborgene.",
       "desc": "Ein ruhiges 3D-Logikrätsel für Android. Meißle leere Würfel weg, male die richtigen an und lege ein verborgenes Voxel-Tier frei. Offline und kostenlos."
+    },
+    "mediacenter": {
+      "name": "Midomii Mediacenter",
+      "tagline": "Alles, was du abspielst, ein ruhiges Zuhause.",
+      "desc": "Ein Windows-Mediacenter für deine eigenen Filme, Serien, Musik, Radio und Live-TV. Lokal, ohne Konto. In Entwicklung – noch kein Download."
     }
   },
   "cubamiiPage": {
@@ -3137,6 +3146,155 @@
       "sub": "Kostenlos für Android – und die ersten sechs Motive laufen ohne Werbung.",
       "button": "Am geschlossenen Test teilnehmen",
       "studio": "Alle Katsumii-Apps"
+    }
+  },
+  "mediacenterPage": {
+    "hero": {
+      "eyebrow": "In Entwicklung · Windows",
+      "brandSub": "In Entwicklung",
+      "h1": {
+        "pre": "Filme, Serien, Musik, Radio.",
+        "em": "Ein ruhiges Zuhause"
+      },
+      "sub": "Midomii Mediacenter bringt deine eigene Bibliothek und Live-Quellen in einer ruhigen Windows-App zusammen: ein schneller Player im Zentrum, nichts in der Cloud, kein Konto.",
+      "chips": [
+        "Windows-Desktop",
+        "Lokal gespeichert",
+        "Ohne Konto",
+        "In Entwicklung"
+      ],
+      "cta": "Entwicklung verfolgen",
+      "more": "Was drinsteckt"
+    },
+    "dev": {
+      "title": "Noch in Entwicklung.",
+      "copy": "Das hier ist eine Vorschau auf das, was wir bauen. Es gibt noch keinen Download, keinen Preis und keinen Veröffentlichungstermin. Unten siehst du, was schon funktioniert und was wir noch prüfen – nichts davon ist ein Versprechen, bevor es auf echter Hardware getestet wurde.",
+      "link": "Sag uns, was du brauchst"
+    },
+    "inside": {
+      "eyebrow": "Was drinsteckt",
+      "title": {
+        "pre": "Eine Bibliothek für",
+        "em": "alles, was du abspielst"
+      },
+      "sub": "Lokale Dateien bleiben, wo sie sind. Midomii beobachtet deine Ordner, sortiert sie und hält sich dann zurück.",
+      "items": [
+        {
+          "title": "Filme & Serien",
+          "copy": "Poster, Handlung und Besetzung holt die App für dich. Serien kennen ihre Folgen, die nächste startet von selbst, und ein Kalender zeigt, was als Nächstes läuft."
+        },
+        {
+          "title": "Musik",
+          "copy": "Alben, Künstler und Playlists mit Warteschlange, Überblenden, Songtexten, Equalizer und Einschlaf-Timer. Medientasten funktionieren, Tags lassen sich bearbeiten."
+        },
+        {
+          "title": "Radio & Podcasts",
+          "copy": "Suche Internetradios und Podcasts, folge Feeds und höre sie neben deiner eigenen Musik."
+        },
+        {
+          "title": "Live-TV",
+          "copy": "Lade deine M3U-Playlist samt Programmführer und schau Live-Sender im selben Player."
+        },
+        {
+          "title": "Ein ernstzunehmender Player",
+          "copy": "Gebaut auf mpv: jeder Codec, HDR, Farb-LUTs und Untertitel zum Reinziehen – auf Wunsch auf deinem eigenen PC übersetzt. Seitenverhältnis, Tempo, Zoom und Drehung nach Bedarf."
+        },
+        {
+          "title": "Dein Wohnzimmer",
+          "copy": "Profile mit PIN und Kinderprofil, Gamecontroller, Übertragen auf den Fernseher und eine Web-Fernbedienung fürs Handy im Heimnetz."
+        }
+      ]
+    },
+    "shots": {
+      "eyebrow": "In Bildern",
+      "title": {
+        "pre": "Ein Blick auf",
+        "em": "den aktuellen Stand"
+      },
+      "sub": "Screenshots aus dem Entwicklungs-Build mit einer Demo-Bibliothek aus erfundenen Titeln. Gestaltung und Texte ändern sich noch.",
+      "items": [
+        {
+          "caption": "Start",
+          "alt": "Startseite von Midomii Mediacenter mit Weiterschauen-Hero und angefangenen Filmen"
+        },
+        {
+          "caption": "Filmseite",
+          "alt": "Filmseite von Midomii Mediacenter mit Handlung, Besetzung, Genres und Fortsetzen-Knopf"
+        },
+        {
+          "caption": "Bibliothek",
+          "alt": "Bibliothek von Midomii Mediacenter mit Postern von Filmen und Serien"
+        },
+        {
+          "caption": "Musik",
+          "alt": "Musikansicht von Midomii Mediacenter mit Alben und Player-Leiste"
+        },
+        {
+          "caption": "Serien",
+          "alt": "Serienseite von Midomii Mediacenter mit der Folgenliste"
+        }
+      ]
+    },
+    "status": {
+      "eyebrow": "Ehrlicher Stand",
+      "title": {
+        "pre": "Was läuft,",
+        "em": "und was wir noch prüfen"
+      },
+      "sub": "Wir testen auf einem PC. Diese Teile haben noch keine echte Hardware gesehen.",
+      "works": {
+        "label": "Läuft in unseren Tests",
+        "items": [
+          "Bibliothek für Filme, Serien und Musik mit automatischer Ordnerüberwachung",
+          "Player mit HDR, Untertiteln sowie Ton- und Bildeinstellungen",
+          "Playlists, Warteschlange, Songtexte, Equalizer und Einschlaf-Timer",
+          "Radio, Podcasts und Live-TV aus deinen eigenen Playlists",
+          "Profile mit PIN, Sicherung und Wiederherstellung",
+          "Web-Fernbedienung im Heimnetz (auf demselben PC getestet)"
+        ]
+      },
+      "testing": {
+        "label": "Wird noch geprüft",
+        "items": [
+          "Übertragen auf einen echten Fernseher",
+          "Tastenbelegung des PlayStation-5-Controllers",
+          "DVDs und Blu-rays",
+          "Abgleich mit dem Trakt-Konto",
+          "Zugriff mit Handy und Tablet im Heim-WLAN",
+          "HDR-Ausgabe auf einem echten HDR-Bildschirm"
+        ]
+      }
+    },
+    "calm": {
+      "eyebrow": "Ruhig gemacht",
+      "title": {
+        "pre": "Lokal.",
+        "em": "Nativ. Privat"
+      },
+      "items": [
+        {
+          "title": "Deine Dateien bleiben deine",
+          "copy": "Die Bibliothek ist eine einzelne Datei auf deinem PC. Nichts wird hochgeladen, und es gibt kein Konto."
+        },
+        {
+          "title": "Natives Windows",
+          "copy": "Eine Windows-App ohne Browser-Engine im Inneren – schnell geöffnet und genügsam im Speicher."
+        },
+        {
+          "title": "Kein Streamingdienst",
+          "copy": "Midomii spielt, was du besitzt, und offene Quellen wie Radio und Podcasts. Keine Anmeldung bei Streamingdiensten."
+        }
+      ],
+      "spec": "Windows-Desktop · Noch nicht veröffentlicht"
+    },
+    "cta": {
+      "title": {
+        "pre": "Willst du den Bau",
+        "em": "verfolgen"
+      },
+      "sub": "Sag uns, was du dir von einem Mediacenter wünschst – wir formen es noch.",
+      "button": "Kontakt aufnehmen",
+      "studio": "Alle Studio-Apps"
     }
   }
 }
