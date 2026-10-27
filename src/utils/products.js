@@ -58,7 +58,7 @@ export const PRODUCTS = [
     status: "dev",
     platform: "desktop",
     price: "tbd",
-    accent: { dark: ["#fb7185", "#fda4af"], light: ["#be123c", "#9f1239"] },
+    accent: { dark: ["#5aa2ff", "#9cc6ff"], light: ["#1d4ed8", "#1e40af"] },
     star: { x: 55, y: 52 },
     galaxy: { r: 0.62, th: 3.2 },
   },

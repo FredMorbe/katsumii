@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.24.1",
+    "date": "2026-10-27",
+    "title": "Midomii Mediacenter now in blue",
+    "changes": [
+      "The Midomii Mediacenter page, its galaxy star and its status chip use a blue accent instead of rose, in both dark and light mode"
+    ]
+  },
+  {
     "version": "0.24.0",
     "date": "2026-10-27",
     "title": "Midomii Mediacenter product page, in development",
