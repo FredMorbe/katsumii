@@ -41,17 +41,6 @@ export const PRODUCTS = [
     galaxy: { r: 0.52, th: -0.55 },
   },
   {
-    key: "cubamii",
-    path: "/cubamii",
-    page: "/cubamii",
-    platform: "mobile",
-    price: "free",
-    accent: { dark: ["#facc15", "#fde68a"], light: ["#ab7503", "#8a5e02"] },
-    shot: { dark: "cubamii_d.webp" },
-    star: { x: 79, y: 70 },
-    galaxy: { r: 0.74, th: 4.75 },
-  },
-  {
     key: "mediacenter",
     path: "/mediacenter",
     page: "/mediacenter",
@@ -69,8 +58,7 @@ export const productByKey = (key) => PRODUCTS.find((p) => p.key === key)
 /* the studio's chart: which stars are joined, plus the dim "next release" stars */
 export const CONSTELLATION_LINES = [
   ["andromeda", "journal"],
-  ["journal", "cubamii"],
-  ["cubamii", "tidii"],
+  ["journal", "tidii"],
   ["tidii", "andromeda"],
 ]
 

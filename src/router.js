@@ -24,7 +24,6 @@ const SecurityPage = () => import("./components/SecurityPage.vue")
 const NotFoundPage = () => import("./components/NotFoundPage.vue")
 const LandingV6 = () => import("./components/LandingV6.vue")
 const SandboxPage = () => import("./components/SandboxPage.vue")
-const CubamiiPage = () => import("./components/CubamiiPage.vue")
 const MediacenterPage = () => import("./components/MediacenterPage.vue")
 
 const localePattern = SUPPORTED_LOCALES.join("|")
@@ -66,7 +65,6 @@ const router = createRouter({
     { path: `/:locale(${localePattern})`, redirect: (to) => localizedPathForRoute("/app", to.params.locale) },
     withLocale("/app",       LandingV6,     { titleKey: "common.pageTitles.app",       descriptionKey: "common.pageDescriptions.app" }),
     withLocale("/sandbox",   SandboxPage,   { titleKey: "common.pageTitles.sandbox",   descriptionKey: "common.pageDescriptions.sandbox", robots: "noindex, follow", studio: true, forceDark: true, v6NoBg: true }),
-    withLocale("/cubamii",   CubamiiPage,   { titleKey: "common.pageTitles.cubamii",   descriptionKey: "common.pageDescriptions.cubamii", robots: "noindex, follow", studio: true, forceDark: true, v6NoBg: true, v6Accent: productByKey("cubamii").accent }),
     withLocale("/mediacenter", MediacenterPage, { titleKey: "common.pageTitles.mediacenter", descriptionKey: "common.pageDescriptions.mediacenter", robots: "noindex, follow", studio: true, forceDark: true, v6NoBg: true, v6Accent: productByKey("mediacenter").accent }),
     withLocale("/features",  FeaturesPage,  { titleKey: "common.pageTitles.features",  descriptionKey: "common.pageDescriptions.features" }),
     withLocale("/prop-firm-challenges", PropFirmChallengesPage, { titleKey: "common.pageTitles.propFirmChallenges", descriptionKey: "common.pageDescriptions.propFirmChallenges", v6Accent: V6_ACCENTS.challenge }),
@@ -109,7 +107,6 @@ const router = createRouter({
     unlocalizedRedirect("/security"),
     unlocalizedRedirect("/welcome"),
     unlocalizedRedirect("/sandbox"),
-    unlocalizedRedirect("/cubamii"),
     unlocalizedRedirect("/mediacenter"),
     { path: "/:pathMatch(.*)*", component: NotFoundPage, meta: { titleKey: "common.pageTitles.notFound", descriptionKey: "common.pageDescriptions.notFound", robots: "noindex, follow", v6DimBg: true } },
   ],

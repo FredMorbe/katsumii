@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.25.0",
+    "date": "2026-11-23",
+    "title": "Cubamii has moved to yunamii.com",
+    "changes": [
+      "The Cubamii product page, its privacy page and its screenshots are gone from this site: Cubamii now lives on yunamii.com, and this site is about Katsumii only",
+      "The Cubamii star left the Studio galaxy and the night-sky constellation, and the apps filter no longer lists a mobile app"
+    ]
+  },
+  {
     "version": "0.24.1",
     "date": "2026-10-27",
     "title": "Midomii Mediacenter now in blue",
